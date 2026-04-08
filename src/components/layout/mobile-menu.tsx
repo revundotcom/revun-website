@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, ChevronRight } from 'lucide-react'
@@ -50,12 +51,16 @@ export function MobileMenu({ scrolled }: { scrolled: boolean }) {
           <div className="flex items-center justify-between border-b border-border px-5 py-4">
             <Link
               href="/"
-              className="flex items-baseline gap-1"
+              className="flex items-center"
               onClick={() => setOpen(false)}
             >
-              <span className="font-display text-xl italic tracking-tight text-brand-graphite">
-                Revun
-              </span>
+              <Image
+                src="/logo-dark.svg"
+                alt="Revun"
+                width={100}
+                height={30}
+                className="h-7 w-auto"
+              />
             </Link>
             <SheetClose
               className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-[#555860] transition-colors hover:bg-[#F5F6F8] hover:text-brand-graphite outline-none focus-visible:ring-2 focus-visible:ring-ring"

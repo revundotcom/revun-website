@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ChevronDown } from 'lucide-react'
@@ -112,15 +113,15 @@ const itemVariants = {
 
 function Logo({ scrolled }: { scrolled: boolean }) {
   return (
-    <Link href="/" className="relative flex items-baseline gap-1 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm">
-      <span
-        className={cn(
-          'font-display text-2xl italic tracking-tight transition-colors duration-300',
-          scrolled ? 'text-brand-graphite' : 'text-white'
-        )}
-      >
-        Revun
-      </span>
+    <Link href="/" className="relative flex items-center outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm">
+      <Image
+        src={scrolled ? '/logo-dark.svg' : '/logo-white.svg'}
+        alt="Revun"
+        width={110}
+        height={34}
+        priority
+        className="h-8 w-auto transition-opacity duration-300"
+      />
     </Link>
   )
 }

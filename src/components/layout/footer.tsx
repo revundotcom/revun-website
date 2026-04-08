@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 const navigation = {
@@ -116,9 +117,13 @@ export function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pb-12 border-b border-white/10">
           <div className="max-w-md">
             <Link href="/" className="inline-block">
-              <span className="font-display italic text-2xl text-white">
-                Revun
-              </span>
+              <Image
+                src="/logo-white.svg"
+                alt="Revun"
+                width={110}
+                height={34}
+                className="h-8 w-auto"
+              />
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-[#64748B]">
               Property management infrastructure for Canada and the United States.
