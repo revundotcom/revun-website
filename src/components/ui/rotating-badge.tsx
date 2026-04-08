@@ -23,6 +23,8 @@ export function RotatingBadge({
     return () => clearInterval(timer)
   }, [phrases.length, interval])
 
+  if (!phrases.length) return null
+
   return (
     <span
       className={`inline-flex overflow-hidden rounded-lg ${className ?? ''}`}

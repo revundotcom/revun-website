@@ -5,53 +5,53 @@ const navigation = {
   platform: {
     title: 'Platform',
     links: [
-      { label: 'Platform Overview', href: '/platform' },
-      { label: 'Features', href: '/features' },
-      { label: 'Pricing', href: '/pricing' },
-      { label: 'Integrations', href: '/integrations' },
-      { label: 'Compare', href: '/compare' },
-      { label: 'Security', href: '/security' },
+      { label: 'Platform Overview', href: '/platform/' },
+      { label: 'Features', href: '/features/' },
+      { label: 'Pricing', href: '/pricing/' },
+      { label: 'Integrations', href: '/integrations/' },
+      { label: 'Compare', href: '/compare/' },
+      { label: 'Security', href: '/security/' },
     ],
   },
   solutions: {
     title: 'Solutions',
     links: [
-      { label: 'Self-Managing Owners', href: '/solutions/owners' },
-      { label: 'PMCs', href: '/solutions/pmcs' },
-      { label: 'Brokerages', href: '/solutions/brokerages' },
-      { label: 'Leasing', href: '/solutions/leasing' },
-      { label: 'Maintenance', href: '/solutions/maintenance' },
-      { label: 'REITs', href: '/solutions/reits' },
+      { label: 'Self-Managing Owners', href: '/solutions/self-managing-owners/' },
+      { label: 'PMCs', href: '/solutions/property-management-companies/' },
+      { label: 'Brokerages', href: '/solutions/brokerages/' },
+      { label: 'Leasing', href: '/solutions/leasing-companies/' },
+      { label: 'Maintenance', href: '/solutions/maintenance-companies/' },
+      { label: 'REITs', href: '/solutions/reits/' },
     ],
   },
   resources: {
     title: 'Resources',
     links: [
-      { label: 'Blog', href: '/blog' },
-      { label: 'Help Center', href: '/help' },
-      { label: 'Guides', href: '/guides' },
-      { label: 'Case Studies', href: '/case-studies' },
-      { label: 'API Docs', href: '/docs/api' },
-      { label: 'Status', href: '/status' },
+      { label: 'Blog', href: '/blog/' },
+      { label: 'Help Center', href: '/help/' },
+      { label: 'Guides', href: '/guides/' },
+      { label: 'Case Studies', href: '/case-studies/' },
+      { label: 'API Docs', href: '/docs/api/' },
+      { label: 'Status', href: '/status/' },
     ],
   },
   company: {
     title: 'Company',
     links: [
-      { label: 'About', href: '/about' },
-      { label: 'Contact', href: '/contact' },
-      { label: 'Careers', href: '/careers' },
-      { label: 'Press', href: '/press' },
-      { label: 'Partners', href: '/partners' },
+      { label: 'About', href: '/about/' },
+      { label: 'Contact', href: '/contact/' },
+      { label: 'Careers', href: '/careers/' },
+      { label: 'Press', href: '/press/' },
+      { label: 'Partners', href: '/partners/' },
     ],
   },
   legal: {
     title: 'Legal',
     links: [
-      { label: 'Privacy Policy', href: '/privacy' },
-      { label: 'Terms of Service', href: '/terms' },
-      { label: 'Cookie Policy', href: '/cookies' },
-      { label: 'Accessibility', href: '/accessibility' },
+      { label: 'Privacy Policy', href: '/privacy/' },
+      { label: 'Terms of Service', href: '/terms/' },
+      { label: 'Cookie Policy', href: '/cookies/' },
+      { label: 'Accessibility', href: '/accessibility/' },
     ],
   },
 } as const
@@ -183,13 +183,13 @@ export function Footer() {
 
           <div className="flex items-center gap-6">
             <Link
-              href="/privacy"
+              href="/privacy/"
               className="text-sm text-[#64748B] hover:text-white transition-colors duration-150"
             >
               Privacy Policy
             </Link>
             <Link
-              href="/terms"
+              href="/terms/"
               className="text-sm text-[#64748B] hover:text-white transition-colors duration-150"
             >
               Terms of Service

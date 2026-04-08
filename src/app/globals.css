@@ -362,6 +362,5 @@ body::before {
   background-size: 24px 24px;
   mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, black 20%, transparent 80%);
   -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, black 20%, transparent 80%);
-  will-change: transform;
   contain: strict;
 }

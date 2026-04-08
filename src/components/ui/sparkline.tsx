@@ -1,5 +1,7 @@
 'use client'
 
+import { useId } from 'react'
+
 interface SparklineProps {
   data: number[]
   width?: number
@@ -32,7 +34,7 @@ export function Sparkline({
 
   const polylinePoints = points.join(' ')
   const fillPoints = `${padding},${height - padding} ${polylinePoints} ${width - padding},${height - padding}`
-  const gradientId = `sparkline-fill-${Math.random().toString(36).slice(2, 8)}`
+  const gradientId = useId()
 
   return (
     <svg
