@@ -10,33 +10,35 @@ import { Loader2, CheckCircle2, AlertCircle } from 'lucide-react'
 
 /* ── Schema ── */
 
+const portfolioSizes = ['1-5', '6-25', '26-100', '101-500', '500+'] as const
+const roleOptions = ['Owner', 'Property Manager', 'Tenant', 'Brokerage', 'Maintenance', 'Other'] as const
+
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.email('Please enter a valid email address'),
   company: z.string().optional(),
-  role: z.enum([
-    'Owner',
-    'PMC',
-    'Brokerage',
-    'Agent',
-    'Maintenance',
-    'REIT',
-    'Other',
-  ]),
+  portfolio_size: z.enum(portfolioSizes),
+  role: z.enum(roleOptions),
   message: z.string().min(10, 'Message must be at least 10 characters'),
 })
 
 type ContactFormData = z.infer<typeof contactSchema>
 
-const roles = [
-  { value: 'Owner', label: 'Owner' },
-  { value: 'PMC', label: 'Property Management Company' },
-  { value: 'Brokerage', label: 'Brokerage' },
-  { value: 'Agent', label: 'Agent' },
-  { value: 'Maintenance', label: 'Maintenance / Vendor' },
-  { value: 'REIT', label: 'REIT / Institutional' },
-  { value: 'Other', label: 'Other' },
-] as const
+const portfolioSizeLabels: Record<(typeof portfolioSizes)[number], string> = {
+  '1-5': '1-5 units',
+  '6-25': '6-25 units',
+  '26-100': '26-100 units',
+  '101-500': '101-500 units',
+  '500+': '500+ units',
+}
+
+/* ── Shared styles ── */
+
+const inputClasses =
+  'h-10 w-full rounded-lg border border-[#D3D5DB] bg-transparent px-3 py-2 text-sm text-[#2C2E33] outline-none transition-colors placeholder:text-[#555860] focus:border-[#176FEB] focus:ring-2 focus:ring-[#176FEB]/30 disabled:cursor-not-allowed disabled:opacity-50'
+
+const selectClasses =
+  'flex h-10 w-full appearance-none rounded-lg border border-[#D3D5DB] bg-transparent px-3 py-2 text-sm text-[#2C2E33] outline-none transition-colors focus:border-[#176FEB] focus:ring-2 focus:ring-[#176FEB]/30'
 
 /* ── Component ── */
 
@@ -54,6 +56,7 @@ export function ContactForm() {
       name: '',
       email: '',
       company: '',
+      portfolio_size: '1-5',
       role: 'Owner',
       message: '',
     },
@@ -90,19 +93,19 @@ export function ContactForm() {
   if (status === 'success') {
     return (
       <div className="flex flex-col items-center gap-4 py-12 text-center">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100">
-          <CheckCircle2 className="h-7 w-7 text-emerald-600" />
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#5EA500]/10">
+          <CheckCircle2 className="h-7 w-7 text-[#5EA500]" />
         </div>
-        <h3 className="font-heading text-lg font-bold text-brand-indigo">
+        <h3 className="text-lg font-bold text-[#0A1628]">
           Message sent
         </h3>
-        <p className="max-w-xs text-sm text-brand-slate-600">
+        <p className="max-w-xs text-sm text-[#555860]">
           {serverMessage}
         </p>
         <button
           type="button"
           onClick={() => setStatus('idle')}
-          className="mt-2 text-sm font-medium text-brand-violet hover:text-brand-violet-dark"
+          className="mt-2 text-sm font-medium text-[#176FEB] hover:text-[#176FEB]/80"
         >
           Send another message
         </button>
@@ -118,7 +121,7 @@ export function ContactForm() {
         <Input
           id="contact-name"
           placeholder="Your full name"
-          className="h-10"
+          className={inputClasses}
           aria-invalid={!!errors.name}
           {...register('name', {
             required: 'Name is required',
@@ -126,7 +129,7 @@ export function ContactForm() {
           })}
         />
         {errors.name && (
-          <p className="text-xs text-destructive">{errors.name.message}</p>
+          <p className="text-xs text-[#E7000B]">{errors.name.message}</p>
         )}
       </div>
 
@@ -137,7 +140,7 @@ export function ContactForm() {
           id="contact-email"
           type="email"
           placeholder="you@company.com"
-          className="h-10"
+          className={inputClasses}
           aria-invalid={!!errors.email}
           {...register('email', {
             required: 'Email is required',
@@ -148,21 +151,41 @@ export function ContactForm() {
           })}
         />
         {errors.email && (
-          <p className="text-xs text-destructive">{errors.email.message}</p>
+          <p className="text-xs text-[#E7000B]">{errors.email.message}</p>
         )}
       </div>
 
       {/* Company */}
       <div className="space-y-1.5">
         <Label htmlFor="contact-company">
-          Company <span className="text-brand-slate-400">(optional)</span>
+          Company <span className="text-[#555860]">(optional)</span>
         </Label>
         <Input
           id="contact-company"
           placeholder="Your company name"
-          className="h-10"
+          className={inputClasses}
           {...register('company')}
         />
+      </div>
+
+      {/* Portfolio Size */}
+      <div className="space-y-1.5">
+        <Label htmlFor="contact-portfolio-size">Portfolio Size</Label>
+        <select
+          id="contact-portfolio-size"
+          className={selectClasses}
+          aria-invalid={!!errors.portfolio_size}
+          {...register('portfolio_size', { required: 'Please select a portfolio size' })}
+        >
+          {portfolioSizes.map((size) => (
+            <option key={size} value={size}>
+              {portfolioSizeLabels[size]}
+            </option>
+          ))}
+        </select>
+        {errors.portfolio_size && (
+          <p className="text-xs text-[#E7000B]">{errors.portfolio_size.message}</p>
+        )}
       </div>
 
       {/* Role */}
@@ -170,18 +193,18 @@ export function ContactForm() {
         <Label htmlFor="contact-role">Role</Label>
         <select
           id="contact-role"
-          className="flex h-10 w-full rounded-lg border border-input bg-transparent px-2.5 py-2 text-sm transition-colors outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+          className={selectClasses}
           aria-invalid={!!errors.role}
           {...register('role', { required: 'Please select a role' })}
         >
-          {roles.map((r) => (
-            <option key={r.value} value={r.value}>
-              {r.label}
+          {roleOptions.map((role) => (
+            <option key={role} value={role}>
+              {role}
             </option>
           ))}
         </select>
         {errors.role && (
-          <p className="text-xs text-destructive">{errors.role.message}</p>
+          <p className="text-xs text-[#E7000B]">{errors.role.message}</p>
         )}
       </div>
 
@@ -191,7 +214,7 @@ export function ContactForm() {
         <Textarea
           id="contact-message"
           placeholder="How can we help?"
-          className="min-h-[120px]"
+          className="min-h-[120px] w-full rounded-lg border border-[#D3D5DB] bg-transparent px-3 py-2 text-sm text-[#2C2E33] outline-none transition-colors placeholder:text-[#555860] focus:border-[#176FEB] focus:ring-2 focus:ring-[#176FEB]/30"
           aria-invalid={!!errors.message}
           {...register('message', {
             required: 'Message is required',
@@ -199,15 +222,15 @@ export function ContactForm() {
           })}
         />
         {errors.message && (
-          <p className="text-xs text-destructive">{errors.message.message}</p>
+          <p className="text-xs text-[#E7000B]">{errors.message.message}</p>
         )}
       </div>
 
       {/* Error banner */}
       {status === 'error' && (
-        <div className="flex items-start gap-3 rounded-lg border border-destructive/20 bg-destructive/5 p-3">
-          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-destructive" />
-          <p className="text-sm text-destructive">{serverMessage}</p>
+        <div className="flex items-start gap-3 rounded-lg border border-[#E7000B]/20 bg-[#E7000B]/5 p-3">
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-[#E7000B]" />
+          <p className="text-sm text-[#E7000B]">{serverMessage}</p>
         </div>
       )}
 
@@ -215,7 +238,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="cta-primary-shadow inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-violet px-8 text-base font-semibold text-white transition-all hover:bg-brand-violet-dark disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white transition-all hover:bg-[#176FEB]/90 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === 'loading' ? (
           <>

@@ -11,8 +11,12 @@ import {
   Wrench,
   ArrowRight,
   Check,
+  X,
+  Star,
 } from 'lucide-react'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
+import { sanitizeJsonLd } from '@/lib/utils'
+import { buildBreadcrumbSchema } from '@/lib/schema-builders'
 
 /* ── Animation variants ─────────────────────────────────────────────── */
 
@@ -22,35 +26,59 @@ const heroStagger = {
 }
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
   },
 }
 
 /* ── Data ────────────────────────────────────────────────────────────── */
 
-const steps = [
+const workflowSteps = [
   {
     number: '01',
-    title: 'Set up your property',
-    description:
-      'Add your property details, unit info, and listing preferences in minutes.',
+    label: 'List',
+    title: 'Publish your listing',
+    description: 'Syndicate to Kijiji, Facebook Marketplace, and more with one click.',
   },
   {
     number: '02',
-    title: 'Find and screen tenants',
-    description:
-      'Publish listings, schedule showings, run screening, and manage applications.',
+    label: 'Screen',
+    title: 'Screen applicants',
+    description: 'Credit checks, identity verification, and background screening built in.',
   },
   {
     number: '03',
-    title: 'Manage everything',
-    description:
-      'Collect rent, handle maintenance requests, store documents, and communicate with tenants.',
+    label: 'Lease',
+    title: 'Sign digitally',
+    description: 'Jurisdiction-specific templates. Both parties e-sign. Stored securely.',
   },
+  {
+    number: '04',
+    label: 'Collect',
+    title: 'Collect rent online',
+    description: 'Auto-reminders, real-time payment tracking, and automatic receipts.',
+  },
+  {
+    number: '05',
+    label: 'Maintain',
+    title: 'Handle maintenance',
+    description: 'Tenants submit requests online. You track, assign, and close work orders.',
+  },
+]
+
+const comparisonRows = [
+  { feature: 'Monthly cost', revun: 'From $30/unit/mo', pm: '8–12% of rent (~$160+/mo)' },
+  { feature: 'Tenant screening', revun: true, pm: true },
+  { feature: 'Lease management', revun: true, pm: true },
+  { feature: 'Rent collection', revun: true, pm: true },
+  { feature: 'Maintenance tracking', revun: true, pm: true },
+  { feature: 'Full control of decisions', revun: true, pm: false },
+  { feature: 'Direct tenant relationship', revun: true, pm: false },
+  { feature: 'Instant access to your data', revun: true, pm: false },
+  { feature: 'No lock-in contracts', revun: true, pm: false },
 ]
 
 const features = [
@@ -86,53 +114,33 @@ const features = [
   },
 ]
 
-const pricingPlans = [
-  {
-    name: 'Lite',
-    price: '$1',
-    period: '/day per unit',
-    description: 'For owners getting started with one or two units.',
-    features: ['Listing syndication', 'Showing scheduling', 'Rent collection', 'Tenant communication'],
-  },
-  {
-    name: 'Pro',
-    price: '$2',
-    period: '/day per unit',
-    description: 'Full toolkit for hands-on landlords.',
-    features: ['Everything in Lite', 'Tenant screening', 'Digital leases', 'Maintenance tracking', 'Document storage'],
-    popular: true,
-  },
-  {
-    name: 'Max',
-    price: '$3',
-    period: '/day per unit',
-    description: 'For portfolio owners who want it all.',
-    features: ['Everything in Pro', 'Multi-property dashboard', 'Financial reporting', 'Priority support', 'API access'],
-  },
-]
-
 /* ── Page ─────────────────────────────────────────────────────────────── */
 
 export default function SelfManagePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: sanitizeJsonLd(
+            buildBreadcrumbSchema([
+              { name: 'Home', url: 'https://revun.com/' },
+              { name: 'Self-Manage', url: 'https://revun.com/self-manage/' },
+            ])
+          ),
+        }}
+      />
       {/* ── Hero ──────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-amber-50/60 via-white to-white dark:from-[#0B0A1A] dark:via-[#0B0A1A] dark:to-[#0B0A1A]">
-        {/* Subtle warm accent */}
-        <div className="absolute inset-0 pointer-events-none" aria-hidden>
-          <div className="absolute right-[10%] top-[15%] h-[400px] w-[400px] rounded-full bg-[radial-gradient(circle,rgba(245,158,11,0.12)_0%,transparent_70%)] blur-3xl" />
-          <div className="absolute left-[5%] bottom-[10%] h-[300px] w-[300px] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.08)_0%,transparent_70%)] blur-3xl" />
-        </div>
-
+      <section className="bg-white dark:bg-[#0B0A1A]">
         <motion.div
-          className="relative z-10 mx-auto max-w-3xl px-6 pt-36 pb-24 text-center"
+          className="mx-auto max-w-3xl px-6 pt-36 pb-24 text-center"
           variants={heroStagger}
           initial="hidden"
           animate="visible"
         >
           <motion.span
             variants={fadeUp}
-            className="mb-5 inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-4 py-1.5 text-sm font-medium text-amber-800 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-300"
+            className="mb-5 inline-flex items-center gap-2 rounded-full border border-brand-blue/20 bg-brand-blue/5 px-4 py-1.5 text-sm font-medium text-brand-blue dark:bg-brand-blue/10"
           >
             For self-managing owners
           </motion.span>
@@ -141,14 +149,15 @@ export default function SelfManagePage() {
             variants={fadeUp}
             className="font-display italic text-4xl leading-[1.1] tracking-tight text-foreground md:text-5xl"
           >
-            Manage your rental property from one app
+            Manage your properties{' '}
+            <span className="text-brand-blue">like a pro</span>
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
             className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground"
           >
-            Listings, showings, screening, leases, rent collection, and maintenance. Starting from $1/day per unit.
+            Listings, showings, screening, leases, rent collection, and maintenance. Everything in one place, starting from $1/day per unit.
           </motion.p>
 
           <motion.div
@@ -157,13 +166,13 @@ export default function SelfManagePage() {
           >
             <Link
               href="/pricing/"
-              className="cta-primary-shadow inline-flex h-12 items-center justify-center rounded-xl bg-brand-violet px-8 text-base font-semibold text-white transition-all hover:bg-brand-violet-dark"
+              className="inline-flex h-12 items-center justify-center rounded-xl bg-brand-blue px-8 text-base font-semibold text-white transition-colors hover:bg-brand-blue-dark"
             >
               Start for $1/day
             </Link>
             <Link
               href="/self-manage/how-it-works/"
-              className="inline-flex h-12 items-center justify-center rounded-xl border border-border px-8 text-base font-semibold text-foreground transition-all hover:bg-muted"
+              className="inline-flex h-12 items-center justify-center rounded-xl border border-border px-8 text-base font-semibold text-foreground transition-colors hover:bg-muted"
             >
               See how it works
             </Link>
@@ -171,13 +180,13 @@ export default function SelfManagePage() {
         </motion.div>
       </section>
 
-      {/* ── How It Works ──────────────────────────────────────────── */}
-      <section className="bg-white py-24 dark:bg-[#0B0A1A]">
-        <div className="mx-auto max-w-5xl px-6">
+      {/* ── How It Works: 5-step flow ─────────────────────────────── */}
+      <section className="bg-brand-off-white py-24 dark:bg-[#0f0e1e]">
+        <div className="mx-auto max-w-6xl px-6">
           <RevealOnScroll className="text-center">
             <motion.p
               variants={revealItem}
-              className="mb-3 text-sm font-medium uppercase tracking-widest text-brand-violet"
+              className="mb-3 text-sm font-medium uppercase tracking-widest text-brand-blue"
             >
               How it works
             </motion.p>
@@ -185,46 +194,166 @@ export default function SelfManagePage() {
               variants={revealItem}
               className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
             >
-              Three steps to better landlording
+              Five steps from listing to{' '}
+              <span className="text-brand-blue">lease and beyond</span>
             </motion.h2>
           </RevealOnScroll>
 
+          {/* Desktop: horizontal row. Mobile: vertical stack */}
           <RevealOnScroll
-            stagger={0.15}
-            className="mt-16 grid gap-8 md:grid-cols-3"
+            stagger={0.1}
+            className="mt-16 flex flex-col gap-0 md:flex-row"
           >
-            {steps.map((step) => (
+            {workflowSteps.map((step, i) => (
               <motion.div
                 key={step.number}
                 variants={revealItem}
-                className="relative flex flex-col items-center text-center"
+                className="relative flex flex-col md:flex-1"
               >
-                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-violet/10 font-heading text-xl font-bold text-brand-violet dark:bg-brand-violet/20">
-                  {step.number}
+                {/* Mobile vertical connector */}
+                {i < workflowSteps.length - 1 && (
+                  <div
+                    className="absolute left-7 top-[3.5rem] bottom-0 w-px bg-border md:hidden"
+                    aria-hidden
+                  />
+                )}
+
+                <div className="flex items-start gap-4 md:flex-col md:items-center md:text-center p-6 md:px-4 md:py-8">
+                  {/* Number badge */}
+                  <div className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-brand-blue/20 bg-white dark:bg-[#0B0A1A]">
+                    <span className="font-heading text-sm font-bold text-brand-blue">{step.label}</span>
+                  </div>
+
+                  <div className="flex-1 md:flex-none">
+                    <p className="mb-0.5 text-[0.7rem] font-semibold uppercase tracking-widest text-muted-foreground">
+                      Step {step.number}
+                    </p>
+                    <h3 className="font-heading text-base font-bold text-foreground">
+                      {step.title}
+                    </h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="font-heading text-lg font-bold text-foreground">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-[0.938rem] leading-relaxed text-muted-foreground">
-                  {step.description}
-                </p>
-                {/* Connector line (visible on md+) */}
-                {step.number !== '03' && (
-                  <div className="absolute right-0 top-7 hidden h-px w-8 translate-x-full bg-border md:block" aria-hidden />
+
+                {/* Desktop horizontal connector arrow */}
+                {i < workflowSteps.length - 1 && (
+                  <div
+                    className="absolute right-0 top-1/2 hidden -translate-y-1/2 translate-x-1/2 z-10 md:flex h-6 w-6 items-center justify-center rounded-full border border-border bg-white dark:bg-[#0f0e1e]"
+                    aria-hidden
+                  >
+                    <ArrowRight className="h-3 w-3 text-muted-foreground" />
+                  </div>
                 )}
               </motion.div>
             ))}
+          </RevealOnScroll>
+
+          <RevealOnScroll className="mt-10 text-center">
+            <motion.div variants={revealItem}>
+              <Link
+                href="/self-manage/how-it-works/"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue transition-colors hover:underline"
+              >
+                Full walkthrough <ArrowRight className="h-4 w-4" />
+              </Link>
+            </motion.div>
+          </RevealOnScroll>
+        </div>
+      </section>
+
+      {/* ── Comparison Table ──────────────────────────────────────── */}
+      <section className="bg-white py-24 dark:bg-[#0B0A1A]">
+        <div className="mx-auto max-w-5xl px-6">
+          <RevealOnScroll className="text-center">
+            <motion.p
+              variants={revealItem}
+              className="mb-3 text-sm font-medium uppercase tracking-widest text-brand-blue"
+            >
+              Self-manage vs. property management
+            </motion.p>
+            <motion.h2
+              variants={revealItem}
+              className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+            >
+              Keep control,{' '}
+              <span className="text-brand-blue">cut the cost</span>
+            </motion.h2>
+            <motion.p
+              variants={revealItem}
+              className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground"
+            >
+              A PM company charges 8–12% of rent and makes decisions without you. Revun gives you the same tools and keeps you in charge.
+            </motion.p>
+          </RevealOnScroll>
+
+          <RevealOnScroll className="mt-12">
+            <motion.div
+              variants={revealItem}
+              className="overflow-hidden rounded-2xl border border-border"
+            >
+              {/* Table header */}
+              <div className="grid grid-cols-3 border-b border-border bg-brand-off-white dark:bg-[#0f0e1e]">
+                <div className="px-6 py-4 text-sm font-semibold text-muted-foreground" />
+                <div className="border-l border-border px-6 py-4 text-center">
+                  <span className="font-heading text-sm font-bold text-foreground">Revun</span>
+                  <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-brand-blue/10 px-2 py-0.5 text-xs font-semibold text-brand-blue">
+                    Self-manage
+                  </span>
+                </div>
+                <div className="border-l border-border px-6 py-4 text-center">
+                  <span className="font-heading text-sm font-bold text-muted-foreground">PM Company</span>
+                </div>
+              </div>
+
+              {/* Rows */}
+              {comparisonRows.map((row, i) => (
+                <div
+                  key={row.feature}
+                  className={`grid grid-cols-3 border-b border-border last:border-0 ${
+                    i % 2 === 1 ? 'bg-brand-off-white/50 dark:bg-white/[0.02]' : 'bg-white dark:bg-[#0B0A1A]'
+                  }`}
+                >
+                  <div className="px-6 py-4 text-sm font-medium text-foreground">
+                    {row.feature}
+                  </div>
+                  <div className="flex items-center justify-center border-l border-border px-6 py-4">
+                    {typeof row.revun === 'boolean' ? (
+                      row.revun ? (
+                        <Check className="h-5 w-5 text-brand-blue" />
+                      ) : (
+                        <X className="h-5 w-5 text-muted-foreground/40" />
+                      )
+                    ) : (
+                      <span className="text-sm font-semibold text-brand-blue">{row.revun}</span>
+                    )}
+                  </div>
+                  <div className="flex items-center justify-center border-l border-border px-6 py-4">
+                    {typeof row.pm === 'boolean' ? (
+                      row.pm ? (
+                        <Check className="h-5 w-5 text-muted-foreground" />
+                      ) : (
+                        <X className="h-5 w-5 text-muted-foreground/40" />
+                      )
+                    ) : (
+                      <span className="text-sm text-muted-foreground">{row.pm}</span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </RevealOnScroll>
         </div>
       </section>
 
       {/* ── Feature Grid ──────────────────────────────────────────── */}
-      <section className="bg-brand-slate-50 py-24 dark:bg-[#0f0e1e]">
+      <section className="bg-brand-off-white py-24 dark:bg-[#0f0e1e]">
         <div className="mx-auto max-w-6xl px-6">
           <RevealOnScroll className="text-center">
             <motion.p
               variants={revealItem}
-              className="mb-3 text-sm font-medium uppercase tracking-widest text-brand-violet"
+              className="mb-3 text-sm font-medium uppercase tracking-widest text-brand-blue"
             >
               Everything you need
             </motion.p>
@@ -232,7 +361,8 @@ export default function SelfManagePage() {
               variants={revealItem}
               className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
             >
-              Built for self-managing owners
+              Built for{' '}
+              <span className="text-brand-blue">hands-on landlords</span>
             </motion.h2>
           </RevealOnScroll>
 
@@ -246,9 +376,9 @@ export default function SelfManagePage() {
                 <motion.div
                   key={f.title}
                   variants={revealItem}
-                  className="spotlight-card group flex flex-col rounded-2xl border border-border bg-card p-8 transition-shadow hover:shadow-xl dark:border-white/8 dark:bg-card"
+                  className="flex flex-col rounded-2xl border border-border bg-card p-8 transition-colors hover:border-brand-blue/30 dark:border-white/8 dark:bg-card"
                 >
-                  <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-violet/10 text-brand-violet dark:bg-brand-violet/20">
+                  <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20">
                     <Icon className="h-5 w-5" strokeWidth={1.8} />
                   </div>
                   <h3 className="font-heading text-lg font-bold text-foreground">
@@ -264,103 +394,145 @@ export default function SelfManagePage() {
         </div>
       </section>
 
-      {/* ── Pricing Preview ───────────────────────────────────────── */}
+      {/* ── Pricing Callout ───────────────────────────────────────── */}
       <section className="bg-white py-24 dark:bg-[#0B0A1A]">
-        <div className="mx-auto max-w-5xl px-6">
+        <div className="mx-auto max-w-3xl px-6">
           <RevealOnScroll className="text-center">
             <motion.p
               variants={revealItem}
-              className="mb-3 text-sm font-medium uppercase tracking-widest text-brand-violet"
+              className="mb-3 text-sm font-medium uppercase tracking-widest text-brand-blue"
             >
-              Simple pricing
+              Pricing
             </motion.p>
             <motion.h2
               variants={revealItem}
               className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
             >
-              Pick the plan that fits your portfolio
+              Start free.{' '}
+              <span className="text-brand-blue">Scale as you grow.</span>
             </motion.h2>
+            <motion.p
+              variants={revealItem}
+              className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground"
+            >
+              Free tier to explore the platform. Growth tier unlocks the full toolkit from $1/day per unit. No annual contracts.
+            </motion.p>
           </RevealOnScroll>
 
           <RevealOnScroll
             stagger={0.1}
-            className="mt-16 grid gap-6 md:grid-cols-3"
+            className="mt-12 grid gap-6 sm:grid-cols-2"
           >
-            {pricingPlans.map((plan) => (
-              <motion.div
-                key={plan.name}
-                variants={revealItem}
-                className={`relative flex flex-col rounded-2xl border p-8 transition-shadow hover:shadow-xl ${
-                  plan.popular
-                    ? 'border-brand-violet bg-brand-violet/5 shadow-lg dark:border-brand-violet/40 dark:bg-brand-violet/10'
-                    : 'border-border bg-card dark:border-white/8 dark:bg-card'
-                }`}
+            <motion.div
+              variants={revealItem}
+              className="flex flex-col rounded-2xl border border-border bg-card p-8"
+            >
+              <h3 className="font-heading text-xl font-bold text-foreground">Free</h3>
+              <div className="mt-3 flex items-baseline gap-1">
+                <span className="font-heading text-4xl font-bold text-foreground">$0</span>
+                <span className="text-sm text-muted-foreground">/month</span>
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Explore the platform. Manage one listing and get a feel for every feature.
+              </p>
+              <ul className="mt-6 flex-1 space-y-3">
+                {['1 active listing', 'Showing scheduling', 'Tenant communication', 'Document storage'].map((feat) => (
+                  <li key={feat} className="flex items-start gap-2 text-sm text-foreground">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue" />
+                    {feat}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/pricing/"
+                className="mt-8 inline-flex h-11 items-center justify-center rounded-xl border border-border text-sm font-semibold text-foreground transition-colors hover:bg-muted"
               >
-                {plan.popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-violet px-4 py-1 text-xs font-semibold text-white">
-                    Most popular
-                  </span>
-                )}
-                <h3 className="font-heading text-xl font-bold text-foreground">
-                  {plan.name}
-                </h3>
-                <div className="mt-4 flex items-baseline gap-1">
-                  <span className="font-heading text-4xl font-bold text-foreground">
-                    {plan.price}
-                  </span>
-                  <span className="text-sm text-muted-foreground">
-                    {plan.period}
-                  </span>
-                </div>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {plan.description}
-                </p>
-                <ul className="mt-6 flex-1 space-y-3">
-                  {plan.features.map((feat) => (
-                    <li
-                      key={feat}
-                      className="flex items-start gap-2 text-sm text-foreground"
-                    >
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-violet" />
-                      {feat}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href="/pricing/"
-                  className={`mt-8 inline-flex h-11 items-center justify-center rounded-xl text-sm font-semibold transition-all ${
-                    plan.popular
-                      ? 'cta-primary-shadow bg-brand-violet text-white hover:bg-brand-violet-dark'
-                      : 'border border-border text-foreground hover:bg-muted'
-                  }`}
-                >
-                  Get started
-                </Link>
-              </motion.div>
-            ))}
+                Get started free
+              </Link>
+            </motion.div>
+
+            <motion.div
+              variants={revealItem}
+              className="relative flex flex-col rounded-2xl border border-brand-blue bg-brand-blue/5 p-8 dark:border-brand-blue/40 dark:bg-brand-blue/10"
+            >
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-blue px-4 py-1 text-xs font-semibold text-white">
+                Most popular
+              </span>
+              <h3 className="font-heading text-xl font-bold text-foreground">Growth</h3>
+              <div className="mt-3 flex items-baseline gap-1">
+                <span className="font-heading text-4xl font-bold text-foreground">$1</span>
+                <span className="text-sm text-muted-foreground">/day per unit</span>
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                The full toolkit. Unlimited listings, screening, leases, and maintenance tracking.
+              </p>
+              <ul className="mt-6 flex-1 space-y-3">
+                {['Unlimited listings', 'Tenant screening', 'Digital leases', 'Rent collection', 'Maintenance tracking'].map((feat) => (
+                  <li key={feat} className="flex items-start gap-2 text-sm text-foreground">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue" />
+                    {feat}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/pricing/"
+                className="mt-8 inline-flex h-11 items-center justify-center rounded-xl bg-brand-blue text-sm font-semibold text-white transition-colors hover:bg-brand-blue-dark"
+              >
+                Start for $1/day
+              </Link>
+            </motion.div>
           </RevealOnScroll>
 
           <RevealOnScroll className="mt-8 text-center">
             <motion.div variants={revealItem}>
               <Link
                 href="/pricing/"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-violet transition-colors hover:underline"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue transition-colors hover:underline"
               >
-                See full pricing <ArrowRight className="h-4 w-4" />
+                See full pricing details <ArrowRight className="h-4 w-4" />
               </Link>
             </motion.div>
           </RevealOnScroll>
         </div>
       </section>
 
+      {/* ── Testimonial ───────────────────────────────────────────── */}
+      <section className="bg-brand-off-white py-24 dark:bg-[#0f0e1e]">
+        <div className="mx-auto max-w-3xl px-6">
+          <RevealOnScroll>
+            <motion.div
+              variants={revealItem}
+              className="rounded-2xl border border-border bg-card p-10 dark:border-white/8 dark:bg-card"
+            >
+              <div className="mb-5 flex gap-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-brand-blue text-brand-blue" />
+                ))}
+              </div>
+              <p className="font-display italic text-xl leading-relaxed text-foreground md:text-2xl">
+                "I was paying a property manager $200/month. Revun gives me everything they did, and I actually know what is happening with my property."
+              </p>
+              <div className="mt-8 flex items-center gap-4">
+                <div className="h-10 w-10 rounded-full bg-brand-blue/10" />
+                <div>
+                  <p className="text-sm font-semibold text-foreground">Sarah M.</p>
+                  <p className="text-sm text-muted-foreground">Landlord, 3 units, Ontario</p>
+                </div>
+              </div>
+            </motion.div>
+          </RevealOnScroll>
+        </div>
+      </section>
+
       {/* ── Bottom CTA ────────────────────────────────────────────── */}
-      <section className="bg-brand-slate-50 py-24 dark:bg-[#0f0e1e]">
+      <section className="bg-white py-24 dark:bg-[#0B0A1A]">
         <RevealOnScroll className="mx-auto max-w-2xl px-6 text-center">
           <motion.h2
             variants={revealItem}
             className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
           >
-            Start managing smarter today
+            Start managing{' '}
+            <span className="text-brand-blue">today</span>
           </motion.h2>
           <motion.p
             variants={revealItem}
@@ -374,13 +546,13 @@ export default function SelfManagePage() {
           >
             <Link
               href="/pricing/"
-              className="cta-primary-shadow inline-flex h-12 items-center justify-center rounded-xl bg-brand-violet px-8 text-base font-semibold text-white transition-all hover:bg-brand-violet-dark"
+              className="inline-flex h-12 items-center justify-center rounded-xl bg-brand-blue px-8 text-base font-semibold text-white transition-colors hover:bg-brand-blue-dark"
             >
               Start for $1/day
             </Link>
             <Link
               href="/contact/"
-              className="inline-flex h-12 items-center justify-center rounded-xl border border-border px-8 text-base font-semibold text-foreground transition-all hover:bg-muted"
+              className="inline-flex h-12 items-center justify-center rounded-xl border border-border px-8 text-base font-semibold text-foreground transition-colors hover:bg-muted"
             >
               Talk to us
             </Link>

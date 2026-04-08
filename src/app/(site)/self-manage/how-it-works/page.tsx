@@ -12,6 +12,8 @@ import {
   Settings,
 } from 'lucide-react'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
+import { sanitizeJsonLd } from '@/lib/utils'
+import { buildBreadcrumbSchema } from '@/lib/schema-builders'
 
 /* ── Animation variants ─────────────────────────────────────────────── */
 
@@ -21,11 +23,11 @@ const heroStagger = {
 }
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
   },
 }
 
@@ -81,22 +83,29 @@ const timelineSteps = [
 export default function SelfManageHowItWorksPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: sanitizeJsonLd(
+            buildBreadcrumbSchema([
+              { name: 'Home', url: 'https://revun.com/' },
+              { name: 'Self-Manage', url: 'https://revun.com/self-manage/' },
+              { name: 'How It Works', url: 'https://revun.com/self-manage/how-it-works/' },
+            ])
+          ),
+        }}
+      />
       {/* ── Hero ──────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-amber-50/60 via-white to-white dark:from-[#0B0A1A] dark:via-[#0B0A1A] dark:to-[#0B0A1A]">
-        <div className="absolute inset-0 pointer-events-none" aria-hidden>
-          <div className="absolute right-[15%] top-[20%] h-[350px] w-[350px] rounded-full bg-[radial-gradient(circle,rgba(245,158,11,0.1)_0%,transparent_70%)] blur-3xl" />
-          <div className="absolute left-[10%] bottom-[5%] h-[250px] w-[250px] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.08)_0%,transparent_70%)] blur-3xl" />
-        </div>
-
+      <section className="bg-white dark:bg-[#0B0A1A]">
         <motion.div
-          className="relative z-10 mx-auto max-w-3xl px-6 pt-36 pb-20 text-center"
+          className="mx-auto max-w-3xl px-6 pt-36 pb-20 text-center"
           variants={heroStagger}
           initial="hidden"
           animate="visible"
         >
           <motion.p
             variants={fadeUp}
-            className="mb-4 text-sm font-medium uppercase tracking-widest text-brand-violet"
+            className="mb-4 text-sm font-medium uppercase tracking-widest text-brand-blue"
           >
             How it works
           </motion.p>
@@ -104,7 +113,8 @@ export default function SelfManageHowItWorksPage() {
             variants={fadeUp}
             className="font-display italic text-4xl leading-[1.1] tracking-tight text-foreground md:text-5xl"
           >
-            How Revun works for self-managing owners
+            From signup to{' '}
+            <span className="text-brand-blue">fully managed</span>
           </motion.h1>
           <motion.p
             variants={fadeUp}
@@ -116,7 +126,7 @@ export default function SelfManageHowItWorksPage() {
       </section>
 
       {/* ── Timeline ──────────────────────────────────────────────── */}
-      <section className="bg-white py-24 dark:bg-[#0B0A1A]">
+      <section className="bg-brand-off-white py-24 dark:bg-[#0f0e1e]">
         <div className="mx-auto max-w-3xl px-6">
           <div className="relative">
             {/* Vertical line */}
@@ -133,14 +143,14 @@ export default function SelfManageHowItWorksPage() {
                     variants={revealItem}
                     className="flex gap-6 md:gap-8"
                   >
-                    {/* Number circle */}
-                    <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand-violet text-white shadow-lg md:h-16 md:w-16">
+                    {/* Icon circle */}
+                    <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-brand-blue/20 bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 md:h-16 md:w-16">
                       <Icon className="h-5 w-5 md:h-6 md:w-6" strokeWidth={1.8} />
                     </div>
 
                     {/* Content */}
                     <div className="flex-1 pt-1">
-                      <span className="mb-1 block text-xs font-semibold uppercase tracking-widest text-brand-violet">
+                      <span className="mb-1 block text-xs font-semibold uppercase tracking-widest text-brand-blue">
                         Step {i + 1}
                       </span>
                       <h3 className="font-heading text-xl font-bold text-foreground md:text-2xl">
@@ -150,8 +160,8 @@ export default function SelfManageHowItWorksPage() {
                         {step.description}
                       </p>
 
-                      {/* Placeholder for screenshot/illustration */}
-                      <div className="mt-6 flex h-48 items-center justify-center rounded-xl border-2 border-dashed border-border bg-brand-slate-50 text-sm text-muted-foreground dark:bg-[#0f0e1e]">
+                      {/* Screenshot placeholder */}
+                      <div className="mt-6 flex h-48 items-center justify-center rounded-xl border-2 border-dashed border-border bg-white text-sm text-muted-foreground dark:bg-[#0B0A1A]">
                         Screenshot / illustration placeholder
                       </div>
                     </div>
@@ -164,13 +174,14 @@ export default function SelfManageHowItWorksPage() {
       </section>
 
       {/* ── Bottom CTA ────────────────────────────────────────────── */}
-      <section className="bg-brand-slate-50 py-24 dark:bg-[#0f0e1e]">
+      <section className="bg-white py-24 dark:bg-[#0B0A1A]">
         <RevealOnScroll className="mx-auto max-w-2xl px-6 text-center">
           <motion.h2
             variants={revealItem}
             className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
           >
-            Ready to get started?
+            Ready to get{' '}
+            <span className="text-brand-blue">started?</span>
           </motion.h2>
           <motion.p
             variants={revealItem}
@@ -184,13 +195,13 @@ export default function SelfManageHowItWorksPage() {
           >
             <Link
               href="/pricing/"
-              className="cta-primary-shadow inline-flex h-12 items-center justify-center rounded-xl bg-brand-violet px-8 text-base font-semibold text-white transition-all hover:bg-brand-violet-dark"
+              className="inline-flex h-12 items-center justify-center rounded-xl bg-brand-blue px-8 text-base font-semibold text-white transition-colors hover:bg-brand-blue-dark"
             >
               Start for $1/day
             </Link>
             <Link
               href="/self-manage/"
-              className="inline-flex h-12 items-center justify-center rounded-xl border border-border px-8 text-base font-semibold text-foreground transition-all hover:bg-muted"
+              className="inline-flex h-12 items-center justify-center rounded-xl border border-border px-8 text-base font-semibold text-foreground transition-colors hover:bg-muted"
             >
               Back to Self-Manage
             </Link>

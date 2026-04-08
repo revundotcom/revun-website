@@ -2,61 +2,89 @@
 
 import { motion } from 'framer-motion'
 
-const stagger = {
+const ease = [0.22, 1, 0.36, 1] as const
+
+const container = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
+  show: {
+    transition: { staggerChildren: 0.1 },
+  },
 }
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: {
+  hidden: { opacity: 0, y: 10 },
+  show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { duration: 0.55, ease },
   },
 }
 
 export function PlatformHero() {
   return (
-    <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-brand-indigo">
-      {/* Background layers */}
-      <div className="absolute inset-0" aria-hidden>
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-indigo via-[#13103a] to-[#0B0A1A]" />
-        <div className="absolute left-[15%] top-[25%] h-[400px] w-[400px] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.25)_0%,transparent_70%)] blur-3xl" />
-        <div className="absolute right-[10%] bottom-[20%] h-[350px] w-[350px] rounded-full bg-[radial-gradient(circle,rgba(245,158,11,0.15)_0%,transparent_70%)] blur-3xl" />
-      </div>
-      <div className="absolute inset-0 bg-dot-grid opacity-30" aria-hidden />
+    <section
+      className="relative min-h-[70vh] overflow-hidden pt-36 pb-24"
+      style={{ backgroundColor: '#0A1628' }}
+    >
+      {/* Dot grid pattern */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        aria-hidden
+        style={{
+          backgroundImage:
+            'radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+        }}
+      />
+
+      {/* Radial gradient blob */}
+      <div
+        className="pointer-events-none absolute"
+        aria-hidden
+        style={{
+          width: '800px',
+          height: '800px',
+          top: '-200px',
+          right: '-100px',
+          background:
+            'radial-gradient(circle, rgba(23,111,235,0.12) 0%, transparent 70%)',
+        }}
+      />
 
       <motion.div
-        className="relative z-10 mx-auto max-w-4xl px-6 pt-36 pb-24 text-center"
-        variants={stagger}
+        variants={container}
         initial="hidden"
-        animate="visible"
+        animate="show"
+        className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-6 text-center"
       >
-        {/* Eyebrow */}
-        <motion.div
-          variants={fadeUp}
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
-        >
-          <span className="text-sm font-medium text-brand-violet-light">
+        {/* Eyebrow pill */}
+        <motion.div variants={fadeUp}>
+          <span
+            className="inline-block rounded-full border px-4 py-1.5 text-sm font-medium"
+            style={{ borderColor: 'rgba(23,111,235,0.3)', color: '#94A3B8' }}
+          >
             Platform Overview
           </span>
         </motion.div>
 
+        {/* Headline */}
         <motion.h1
           variants={fadeUp}
-          className="font-display italic text-5xl leading-[1.08] tracking-tight text-white md:text-7xl"
+          className="font-display mt-8 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl"
+          style={{ color: '#FFFFFF' }}
         >
-          The operating system for
-          <br className="hidden sm:block" /> property management
+          One <span style={{ color: '#176FEB' }}>Platform</span>. Every
+          Workflow.
         </motion.h1>
 
+        {/* Subtitle */}
         <motion.p
           variants={fadeUp}
-          className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-brand-slate-300"
+          className="mt-6 max-w-2xl text-lg sm:text-xl"
+          style={{ color: '#94A3B8' }}
         >
-          Revun brings owner workflows, tenant management, vendor coordination,
-          compliance, payments, and communications into one platform.
+          Manage properties, tenants, maintenance, and financials from a single
+          dashboard built for Canadian property managers.
         </motion.p>
       </motion.div>
     </section>

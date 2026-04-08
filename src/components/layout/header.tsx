@@ -76,9 +76,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Solutions', children: SOLUTIONS_ITEMS },
   { label: 'Pricing', href: '/pricing/' },
   { label: 'Integrations', href: '/integrations/' },
-  { label: 'Compare', href: '/compare/' },
   { label: 'Resources', children: RESOURCES_ITEMS },
-  { label: 'Support', href: '/support/' },
 ]
 
 // ─── Animation variants ──────────────────────────────────────────────────────
@@ -118,20 +116,10 @@ function Logo({ scrolled }: { scrolled: boolean }) {
       <span
         className={cn(
           'font-display text-2xl italic tracking-tight transition-colors duration-300',
-          scrolled ? 'text-brand-indigo' : 'text-white'
+          scrolled ? 'text-brand-graphite' : 'text-white'
         )}
       >
         Revun
-      </span>
-      <span
-        className={cn(
-          'inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-heading font-semibold uppercase leading-none tracking-wider transition-all duration-300',
-          scrolled
-            ? 'bg-brand-violet/10 text-brand-violet'
-            : 'bg-white/15 text-white/80'
-        )}
-      >
-        beta
       </span>
     </Link>
   )
@@ -146,17 +134,17 @@ function SolutionsMegaMenu({ onClose }: { onClose: () => void }) {
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="absolute left-1/2 top-full mt-2 w-[680px] -translate-x-1/2 rounded-xl border border-border bg-white p-5 shadow-xl shadow-brand-indigo/5"
+      className="absolute left-1/2 top-full mt-2 w-[680px] -translate-x-1/2 rounded-xl border border-[#E5E7EB] bg-white p-5 shadow-lg"
       role="menu"
       onKeyDown={(e) => e.key === 'Escape' && onClose()}
     >
       <div className="mb-3 flex items-center justify-between">
-        <p className="text-xs font-heading font-semibold uppercase tracking-wider text-brand-slate-400">
+        <p className="text-xs font-heading font-semibold uppercase tracking-wider text-[#94A3B8]">
           By audience
         </p>
         <Link
           href="/solutions/"
-          className="text-xs font-medium text-brand-violet hover:underline"
+          className="text-xs font-medium text-brand-blue hover:underline"
           onClick={onClose}
         >
           View all solutions
@@ -167,18 +155,18 @@ function SolutionsMegaMenu({ onClose }: { onClose: () => void }) {
           <motion.div key={item.href} variants={itemVariants}>
             <Link
               href={item.href}
-              className="group/card flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-brand-slate-50"
+              className="group/card flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-[#F5F6F8]"
               role="menuitem"
               onClick={onClose}
             >
-              <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-violet/8 text-base transition-colors group-hover/card:bg-brand-violet/12">
+              <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-blue/8 text-base transition-colors group-hover/card:bg-brand-blue/12">
                 {item.icon}
               </span>
               <div className="min-w-0">
-                <p className="text-sm font-heading font-semibold text-brand-indigo group-hover/card:text-brand-violet transition-colors">
+                <p className="text-sm font-heading font-semibold text-brand-graphite group-hover/card:text-brand-blue transition-colors">
                   {item.label}
                 </p>
-                <p className="mt-0.5 text-xs text-brand-slate-500 leading-relaxed">
+                <p className="mt-0.5 text-xs text-[#555860] leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -199,7 +187,7 @@ function ResourcesDropdown({ onClose }: { onClose: () => void }) {
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="absolute left-1/2 top-full mt-2 w-[280px] -translate-x-1/2 rounded-xl border border-border bg-white p-2 shadow-xl shadow-brand-indigo/5"
+      className="absolute left-1/2 top-full mt-2 w-[280px] -translate-x-1/2 rounded-xl border border-[#E5E7EB] bg-white p-2 shadow-lg"
       role="menu"
       onKeyDown={(e) => e.key === 'Escape' && onClose()}
     >
@@ -207,14 +195,14 @@ function ResourcesDropdown({ onClose }: { onClose: () => void }) {
         <motion.div key={item.href} variants={itemVariants}>
           <Link
             href={item.href}
-            className="flex flex-col rounded-lg px-3 py-2.5 transition-colors hover:bg-brand-slate-50"
+            className="flex flex-col rounded-lg px-3 py-2.5 transition-colors hover:bg-[#F5F6F8]"
             role="menuitem"
             onClick={onClose}
           >
-            <span className="text-sm font-heading font-semibold text-brand-indigo">
+            <span className="text-sm font-heading font-semibold text-brand-graphite">
               {item.label}
             </span>
-            <span className="text-xs text-brand-slate-500">{item.description}</span>
+            <span className="text-xs text-[#555860]">{item.description}</span>
           </Link>
         </motion.div>
       ))}
@@ -265,8 +253,8 @@ function DesktopNavItem({
 
   const textColor = scrolled
     ? isActive
-      ? 'text-brand-violet'
-      : 'text-brand-slate-700 hover:text-brand-indigo'
+      ? 'text-brand-blue'
+      : 'text-[#334155] hover:text-brand-graphite'
     : isActive
       ? 'text-white'
       : 'text-white/80 hover:text-white'
@@ -332,28 +320,17 @@ function CTACluster({ scrolled }: { scrolled: boolean }) {
         className={cn(
           'rounded-lg px-3.5 py-2 text-sm font-medium transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring',
           scrolled
-            ? 'text-brand-slate-600 hover:text-brand-indigo hover:bg-brand-slate-50'
+            ? 'text-[#555860] hover:text-brand-graphite hover:bg-[#F5F6F8]'
             : 'text-white/80 hover:text-white hover:bg-white/10'
         )}
       >
         Log In
       </Link>
       <Link
-        href="/demo/"
-        className={cn(
-          'rounded-lg border px-3.5 py-2 text-sm font-medium transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring',
-          scrolled
-            ? 'border-brand-slate-200 text-brand-indigo hover:bg-brand-slate-50'
-            : 'border-white/25 text-white hover:bg-white/10'
-        )}
-      >
-        Book Demo
-      </Link>
-      <Link
         href="/signup/"
-        className="cta-primary-shadow rounded-lg bg-brand-violet px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-brand-violet-dark outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        className="rounded-lg bg-brand-blue px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-brand-blue-dark outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       >
-        Start Free
+        Get Started
       </Link>
     </div>
   )

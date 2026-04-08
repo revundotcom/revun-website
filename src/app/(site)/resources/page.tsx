@@ -1,98 +1,194 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import { ArrowRight, BookOpen, FileText, BarChart3 } from 'lucide-react'
-import { buildCanonicalUrl } from '@/lib/utils'
+import { BookOpen, FileText, BarChart3, Presentation, ArrowRight, Clock } from 'lucide-react'
+import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
+import { buildBreadcrumbSchema } from '@/lib/schema-builders'
 import { RevealOnScroll } from '@/components/ui/reveal-on-scroll'
 
 export const metadata: Metadata = {
   title: 'Resources | Revun',
   description:
-    'Guides, case studies, and insights for property managers and owners.',
+    'Guides, market reports, templates, and webinars for property managers and owners. Built to help you run a smarter operation.',
   alternates: { canonical: buildCanonicalUrl('/resources') },
   openGraph: {
     title: 'Resources | Revun',
     description:
-      'Guides, case studies, and insights for property managers and owners.',
+      'Guides, market reports, templates, and webinars for property managers and owners.',
     url: buildCanonicalUrl('/resources'),
   },
 }
 
-const upcomingCategories = [
+const categories = [
   {
     icon: BookOpen,
     title: 'Guides',
     description:
-      'Step-by-step playbooks for property management operations, from onboarding tenants to scaling your portfolio.',
-  },
-  {
-    icon: FileText,
-    title: 'Case Studies',
-    description:
-      'Real stories from property managers and owners who transformed their operations with Revun.',
+      'Step-by-step playbooks for every stage of property management, from onboarding tenants to scaling a portfolio across multiple markets.',
   },
   {
     icon: BarChart3,
-    title: 'Industry Insights',
+    title: 'Market Reports',
     description:
-      'Market data, trend analysis, and research to help you make better property management decisions.',
+      'Data-backed analysis of Canadian rental markets, vacancy trends, and operator benchmarks to help you make informed decisions.',
+  },
+  {
+    icon: FileText,
+    title: 'Templates',
+    description:
+      'Ready-to-use lease clauses, inspection checklists, maintenance request forms, and communication scripts built for Canadian operators.',
+  },
+  {
+    icon: Presentation,
+    title: 'Webinars',
+    description:
+      'Live and on-demand sessions with property management experts, operators, and the Revun team on topics that move the needle.',
+  },
+] as const
+
+const featuredResources = [
+  {
+    category: 'Guide',
+    title: 'The Property Manager\'s Onboarding Playbook',
+    description:
+      'A complete checklist and workflow for moving new tenants in without friction, from lease signing to key handoff.',
+  },
+  {
+    category: 'Market Report',
+    title: 'Canadian Rental Market Benchmarks 2025',
+    description:
+      'Vacancy rates, average rents, and portfolio performance data across 12 major Canadian markets, with operator commentary.',
+  },
+  {
+    category: 'Template',
+    title: 'Maintenance Request & Work Order Pack',
+    description:
+      'Six pre-built forms covering routine maintenance, emergency requests, vendor dispatch, and sign-off confirmation.',
+  },
+  {
+    category: 'Webinar',
+    title: 'Scaling from 50 to 500 Units Without Hiring More Staff',
+    description:
+      'Three operators share how they used automation and process redesign to grow portfolios without proportional headcount growth.',
   },
 ] as const
 
 export default function ResourcesPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: sanitizeJsonLd(
+            buildBreadcrumbSchema([
+              { name: 'Home', url: 'https://revun.com/' },
+              { name: 'Resources', url: 'https://revun.com/resources/' },
+            ])
+          ),
+        }}
+      />
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-brand-indigo">
-        <div className="absolute inset-0 bg-dot-grid opacity-30" />
-        <div className="absolute inset-0 bg-mesh-gradient opacity-20" />
-        <div className="relative mx-auto max-w-7xl px-6 py-24 text-center sm:py-32 lg:px-8">
-          <h1 className="font-display text-4xl italic text-white sm:text-5xl lg:text-6xl">
-            Resources
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-indigo-200">
-            Guides, case studies, and insights for property managers and owners.
-          </p>
-        </div>
-      </section>
-
-      {/* ── Coming Soon ── */}
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
+      <section className="bg-brand-navy">
+        <div className="mx-auto max-w-7xl px-6 py-24 text-center sm:py-32 lg:px-8">
           <RevealOnScroll>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-violet">
-              Coming Soon
+            <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-brand-blue">
+              Resources
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-brand-indigo md:text-4xl">
-              We are building something worth reading
-            </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-brand-slate-500">
-              Our content library is in development. Sign up to be notified when
-              we publish our first guides, case studies, and market reports.
+            <h1 className="font-display text-4xl italic text-white sm:text-5xl lg:text-6xl">
+              Guides, Reports, and Tools for{' '}
+              <span className="text-brand-blue">Property Managers</span>
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#D3D5DB]">
+              Practical content for Canadian operators. No fluff, no generic advice, only material built around the real decisions you make every week.
             </p>
           </RevealOnScroll>
         </div>
       </section>
 
-      {/* ── Category Preview Cards ── */}
-      <section className="bg-brand-slate-50 py-20">
-        <div className="mx-auto max-w-5xl px-6 lg:px-8">
+      {/* ── Category Grid ── */}
+      <section className="bg-white py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <RevealOnScroll className="mb-16 text-center">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-blue">
+              What's Coming
+            </p>
+            <h2 className="font-heading text-3xl font-bold tracking-tight text-brand-graphite md:text-4xl">
+              Four content types, one{' '}
+              <span className="text-brand-blue">clear purpose</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-brand-off-white0">
+              Everything in the Revun resource library is designed to save time or sharpen decisions. Nothing else makes it in.
+            </p>
+          </RevealOnScroll>
+
           <RevealOnScroll stagger={0.1}>
-            <div className="grid gap-6 md:grid-cols-3">
-              {upcomingCategories.map((cat) => (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {categories.map((cat) => (
                 <div
                   key={cat.title}
-                  className="group relative overflow-hidden rounded-2xl border border-border bg-white p-8 transition-all duration-300 hover:shadow-lg"
+                  className="group relative rounded-2xl border border-[#E5E7EB] bg-white p-8 transition-colors duration-150 hover:border-brand-blue"
                 >
-                  <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-gradient-to-br from-brand-violet/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <div className="relative z-10">
-                    <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-brand-violet/10">
-                      <cat.icon className="size-6 text-brand-violet" />
+                  <div className="mb-5 flex size-12 items-center justify-center rounded-xl border border-[#E5E7EB] bg-brand-off-white transition-colors duration-150 group-hover:border-brand-blue/20 group-hover:bg-brand-blue/5">
+                    <cat.icon className="size-5 text-brand-blue" />
+                  </div>
+                  <h3 className="mb-2 font-heading text-base font-bold text-brand-graphite">
+                    {cat.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-brand-off-white0">
+                    {cat.description}
+                  </p>
+                  <div className="mt-5">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-[#E5E7EB] px-3 py-1 text-xs font-medium text-[#94A3B8]">
+                      <Clock className="size-3" />
+                      Coming soon
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </RevealOnScroll>
+        </div>
+      </section>
+
+      {/* ── Featured Resource Previews ── */}
+      <section className="bg-brand-off-white py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <RevealOnScroll className="mb-16">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-blue">
+              First Up
+            </p>
+            <h2 className="font-heading text-3xl font-bold tracking-tight text-brand-graphite md:text-4xl">
+              What we're{' '}
+              <span className="text-brand-blue">publishing first</span>
+            </h2>
+            <p className="mt-4 max-w-xl text-brand-off-white0">
+              These are in production. Sign up below to be notified when they go live.
+            </p>
+          </RevealOnScroll>
+
+          <RevealOnScroll stagger={0.08}>
+            <div className="grid gap-6 sm:grid-cols-2">
+              {featuredResources.map((resource) => (
+                <div
+                  key={resource.title}
+                  className="group relative overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white transition-colors duration-150 hover:border-brand-blue"
+                >
+                  {/* Coming soon overlay */}
+                  <div className="absolute inset-0 z-10 flex items-center justify-center rounded-2xl bg-brand-navy/60 opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                    <span className="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white backdrop-blur-sm">
+                      Coming soon
+                    </span>
+                  </div>
+
+                  <div className="p-8">
+                    <div className="mb-4">
+                      <span className="inline-block rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold text-brand-blue">
+                        {resource.category}
+                      </span>
                     </div>
-                    <h3 className="mb-3 font-heading text-lg font-bold text-brand-indigo">
-                      {cat.title}
+                    <h3 className="mb-3 font-heading text-lg font-bold leading-snug text-brand-graphite">
+                      {resource.title}
                     </h3>
-                    <p className="text-sm leading-relaxed text-brand-slate-600">
-                      {cat.description}
+                    <p className="text-sm leading-relaxed text-brand-off-white0">
+                      {resource.description}
                     </p>
                   </div>
                 </div>
@@ -103,33 +199,42 @@ export default function ResourcesPage() {
       </section>
 
       {/* ── Newsletter CTA ── */}
-      <section className="relative overflow-hidden bg-brand-indigo py-24 md:py-32">
-        <div className="absolute inset-0 bg-mesh-gradient opacity-40" />
-        <div className="absolute inset-0 bg-dot-grid opacity-20" />
-        <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
+      <section className="bg-brand-navy py-24 md:py-32">
+        <div className="mx-auto max-w-3xl px-6 text-center">
           <RevealOnScroll>
-            <h2 className="font-display text-4xl italic tracking-tight text-white md:text-5xl">
-              Stay in the loop
-            </h2>
-            <p className="mx-auto mt-5 max-w-lg text-lg text-brand-slate-300">
-              Get notified when we publish new guides, case studies, and market
-              insights. No spam, just useful content for property operators.
+            <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-brand-blue">
+              Stay ahead
             </p>
-            <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <Link
-                href="/contact/"
-                className="cta-primary-shadow inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-violet px-8 text-base font-semibold text-white transition-all hover:bg-brand-violet-dark"
+            <h2 className="font-display text-4xl italic tracking-tight text-white md:text-5xl">
+              Get notified when we publish
+            </h2>
+            <p className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-[#D3D5DB]">
+              Drop your email and we will send you each new guide, report, or template as it goes live. One email per publish, no noise.
+            </p>
+
+            <form
+              action="#"
+              className="mx-auto mt-10 flex max-w-md flex-col gap-3 sm:flex-row"
+              aria-label="Newsletter signup"
+            >
+              <input
+                type="email"
+                required
+                placeholder="your@email.com"
+                className="h-12 w-full rounded-xl border border-white/20 bg-white/10 px-4 text-base text-white placeholder:text-[#94A3B8] focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/30"
+              />
+              <button
+                type="submit"
+                className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-brand-blue px-6 text-base font-semibold text-white transition-colors duration-150 hover:bg-brand-blue-dark"
               >
-                Subscribe to Updates
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/"
-                className="inline-flex h-12 items-center justify-center rounded-xl border border-white/20 px-8 text-base font-semibold text-white transition-all hover:bg-white/10"
-              >
-                Back to Home
-              </Link>
-            </div>
+                Subscribe
+                <ArrowRight className="size-4" />
+              </button>
+            </form>
+
+            <p className="mt-4 text-sm text-[#94A3B8]">
+              No spam. Unsubscribe any time.
+            </p>
           </RevealOnScroll>
         </div>
       </section>

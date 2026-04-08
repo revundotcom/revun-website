@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { ArrowRight, Check, Plug, Zap } from 'lucide-react'
+import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
 
 /* ------------------------------------------------------------------ */
 /*                             Data                                    */
@@ -170,6 +171,36 @@ const integrationData: Record<string, IntegrationDetail> = {
     setup: 'Easy',
     status: 'Available',
   },
+  docusign: {
+    name: 'DocuSign',
+    slug: 'docusign',
+    category: 'Communications',
+    description:
+      'Electronic lease signing and document management with DocuSign. Send, sign, and store leases, amendments, and compliance documents.',
+    features: [
+      'E-signature for leases and amendments',
+      'Template library with auto-populated fields',
+      'Audit trail and completion tracking',
+      'Mobile signing for tenants and owners',
+    ],
+    setup: 'Easy',
+    status: 'Available',
+  },
+  equifax: {
+    name: 'Equifax',
+    slug: 'equifax',
+    category: 'Identity',
+    description:
+      'Canadian credit bureau integration for comprehensive tenant screening. Pull credit reports and background checks directly within Revun.',
+    features: [
+      'Canadian credit report pulls',
+      'Background check integration',
+      'Risk score assessment',
+      'Automated screening workflows',
+    ],
+    setup: 'Medium',
+    status: 'Coming Soon',
+  },
 }
 
 const setupColors: Record<SetupDifficulty, string> = {
@@ -207,6 +238,9 @@ export async function generateMetadata({
   return {
     title: `Revun + ${data.name} Integration`,
     description: `Connect Revun with ${data.name}. ${data.description.slice(0, 120)}...`,
+    alternates: {
+      canonical: buildCanonicalUrl(`/integrations/${slug}`),
+    },
   }
 }
 
@@ -223,10 +257,42 @@ export default async function IntegrationDetailPage({
   const data = integrationData[slug]
   if (!data) notFound()
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: buildCanonicalUrl('/'),
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Integrations',
+        item: buildCanonicalUrl('/integrations'),
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: `Revun + ${data.name}`,
+        item: buildCanonicalUrl(`/integrations/${slug}`),
+      },
+    ],
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: sanitizeJsonLd(breadcrumbJsonLd as unknown as Record<string, unknown>),
+        }}
+      />
+
       {/* Hero */}
-      <section className="relative overflow-hidden bg-brand-indigo">
+      <section className="relative overflow-hidden bg-[#0A1628]">
         <div className="absolute inset-0 bg-dot-grid opacity-20" />
         <div className="relative mx-auto max-w-5xl px-6 py-24 sm:py-32 lg:px-8">
           <div className="flex flex-col items-center text-center">
@@ -236,8 +302,8 @@ export default async function IntegrationDetailPage({
                 <span className="font-heading text-2xl font-bold text-white">R</span>
               </div>
               <div className="flex flex-col items-center gap-1">
-                <Zap className="size-5 text-brand-amber" />
-                <div className="h-px w-8 bg-gradient-to-r from-brand-violet-light to-brand-amber" />
+                <Zap className="size-5 text-[#176FEB]" />
+                <div className="h-px w-8 bg-[#176FEB]" />
               </div>
               <div className="flex size-16 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm">
                 <span className="font-heading text-2xl font-bold text-white">
@@ -246,13 +312,13 @@ export default async function IntegrationDetailPage({
               </div>
             </div>
 
-            <p className="mt-8 text-sm font-semibold uppercase tracking-widest text-brand-violet-light">
+            <p className="mt-8 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Integration
             </p>
             <h1 className="mt-3 font-display text-4xl italic text-white sm:text-5xl">
               Revun + {data.name}
             </h1>
-            <p className="mx-auto mt-4 max-w-xl text-lg text-indigo-200">
+            <p className="mx-auto mt-4 max-w-xl text-lg text-slate-300">
               {data.category} integration
             </p>
 
@@ -277,26 +343,26 @@ export default async function IntegrationDetailPage({
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
             <div>
-              <h2 className="font-heading text-2xl font-bold text-brand-indigo">
+              <h2 className="font-heading text-2xl font-bold text-[#2C2E33]">
                 What this integration does
               </h2>
-              <p className="mt-4 leading-relaxed text-brand-slate-600">
+              <p className="mt-4 leading-relaxed text-[#555860]">
                 {data.description}
               </p>
             </div>
 
             {/* Key Features */}
-            <div className="rounded-2xl border border-border bg-brand-slate-50 p-8">
-              <h3 className="font-heading text-lg font-bold text-brand-indigo">
+            <div className="rounded-2xl border border-[#D3D5DB] bg-[#F5F6F8] p-8">
+              <h3 className="font-heading text-lg font-bold text-[#2C2E33]">
                 Key features
               </h3>
               <ul className="mt-5 space-y-4">
                 {data.features.map((feature, i) => (
                   <li key={i} className="flex gap-3">
-                    <span className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-brand-violet/10">
-                      <Check className="size-3 text-brand-violet" strokeWidth={3} />
+                    <span className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-[#E8F2FE]">
+                      <Check className="size-3 text-[#176FEB]" strokeWidth={3} />
                     </span>
-                    <span className="text-sm text-brand-slate-700">{feature}</span>
+                    <span className="text-sm text-[#555860]">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -306,15 +372,15 @@ export default async function IntegrationDetailPage({
       </section>
 
       {/* Setup Info */}
-      <section className="bg-brand-slate-50 py-20">
+      <section className="bg-[#F5F6F8] py-20">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <div className="rounded-2xl border border-border bg-white p-8 shadow-sm md:p-12">
+          <div className="rounded-2xl border border-[#D3D5DB] bg-white p-8 md:p-12">
             <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
               <div>
-                <h2 className="font-heading text-xl font-bold text-brand-indigo">
+                <h2 className="font-heading text-xl font-bold text-[#2C2E33]">
                   How to connect
                 </h2>
-                <p className="mt-2 text-sm text-brand-slate-500">
+                <p className="mt-2 text-sm text-[#555860]">
                   Set up the Revun + {data.name} integration in minutes. No
                   engineering required.
                 </p>
@@ -344,14 +410,14 @@ export default async function IntegrationDetailPage({
                   desc: 'Enable the sync and start seeing data flow automatically.',
                 },
               ].map((s) => (
-                <div key={s.step} className="rounded-xl bg-brand-slate-50 p-5">
-                  <span className="inline-flex size-8 items-center justify-center rounded-lg bg-brand-violet text-sm font-bold text-white">
+                <div key={s.step} className="rounded-xl bg-[#F5F6F8] p-5">
+                  <span className="inline-flex size-8 items-center justify-center rounded-lg bg-[#176FEB] text-sm font-bold text-white">
                     {s.step}
                   </span>
-                  <h4 className="mt-3 font-heading text-sm font-bold text-brand-indigo">
+                  <h4 className="mt-3 font-heading text-sm font-bold text-[#2C2E33]">
                     {s.title}
                   </h4>
-                  <p className="mt-1 text-xs text-brand-slate-500">{s.desc}</p>
+                  <p className="mt-1 text-xs text-[#555860]">{s.desc}</p>
                 </div>
               ))}
             </div>
@@ -360,10 +426,10 @@ export default async function IntegrationDetailPage({
       </section>
 
       {/* CTA */}
-      <section className="bg-brand-indigo py-20">
+      <section className="bg-[#0A1628] py-20">
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
           <div className="mx-auto flex w-fit items-center gap-3 rounded-full bg-white/10 px-5 py-2 backdrop-blur-sm">
-            <Plug className="size-4 text-brand-violet-light" />
+            <Plug className="size-4 text-[#176FEB]" />
             <span className="text-sm font-medium text-white">
               Ready to connect
             </span>
@@ -371,13 +437,13 @@ export default async function IntegrationDetailPage({
           <h2 className="mt-6 font-heading text-2xl font-bold text-white sm:text-3xl">
             Get started with Revun + {data.name}
           </h2>
-          <p className="mt-4 text-indigo-200">
+          <p className="mt-4 text-slate-300">
             Start your free trial and connect {data.name} in minutes.
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
               href="/contact/"
-              className="inline-flex h-12 items-center gap-2 rounded-lg bg-brand-violet px-8 text-sm font-semibold text-white cta-primary-shadow hover:bg-brand-violet-dark"
+              className="inline-flex h-12 items-center gap-2 rounded-lg bg-[#176FEB] px-8 text-sm font-semibold text-white hover:bg-[#005CE8]"
             >
               Try Revun Free
               <ArrowRight className="size-4" />
@@ -391,7 +457,7 @@ export default async function IntegrationDetailPage({
           </div>
           <Link
             href="/integrations/"
-            className="mt-6 inline-block text-sm font-medium text-brand-violet-light hover:underline"
+            className="mt-6 inline-block text-sm font-medium text-[#176FEB] hover:underline"
           >
             View all integrations
           </Link>

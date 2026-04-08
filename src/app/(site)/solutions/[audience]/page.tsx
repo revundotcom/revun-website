@@ -1,31 +1,14 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import {
-  Home,
-  Building2,
-  Briefcase,
-  FileKey2,
-  Wrench,
-  Landmark,
-  CheckCircle2,
-  ArrowRight,
-} from 'lucide-react'
-import { buildCanonicalUrl } from '@/lib/utils'
+import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
 import { SolutionDetailClient } from './client'
-
-/* ── Icon map (server-safe reference) ────────────────────────────────────── */
-
-const iconMap = {
-  Home, Building2, Briefcase, FileKey2, Wrench, Landmark, CheckCircle2, ArrowRight,
-} as const
 
 /* ── Types ────────────────────────────────────────────────────────────────── */
 
 interface Feature {
   title: string
   description: string
-  iconName: keyof typeof iconMap
+  iconName: string
 }
 
 interface Step {
@@ -48,6 +31,8 @@ interface SolutionContent {
   pricingNote: string
   ctaHeading: string
   ctaBody: string
+  replaces: string[]
+  relatedSolutions: { slug: string; title: string }[]
   metaTitle: string
   metaDescription: string
 }
@@ -88,9 +73,15 @@ const solutionData: Record<string, SolutionContent> = {
     pricingNote: 'No credit card required to start. Cancel anytime.',
     ctaHeading: 'Ready to simplify your rental?',
     ctaBody: 'Join thousands of self-managing owners who replaced 5+ tools with Revun.',
-    metaTitle: 'Self-Managing Owners',
+    replaces: ['Kijiji listings', 'Spreadsheet tracking', 'Email chains', 'Paper leases', 'E-transfer tracking'],
+    relatedSolutions: [
+      { slug: 'property-management-companies', title: 'Property Management Companies' },
+      { slug: 'leasing-companies', title: 'Leasing Companies' },
+      { slug: 'maintenance-companies', title: 'Maintenance Companies' },
+    ],
+    metaTitle: 'Property Management for Self-Managing Owners | Revun',
     metaDescription:
-      'List, screen, collect rent, and manage maintenance from one dashboard. Starting at $1/day per unit. No credit card required.',
+      'Replace Kijiji listings, spreadsheets, and email chains with one dashboard. List, screen tenants, collect rent, and manage maintenance starting at $1/day per unit.',
   },
   'property-management-companies': {
     title: 'One system of record for your entire portfolio',
@@ -125,9 +116,15 @@ const solutionData: Record<string, SolutionContent> = {
     pricingNote: 'Volume discounts for 100+ units. Custom plans available.',
     ctaHeading: 'Replace your tool stack with one platform',
     ctaBody: 'Book a portfolio review and see how Revun maps to your operation.',
-    metaTitle: 'Property Management Companies',
+    replaces: ['Buildium', 'AppFolio', 'Propertyware', 'Spreadsheets', 'Multiple disconnected tools'],
+    relatedSolutions: [
+      { slug: 'self-managing-owners', title: 'Self-Managing Owners' },
+      { slug: 'leasing-companies', title: 'Leasing Companies' },
+      { slug: 'reits', title: 'REITs & Asset Managers' },
+    ],
+    metaTitle: 'Property Management Software for PMCs | Revun',
     metaDescription:
-      'Owner portals, tenant workflows, vendor management, automated compliance, and financials. One platform to replace your entire PMC tool stack.',
+      'Replace Buildium, AppFolio, and spreadsheets with one platform. Owner portals, tenant workflows, vendor management, compliance, and financials for property management companies.',
   },
   brokerages: {
     title: 'Close deals faster with zero paperwork bottlenecks',
@@ -162,9 +159,14 @@ const solutionData: Record<string, SolutionContent> = {
     pricingNote: 'Brokerage-wide plans with volume discounts available.',
     ctaHeading: 'Give your agents an unfair advantage',
     ctaBody: 'See how top brokerages cut admin time by 60% with Revun.',
-    metaTitle: 'Brokerages & Agents',
+    replaces: ['Follow Up Boss', 'kvCORE', 'Lone Wolf', 'Paper offer packages', 'Manual showing coordination'],
+    relatedSolutions: [
+      { slug: 'leasing-companies', title: 'Leasing Companies' },
+      { slug: 'property-management-companies', title: 'Property Management Companies' },
+    ],
+    metaTitle: 'Real Estate Brokerage Software | Revun',
     metaDescription:
-      'CRM, document automation, offer management, and compliance workflows purpose-built for real estate brokerages. 60-day guided launch included.',
+      'Replace Follow Up Boss, kvCORE, and Lone Wolf with one platform. CRM, document automation, offer management, and compliance workflows for real estate brokerages.',
   },
   'leasing-companies': {
     title: 'Automate the leasing lifecycle end to end',
@@ -199,9 +201,15 @@ const solutionData: Record<string, SolutionContent> = {
     pricingNote: 'Includes unlimited applications and lease generations.',
     ctaHeading: 'Stop leasing manually',
     ctaBody: 'See how leasing companies cut time-to-lease by 40% with Revun.',
-    metaTitle: 'Leasing Companies',
+    replaces: ['PDF applications', 'Manual lease assembly', 'Separate screening tools', 'Email-based workflows'],
+    relatedSolutions: [
+      { slug: 'property-management-companies', title: 'Property Management Companies' },
+      { slug: 'brokerages', title: 'Brokerages & Agents' },
+      { slug: 'self-managing-owners', title: 'Self-Managing Owners' },
+    ],
+    metaTitle: 'Leasing Automation Software for Leasing Companies | Revun',
     metaDescription:
-      'Online applications, lease generation, identity verification, and compliance notices. Automate your entire leasing lifecycle with Revun.',
+      'Replace PDF applications, manual lease assembly, and separate screening tools. Automate applications, lease generation, identity verification, and compliance notices.',
   },
   'maintenance-companies': {
     title: 'Dispatch, track, invoice. All from one platform.',
@@ -236,9 +244,15 @@ const solutionData: Record<string, SolutionContent> = {
     pricingNote: 'Unlimited work orders. Add technicians for $19/mo each.',
     ctaHeading: 'Modernize your maintenance operation',
     ctaBody: 'See how maintenance companies cut dispatch time by 70% with Revun.',
-    metaTitle: 'Maintenance Companies',
+    replaces: ['Jobber', 'ServiceTitan', 'Paper work orders', 'Phone dispatch', 'Manual invoicing'],
+    relatedSolutions: [
+      { slug: 'property-management-companies', title: 'Property Management Companies' },
+      { slug: 'self-managing-owners', title: 'Self-Managing Owners' },
+      { slug: 'reits', title: 'REITs & Asset Managers' },
+    ],
+    metaTitle: 'Property Maintenance Management Software | Revun',
     metaDescription:
-      'Work order intake, technician dispatch, scheduling, proof of work, and invoicing. One platform for property maintenance companies.',
+      'Replace Jobber, ServiceTitan, and paper work orders with one platform. Work order intake, technician dispatch, proof of work, and invoicing for maintenance companies.',
   },
   reits: {
     title: 'Institutional-grade operations, unified across every asset',
@@ -273,9 +287,15 @@ const solutionData: Record<string, SolutionContent> = {
     pricingNote: 'Dedicated account team. Enterprise SLA. SOC 2 compliant.',
     ctaHeading: 'Unify your portfolio on one platform',
     ctaBody: 'Schedule a portfolio assessment with our enterprise team.',
-    metaTitle: 'REITs & Asset Managers',
+    replaces: ['Yardi', 'MRI Software', 'Multiple legacy systems', 'Manual consolidation', 'Excel reporting'],
+    relatedSolutions: [
+      { slug: 'property-management-companies', title: 'Property Management Companies' },
+      { slug: 'maintenance-companies', title: 'Maintenance Companies' },
+      { slug: 'leasing-companies', title: 'Leasing Companies' },
+    ],
+    metaTitle: 'Property Management Platform for REITs & Asset Managers | Revun',
     metaDescription:
-      'Standardize operations across properties and regions. Portfolio dashboards, role-based access, advanced reporting, and API integrations for institutional real estate.',
+      'Replace Yardi, MRI Software, and legacy systems with one unified platform. Portfolio dashboards, role-based access, advanced reporting, and API integrations for institutional real estate.',
   },
 }
 
@@ -298,11 +318,11 @@ export async function generateMetadata({
   const data = solutionData[audience]
   if (!data) return {}
   return {
-    title: `${data.metaTitle} | Solutions`,
+    title: data.metaTitle,
     description: data.metaDescription,
     alternates: { canonical: buildCanonicalUrl(`/solutions/${audience}`) },
     openGraph: {
-      title: `${data.metaTitle} | Revun Solutions`,
+      title: data.metaTitle,
       description: data.metaDescription,
       url: buildCanonicalUrl(`/solutions/${audience}`),
     },
@@ -320,5 +340,26 @@ export default async function SolutionDetailPage({
   const data = solutionData[audience]
   if (!data) notFound()
 
-  return <SolutionDetailClient data={data} slug={audience} />
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://revun.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Solutions', item: 'https://revun.com/solutions/' },
+      { '@type': 'ListItem', position: 3, name: data.metaTitle.split(' | ')[0], item: buildCanonicalUrl(`/solutions/${audience}`) },
+    ],
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: sanitizeJsonLd(breadcrumbJsonLd) }}
+      />
+      <SolutionDetailClient
+        data={data}
+        slug={audience}
+      />
+    </>
+  )
 }

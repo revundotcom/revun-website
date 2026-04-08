@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowRight, Plug } from 'lucide-react'
+import { ArrowRight, Plug, Search } from 'lucide-react'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 
 const filterCategories = [
@@ -26,6 +26,7 @@ interface Integration {
   category: Exclude<FilterCategory, 'All'>
   status: Status
   description: string
+  featured?: boolean
 }
 
 const integrations: Integration[] = [
@@ -36,6 +37,7 @@ const integrations: Integration[] = [
     category: 'Accounting',
     status: 'Available',
     description: 'Sync invoices, payments, and expenses with QuickBooks Online.',
+    featured: true,
   },
   {
     name: 'Xero',
@@ -65,6 +67,7 @@ const integrations: Integration[] = [
     category: 'CRM',
     status: 'Available',
     description: 'Push lead and deal data directly into Salesforce CRM.',
+    featured: true,
   },
   {
     name: 'HubSpot',
@@ -87,6 +90,7 @@ const integrations: Integration[] = [
     category: 'Communications',
     status: 'Available',
     description: 'SMS, voice, and WhatsApp messaging for tenant communication.',
+    featured: true,
   },
   {
     name: 'RingCentral',
@@ -138,6 +142,7 @@ const integrations: Integration[] = [
     category: 'Payments',
     status: 'Available',
     description: 'Accept rent payments via card, ACH, and bank debit.',
+    featured: true,
   },
   {
     name: 'Plaid',
@@ -159,6 +164,7 @@ const integrations: Integration[] = [
     category: 'Payments',
     status: 'Available',
     description: 'Electronic lease signing and document management.',
+    featured: true,
   },
   // Productivity
   {
@@ -188,59 +194,115 @@ const integrations: Integration[] = [
     category: 'Productivity',
     status: 'Available',
     description: 'Connect Revun to 5,000+ apps with custom automations.',
+    featured: true,
   },
 ]
 
 const statusColors: Record<Status, string> = {
-  Available: 'bg-emerald-100 text-emerald-700',
-  'Coming Soon': 'bg-amber-100 text-amber-700',
-  Beta: 'bg-blue-100 text-blue-700',
+  Available: 'bg-emerald-50 text-emerald-600',
+  'Coming Soon': 'bg-orange-50 text-orange-600',
+  Beta: 'bg-sky-50 text-sky-600',
 }
 
-const categoryIcons: Record<Exclude<FilterCategory, 'All'>, string> = {
-  Accounting: 'bg-indigo-100 text-indigo-600',
-  CRM: 'bg-violet-100 text-violet-600',
-  Communications: 'bg-sky-100 text-sky-600',
-  Identity: 'bg-rose-100 text-rose-600',
-  Payments: 'bg-emerald-100 text-emerald-600',
-  Productivity: 'bg-amber-100 text-amber-600',
+const featuredSlugs = ['stripe', 'quickbooks', 'twilio', 'salesforce', 'zapier', 'docusign']
+
+function IntegrationCard({ integration }: { integration: Integration }) {
+  return (
+    <Link
+      href={`/integrations/${integration.slug}/`}
+      className="group flex flex-col justify-between rounded-2xl border border-[#D3D5DB] bg-white p-6 transition-colors duration-150 hover:border-[#176FEB]"
+    >
+      <div>
+        <div className="flex items-start justify-between">
+          <div className="inline-flex size-10 items-center justify-center rounded-xl bg-[#E8F2FE]">
+            <Plug className="size-5 text-[#176FEB]" />
+          </div>
+          <span
+            className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${statusColors[integration.status]}`}
+          >
+            {integration.status}
+          </span>
+        </div>
+        <h3 className="mt-4 font-heading text-lg font-bold text-[#2C2E33]">
+          {integration.name}
+        </h3>
+        <span className="mt-1 inline-block text-xs text-[#555860]">
+          {integration.category}
+        </span>
+        <p className="mt-2 text-sm text-[#555860]">
+          {integration.description}
+        </p>
+      </div>
+      <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-[#176FEB] transition-colors">
+        Learn more
+        <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+      </div>
+    </Link>
+  )
 }
 
 export default function IntegrationsPage() {
+  const [search, setSearch] = useState('')
   const [active, setActive] = useState<FilterCategory>('All')
 
-  const filtered =
-    active === 'All'
-      ? integrations
-      : integrations.filter((i) => i.category === active)
+  const filtered = integrations.filter((i) => {
+    const matchesCategory = active === 'All' || i.category === active
+    const matchesSearch =
+      !search ||
+      i.name.toLowerCase().includes(search.toLowerCase()) ||
+      i.description.toLowerCase().includes(search.toLowerCase())
+    return matchesCategory && matchesSearch
+  })
+
+  const featured = integrations.filter((i) => featuredSlugs.includes(i.slug))
 
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-brand-indigo">
-        <div className="absolute inset-0 bg-dot-grid opacity-30" />
+      <section className="relative overflow-hidden bg-[#0A1628]">
         <div className="relative mx-auto max-w-7xl px-6 py-24 text-center sm:py-32 lg:px-8">
-          <h1 className="font-display text-4xl italic text-white sm:text-5xl lg:text-6xl">
-            40+ integrations. One connected platform.
+          <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/70">
+            <Plug className="size-4" />
+            22+ integrations
+          </div>
+          <h1 className="font-heading text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
+            Connect Revun with Your Favorite{' '}
+            <span className="text-[#176FEB]">Tools</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-indigo-200">
-            Revun connects to the tools your business already runs on.
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-white/60">
+            Revun connects to the tools your business already runs on, from accounting and payments to communications and identity verification.
           </p>
         </div>
       </section>
 
-      {/* Filter Tabs */}
-      <section className="border-b border-border bg-white">
+      {/* Search Bar */}
+      <section className="border-b border-[#D3D5DB] bg-white">
+        <div className="mx-auto max-w-7xl px-6 py-6 lg:px-8">
+          <div className="relative mx-auto max-w-xl">
+            <Search className="absolute left-4 top-1/2 size-5 -translate-y-1/2 text-[#555860]" />
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search integrations..."
+              className="w-full rounded-xl border border-[#D3D5DB] bg-[#F5F6F8] py-3 pl-12 pr-4 text-sm text-[#2C2E33] placeholder:text-[#555860] focus:border-[#176FEB] focus:outline-none focus:ring-1 focus:ring-[#176FEB]"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Category Pills */}
+      <section className="border-b border-[#D3D5DB] bg-white">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="no-scrollbar flex gap-1 overflow-x-auto py-4">
+          <div className="no-scrollbar flex gap-2 overflow-x-auto py-4">
             {filterCategories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActive(cat)}
-                className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                   active === cat
-                    ? 'bg-brand-violet text-white shadow-md'
-                    : 'bg-brand-slate-100 text-brand-slate-600 hover:bg-brand-slate-200'
+                    ? 'bg-[#176FEB] text-white'
+                    : 'bg-[#F5F6F8] text-[#555860] hover:bg-[#E8F2FE]'
                 }`}
               >
                 {cat}
@@ -250,72 +312,80 @@ export default function IntegrationsPage() {
         </div>
       </section>
 
-      {/* Integration Grid */}
-      <section className="bg-brand-slate-50 py-20">
+      {/* Featured Integrations */}
+      {active === 'All' && !search && (
+        <section className="bg-[#F5F6F8] py-16">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <h2 className="font-heading text-2xl font-bold text-[#2C2E33] sm:text-3xl">
+              Featured <span className="text-[#176FEB]">Integrations</span>
+            </h2>
+            <p className="mt-2 text-[#555860]">
+              Our most popular connections, ready to go out of the box.
+            </p>
+            <RevealOnScroll stagger={0.05}>
+              <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {featured.map((integration) => (
+                  <motion.div key={integration.slug} variants={revealItem}>
+                    <IntegrationCard integration={integration} />
+                  </motion.div>
+                ))}
+              </div>
+            </RevealOnScroll>
+          </div>
+        </section>
+      )}
+
+      {/* Full Directory Grid */}
+      <section className="bg-white py-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <h2 className="font-heading text-2xl font-bold text-[#2C2E33] sm:text-3xl">
+            All <span className="text-[#176FEB]">Integrations</span>
+          </h2>
+          <p className="mt-2 text-[#555860]">
+            {filtered.length} integration{filtered.length !== 1 ? 's' : ''} found
+            {active !== 'All' ? ` in ${active}` : ''}
+            {search ? ` matching "${search}"` : ''}
+          </p>
           <RevealOnScroll stagger={0.05}>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {filtered.map((integration) => (
                 <motion.div key={integration.slug} variants={revealItem}>
-                  <Link
-                    href={`/integrations/${integration.slug}/`}
-                    className="spotlight-card group flex flex-col justify-between rounded-2xl border border-border bg-white p-6 shadow-sm transition-all hover:shadow-lg hover:border-brand-violet-light"
-                  >
-                    <div>
-                      <div className="flex items-start justify-between">
-                        <div
-                          className={`inline-flex size-10 items-center justify-center rounded-xl ${categoryIcons[integration.category]}`}
-                        >
-                          <Plug className="size-5" />
-                        </div>
-                        <span
-                          className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${statusColors[integration.status]}`}
-                        >
-                          {integration.status}
-                        </span>
-                      </div>
-                      <h3 className="mt-4 font-heading text-lg font-bold text-brand-indigo">
-                        {integration.name}
-                      </h3>
-                      <span className="mt-1 inline-block text-xs font-medium text-brand-slate-400">
-                        {integration.category}
-                      </span>
-                      <p className="mt-2 text-sm text-brand-slate-500">
-                        {integration.description}
-                      </p>
-                    </div>
-                    <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-brand-violet transition-colors group-hover:text-brand-violet-dark">
-                      Learn more
-                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                    </div>
-                  </Link>
+                  <IntegrationCard integration={integration} />
                 </motion.div>
               ))}
             </div>
           </RevealOnScroll>
+          {filtered.length === 0 && (
+            <div className="py-16 text-center">
+              <p className="text-lg font-medium text-[#2C2E33]">No integrations found</p>
+              <p className="mt-2 text-sm text-[#555860]">
+                Try adjusting your search or category filter.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
       {/* Bottom CTA */}
       <section className="bg-white py-20">
-        <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
-          <h2 className="font-heading text-2xl font-bold text-brand-indigo sm:text-3xl">
-            Need a custom integration?
+        <div className="mx-auto max-w-3xl border-t border-[#D3D5DB] px-6 pt-20 text-center lg:px-8">
+          <h2 className="font-heading text-2xl font-bold text-[#2C2E33] sm:text-3xl">
+            Need a Custom <span className="text-[#176FEB]">Integration</span>?
           </h2>
-          <p className="mt-4 text-brand-slate-500">
+          <p className="mt-4 text-[#555860]">
             Our API and Zapier connector let you build integrations with any tool
             in your stack.
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
               href="/contact/"
-              className="inline-flex h-11 items-center rounded-lg bg-brand-violet px-6 text-sm font-semibold text-white cta-primary-shadow hover:bg-brand-violet-dark"
+              className="inline-flex h-11 items-center rounded-lg bg-[#176FEB] px-6 text-sm font-semibold text-white transition-colors hover:bg-[#1260d1]"
             >
               Talk to Our Team
             </Link>
             <Link
               href="/contact/"
-              className="inline-flex h-11 items-center rounded-lg border border-border px-6 text-sm font-semibold text-brand-indigo hover:bg-brand-slate-50"
+              className="inline-flex h-11 items-center rounded-lg border border-[#D3D5DB] px-6 text-sm font-semibold text-[#2C2E33] transition-colors hover:bg-[#F5F6F8]"
             >
               View API Docs
             </Link>

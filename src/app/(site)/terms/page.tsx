@@ -1,16 +1,53 @@
 import type { Metadata } from 'next'
+import { buildCanonicalUrl } from '@/lib/utils'
+
+const title = 'Terms of Service'
+const description =
+  'Read the terms and conditions that govern your use of the Revun platform.'
+const url = buildCanonicalUrl('/terms')
 
 export const metadata: Metadata = {
-  title: 'Terms of Service',
-  description:
-    'Read the terms and conditions that govern your use of the Revun platform.',
+  title,
+  description,
+  alternates: {
+    canonical: url,
+  },
+  openGraph: {
+    title,
+    description,
+    url,
+  },
 }
 
 export default function TermsOfServicePage() {
   return (
     <article className="mx-auto max-w-3xl px-6 pt-36 pb-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: buildCanonicalUrl('/'),
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Terms of Service',
+                item: url,
+              },
+            ],
+          }),
+        }}
+      />
+
       <header className="mb-12">
-        <p className="mb-3 text-sm font-medium uppercase tracking-widest text-brand-violet">
+        <p className="mb-3 text-sm font-medium uppercase tracking-widest text-brand-blue">
           Legal
         </p>
         <h1 className="font-display italic text-4xl leading-[1.1] tracking-tight text-foreground md:text-5xl">
@@ -21,7 +58,7 @@ export default function TermsOfServicePage() {
         </p>
       </header>
 
-      <div className="prose prose-slate max-w-none dark:prose-invert [&_h2]:font-heading [&_h2]:text-xl [&_h2]:font-bold [&_h2]:tracking-tight [&_h2]:text-foreground [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:text-[0.938rem] [&_p]:leading-relaxed [&_p]:text-muted-foreground [&_ul]:text-[0.938rem] [&_ul]:leading-relaxed [&_ul]:text-muted-foreground [&_li]:text-muted-foreground [&_a]:text-brand-violet [&_a]:no-underline hover:[&_a]:underline">
+      <div className="prose prose-slate max-w-none dark:prose-invert [&_h2]:font-heading [&_h2]:text-xl [&_h2]:font-bold [&_h2]:tracking-tight [&_h2]:text-foreground [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:text-[0.938rem] [&_p]:leading-relaxed [&_p]:text-muted-foreground [&_ul]:text-[0.938rem] [&_ul]:leading-relaxed [&_ul]:text-muted-foreground [&_li]:text-muted-foreground [&_a]:text-brand-blue [&_a]:no-underline hover:[&_a]:underline">
         <p>
           These Terms of Service (&quot;Terms&quot;) govern your access to and use of the Revun platform, website, and related services (collectively, the &quot;Services&quot;) provided by Revun Inc. (&quot;Revun,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;). By creating an account or using the Services, you agree to be bound by these Terms.
         </p>

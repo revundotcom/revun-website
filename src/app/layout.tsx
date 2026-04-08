@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
-import { Inter, Plus_Jakarta_Sans, Instrument_Serif, Geist_Mono } from 'next/font/google'
+import { Inter, Outfit, Instrument_Serif, Geist_Mono } from 'next/font/google'
 import { GoogleTagManager } from '@next/third-parties/google'
+import { buildOrganizationSchema } from '@/lib/schema-builders'
+import { sanitizeJsonLd } from '@/lib/utils'
 import './globals.css'
 
 const inter = Inter({
@@ -10,12 +12,12 @@ const inter = Inter({
   variable: '--font-sans',
 })
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const outfit = Outfit({
   subsets: ['latin'],
   display: 'swap',
   preload: true,
   variable: '--font-heading',
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['300', '400', '500', '600', '700', '800'],
 })
 
 const instrumentSerif = Instrument_Serif({
@@ -104,9 +106,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en-CA"
-      className={`${inter.variable} ${plusJakartaSans.variable} ${instrumentSerif.variable} ${geistMono.variable}`}
+      className={`${inter.variable} ${outfit.variable} ${instrumentSerif.variable} ${geistMono.variable}`}
     >
       <body className="min-h-screen font-sans antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: sanitizeJsonLd(buildOrganizationSchema()),
+          }}
+        />
         {process.env.NEXT_PUBLIC_GTM_ID && (
           <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
         )}

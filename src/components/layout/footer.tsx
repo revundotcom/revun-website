@@ -42,7 +42,15 @@ const navigation = {
       { label: 'Careers', href: '/careers' },
       { label: 'Press', href: '/press' },
       { label: 'Partners', href: '/partners' },
-      { label: 'Legal', href: '/legal' },
+    ],
+  },
+  legal: {
+    title: 'Legal',
+    links: [
+      { label: 'Privacy Policy', href: '/privacy' },
+      { label: 'Terms of Service', href: '/terms' },
+      { label: 'Cookie Policy', href: '/cookies' },
+      { label: 'Accessibility', href: '/accessibility' },
     ],
   },
 } as const
@@ -58,7 +66,7 @@ function FooterColumn({ title, links }: { title: string; links: ReadonlyArray<{ 
           <li key={link.href}>
             <Link
               href={link.href}
-              className="text-sm text-brand-slate-400 hover:text-white transition-colors"
+              className="text-sm text-[#64748B] hover:text-white transition-colors duration-150"
             >
               {link.label}
             </Link>
@@ -101,7 +109,7 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-brand-indigo border-t border-white/10">
+    <footer className="bg-[#0A1628] border-t border-white/10">
       {/* Main footer */}
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Top: brand + newsletter */}
@@ -112,7 +120,7 @@ export function Footer() {
                 Revun
               </span>
             </Link>
-            <p className="mt-4 text-sm leading-relaxed text-brand-slate-400">
+            <p className="mt-4 text-sm leading-relaxed text-[#64748B]">
               Property management infrastructure for Canada and the United States.
             </p>
           </div>
@@ -122,7 +130,7 @@ export function Footer() {
               <p className="text-sm font-semibold text-white">
                 Stay up to date
               </p>
-              <p className="mt-1 text-sm text-brand-slate-400">
+              <p className="mt-1 text-sm text-[#64748B]">
                 Product updates, insights, and industry news.
               </p>
               <form className="mt-4 flex gap-2" action="/api/contact" method="POST">
@@ -135,11 +143,11 @@ export function Footer() {
                   placeholder="you@company.com"
                   autoComplete="email"
                   required
-                  className="flex-1 min-w-0 rounded-lg bg-white/5 border border-white/10 px-3.5 py-2 text-sm text-white placeholder:text-brand-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-violet focus:border-transparent"
+                  className="flex-1 min-w-0 rounded-lg bg-white/5 border border-white/10 px-3.5 py-2 text-sm text-white placeholder:text-[#64748B] focus:outline-none focus:ring-2 focus:ring-[#176FEB] focus:border-transparent"
                 />
                 <button
                   type="submit"
-                  className="shrink-0 rounded-lg bg-brand-violet px-4 py-2 text-sm font-semibold text-white hover:bg-brand-violet-dark transition-colors focus:outline-none focus:ring-2 focus:ring-brand-violet focus:ring-offset-2 focus:ring-offset-brand-indigo"
+                  className="shrink-0 rounded-lg bg-[#176FEB] px-4 py-2 text-sm font-semibold text-white hover:bg-[#1260CC] transition-colors focus:outline-none focus:ring-2 focus:ring-[#176FEB] focus:ring-offset-2 focus:ring-offset-[#0A1628]"
                 >
                   Subscribe
                 </button>
@@ -149,7 +157,7 @@ export function Footer() {
         </div>
 
         {/* Link columns */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 pt-12">
           {Object.values(navigation).map((column) => (
             <FooterColumn key={column.title} title={column.title} links={column.links} />
           ))}
@@ -159,20 +167,20 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-brand-slate-500">
+          <p className="text-sm text-[#555860]">
             &copy; 2026 Revun. All rights reserved.
           </p>
 
           <div className="flex items-center gap-6">
             <Link
               href="/privacy"
-              className="text-sm text-brand-slate-400 hover:text-white transition-colors"
+              className="text-sm text-[#64748B] hover:text-white transition-colors duration-150"
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="text-sm text-brand-slate-400 hover:text-white transition-colors"
+              className="text-sm text-[#64748B] hover:text-white transition-colors duration-150"
             >
               Terms of Service
             </Link>
@@ -185,7 +193,7 @@ export function Footer() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-brand-slate-500 hover:text-white transition-colors"
+                className="text-[#555860] hover:text-white transition-colors duration-150"
                 aria-label={item.label}
               >
                 <item.icon className="h-5 w-5" />

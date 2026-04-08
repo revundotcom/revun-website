@@ -1,13 +1,16 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
-  Users,
   FileText,
-  Wrench,
   CreditCard,
+  Wrench,
   Shield,
+  BarChart3,
   MessageSquare,
   ArrowRight,
+  UserPlus,
+  Building2,
+  Rocket,
 } from 'lucide-react'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 import { PlatformHero } from '@/components/blocks/platform-hero'
@@ -30,58 +33,76 @@ export const metadata: Metadata = {
 
 const modules = [
   {
-    title: 'Owner & Tenant Management',
-    description:
-      'Onboarding, portals, communication, and document management for every stakeholder in one place.',
-    icon: Users,
-    accent: 'from-violet-500/20 to-indigo-500/20',
-    border: 'group-hover:border-violet-400/40',
-    span: 'md:col-span-2',
-  },
-  {
     title: 'Leasing & Applications',
     description:
       'Listings, showings, screening, offers, and lease execution. From vacancy to signed lease, automated.',
     icon: FileText,
-    accent: 'from-amber-500/20 to-orange-500/20',
-    border: 'group-hover:border-amber-400/40',
-    span: 'md:col-span-1',
-  },
-  {
-    title: 'Maintenance & Vendors',
-    description:
-      'Work orders, dispatch, proof of work, and vendor payments. Full lifecycle visibility.',
-    icon: Wrench,
-    accent: 'from-emerald-500/20 to-teal-500/20',
-    border: 'group-hover:border-emerald-400/40',
-    span: 'md:col-span-1',
-  },
-  {
-    title: 'Payments & Financial',
-    description:
-      'Rent collection, owner payouts, reconciliation, and reporting. Real-time financial clarity.',
-    icon: CreditCard,
-    accent: 'from-blue-500/20 to-cyan-500/20',
-    border: 'group-hover:border-blue-400/40',
     span: 'md:col-span-2',
+    accent: true,
   },
   {
-    title: 'Compliance & Legal',
+    title: 'Rent Collection & Payments',
     description:
-      'Province and state workflows, automated notices, and audit trails. Stay compliant without the overhead.',
-    icon: Shield,
-    accent: 'from-rose-500/20 to-pink-500/20',
-    border: 'group-hover:border-rose-400/40',
+      'ACH, credit card, and Interac. Automated reminders, split payments, and real-time reconciliation.',
+    icon: CreditCard,
     span: 'md:col-span-1',
+    accent: false,
+  },
+  {
+    title: 'Maintenance Management',
+    description:
+      'Work orders, dispatch, proof of work, vendor payments. Full lifecycle visibility.',
+    icon: Wrench,
+    span: 'md:col-span-1',
+    accent: false,
+  },
+  {
+    title: 'Tenant Screening',
+    description:
+      'Credit, criminal, and eviction checks through Equifax and TransUnion. Results in minutes.',
+    icon: Shield,
+    span: 'md:col-span-1',
+    accent: false,
+  },
+  {
+    title: 'Financial Reporting',
+    description:
+      'Owner statements, P&L, cash flow, and tax-ready reports. QuickBooks and Xero sync.',
+    icon: BarChart3,
+    span: 'md:col-span-1',
+    accent: false,
   },
   {
     title: 'Communications',
     description:
-      'Email, SMS, calling, and in-app messaging. All conversations in context, all in one thread.',
+      'Email, SMS, calling, and in-app messaging. Every conversation in context.',
     icon: MessageSquare,
-    accent: 'from-purple-500/20 to-fuchsia-500/20',
-    border: 'group-hover:border-purple-400/40',
     span: 'md:col-span-2',
+    accent: true,
+  },
+] as const
+
+const steps = [
+  {
+    step: '01',
+    title: 'Sign Up',
+    description:
+      'Create your account in under 2 minutes. No credit card required for Free plan.',
+    icon: UserPlus,
+  },
+  {
+    step: '02',
+    title: 'Connect Properties',
+    description:
+      'Add your properties, import tenant data, and connect your existing tools.',
+    icon: Building2,
+  },
+  {
+    step: '03',
+    title: 'Go Live',
+    description:
+      'Start managing. Leasing, payments, maintenance, and reporting from day one.',
+    icon: Rocket,
   },
 ] as const
 
@@ -94,10 +115,10 @@ const integrations = [
   'SendGrid',
   'DocuSign',
   'Certn',
-  'Google Workspace',
-  'Microsoft 365',
+  'Equifax',
+  'TransUnion',
   'Zapier',
-  'Slack',
+  'Google Workspace',
 ]
 
 /* ── Page ──────────────────────────────────────────────────────────────────── */
@@ -109,14 +130,14 @@ export default function PlatformPage() {
       <PlatformHero />
 
       {/* ── Core Modules (Bento Grid) ── */}
-      <section className="relative bg-white py-24 md:py-32">
+      <section className="bg-white py-24 md:py-32">
         <div className="mx-auto max-w-6xl px-6">
-          <RevealOnScroll className="mb-16 text-center">
-            <p className="revealItem mb-3 text-sm font-semibold uppercase tracking-widest text-brand-violet">
+          <RevealOnScroll className="mb-16 text-center" stagger={0.12}>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Core Modules
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-brand-indigo md:text-4xl">
-              Everything your operation needs, nothing it doesn't
+            <h2 className="font-heading text-3xl font-bold text-[#2C2E33] md:text-4xl">
+              Everything your <span className="text-[#176FEB]">operation</span> needs
             </h2>
           </RevealOnScroll>
 
@@ -127,24 +148,17 @@ export default function PlatformPage() {
                 return (
                   <div
                     key={m.title}
-                    className={`group relative overflow-hidden rounded-2xl border border-brand-slate-200 bg-brand-slate-50 p-8 transition-all duration-300 hover:shadow-lg ${m.border} ${m.span}`}
+                    className={`rounded-2xl border border-[#D3D5DB] bg-white p-8 transition hover:border-[#176FEB]/40 ${m.accent ? 'border-t-4 border-t-[#176FEB]' : ''} ${m.span}`}
                   >
-                    {/* Gradient glow */}
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-br ${m.accent} opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
-                      aria-hidden
-                    />
-                    <div className="relative z-10">
-                      <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-sm ring-1 ring-brand-slate-200">
-                        <Icon className="h-6 w-6 text-brand-violet" />
-                      </div>
-                      <h3 className="mb-2 font-heading text-lg font-bold text-brand-indigo">
-                        {m.title}
-                      </h3>
-                      <p className="text-sm leading-relaxed text-brand-slate-600">
-                        {m.description}
-                      </p>
+                    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#E8F2FE]">
+                      <Icon className="h-6 w-6 text-[#176FEB]" />
                     </div>
+                    <h3 className="mb-2 font-heading text-lg font-bold text-[#2C2E33]">
+                      {m.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-[#555860]">
+                      {m.description}
+                    </p>
                   </div>
                 )
               })}
@@ -153,91 +167,58 @@ export default function PlatformPage() {
         </div>
       </section>
 
-      {/* ── How It Connects ── */}
-      <section className="relative overflow-hidden bg-brand-indigo py-24 md:py-32">
-        <div className="absolute inset-0 bg-dot-grid opacity-20" aria-hidden />
-        <div className="relative z-10 mx-auto max-w-5xl px-6">
-          <RevealOnScroll className="mb-16 text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-amber">
-              Architecture
+      {/* ── How It Works ── */}
+      <section className="bg-[#F5F6F8] py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6">
+          <RevealOnScroll className="mb-16 text-center" stagger={0.12}>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
+              How It Works
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-white md:text-4xl">
-              How it all connects
+            <h2 className="font-heading text-3xl font-bold text-[#2C2E33] md:text-4xl">
+              Live in <span className="text-[#176FEB]">three</span> steps
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-brand-slate-300">
-              Every module feeds into a shared data layer. Actions in one area
-              automatically update the rest. No CSV exports. No double entry.
-            </p>
           </RevealOnScroll>
 
-          {/* Connection diagram */}
-          <RevealOnScroll>
-            <div className="relative mx-auto max-w-3xl">
-              {/* Center hub */}
-              <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full bg-gradient-to-br from-brand-violet to-brand-violet-dark shadow-lg shadow-brand-violet/30 ring-4 ring-brand-violet-light/20">
-                <span className="font-heading text-sm font-bold text-white">
-                  Revun
-                  <br />
-                  Core
-                </span>
-              </div>
-
-              {/* Spokes */}
-              <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3">
-                {modules.map((m) => {
-                  const Icon = m.icon
-                  return (
-                    <div
-                      key={m.title}
-                      className="glass-dark flex items-center gap-3 rounded-xl px-4 py-3"
-                    >
-                      <Icon className="h-5 w-5 shrink-0 text-brand-violet-light" />
-                      <span className="text-sm font-medium text-white/90">
-                        {m.title.split(' & ')[0]}
-                      </span>
+          <RevealOnScroll stagger={0.1}>
+            <div className="grid gap-8 md:grid-cols-3">
+              {steps.map((s) => {
+                const Icon = s.icon
+                return (
+                  <div
+                    key={s.step}
+                    className="rounded-2xl border border-[#D3D5DB] bg-white p-8"
+                  >
+                    <span className="mb-4 block font-mono text-sm font-semibold text-[#176FEB]">
+                      Step {s.step}
+                    </span>
+                    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#E8F2FE]">
+                      <Icon className="h-6 w-6 text-[#176FEB]" />
                     </div>
-                  )
-                })}
-              </div>
-
-              {/* Connecting lines (decorative) */}
-              <div
-                className="pointer-events-none absolute inset-0 hidden md:block"
-                aria-hidden
-              >
-                <svg
-                  className="h-full w-full"
-                  viewBox="0 0 600 100"
-                  fill="none"
-                  preserveAspectRatio="none"
-                >
-                  <line
-                    x1="300"
-                    y1="0"
-                    x2="300"
-                    y2="100"
-                    stroke="rgba(167,139,250,0.2)"
-                    strokeWidth="1"
-                    strokeDasharray="4 4"
-                  />
-                </svg>
-              </div>
+                    <h3 className="mb-2 font-heading text-lg font-bold text-[#2C2E33]">
+                      {s.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-[#555860]">
+                      {s.description}
+                    </p>
+                  </div>
+                )
+              })}
             </div>
           </RevealOnScroll>
         </div>
       </section>
 
       {/* ── Integrations ── */}
-      <section className="relative bg-brand-slate-50 py-24 md:py-32">
+      <section className="bg-white py-24 md:py-32">
         <div className="mx-auto max-w-6xl px-6">
-          <RevealOnScroll className="mb-16 text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-violet">
+          <RevealOnScroll className="mb-16 text-center" stagger={0.12}>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Ecosystem
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-brand-indigo md:text-4xl">
-              Connects to 40+ tools
+            <h2 className="font-heading text-3xl font-bold text-[#2C2E33] md:text-4xl">
+              Connects to <span className="text-[#176FEB]">40+</span> tools
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-brand-slate-600">
+            <p className="mx-auto mt-4 max-w-xl text-[#555860]">
               Revun integrates with the accounting, payment, screening, and
               communication tools you already use.
             </p>
@@ -248,7 +229,7 @@ export default function PlatformPage() {
               {integrations.map((name) => (
                 <div
                   key={name}
-                  className="flex h-16 items-center justify-center rounded-xl border border-brand-slate-200 bg-white text-sm font-medium text-brand-slate-700 transition-shadow hover:shadow-md"
+                  className="flex h-16 items-center justify-center rounded-xl border border-[#D3D5DB] bg-white text-sm font-medium text-[#555860] transition hover:border-[#176FEB]/40"
                 >
                   {name}
                 </div>
@@ -258,7 +239,7 @@ export default function PlatformPage() {
             <div className="mt-10 text-center">
               <Link
                 href="/integrations/"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-brand-violet transition-colors hover:text-brand-violet-dark"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[#176FEB] transition-colors hover:text-[#1259c1]"
               >
                 View all integrations
                 <ArrowRight className="h-4 w-4" />
@@ -269,27 +250,26 @@ export default function PlatformPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="relative overflow-hidden bg-brand-indigo py-24 md:py-32">
-        <div className="absolute inset-0 bg-mesh-gradient opacity-40" aria-hidden />
-        <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
-          <RevealOnScroll>
-            <h2 className="font-display italic text-4xl tracking-tight text-white md:text-5xl">
-              See Revun in action
+      <section className="bg-[#0A1628] py-24 md:py-32">
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <RevealOnScroll stagger={0.12}>
+            <h2 className="font-display text-4xl italic tracking-tight text-white md:text-5xl">
+              See the full <span className="text-[#176FEB]">platform</span> in action
             </h2>
-            <p className="mx-auto mt-5 max-w-lg text-lg text-brand-slate-300">
+            <p className="mx-auto mt-5 max-w-lg text-lg text-[#94A3B8]">
               Whether you manage 10 units or 10,000, Revun scales with your
               operation. Get a walkthrough from our team.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
                 href="/demo/"
-                className="cta-primary-shadow inline-flex h-12 items-center justify-center rounded-xl bg-brand-violet px-8 text-base font-semibold text-white transition-all hover:bg-brand-violet-dark"
+                className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white transition-colors hover:bg-[#1259c1]"
               >
                 Book a Demo
               </Link>
               <Link
                 href="/signup/"
-                className="inline-flex h-12 items-center justify-center rounded-xl border border-white/25 px-8 text-base font-semibold text-white transition-all hover:bg-white/10"
+                className="inline-flex h-12 items-center justify-center rounded-xl border border-white/25 px-8 text-base font-semibold text-white transition-colors hover:bg-white/10"
               >
                 Start Free
               </Link>

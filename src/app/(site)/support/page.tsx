@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { Building2, User, ChevronDown } from 'lucide-react'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 import { useState } from 'react'
+import { buildBreadcrumbSchema, buildFAQPageSchema } from '@/lib/schema-builders'
+import { sanitizeJsonLd } from '@/lib/utils'
 
 /* ── Animation variants ─────────────────────────────────────────────── */
 
@@ -95,24 +97,38 @@ function FAQItem({ faq }: { faq: (typeof faqs)[number] }) {
 export default function SupportPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: sanitizeJsonLd(
+            buildBreadcrumbSchema([
+              { name: 'Home', url: 'https://revun.com/' },
+              { name: 'Support', url: 'https://revun.com/support/' },
+            ])
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: sanitizeJsonLd(
+            buildFAQPageSchema(
+              faqs.map((faq) => ({ question: faq.question, answer: faq.answer }))
+            )
+          ),
+        }}
+      />
       {/* ── Hero ──────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-brand-indigo">
-        <div className="absolute inset-0" aria-hidden>
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-indigo via-[#13103a] to-[#0B0A1A]" />
-          <div className="absolute inset-0 bg-dot-grid opacity-20" />
-          <div className="absolute left-[20%] top-[30%] h-[350px] w-[350px] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.25)_0%,transparent_70%)] blur-3xl" />
-          <div className="absolute right-[15%] top-[15%] h-[300px] w-[300px] rounded-full bg-[radial-gradient(circle,rgba(167,139,250,0.15)_0%,transparent_70%)] blur-3xl" />
-        </div>
-
+      <section className="bg-brand-navy">
         <motion.div
-          className="relative z-10 mx-auto max-w-3xl px-6 pt-36 pb-24 text-center"
+          className="mx-auto max-w-3xl px-6 pt-36 pb-24 text-center"
           variants={heroStagger}
           initial="hidden"
           animate="visible"
         >
           <motion.p
             variants={fadeUp}
-            className="mb-4 text-sm font-medium uppercase tracking-widest text-brand-violet-light"
+            className="mb-4 text-sm font-medium uppercase tracking-widest text-brand-blue-light"
           >
             Support
           </motion.p>
@@ -120,11 +136,12 @@ export default function SupportPage() {
             variants={fadeUp}
             className="font-display italic text-4xl leading-[1.1] tracking-tight text-white sm:text-5xl"
           >
-            How can we help?
+            How can we{' '}
+            <span className="text-brand-blue-light">help?</span>
           </motion.h1>
           <motion.p
             variants={fadeUp}
-            className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-brand-slate-300"
+            className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#D3D5DB]"
           >
             Choose the path that matches your situation to find the right support.
           </motion.p>
@@ -132,7 +149,7 @@ export default function SupportPage() {
       </section>
 
       {/* ── Two-path cards ────────────────────────────────────────── */}
-      <section className="bg-brand-slate-50 py-24 dark:bg-[#0B0A1A]">
+      <section className="bg-brand-off-white py-24 dark:bg-[#0B0A1A]">
         <div className="mx-auto max-w-4xl px-6">
           <RevealOnScroll
             stagger={0.15}
@@ -141,20 +158,20 @@ export default function SupportPage() {
             {/* Left: Powered by Revun */}
             <motion.div
               variants={revealItem}
-              className="flex flex-col rounded-2xl border border-border bg-brand-indigo p-8 text-white dark:border-white/8"
+              className="flex flex-col rounded-2xl border border-border bg-brand-navy p-8 text-white dark:border-white/8"
             >
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
-                <Building2 className="h-6 w-6 text-brand-violet-light" strokeWidth={1.8} />
+                <Building2 className="h-6 w-6 text-brand-blue-light" strokeWidth={1.8} />
               </div>
               <h2 className="font-heading text-xl font-bold">
                 I use a Powered by Revun company
               </h2>
-              <p className="mt-3 flex-1 text-[0.938rem] leading-relaxed text-brand-slate-300">
+              <p className="mt-3 flex-1 text-[0.938rem] leading-relaxed text-[#D3D5DB]">
                 Your property management company, brokerage, or maintenance provider uses Revun to manage your experience. For questions about your lease, maintenance requests, payments, or showings, contact your property manager directly.
               </p>
               <Link
                 href="/help/"
-                className="mt-8 inline-flex h-11 items-center justify-center rounded-xl border border-white/20 text-sm font-semibold text-white transition-all hover:bg-white/10"
+                className="mt-8 inline-flex h-11 items-center justify-center rounded-xl border border-white/20 text-sm font-semibold text-white transition-colors hover:bg-white/10"
               >
                 Contact Your Operator
               </Link>
@@ -165,8 +182,8 @@ export default function SupportPage() {
               variants={revealItem}
               className="flex flex-col rounded-2xl border border-border bg-card p-8 dark:border-white/8 dark:bg-card"
             >
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-violet/10 dark:bg-brand-violet/20">
-                <User className="h-6 w-6 text-brand-violet" strokeWidth={1.8} />
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue/10 dark:bg-brand-blue/20">
+                <User className="h-6 w-6 text-brand-blue" strokeWidth={1.8} />
               </div>
               <h2 className="font-heading text-xl font-bold text-foreground">
                 I am a Revun Self-Manage user
@@ -177,13 +194,13 @@ export default function SupportPage() {
               <div className="mt-8 flex flex-col gap-3">
                 <Link
                   href="/help/"
-                  className="cta-primary-shadow inline-flex h-11 items-center justify-center rounded-xl bg-brand-violet text-sm font-semibold text-white transition-all hover:bg-brand-violet-dark"
+                  className="inline-flex h-11 items-center justify-center rounded-xl bg-brand-blue text-sm font-semibold text-white transition-colors hover:bg-brand-blue-dark"
                 >
                   Visit Help Center
                 </Link>
                 <Link
                   href="/contact/"
-                  className="inline-flex h-11 items-center justify-center rounded-xl border border-border text-sm font-semibold text-foreground transition-all hover:bg-muted"
+                  className="inline-flex h-11 items-center justify-center rounded-xl border border-border text-sm font-semibold text-foreground transition-colors hover:bg-muted"
                 >
                   Contact Support
                 </Link>
@@ -199,7 +216,7 @@ export default function SupportPage() {
           <RevealOnScroll className="text-center">
             <motion.p
               variants={revealItem}
-              className="mb-3 text-sm font-medium uppercase tracking-widest text-brand-violet"
+              className="mb-3 text-sm font-medium uppercase tracking-widest text-brand-blue"
             >
               FAQ
             </motion.p>
@@ -207,7 +224,7 @@ export default function SupportPage() {
               variants={revealItem}
               className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
             >
-              Common questions
+              Common <span className="text-brand-blue">questions</span>
             </motion.h2>
           </RevealOnScroll>
 

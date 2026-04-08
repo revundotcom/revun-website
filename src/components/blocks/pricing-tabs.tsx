@@ -12,294 +12,99 @@ import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 
 type Tier = {
   name: string
-  price: string
+  monthlyPrice: string
+  annualPrice?: string
   unit?: string
-  note?: string
   description: string
   features: string[]
   cta: string
   ctaHref?: string
   popular?: boolean
+  bg: string
 }
 
-type TabData = {
-  id: string
-  label: string
-  description: string
-  tiers: Tier[]
-  gridCols?: string
-}
-
-const TABS: TabData[] = [
+const TIERS: Tier[] = [
   {
-    id: 'self-manage',
-    label: 'Self-Manage',
-    description: 'For individual owners managing their own properties.',
-    tiers: [
-      {
-        name: 'Lite',
-        price: '$1',
-        unit: '/day per active unit',
-        description: 'Everything you need to manage a single property.',
-        features: [
-          'Property profile',
-          'Listing setup',
-          'Showing scheduling',
-          'Tenant chat',
-          'Basic lease workflow',
-          'Rent collection',
-          'Maintenance intake',
-          'Mobile app',
-        ],
-        cta: 'Start for $1/day',
-        ctaHref: '#',
-      },
-      {
-        name: 'Pro',
-        price: '$2',
-        unit: '/day per active unit',
-        popular: true,
-        description: 'More automation. More reach. Less busywork.',
-        features: [
-          'Everything in Lite',
-          'Listing distribution',
-          'Offer workflow',
-          'Lease automation',
-          'Owner wallet',
-          'Vendor coordination',
-          'Automation rules',
-          'Screening integrations',
-        ],
-        cta: 'Go Pro',
-        ctaHref: '#',
-      },
-      {
-        name: 'Max',
-        price: '$3',
-        unit: '/day per active unit',
-        description: 'Full control for growing portfolios.',
-        features: [
-          'Everything in Pro',
-          'Portfolio dashboard',
-          'Multi-property reporting',
-          'Compliance workflows',
-          'Custom permissions',
-          'Vendor tracking',
-          'Priority support',
-        ],
-        cta: 'Get Max',
-        ctaHref: '#',
-      },
+    name: 'Free',
+    monthlyPrice: '$0',
+    annualPrice: '$0',
+    unit: '/mo',
+    description: 'For individual owners (1-2 units)',
+    features: [
+      'Property profile',
+      'Listing setup',
+      'Showing scheduling',
+      'Tenant chat',
+      'Basic lease workflow',
+      'Rent collection (ACH only)',
+      'Maintenance intake',
+      'Mobile app',
     ],
+    cta: 'Start Free',
+    ctaHref: '#',
+    bg: 'bg-white',
   },
   {
-    id: 'agent-brokerage',
-    label: 'Agent & Brokerage',
-    description: 'Built for licensed agents and teams.',
-    gridCols: 'lg:grid-cols-2',
-    tiers: [
-      {
-        name: 'Agent Starter',
-        price: '$149',
-        unit: '/mo per user',
-        description: 'Everything an agent needs from day one.',
-        features: [
-          'CRM',
-          'Listings',
-          'Showings',
-          'Offers',
-          'Documents',
-          'Signatures',
-          'Task/calendar',
-          'Messaging',
-          '60-day guided trial',
-        ],
-        cta: 'Start Trial',
-        ctaHref: '#',
-      },
-      {
-        name: 'Agent Pro',
-        price: '$249',
-        unit: '/mo per user',
-        popular: true,
-        description: 'Advanced tools for high-volume agents.',
-        features: [
-          'Everything in Starter',
-          'Advanced documents',
-          'Compliance',
-          'Offer packages',
-          'Calling/video',
-          'Analytics',
-        ],
-        cta: 'Go Pro',
-        ctaHref: '#',
-      },
-      {
-        name: 'Brokerage Core',
-        price: '$499',
-        unit: '/mo',
-        description: 'Foundation for growing brokerages.',
-        features: [
-          'Team CRM',
-          'Document system',
-          'Deal pipeline',
-          'Compliance',
-          'Permissions',
-          'Launch program',
-        ],
-        cta: 'Start Trial',
-        ctaHref: '#',
-      },
-      {
-        name: 'Brokerage Growth',
-        price: '$999',
-        unit: '/mo',
-        description: 'Scale your brokerage operations.',
-        features: [
-          'Everything in Core',
-          'Training',
-          'Analytics',
-          'Premium support',
-          'Automation',
-          'Telephony routing',
-        ],
-        cta: 'Contact Sales',
-        ctaHref: '#',
-      },
+    name: 'Growth',
+    monthlyPrice: '$29',
+    annualPrice: '$23',
+    unit: '/unit/mo',
+    description: 'For growing portfolios (3-25 units)',
+    features: [
+      'Everything in Free',
+      'Listing distribution',
+      'Offer workflow',
+      'Lease automation',
+      'Owner financial reports',
+      'Vendor coordination',
+      'Automation rules',
+      'Screening integrations',
+      'Priority email support',
     ],
+    cta: 'Start Free Trial',
+    ctaHref: '#',
+    bg: 'bg-[#F5F6F8]',
   },
   {
-    id: 'operator',
-    label: 'Operator',
-    description: 'For property management companies at scale.',
-    tiers: [
-      {
-        name: 'Core',
-        price: '$999',
-        unit: '/mo',
-        description: 'Foundational property management operations.',
-        features: [
-          'Owner/tenant/vendor workflows',
-          'Communications',
-          'Maintenance intake',
-          'Payments',
-          'Reporting',
-        ],
-        cta: 'Book Demo',
-        ctaHref: '#',
-      },
-      {
-        name: 'Growth',
-        price: '$2,499',
-        unit: '/mo',
-        popular: true,
-        description: 'Advanced automation for growing teams.',
-        features: [
-          'Advanced automation',
-          'Routing rules',
-          'Staffing tools',
-          'Dashboards',
-          'Integrations',
-          'Implementation support',
-        ],
-        cta: 'Book Demo',
-        ctaHref: '#',
-      },
-      {
-        name: 'Max',
-        price: '$4,999',
-        unit: '/mo',
-        description: 'Enterprise-grade property management.',
-        features: [
-          'Enterprise controls',
-          'Custom workflows',
-          'Financial operations',
-          'Advanced reporting',
-          'API layer',
-        ],
-        cta: 'Book Demo',
-        ctaHref: '#',
-      },
+    name: 'Professional',
+    monthlyPrice: '$49',
+    annualPrice: '$39',
+    unit: '/unit/mo',
+    description: 'For PMCs and brokerages (25-500 units)',
+    popular: true,
+    features: [
+      'Everything in Growth',
+      'Team management',
+      'Compliance workflows',
+      'Custom permissions',
+      'Portfolio dashboard',
+      'Multi-entity reporting',
+      'Telephony routing',
+      'API access',
+      'Dedicated account manager',
     ],
+    cta: 'Start Free Trial',
+    ctaHref: '#',
+    bg: 'bg-[#E8F2FE]',
   },
   {
-    id: 'maintenance',
-    label: 'Maintenance',
-    description: 'Purpose-built for maintenance and trades companies.',
-    tiers: [
-      {
-        name: 'Core',
-        price: '$399',
-        unit: '/mo',
-        description: 'Run your maintenance operation end-to-end.',
-        features: [
-          'Job intake',
-          'Dispatching',
-          'Scheduling',
-          'Work orders',
-          'Proof uploads',
-          'Customer communication',
-          'Invoicing',
-        ],
-        cta: 'Book Demo',
-        ctaHref: '#',
-      },
-      {
-        name: 'Growth',
-        price: '$899',
-        unit: '/mo',
-        popular: true,
-        description: 'Scale your team with better visibility.',
-        features: [
-          'CRM',
-          'Team dashboards',
-          'Training',
-          'Communication tools',
-          'Technician tracking',
-          'Quick pay',
-        ],
-        cta: 'Book Demo',
-        ctaHref: '#',
-      },
-      {
-        name: 'Enterprise',
-        price: 'Custom',
-        description: 'Tailored for large-scale operations.',
-        features: [
-          'Advanced reporting',
-          'API access',
-          'Custom dispatch',
-          'Enterprise onboarding',
-        ],
-        cta: 'Contact Sales',
-        ctaHref: '#',
-      },
+    name: 'Enterprise',
+    monthlyPrice: 'Custom',
+    unit: '',
+    description: 'For operators (500+ units)',
+    features: [
+      'Everything in Professional',
+      'White-glove onboarding',
+      'Custom infrastructure',
+      'SLA guarantees',
+      'Phased rollout plan',
+      'Governance configuration',
+      'Security audit',
+      'Dedicated success team',
     ],
-  },
-  {
-    id: 'enterprise',
-    label: 'Enterprise',
-    description: 'Custom infrastructure for large organizations.',
-    tiers: [
-      {
-        name: 'Enterprise',
-        price: 'Custom',
-        description:
-          'White-glove onboarding, phased rollout, governance, security configuration, and custom infrastructure, all tailored to your organization.',
-        features: [
-          'Custom pricing',
-          'White-glove onboarding',
-          'Phased rollout plan',
-          'Governance and compliance',
-          'Security configuration',
-          'Custom infrastructure',
-          'Dedicated account team',
-          'SLA guarantees',
-        ],
-        cta: 'Request Consultation',
-        ctaHref: '#',
-      },
-    ],
+    cta: 'Contact Sales',
+    ctaHref: '#',
+    bg: 'bg-white',
   },
 ]
 
@@ -307,20 +112,27 @@ const TABS: TabData[] = [
 /*  Card                                                               */
 /* ------------------------------------------------------------------ */
 
-function PricingCard({ tier, isEnterpriseSolo }: { tier: Tier; isEnterpriseSolo?: boolean }) {
+function PricingCard({ tier, isAnnual }: { tier: Tier; isAnnual: boolean }) {
+  const isCustom = tier.monthlyPrice === 'Custom'
+  const displayPrice = isCustom
+    ? 'Custom'
+    : isAnnual && tier.annualPrice
+      ? tier.annualPrice
+      : tier.monthlyPrice
+
   return (
-    <motion.div variants={revealItem}>
+    <motion.div variants={revealItem} className="flex">
       <div
         className={cn(
-          'relative flex h-full flex-col rounded-xl border bg-card p-6 transition-shadow hover:shadow-lg md:p-8',
-          tier.popular && 'ring-2 ring-brand-violet shadow-lg',
-          isEnterpriseSolo && 'mx-auto max-w-2xl text-center'
+          'relative flex h-full w-full flex-col rounded-xl border border-[#D3D5DB] p-6 md:p-8',
+          tier.bg,
+          tier.popular && 'border-t-4 border-t-[#176FEB]'
         )}
       >
         {/* Popular badge */}
         {tier.popular && (
           <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-            <span className="inline-flex items-center rounded-full bg-brand-violet px-4 py-1 text-xs font-semibold tracking-wide text-white uppercase">
+            <span className="inline-flex items-center rounded-full bg-[#176FEB] px-4 py-1 text-xs font-semibold tracking-wide text-white uppercase">
               Most Popular
             </span>
           </div>
@@ -328,39 +140,36 @@ function PricingCard({ tier, isEnterpriseSolo }: { tier: Tier; isEnterpriseSolo?
 
         {/* Header */}
         <div className={cn('mb-6', tier.popular && 'mt-2')}>
-          <h3 className="font-heading text-xl font-bold text-foreground">{tier.name}</h3>
+          <h3 className="font-heading text-xl font-bold text-[#2C2E33]">{tier.name}</h3>
           <div className="mt-3 flex items-baseline gap-1">
-            {tier.price === 'Custom' ? (
-              <span className="font-heading text-4xl font-bold text-foreground">Custom</span>
+            {isCustom ? (
+              <span className="font-heading text-4xl font-bold text-[#0A1628]">Custom</span>
             ) : (
               <>
-                <span className="font-heading text-4xl font-bold text-foreground">
-                  {tier.price}
+                <span className="font-heading text-4xl font-bold text-[#0A1628]">
+                  {displayPrice}
                 </span>
                 {tier.unit && (
-                  <span className="text-sm text-muted-foreground">{tier.unit}</span>
+                  <span className="text-sm text-[#555860]">{tier.unit}</span>
                 )}
               </>
             )}
           </div>
-          {tier.note && (
-            <p className="mt-1 text-xs text-muted-foreground">{tier.note}</p>
+          {!isCustom && isAnnual && tier.annualPrice && (
+            <p className="mt-1 text-xs text-[#176FEB] font-medium">
+              Save 20% vs monthly ({tier.monthlyPrice}{tier.unit})
+            </p>
           )}
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-3 text-sm leading-relaxed text-[#555860]">
             {tier.description}
           </p>
         </div>
 
         {/* Features */}
-        <ul
-          className={cn(
-            'mb-8 flex flex-1 flex-col gap-3',
-            isEnterpriseSolo && 'mx-auto grid max-w-lg grid-cols-1 gap-3 sm:grid-cols-2'
-          )}
-        >
+        <ul className="mb-8 flex flex-1 flex-col gap-3">
           {tier.features.map((f) => (
-            <li key={f} className="flex items-start gap-2.5 text-sm text-foreground/80">
-              <Check className="mt-0.5 size-4 shrink-0 text-brand-violet" strokeWidth={2.5} />
+            <li key={f} className="flex items-start gap-2.5 text-sm text-[#2C2E33]/80">
+              <Check className="mt-0.5 size-4 shrink-0 text-[#176FEB]" strokeWidth={2.5} />
               <span>{f}</span>
             </li>
           ))}
@@ -370,10 +179,10 @@ function PricingCard({ tier, isEnterpriseSolo }: { tier: Tier; isEnterpriseSolo?
         <a
           href={tier.ctaHref || '#'}
           className={cn(
-            'inline-flex h-11 items-center justify-center rounded-lg px-6 text-sm font-semibold transition-all',
+            'inline-flex h-11 items-center justify-center rounded-lg px-6 text-sm font-semibold transition-colors',
             tier.popular
-              ? 'bg-brand-violet text-white cta-primary-shadow hover:bg-brand-violet-dark'
-              : 'border border-border bg-background text-foreground hover:bg-muted'
+              ? 'bg-[#176FEB] text-white hover:bg-[#1260CC]'
+              : 'border border-[#D3D5DB] bg-white text-[#2C2E33] hover:bg-[#F5F6F8]'
           )}
         >
           {tier.cta}
@@ -402,76 +211,70 @@ const panelVariants = {
 /* ------------------------------------------------------------------ */
 
 export function PricingTabs() {
-  const [active, setActive] = useState('self-manage')
+  const [isAnnual, setIsAnnual] = useState(false)
 
   return (
     <section className="py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Tab triggers */}
-        <div className="flex justify-center">
-          <div className="inline-flex flex-wrap items-center justify-center gap-1 rounded-xl bg-muted p-1.5">
-            {TABS.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActive(tab.id)}
-                className={cn(
-                  'relative rounded-lg px-4 py-2 text-sm font-medium transition-all',
-                  active === tab.id
-                    ? 'text-foreground'
-                    : 'text-muted-foreground hover:text-foreground'
-                )}
-              >
-                {active === tab.id && (
-                  <motion.span
-                    layoutId="pricing-tab-pill"
-                    className="absolute inset-0 rounded-lg bg-background shadow-sm"
-                    transition={{ type: 'spring', bounce: 0.2, duration: 0.5 }}
-                  />
-                )}
-                <span className="relative z-10">{tab.label}</span>
-              </button>
-            ))}
-          </div>
+        {/* Billing toggle */}
+        <div className="flex items-center justify-center gap-3">
+          <span
+            className={cn(
+              'text-sm font-medium transition-colors',
+              !isAnnual ? 'text-[#0A1628]' : 'text-[#555860]'
+            )}
+          >
+            Monthly
+          </span>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={isAnnual}
+            onClick={() => setIsAnnual(!isAnnual)}
+            className={cn(
+              'relative inline-flex h-7 w-12 shrink-0 cursor-pointer items-center rounded-full border border-[#D3D5DB] transition-colors',
+              isAnnual ? 'bg-[#176FEB]' : 'bg-[#F5F6F8]'
+            )}
+          >
+            <span
+              className={cn(
+                'pointer-events-none inline-block size-5 rounded-full bg-white transition-transform',
+                isAnnual ? 'translate-x-6' : 'translate-x-1'
+              )}
+            />
+          </button>
+          <span
+            className={cn(
+              'text-sm font-medium transition-colors',
+              isAnnual ? 'text-[#0A1628]' : 'text-[#555860]'
+            )}
+          >
+            Annual
+          </span>
+          <span className="ml-1 rounded-full bg-[#E8F2FE] px-2.5 py-0.5 text-xs font-semibold text-[#176FEB]">
+            Save 20%
+          </span>
         </div>
 
-        {/* Tab panels */}
+        {/* Cards grid */}
         <div className="mt-12">
           <AnimatePresence mode="wait">
-            {TABS.filter((t) => t.id === active).map((tab) => (
-              <motion.div
-                key={tab.id}
-                variants={panelVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
+            <motion.div
+              key={isAnnual ? 'annual' : 'monthly'}
+              variants={panelVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+            >
+              <RevealOnScroll
+                className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
+                stagger={0.08}
               >
-                {/* Description */}
-                <p className="mb-10 text-center text-base text-muted-foreground">
-                  {tab.description}
-                </p>
-
-                {/* Cards grid */}
-                <RevealOnScroll
-                  className={cn(
-                    'grid gap-6',
-                    tab.id === 'enterprise'
-                      ? 'grid-cols-1'
-                      : tab.gridCols
-                        ? `grid-cols-1 md:grid-cols-2 ${tab.gridCols}`
-                        : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-                  )}
-                  stagger={0.08}
-                >
-                  {tab.tiers.map((tier) => (
-                    <PricingCard
-                      key={tier.name}
-                      tier={tier}
-                      isEnterpriseSolo={tab.id === 'enterprise'}
-                    />
-                  ))}
-                </RevealOnScroll>
-              </motion.div>
-            ))}
+                {TIERS.map((tier) => (
+                  <PricingCard key={tier.name} tier={tier} isAnnual={isAnnual} />
+                ))}
+              </RevealOnScroll>
+            </motion.div>
           </AnimatePresence>
         </div>
       </div>

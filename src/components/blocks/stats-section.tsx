@@ -1,67 +1,26 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
-import { motion, useInView, animate } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 
 /* ── Stat data ────────────────────────────────────────────────────────────── */
 
 const stats = [
-  { value: 12000, suffix: '+', label: 'Units on Platform' },
-  { value: 99.9, suffix: '%', label: 'Uptime', decimals: 1 },
-  { value: 40, suffix: '+', label: 'Integrations' },
-  { value: 2, suffix: '', label: 'Countries' },
+  { value: '12,000+', label: 'Units on Platform' },
+  { value: '99.9%', label: 'Uptime' },
+  { value: '40+', label: 'Integrations' },
+  { value: '2', label: 'Countries' },
 ] as const
-
-/* ── Animated counter ─────────────────────────────────────────────────────── */
-
-function AnimatedCounter({
-  value,
-  suffix,
-  decimals = 0,
-}: {
-  value: number
-  suffix: string
-  decimals?: number
-}) {
-  const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-100px 0px' })
-  const [displayValue, setDisplayValue] = useState('0')
-
-  useEffect(() => {
-    if (!inView) return
-
-    const controls = animate(0, value, {
-      duration: 2,
-      ease: [0.22, 1, 0.36, 1] as const,
-      onUpdate(v) {
-        if (decimals > 0) {
-          setDisplayValue(v.toFixed(decimals))
-        } else {
-          setDisplayValue(Math.floor(v).toLocaleString())
-        }
-      },
-    })
-
-    return () => controls.stop()
-  }, [inView, value, decimals])
-
-  return (
-    <span ref={ref}>
-      {displayValue}{suffix}
-    </span>
-  )
-}
 
 /* ── Stats section ────────────────────────────────────────────────────────── */
 
 export function StatsSection() {
   return (
-    <section className="relative overflow-hidden bg-brand-indigo py-24 md:py-28">
-      {/* Subtle gradient accents */}
+    <section className="relative overflow-hidden bg-brand-navy py-20 md:py-24">
+      {/* Thin decorative lines at top and bottom */}
       <div className="absolute inset-0" aria-hidden>
-        <div className="absolute left-[10%] top-0 h-px w-[40%] bg-gradient-to-r from-transparent via-brand-violet/30 to-transparent" />
-        <div className="absolute right-[10%] bottom-0 h-px w-[40%] bg-gradient-to-r from-transparent via-brand-violet/20 to-transparent" />
+        <div className="absolute left-1/2 top-0 h-px w-[60%] -translate-x-1/2 bg-white/5" />
+        <div className="absolute left-1/2 bottom-0 h-px w-[60%] -translate-x-1/2 bg-white/5" />
       </div>
 
       <div className="relative mx-auto max-w-6xl px-6">
@@ -81,14 +40,10 @@ export function StatsSection() {
               )}
 
               <span className="font-display text-4xl tracking-tight text-white md:text-5xl">
-                <AnimatedCounter
-                  value={stat.value}
-                  suffix={stat.suffix}
-                  decimals={'decimals' in stat ? stat.decimals : 0}
-                />
+                {stat.value}
               </span>
 
-              <span className="mt-2 text-sm font-medium text-brand-slate-400">
+              <span className="mt-2 text-sm font-medium text-[#64748B]">
                 {stat.label}
               </span>
             </motion.div>

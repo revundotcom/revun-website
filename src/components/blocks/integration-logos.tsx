@@ -24,8 +24,8 @@ const integrations = [
 
 function LogoPill({ name }: { name: string }) {
   return (
-    <div className="group flex h-14 shrink-0 items-center justify-center rounded-xl border border-brand-slate-200 bg-white px-8 transition-all duration-300 hover:border-brand-violet/30 hover:shadow-md hover:shadow-brand-violet/5">
-      <span className="whitespace-nowrap text-sm font-heading font-semibold text-brand-slate-400 transition-colors duration-300 grayscale group-hover:text-brand-indigo group-hover:grayscale-0">
+    <div className="group flex h-14 shrink-0 items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-8 transition-all duration-150 hover:border-brand-blue/20">
+      <span className="whitespace-nowrap text-sm font-heading font-semibold text-[#94A3B8] transition-colors duration-150 group-hover:text-brand-graphite">
         {name}
       </span>
     </div>
@@ -35,7 +35,6 @@ function LogoPill({ name }: { name: string }) {
 /* ── Integration logos section ─────────────────────────────────────────────── */
 
 export function IntegrationLogos() {
-  // Duplicate array for seamless infinite scroll
   const doubled = [...integrations, ...integrations]
 
   return (
@@ -44,15 +43,15 @@ export function IntegrationLogos() {
         <RevealOnScroll className="text-center">
           <motion.p
             variants={revealItem}
-            className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-violet"
+            className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue"
           >
             Integrations
           </motion.p>
           <motion.h2
             variants={revealItem}
-            className="mx-auto mt-3 max-w-md font-heading text-3xl font-bold tracking-tight text-brand-indigo md:text-4xl"
+            className="mx-auto mt-3 max-w-md font-heading text-3xl font-bold tracking-tight text-brand-graphite md:text-4xl"
           >
-            Works with the tools you already use
+            Works with the <span className="text-accent">tools</span> you already use
           </motion.h2>
         </RevealOnScroll>
       </div>

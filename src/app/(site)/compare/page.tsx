@@ -22,46 +22,47 @@ interface Competitor {
   name: string
   slug: string
   category: Exclude<Category, 'All'>
+  description: string
 }
 
 const competitors: Competitor[] = [
   // PM Software
-  { name: 'AppFolio', slug: 'appfolio', category: 'PM Software' },
-  { name: 'Buildium', slug: 'buildium', category: 'PM Software' },
-  { name: 'DoorLoop', slug: 'doorloop', category: 'PM Software' },
-  { name: 'Yardi', slug: 'yardi', category: 'PM Software' },
-  { name: 'Propertyware', slug: 'propertyware', category: 'PM Software' },
-  { name: 'Rent Manager', slug: 'rent-manager', category: 'PM Software' },
+  { name: 'AppFolio', slug: 'appfolio', category: 'PM Software', description: 'Compare Revun\'s Canadian-first property management platform against AppFolio\'s US-centric tools and pricing.' },
+  { name: 'Buildium', slug: 'buildium', category: 'PM Software', description: 'See how Revun stacks up against Buildium for lease management, accounting, and tenant portals.' },
+  { name: 'DoorLoop', slug: 'doorloop', category: 'PM Software', description: 'Revun vs DoorLoop: which platform delivers better value for Canadian property managers?' },
+  { name: 'Yardi', slug: 'yardi', category: 'PM Software', description: 'Enterprise-grade property management compared. See where Revun outperforms Yardi for mid-market managers.' },
+  { name: 'Propertyware', slug: 'propertyware', category: 'PM Software', description: 'Propertyware focuses on single-family. Revun covers your entire portfolio under one roof.' },
+  { name: 'Rent Manager', slug: 'rent-manager', category: 'PM Software', description: 'Rent Manager vs Revun: compare features, pricing, and Canadian compliance support side by side.' },
   // Canadian Platforms
-  { name: 'SingleKey', slug: 'singlekey', category: 'Canadian Platforms' },
-  { name: 'liv.rent', slug: 'liv-rent', category: 'Canadian Platforms' },
-  { name: 'FrontLobby', slug: 'frontlobby', category: 'Canadian Platforms' },
-  { name: 'Rhenti', slug: 'rhenti', category: 'Canadian Platforms' },
+  { name: 'SingleKey', slug: 'singlekey', category: 'Canadian Platforms', description: 'Both built for Canada. See how Revun\'s all-in-one platform compares to SingleKey\'s tenant screening focus.' },
+  { name: 'liv.rent', slug: 'liv-rent', category: 'Canadian Platforms', description: 'liv.rent targets renters. Revun is built for property managers who need full operational control.' },
+  { name: 'FrontLobby', slug: 'frontlobby', category: 'Canadian Platforms', description: 'FrontLobby handles rent reporting. Revun handles rent reporting plus everything else you need.' },
+  { name: 'Rhenti', slug: 'rhenti', category: 'Canadian Platforms', description: 'Rhenti vs Revun: compare listing syndication, applications, and end-to-end management capabilities.' },
   // Brokerage/CRM
-  { name: 'Follow Up Boss', slug: 'follow-up-boss', category: 'Brokerage/CRM' },
-  { name: 'kvCORE', slug: 'kvcore', category: 'Brokerage/CRM' },
-  { name: 'Lone Wolf', slug: 'lone-wolf', category: 'Brokerage/CRM' },
+  { name: 'Follow Up Boss', slug: 'follow-up-boss', category: 'Brokerage/CRM', description: 'Follow Up Boss is a sales CRM. Revun is a property management platform with built-in relationship tools.' },
+  { name: 'kvCORE', slug: 'kvcore', category: 'Brokerage/CRM', description: 'kvCORE serves brokerages. Revun serves property managers. See which fits your workflow better.' },
+  { name: 'Lone Wolf', slug: 'lone-wolf', category: 'Brokerage/CRM', description: 'Lone Wolf focuses on transactions. Revun focuses on ongoing property management operations.' },
   // Maintenance
-  { name: 'Property Meld', slug: 'property-meld', category: 'Maintenance' },
-  { name: 'Jobber', slug: 'jobber', category: 'Maintenance' },
-  { name: 'ServiceTitan', slug: 'servicetitan', category: 'Maintenance' },
+  { name: 'Property Meld', slug: 'property-meld', category: 'Maintenance', description: 'Property Meld is maintenance-only. Revun includes maintenance coordination inside a full PM platform.' },
+  { name: 'Jobber', slug: 'jobber', category: 'Maintenance', description: 'Jobber is for field service businesses. Revun brings maintenance tracking into your property management workflow.' },
+  { name: 'ServiceTitan', slug: 'servicetitan', category: 'Maintenance', description: 'ServiceTitan is built for contractors. Revun is built for the property managers who hire them.' },
   // Communications
-  { name: 'RingCentral', slug: 'ringcentral', category: 'Communications' },
-  { name: 'OpenPhone', slug: 'openphone', category: 'Communications' },
-  { name: 'Dialpad', slug: 'dialpad', category: 'Communications' },
+  { name: 'RingCentral', slug: 'ringcentral', category: 'Communications', description: 'RingCentral is a generic phone system. Revun gives you tenant communications built into your PM workflow.' },
+  { name: 'OpenPhone', slug: 'openphone', category: 'Communications', description: 'OpenPhone is a business phone app. Revun centralizes all tenant and owner communications in one place.' },
+  { name: 'Dialpad', slug: 'dialpad', category: 'Communications', description: 'Dialpad is an AI communications platform. Revun embeds communication tools purpose-built for property management.' },
   // Screening
-  { name: 'TransUnion SmartMove', slug: 'transunion-smartmove', category: 'Screening' },
-  { name: 'Naborly', slug: 'naborly', category: 'Screening' },
-  { name: 'RentPrep', slug: 'rentprep', category: 'Screening' },
+  { name: 'TransUnion SmartMove', slug: 'transunion-smartmove', category: 'Screening', description: 'TransUnion SmartMove is screening-only. Revun integrates screening directly into your leasing pipeline.' },
+  { name: 'Naborly', slug: 'naborly', category: 'Screening', description: 'Naborly offers tenant screening for Canada. Revun offers screening plus the full management platform around it.' },
+  { name: 'RentPrep', slug: 'rentprep', category: 'Screening', description: 'RentPrep handles background checks. Revun handles background checks, leasing, accounting, and more.' },
 ]
 
-const categoryColors: Record<Exclude<Category, 'All'>, string> = {
-  'PM Software': 'bg-violet-100 text-violet-700',
-  'Canadian Platforms': 'bg-rose-100 text-rose-700',
-  'Brokerage/CRM': 'bg-blue-100 text-blue-700',
-  Maintenance: 'bg-emerald-100 text-emerald-700',
-  Communications: 'bg-amber-100 text-amber-700',
-  Screening: 'bg-indigo-100 text-indigo-700',
+const badgeColors: Record<Exclude<Category, 'All'>, string> = {
+  'PM Software': 'bg-[#E8F2FE] text-[#176FEB]',
+  'Canadian Platforms': 'bg-red-50 text-red-600',
+  'Brokerage/CRM': 'bg-sky-50 text-sky-600',
+  Maintenance: 'bg-emerald-50 text-emerald-600',
+  Communications: 'bg-orange-50 text-orange-600',
+  Screening: 'bg-teal-50 text-teal-600',
 }
 
 export default function ComparePage() {
@@ -75,30 +76,39 @@ export default function ComparePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-brand-indigo">
-        <div className="absolute inset-0 bg-dot-grid opacity-30" />
-        <div className="relative mx-auto max-w-7xl px-6 py-24 text-center sm:py-32 lg:px-8">
-          <h1 className="font-display text-4xl italic text-white sm:text-5xl lg:text-6xl">
-            See how Revun compares
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-indigo-200">
-            Honest, detailed comparisons with the tools you might be considering.
-          </p>
+      <section className="bg-[#0A1628] py-24 md:py-32">
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <RevealOnScroll>
+            <motion.h1
+              variants={revealItem}
+              className="font-display text-4xl italic leading-tight text-white md:text-5xl lg:text-6xl"
+            >
+              See How Revun{' '}
+              <span className="text-[#176FEB]">Compares</span>
+            </motion.h1>
+            <motion.p
+              variants={revealItem}
+              className="mx-auto mt-6 max-w-xl text-lg text-white/70"
+            >
+              Honest, side-by-side breakdowns so you can pick the right
+              tool for your portfolio. No spin, just facts.
+            </motion.p>
+          </RevealOnScroll>
         </div>
       </section>
 
       {/* Filter Tabs */}
-      <section className="border-b border-border bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="no-scrollbar flex gap-1 overflow-x-auto py-4">
+      <section className="border-b border-[#D3D5DB] bg-white">
+        <div className="mx-auto max-w-5xl overflow-x-auto px-6 py-5">
+          <div className="flex gap-2">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActive(cat)}
-                className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                className={`shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors duration-150 ${
                   active === cat
-                    ? 'bg-brand-violet text-white shadow-md'
-                    : 'bg-brand-slate-100 text-brand-slate-600 hover:bg-brand-slate-200'
+                    ? 'bg-[#176FEB] text-white'
+                    : 'bg-[#F5F6F8] text-[#555860] hover:bg-[#E8F2FE]'
                 }`}
               >
                 {cat}
@@ -109,66 +119,75 @@ export default function ComparePage() {
       </section>
 
       {/* Competitor Grid */}
-      <section className="bg-brand-slate-50 py-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <RevealOnScroll stagger={0.06}>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {filtered.map((comp) => (
-                <motion.div key={comp.slug} variants={revealItem}>
-                  <Link
-                    href={`/compare/revun-vs-${comp.slug}/`}
-                    className="spotlight-card group flex flex-col justify-between rounded-2xl border border-border bg-white p-6 shadow-sm transition-all hover:shadow-lg hover:border-brand-violet-light"
+      <section className="bg-[#F5F6F8] py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <RevealOnScroll
+            className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+            stagger={0.08}
+          >
+            {filtered.map((comp) => (
+              <motion.div key={comp.slug} variants={revealItem}>
+                <Link
+                  href={`/compare/revun-vs-${comp.slug}/`}
+                  className="group flex h-full flex-col rounded-2xl border border-[#D3D5DB] bg-white p-6 transition-colors duration-150 hover:border-[#176FEB]"
+                >
+                  <span
+                    className={`mb-4 inline-block w-fit rounded-full px-3 py-1 text-xs font-medium ${badgeColors[comp.category]}`}
                   >
-                    <div>
-                      <span
-                        className={`inline-block rounded-full px-3 py-1 text-xs font-semibold ${categoryColors[comp.category]}`}
-                      >
-                        {comp.category}
-                      </span>
-                      <h3 className="mt-4 font-heading text-xl font-bold text-brand-indigo">
-                        Revun vs {comp.name}
-                      </h3>
-                      <p className="mt-2 text-sm text-brand-slate-500">
-                        See how Revun stacks up against {comp.name} across features,
-                        pricing, and support.
-                      </p>
-                    </div>
-                    <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-brand-violet transition-colors group-hover:text-brand-violet-dark">
-                      Compare
-                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
+                    {comp.category}
+                  </span>
+                  <h3 className="font-heading text-lg font-bold text-[#2C2E33]">
+                    Revun vs {comp.name}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-[#555860]">
+                    {comp.description}
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#176FEB]">
+                    Read comparison
+                    <ArrowRight className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              </motion.div>
+            ))}
           </RevealOnScroll>
         </div>
       </section>
 
       {/* Bottom CTA */}
       <section className="bg-white py-20">
-        <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
-          <h2 className="font-heading text-2xl font-bold text-brand-indigo sm:text-3xl">
-            Don&apos;t see your current tool?
-          </h2>
-          <p className="mt-4 text-brand-slate-500">
-            We&apos;re adding new comparisons regularly. Request a specific comparison
-            or book a demo to see how Revun fits your workflow.
-          </p>
-          <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Link
-              href="/contact/"
-              className="inline-flex h-11 items-center rounded-lg bg-brand-violet px-6 text-sm font-semibold text-white cta-primary-shadow hover:bg-brand-violet-dark"
+        <div className="mx-auto max-w-2xl px-6 text-center">
+          <RevealOnScroll>
+            <motion.h2
+              variants={revealItem}
+              className="font-heading text-2xl font-bold text-[#2C2E33] md:text-3xl"
             >
-              Request a Comparison
-            </Link>
-            <Link
-              href="/contact/"
-              className="inline-flex h-11 items-center rounded-lg border border-border px-6 text-sm font-semibold text-brand-indigo hover:bg-brand-slate-50"
+              Don&apos;t see your current tool?
+            </motion.h2>
+            <motion.p
+              variants={revealItem}
+              className="mx-auto mt-3 max-w-lg text-[#555860]"
             >
-              Book a Demo
-            </Link>
-          </div>
+              We&apos;re adding new comparisons every week. Request one or
+              jump straight into a demo to see Revun in action.
+            </motion.p>
+            <motion.div
+              variants={revealItem}
+              className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row"
+            >
+              <Link
+                href="/contact/"
+                className="rounded-xl bg-[#176FEB] px-6 py-3 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#1260d1]"
+              >
+                Request a Comparison
+              </Link>
+              <Link
+                href="/demo/"
+                className="rounded-xl border border-[#176FEB] px-6 py-3 text-sm font-semibold text-[#176FEB] transition-colors duration-150 hover:bg-[#E8F2FE]"
+              >
+                Book a Demo
+              </Link>
+            </motion.div>
+          </RevealOnScroll>
         </div>
       </section>
     </>

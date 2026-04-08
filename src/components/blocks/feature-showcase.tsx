@@ -3,47 +3,6 @@
 import { motion } from 'framer-motion'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 
-/* ── Feature data ─────────────────────────────────────────────────────────── */
-
-const features = [
-  {
-    title: 'Unified tenant, owner, and vendor workflows',
-    description:
-      'One system of record for every interaction. No more switching between apps.',
-    gradient: 'from-brand-violet/10 to-brand-violet/5',
-    iconGradient: 'from-brand-violet to-brand-violet-light',
-    icon: WorkflowIcon,
-    span: 'lg:col-span-2',
-  },
-  {
-    title: 'Automated compliance',
-    description:
-      'Province and state-specific workflows built in. Notices, forms, and deadlines handled.',
-    gradient: 'from-brand-amber/10 to-brand-amber/5',
-    iconGradient: 'from-brand-amber to-brand-amber-light',
-    icon: ShieldIcon,
-    span: '',
-  },
-  {
-    title: 'Integrated payments',
-    description:
-      'Rent collection, vendor payouts, and financial reporting in one place.',
-    gradient: 'from-emerald-500/10 to-emerald-500/5',
-    iconGradient: 'from-emerald-500 to-emerald-400',
-    icon: CreditCardIcon,
-    span: '',
-  },
-  {
-    title: 'Communications hub',
-    description:
-      'Email, SMS, calling, and in-app messaging. Every conversation in context.',
-    gradient: 'from-sky-500/10 to-sky-500/5',
-    iconGradient: 'from-sky-500 to-sky-400',
-    icon: MessageIcon,
-    span: 'lg:col-span-2',
-  },
-] as const
-
 /* ── SVG Icons ────────────────────────────────────────────────────────────── */
 
 function WorkflowIcon({ className }: { className?: string }) {
@@ -52,8 +11,7 @@ function WorkflowIcon({ className }: { className?: string }) {
       <rect x="3" y="3" width="7" height="7" rx="1" />
       <rect x="14" y="3" width="7" height="7" rx="1" />
       <rect x="3" y="14" width="7" height="7" rx="1" />
-      <path d="M17.5 14v3.5a1 1 0 01-1 1H14" />
-      <path d="M14 17.5h3.5" />
+      <rect x="14" y="14" width="7" height="7" rx="1" />
     </svg>
   )
 }
@@ -85,50 +43,72 @@ function MessageIcon({ className }: { className?: string }) {
   )
 }
 
+/* ── Feature data ─────────────────────────────────────────────────────────── */
+
+const features = [
+  {
+    icon: WorkflowIcon,
+    title: 'Unified',
+    keyword: 'workflows',
+    description:
+      'One system of record for tenants, owners, and vendors. No more switching between apps.',
+    span: 'lg:col-span-2',
+  },
+  {
+    icon: ShieldIcon,
+    title: 'Automated',
+    keyword: 'compliance',
+    description:
+      'Province and state-specific workflows built in. Notices, forms, and deadlines handled.',
+    span: '',
+  },
+  {
+    icon: CreditCardIcon,
+    title: 'Integrated',
+    keyword: 'payments',
+    description:
+      'Rent collection, vendor payouts, and financial reporting in one place.',
+    span: '',
+  },
+  {
+    icon: MessageIcon,
+    title: 'Communications',
+    keyword: 'hub',
+    description:
+      'Email, SMS, calling, and in-app messaging. Every conversation in context.',
+    span: 'lg:col-span-2',
+  },
+]
+
 /* ── Feature card ─────────────────────────────────────────────────────────── */
 
-function FeatureCard({
-  feature,
-}: {
-  feature: (typeof features)[number]
-}) {
-  const isLarge = feature.span.includes('col-span-2')
-
+function FeatureCard({ feature }: { feature: (typeof features)[number] }) {
   return (
     <motion.div
       variants={revealItem}
-      className={`group relative overflow-hidden rounded-2xl border border-border bg-white ${feature.span}`}
+      className={`group relative overflow-hidden rounded-xl border border-[#E5E7EB] bg-white p-8 transition-colors duration-300 hover:border-brand-blue/30 ${feature.span}`}
     >
-      {/* Gradient accent top bar */}
+      {/* Blue accent top bar */}
       <div
-        className={`absolute inset-x-0 top-0 h-px bg-gradient-to-r ${feature.iconGradient} opacity-60`}
+        className="absolute inset-x-0 top-0 h-[2px] bg-brand-blue"
         aria-hidden
       />
 
-      <div className={`relative p-8 ${isLarge ? 'md:p-10' : ''}`}>
-        {/* Subtle gradient bg */}
-        <div
-          className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
-          aria-hidden
-        />
-
-        <div className="relative z-10">
-          {/* Icon */}
-          <div className={`mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${feature.iconGradient} shadow-lg`}>
-            <feature.icon className="h-6 w-6 text-white" />
-          </div>
-
-          {/* Title */}
-          <h3 className={`font-heading font-semibold text-brand-indigo ${isLarge ? 'text-xl md:text-2xl' : 'text-lg'}`}>
-            {feature.title}
-          </h3>
-
-          {/* Description */}
-          <p className={`mt-3 leading-relaxed text-brand-slate-500 ${isLarge ? 'max-w-lg text-base' : 'text-sm'}`}>
-            {feature.description}
-          </p>
-        </div>
+      {/* Icon */}
+      <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue">
+        <feature.icon className="h-6 w-6 text-white" />
       </div>
+
+      {/* Title */}
+      <h3 className="font-heading text-lg font-semibold text-brand-graphite">
+        {feature.title}{' '}
+        <span className="text-brand-blue">{feature.keyword}</span>
+      </h3>
+
+      {/* Description */}
+      <p className="mt-3 text-sm leading-relaxed text-[#555860]">
+        {feature.description}
+      </p>
     </motion.div>
   )
 }
@@ -137,26 +117,27 @@ function FeatureCard({
 
 export function FeatureShowcase() {
   return (
-    <section className="relative bg-brand-slate-50 py-24 md:py-32">
+    <section className="bg-brand-off-white py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <RevealOnScroll className="text-center">
           <motion.p
             variants={revealItem}
-            className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-violet"
+            className="font-heading text-sm font-semibold uppercase tracking-wider text-brand-blue"
           >
             Platform
           </motion.p>
           <motion.h2
             variants={revealItem}
-            className="mx-auto mt-3 max-w-xl font-heading text-3xl font-bold tracking-tight text-brand-indigo md:text-4xl"
+            className="mx-auto mt-3 max-w-xl font-heading text-3xl font-bold text-brand-graphite md:text-4xl"
           >
-            Everything you need. Nothing you don't.
+            Everything you need.{' '}
+            <span className="text-accent">Nothing</span> you don&apos;t.
           </motion.h2>
         </RevealOnScroll>
 
-        <RevealOnScroll className="mt-16 grid gap-5 lg:grid-cols-2" stagger={0.1}>
+        <RevealOnScroll className="mt-16 grid gap-5 lg:grid-cols-3" stagger={0.1}>
           {features.map((feature) => (
-            <FeatureCard key={feature.title} feature={feature} />
+            <FeatureCard key={feature.keyword} feature={feature} />
           ))}
         </RevealOnScroll>
       </div>
