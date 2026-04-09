@@ -29,7 +29,7 @@ export function buildOrganizationSchema(): Record<string, unknown> {
     '@type': 'Organization',
     name: 'Revun',
     url: SITE_URL,
-    logo: `${SITE_URL}/logo.svg`,
+    logo: `${SITE_URL}/revun-logo-blue-bg.png`,
     sameAs: [],
     contactPoint: {
       '@type': 'ContactPoint',
@@ -161,7 +161,7 @@ export function buildArticleSchema(data: ArticleData): Record<string, unknown> {
       url: SITE_URL,
       logo: {
         '@type': 'ImageObject',
-        url: `${SITE_URL}/logo-dark.svg`,
+        url: `${SITE_URL}/revun-logo-blue-bg.png`,
       },
     },
     ...(data.image ? { image: data.image } : {}),

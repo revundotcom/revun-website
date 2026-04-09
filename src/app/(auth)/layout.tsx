@@ -1,5 +1,4 @@
-import Link from 'next/link'
-import Image from 'next/image'
+import { RevunLogo } from '@/components/ui/revun-logo'
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -7,16 +6,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="mb-8 flex justify-center">
-          <Link href="/">
-            <Image
-              src="/logo-dark.svg"
-              alt="Revun"
-              width={120}
-              height={36}
-              priority
-              className="h-9 w-auto"
-            />
-          </Link>
+          <RevunLogo size="h-9" />
         </div>
 
         {children}

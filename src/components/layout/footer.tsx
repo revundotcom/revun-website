@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import Link from 'next/link'
+import { RevunLogo } from '@/components/ui/revun-logo'
 
 const navigation = {
   platform: {
@@ -114,15 +114,7 @@ export function Footer() {
         {/* Top: brand + newsletter */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pb-12 border-b border-[#E5E7EB]">
           <div className="max-w-md">
-            <Link href="/" className="inline-block">
-              <Image
-                src="/logo-dark.svg"
-                alt="Revun"
-                width={110}
-                height={34}
-                className="h-8 w-auto"
-              />
-            </Link>
+            <RevunLogo size="h-8" />
             <p className="mt-4 text-sm leading-relaxed text-[#64748B]">
               Property management infrastructure for Canada and the United States.
             </p>

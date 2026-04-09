@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 import Link from 'next/link'
+import { RevunLogo } from '@/components/ui/revun-logo'
 import { usePathname } from 'next/navigation'
 import { Menu, X, ChevronRight, Home, Building2, Handshake, FileText, Wrench, TrendingUp, Layers, Sparkles, Calendar, Wallet, Plug, MapPin } from 'lucide-react'
 import {
@@ -53,19 +53,9 @@ export function MobileMenu({ scrolled }: { scrolled: boolean }) {
         >
           {/* Header row */}
           <div className="flex items-center justify-between border-b border-border px-5 py-4">
-            <Link
-              href="/"
-              className="flex items-center"
-              onClick={() => setOpen(false)}
-            >
-              <Image
-                src="/logo-dark.svg"
-                alt="Revun"
-                width={100}
-                height={30}
-                className="h-7 w-auto"
-              />
-            </Link>
+            <span onClick={() => setOpen(false)}>
+              <RevunLogo size="h-7" />
+            </span>
             <SheetClose
               className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-[#555860] transition-colors hover:bg-[#F5F6F8] hover:text-brand-graphite outline-none focus-visible:ring-2 focus-visible:ring-ring"
               aria-label="Close navigation menu"

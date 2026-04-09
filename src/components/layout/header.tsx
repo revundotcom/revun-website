@@ -3,11 +3,11 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ChevronDown, Home, Building2, Handshake, FileText, Wrench, TrendingUp, Layers, Sparkles, Calendar, Wallet, Plug, MapPin } from 'lucide-react'
 import { MobileMenu } from './mobile-menu'
+import { RevunLogo } from '@/components/ui/revun-logo'
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -121,19 +121,8 @@ const itemVariants = {
 
 // ─── Logo ────────────────────────────────────────────────────────────────────
 
-function Logo({ scrolled }: { scrolled: boolean }) {
-  return (
-    <Link href="/" className="relative flex items-center outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm">
-      <Image
-        src="/logo-dark.svg"
-        alt="Revun"
-        width={110}
-        height={34}
-        priority
-        className="h-8 w-auto transition-opacity duration-300"
-      />
-    </Link>
-  )
+function Logo() {
+  return <RevunLogo size="h-8" />
 }
 
 // ─── Mega menu: Solutions ────────────────────────────────────────────────────
@@ -467,7 +456,7 @@ export function Header() {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Logo scrolled={scrolled} />
+        <Logo />
 
         {/* Desktop navigation */}
         <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Main navigation">
