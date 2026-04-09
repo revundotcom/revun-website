@@ -28,7 +28,7 @@ declare global {
 
 export function pushEvent(event: GTMEvent): void {
   if (typeof window !== 'undefined' && window.dataLayer) {
-    window.dataLayer.push(event as Record<string, unknown>)
+    window.dataLayer.push({ ...event })
   }
 }
 

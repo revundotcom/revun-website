@@ -3,17 +3,13 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import {
   Users,
-  CreditCard,
-  Wrench,
-  FileText,
-  BarChart3,
-  BookOpen,
   CheckCircle2,
   ArrowRight,
 } from 'lucide-react'
 import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
 import { buildBreadcrumbSchema } from '@/lib/schema-builders'
 import { RevealOnScroll } from '@/components/ui/reveal-on-scroll'
+import { iconMap } from '@/lib/icon-map'
 
 interface Capability {
   title: string
@@ -157,15 +153,6 @@ const featureData: Record<string, FeatureData> = {
       { number: '03', title: 'Build trust automatically', description: 'Real-time transparency builds owner confidence and reduces support requests by up to 60%.' },
     ],
   },
-}
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Users,
-  CreditCard,
-  Wrench,
-  FileText,
-  BarChart3,
-  BookOpen,
 }
 
 export function generateStaticParams() {

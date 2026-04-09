@@ -108,7 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en-CA"
       className={`${inter.variable} ${instrumentSans.variable} ${instrumentSerif.variable} ${geistMono.variable}`}
     >
-      <body className="min-h-screen font-sans antialiased">
+      <body className="flex min-h-screen flex-col font-sans antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

@@ -32,10 +32,10 @@ const portfolioSizeLabels: Record<(typeof portfolioSizes)[number], string> = {
 /* ── Shared styles ── */
 
 const inputClasses =
-  'h-10 w-full rounded-lg border border-[#D3D5DB] bg-transparent px-3 py-2 text-sm text-[#2C2E33] outline-none transition-colors placeholder:text-[#555860] focus:border-[#176FEB] focus:ring-2 focus:ring-[#176FEB]/30 disabled:cursor-not-allowed disabled:opacity-50'
+  'h-10 w-full rounded-lg border border-brand-graphite-light bg-transparent px-3 py-2 text-sm text-brand-graphite outline-none transition-colors placeholder:text-brand-graphite-mid focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/30 disabled:cursor-not-allowed disabled:opacity-50'
 
 const selectClasses =
-  'flex h-10 w-full appearance-none rounded-lg border border-[#D3D5DB] bg-transparent px-3 py-2 text-sm text-[#2C2E33] outline-none transition-colors focus:border-[#176FEB] focus:ring-2 focus:ring-[#176FEB]/30'
+  'flex h-10 w-full appearance-none rounded-lg border border-brand-graphite-light bg-transparent px-3 py-2 text-sm text-brand-graphite outline-none transition-colors focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/30'
 
 /* ── Component ── */
 
@@ -90,19 +90,19 @@ export function ContactForm() {
   if (status === 'success') {
     return (
       <div className="flex flex-col items-center gap-4 py-12 text-center">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#5EA500]/10">
-          <CheckCircle2 className="h-7 w-7 text-[#5EA500]" />
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-blue/10">
+          <CheckCircle2 className="h-7 w-7 text-brand-blue" />
         </div>
         <h3 className="text-lg font-bold text-[#0A1628]">
           Message sent
         </h3>
-        <p className="max-w-xs text-sm text-[#555860]">
+        <p className="max-w-xs text-sm text-brand-graphite-mid">
           {serverMessage}
         </p>
         <button
           type="button"
           onClick={() => setStatus('idle')}
-          className="mt-2 text-sm font-medium text-[#176FEB] hover:text-[#176FEB]/80"
+          className="mt-2 text-sm font-medium text-brand-blue hover:text-brand-blue/80"
         >
           Send another message
         </button>
@@ -155,7 +155,7 @@ export function ContactForm() {
       {/* Company */}
       <div className="space-y-1.5">
         <Label htmlFor="contact-company">
-          Company <span className="text-[#555860]">(optional)</span>
+          Company <span className="text-brand-graphite-mid">(optional)</span>
         </Label>
         <Input
           id="contact-company"
@@ -211,7 +211,7 @@ export function ContactForm() {
         <Textarea
           id="contact-message"
           placeholder="How can we help?"
-          className="min-h-[120px] w-full rounded-lg border border-[#D3D5DB] bg-transparent px-3 py-2 text-sm text-[#2C2E33] outline-none transition-colors placeholder:text-[#555860] focus:border-[#176FEB] focus:ring-2 focus:ring-[#176FEB]/30"
+          className="min-h-[120px] w-full rounded-lg border border-brand-graphite-light bg-transparent px-3 py-2 text-sm text-brand-graphite outline-none transition-colors placeholder:text-brand-graphite-mid focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/30"
           aria-invalid={!!errors.message}
           {...register('message', {
             required: 'Message is required',
@@ -235,7 +235,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white transition-all hover:bg-[#0B5AD4] disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-brand-blue px-8 text-base font-semibold text-white transition-all hover:bg-brand-blue-dark disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === 'loading' ? (
           <>

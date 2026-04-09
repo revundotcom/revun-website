@@ -13,15 +13,15 @@ import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 
 function BrowserFrame({ url, children }: { url: string; children: React.ReactNode }) {
   return (
-    <div className="overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-sm">
-      <div className="flex items-center gap-2 border-b border-[#E5E7EB] bg-[#F8F9FA] px-3 py-2">
+    <div className="overflow-hidden rounded-xl border border-border bg-white shadow-sm">
+      <div className="flex items-center gap-2 border-b border-border bg-[#F8F9FA] px-3 py-2">
         <div className="flex gap-1">
           <span className="h-2 w-2 rounded-full bg-[#FF5F57]" />
           <span className="h-2 w-2 rounded-full bg-[#FEBD2F]" />
           <span className="h-2 w-2 rounded-full bg-[#28C840]" />
         </div>
         <div className="flex-1 flex justify-center">
-          <span className="rounded bg-white border border-[#E5E7EB] px-2.5 py-0.5 text-[9px] text-[#94A3B8]">
+          <span className="rounded bg-white border border-border px-2.5 py-0.5 text-[9px] text-[#94A3B8]">
             {url}
           </span>
         </div>
@@ -61,7 +61,7 @@ function ScoreRing({
           <span className="text-sm font-bold" style={{ color }}>{counter}</span>
         </div>
       </div>
-      <span className="text-[10px] text-[#555860]">{label}</span>
+      <span className="text-[10px] text-brand-graphite-mid">{label}</span>
     </div>
   )
 }
@@ -98,7 +98,7 @@ function VizWorkflows({ inView }: { inView: boolean }) {
           >
             <span className="flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-[#22C55E]" />
-              <span className="text-[#555860]">{m.l}</span>
+              <span className="text-brand-graphite-mid">{m.l}</span>
             </span>
             <span className="font-semibold text-brand-graphite">{m.v}</span>
           </motion.div>
@@ -122,7 +122,7 @@ function VizCompliance({ inView }: { inView: boolean }) {
   return (
     <BrowserFrame url="app.revun.com/compliance">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-[10px] font-semibold text-[#555860]">Provincial compliance</span>
+        <span className="text-[10px] font-semibold text-brand-graphite-mid">Provincial compliance</span>
         <motion.span
           className="rounded-full bg-[#22C55E]/10 px-2 py-0.5 text-[9px] font-bold text-[#22C55E]"
           initial={{ opacity: 0 }}
@@ -136,14 +136,14 @@ function VizCompliance({ inView }: { inView: boolean }) {
         {provinces.map((p, i) => (
           <motion.div
             key={p.code}
-            className="flex items-center justify-between rounded-md bg-[#F5F6F8] px-2.5 py-1.5"
+            className="flex items-center justify-between rounded-md bg-brand-off-white px-2.5 py-1.5"
             initial={{ opacity: 0, x: -6 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.3, delay: 0.2 + i * 0.1 }}
           >
             <div className="flex items-center gap-2">
-              <span className="flex h-5 w-5 items-center justify-center rounded bg-[#176FEB]/10 text-[8px] font-bold text-[#176FEB]">{p.code}</span>
-              <span className="text-[10px] text-[#555860]">{p.board}</span>
+              <span className="flex h-5 w-5 items-center justify-center rounded bg-[#176FEB]/10 text-[8px] font-bold text-brand-blue">{p.code}</span>
+              <span className="text-[10px] text-brand-graphite-mid">{p.board}</span>
             </div>
             <motion.div
               className="flex items-center gap-1"
@@ -207,15 +207,15 @@ function VizPayments({ inView }: { inView: boolean }) {
         {txns.map((tx, i) => (
           <motion.div
             key={tx.name}
-            className="flex items-center justify-between rounded-md bg-[#F5F6F8] px-2.5 py-1.5"
+            className="flex items-center justify-between rounded-md bg-brand-off-white px-2.5 py-1.5"
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ delay: 0.4 + i * 0.12 }}
           >
             <div className="flex items-center gap-2">
-              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#176FEB]/10 text-[8px] font-bold text-[#176FEB]">{tx.name[0]}</div>
-              <span className="text-[10px] text-[#555860]">{tx.name}</span>
-              <span className="rounded bg-[#E5E7EB] px-1.5 py-px text-[8px] text-[#94A3B8]">{tx.method}</span>
+              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#176FEB]/10 text-[8px] font-bold text-brand-blue">{tx.name[0]}</div>
+              <span className="text-[10px] text-brand-graphite-mid">{tx.name}</span>
+              <span className="rounded bg-border px-1.5 py-px text-[8px] text-[#94A3B8]">{tx.method}</span>
             </div>
             <span className="text-[10px] font-semibold text-brand-graphite">{tx.amount}</span>
           </motion.div>
@@ -239,8 +239,8 @@ function VizComms({ inView }: { inView: boolean }) {
     <BrowserFrame url="app.revun.com/messages">
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="h-5 w-5 rounded-full bg-[#176FEB]/10 flex items-center justify-center text-[8px] font-bold text-[#176FEB]">S</div>
-          <span className="text-[10px] font-semibold text-[#555860]">Sarah M. - Unit 3A</span>
+          <div className="h-5 w-5 rounded-full bg-[#176FEB]/10 flex items-center justify-center text-[8px] font-bold text-brand-blue">S</div>
+          <span className="text-[10px] font-semibold text-brand-graphite-mid">Sarah M. - Unit 3A</span>
         </div>
         <div className="flex items-center gap-1">
           <span className="relative flex h-1.5 w-1.5">
@@ -259,7 +259,7 @@ function VizComms({ inView }: { inView: boolean }) {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3 + i * 0.35 }}
           >
-            <div className={`max-w-[80%] rounded-xl px-3 py-1.5 ${m.own ? 'bg-[#176FEB] text-white' : 'bg-[#F5F6F8] text-[#555860]'}`}>
+            <div className={`max-w-[80%] rounded-xl px-3 py-1.5 ${m.own ? 'bg-brand-blue text-white' : 'bg-brand-off-white text-brand-graphite-mid'}`}>
               <p className="text-[10px] leading-relaxed">{m.text}</p>
               <p className={`text-right text-[7px] mt-0.5 ${m.own ? 'text-white/50' : 'text-[#94A3B8]'}`}>{m.time}</p>
             </div>
@@ -308,14 +308,14 @@ function VizGuarantee({ inView }: { inView: boolean }) {
           </motion.p>
         </div>
       </div>
-      <div className="mt-4 rounded-lg bg-[#F5F6F8] p-2.5">
+      <div className="mt-4 rounded-lg bg-brand-off-white p-2.5">
         <div className="flex justify-between text-[9px] mb-1">
-          <span className="text-[#555860]">Coverage</span>
+          <span className="text-brand-graphite-mid">Coverage</span>
           <span className="font-bold text-[#22C55E]">${coverage.toLocaleString()}</span>
         </div>
-        <div className="h-1.5 w-full rounded-full bg-[#E5E7EB] overflow-hidden">
+        <div className="h-1.5 w-full rounded-full bg-border overflow-hidden">
           <motion.div
-            className="h-full rounded-full bg-gradient-to-r from-[#176FEB] to-[#22C55E]"
+            className="h-full rounded-full bg-gradient-to-r from-brand-blue to-[#22C55E]"
             initial={{ width: '0%' }}
             animate={inView ? { width: '85%' } : {}}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
@@ -357,11 +357,11 @@ function VizAI({ inView }: { inView: boolean }) {
       {/* Response */}
       <div className="flex items-start gap-2">
         <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#176FEB]/10">
-          <Sparkles className="h-2.5 w-2.5 text-[#176FEB]" />
+          <Sparkles className="h-2.5 w-2.5 text-brand-blue" />
         </div>
         <div className="space-y-1.5">
           <motion.p
-            className="text-[10px] text-[#555860]"
+            className="text-[10px] text-brand-graphite-mid"
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ delay: 0.5 }}
@@ -377,7 +377,7 @@ function VizAI({ inView }: { inView: boolean }) {
               transition={{ delay: 0.7 + i * 0.18 }}
             >
               <span className="text-[10px] text-[#94A3B8]">{s.step}</span>
-              <p className="text-[10px] text-[#555860]">
+              <p className="text-[10px] text-brand-graphite-mid">
                 {s.text} <span className="font-semibold" style={{ color: s.color }}>{s.highlight}</span>
               </p>
             </motion.div>
@@ -385,12 +385,12 @@ function VizAI({ inView }: { inView: boolean }) {
         </div>
       </div>
       {/* Bottom badges */}
-      <div className="mt-3 pt-2.5 border-t border-[#E5E7EB] flex items-center justify-between">
+      <div className="mt-3 pt-2.5 border-t border-border flex items-center justify-between">
         <div className="flex items-center gap-1">
           {['Classify', 'Match', 'Schedule', 'Notify'].map((b) => (
             <motion.span
               key={b}
-              className="rounded-full border border-[#E5E7EB] bg-[#F5F6F8] px-1.5 py-px text-[8px] font-medium text-[#555860]"
+              className="rounded-full border border-border bg-brand-off-white px-1.5 py-px text-[8px] font-medium text-brand-graphite-mid"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 1.5 }}
@@ -474,7 +474,7 @@ function FeatureCard({ feature, index, inView }: { feature: (typeof features)[nu
       {/* Text below */}
       <div className="mt-4 flex flex-1 flex-col">
         <h3 className="font-heading text-base font-semibold text-brand-graphite">{feature.title}</h3>
-        <p className="mt-1 flex-1 text-sm leading-relaxed text-[#555860]">{feature.description}</p>
+        <p className="mt-1 flex-1 text-sm leading-relaxed text-brand-graphite-mid">{feature.description}</p>
         <Link
           href={feature.href}
           className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue opacity-0 transition-opacity duration-150 group-hover:opacity-100"
@@ -509,7 +509,7 @@ export function FeatureShowcase() {
             Platform
           </motion.p>
           <motion.h2 variants={revealItem} className="mt-3 font-display text-4xl font-normal text-brand-graphite md:text-5xl">
-            Everything you need. <span className="text-keyword">Nothing</span> you don&apos;t.
+            Everything you need. <span className="text-keyword">Nothing</span>{' '}you don&apos;t.
           </motion.h2>
           <motion.p variants={revealItem} className="mx-auto mt-4 max-w-2xl text-lg text-brand-graphite/70">
             Six core modules that replace your entire property management stack -

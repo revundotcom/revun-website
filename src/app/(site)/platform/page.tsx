@@ -1,18 +1,19 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import {
-  FileText,
-  CreditCard,
-  Wrench,
-  Shield,
-  BarChart3,
-  MessageSquare,
-  ArrowRight,
-  UserPlus,
-  Building2,
-  Rocket,
-} from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
+import { getIntegrationIcon } from '@/lib/integration-icons'
+import {
+  LeasingIcon,
+  RentIcon,
+  MaintenanceIcon,
+  TenantScreeningIcon,
+  FinancialReportingIcon,
+  CommunicationsIcon,
+  SignUpIcon,
+  ConnectPropertiesIcon,
+  GoLiveIcon,
+} from '@/lib/feature-icons'
 import { PlatformHero } from '@/components/blocks/platform-hero'
 import { PlatformModules } from '@/components/blocks/platform-modules'
 import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
@@ -38,7 +39,7 @@ const modules = [
     title: 'Leasing & Applications',
     description:
       'Listings, showings, screening, offers, and lease execution. From vacancy to signed lease, automated.',
-    icon: FileText,
+    icon: LeasingIcon,
     span: 'md:col-span-2',
     accent: true,
   },
@@ -46,7 +47,7 @@ const modules = [
     title: 'Rent Collection & Payments',
     description:
       'ACH, credit card, and Interac. Automated reminders, split payments, and real-time reconciliation.',
-    icon: CreditCard,
+    icon: RentIcon,
     span: 'md:col-span-1',
     accent: false,
   },
@@ -54,7 +55,7 @@ const modules = [
     title: 'Maintenance Management',
     description:
       'Work orders, dispatch, proof of work, vendor payments. Full lifecycle visibility.',
-    icon: Wrench,
+    icon: MaintenanceIcon,
     span: 'md:col-span-1',
     accent: false,
   },
@@ -62,7 +63,7 @@ const modules = [
     title: 'Tenant Screening',
     description:
       'Credit, criminal, and eviction checks through Equifax and TransUnion. Results in minutes.',
-    icon: Shield,
+    icon: TenantScreeningIcon,
     span: 'md:col-span-1',
     accent: false,
   },
@@ -70,7 +71,7 @@ const modules = [
     title: 'Financial Reporting',
     description:
       'Owner statements, P&L, cash flow, and tax-ready reports. QuickBooks and Xero sync.',
-    icon: BarChart3,
+    icon: FinancialReportingIcon,
     span: 'md:col-span-1',
     accent: false,
   },
@@ -78,7 +79,7 @@ const modules = [
     title: 'Communications',
     description:
       'Email, SMS, calling, and in-app messaging. Every conversation in context.',
-    icon: MessageSquare,
+    icon: CommunicationsIcon,
     span: 'md:col-span-2',
     accent: true,
   },
@@ -90,21 +91,21 @@ const steps = [
     title: 'Sign Up',
     description:
       'Create your account in under 2 minutes. No credit card required for Free plan.',
-    icon: UserPlus,
+    icon: SignUpIcon,
   },
   {
     step: '02',
     title: 'Connect Properties',
     description:
       'Add your properties, import tenant data, and connect your existing tools.',
-    icon: Building2,
+    icon: ConnectPropertiesIcon,
   },
   {
     step: '03',
     title: 'Go Live',
     description:
       'Start managing. Leasing, payments, maintenance, and reporting from day one.',
-    icon: Rocket,
+    icon: GoLiveIcon,
   },
 ] as const
 
@@ -188,8 +189,8 @@ export default function PlatformPage() {
                     <span className="mb-4 block font-mono text-sm font-semibold text-[#176FEB]">
                       Step {s.step}
                     </span>
-                    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#E8F2FE]">
-                      <Icon className="h-6 w-6 text-[#176FEB]" />
+                    <div className="mb-5">
+                      <Icon className="h-12 w-12" />
                     </div>
                     <h3 className="mb-2 font-heading text-lg font-bold text-[#2C2E33]">
                       {s.title}
@@ -223,14 +224,18 @@ export default function PlatformPage() {
 
           <RevealOnScroll stagger={0.06}>
             <div className="mx-auto grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-              {integrations.map((name) => (
-                <div
-                  key={name}
-                  className="flex h-16 items-center justify-center rounded-xl border border-[#E5E7EB] bg-white text-sm font-medium text-[#555860] hover:border-[#176FEB]/40 hover:text-[#176FEB]"
-                >
-                  {name}
-                </div>
-              ))}
+              {integrations.map((name) => {
+                const Logo = getIntegrationIcon(name)
+                return (
+                  <div
+                    key={name}
+                    className="flex h-20 flex-col items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white text-sm font-medium text-[#555860] hover:border-[#176FEB]/40 hover:shadow-sm transition-all"
+                  >
+                    <Logo className="h-8 w-8 shrink-0" />
+                    <span className="text-xs font-semibold">{name}</span>
+                  </div>
+                )
+              })}
             </div>
 
             <div className="mt-10 text-center">

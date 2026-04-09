@@ -3,22 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { RotatingBadge } from '@/components/ui/rotating-badge'
-
-const stagger = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.12, delayChildren: 0.15 },
-  },
-}
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 10 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
-  },
-}
+import { stagger, fadeUp } from '@/lib/motion'
 
 export function HeroSection() {
   return (
@@ -39,12 +24,12 @@ export function HeroSection() {
       >
         {/* Eyebrow badge */}
         <motion.div variants={fadeUp}>
-          <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-[#E5E7EB] bg-white px-4 py-1.5 shadow-sm">
+          <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-border bg-white px-4 py-1.5 shadow-sm">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5EA500] opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#5EA500]" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-blue opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-blue" />
             </span>
-            <span className="text-sm font-medium text-[#555860]">Built for</span>
+            <span className="text-sm font-medium text-brand-graphite-mid">Built for</span>
             <RotatingBadge
               phrases={[
                 'Canadian Compliance',
@@ -65,13 +50,13 @@ export function HeroSection() {
         >
           One platform for every property
           <br className="hidden md:block" />
-          {' '}<span className="text-[#176FEB]">workflow</span>
+          {' '}<span className="text-brand-blue">workflow</span>
         </motion.h1>
 
         {/* Subtitle */}
         <motion.p
           variants={fadeUp}
-          className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#555860] md:text-xl"
+          className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-brand-graphite-mid md:text-xl"
         >
           Revun replaces disconnected tools with a single operating system for
           property management, leasing, brokerage, maintenance, and self-managing
@@ -85,13 +70,13 @@ export function HeroSection() {
         >
           <Link
             href="/pricing/"
-            className="inline-flex h-14 items-center justify-center rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white shadow-cta-glow transition-all duration-200 hover:bg-[#0B5AD4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#176FEB] focus-visible:ring-offset-2"
+            className="inline-flex h-14 items-center justify-center rounded-xl bg-brand-blue px-8 text-base font-semibold text-white shadow-cta-glow transition-all duration-200 hover:bg-brand-blue-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
           >
             Start Free Trial
           </Link>
           <Link
             href="/contact/"
-            className="inline-flex h-14 items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-8 text-base font-semibold text-[#2C2E33] transition-all duration-200 hover:border-[#176FEB]/30 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#176FEB] focus-visible:ring-offset-2"
+            className="inline-flex h-14 items-center justify-center rounded-xl border border-border bg-white px-8 text-base font-semibold text-brand-graphite transition-all duration-200 hover:border-brand-blue/30 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
           >
             Book a Demo
           </Link>

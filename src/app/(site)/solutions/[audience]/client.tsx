@@ -3,22 +3,60 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {
-  Home,
-  Building2,
-  Briefcase,
-  FileKey2,
-  Wrench,
-  Landmark,
   CheckCircle2,
   ArrowRight,
   X,
 } from 'lucide-react'
 import { RevealOnScroll, revealItem, revealItemLeft, revealItemRight } from '@/components/ui/reveal-on-scroll'
+import { fadeUp, heroStagger } from '@/lib/motion'
+import {
+  PropertyOwnerIcon,
+  PMCompanyIcon,
+  BrokerageIcon,
+  LeasingIcon,
+  MaintenanceCompanyIcon,
+  FinancialReportingIcon,
+  TenantScreeningIcon,
+  RentIcon,
+  MaintenanceIcon,
+  CommunicationsIcon,
+  ComplianceTrackingIcon,
+  OwnerPortalIcon,
+  ConnectPropertiesIcon,
+  SignUpIcon,
+  GoLiveIcon,
+} from '@/lib/feature-icons'
 
 /* ── Icon lookup ─────────────────────────────────────────────────────────── */
 
-const iconMap: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement> & { strokeWidth?: number }>> = {
-  Home, Building2, Briefcase, FileKey2, Wrench, Landmark, CheckCircle2, ArrowRight,
+const iconMap: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
+  Home: PropertyOwnerIcon,
+  Building2: PMCompanyIcon,
+  Briefcase: BrokerageIcon,
+  FileKey2: LeasingIcon,
+  Wrench: MaintenanceIcon,
+  Landmark: FinancialReportingIcon,
+  CheckCircle2: ComplianceTrackingIcon,
+  ArrowRight: GoLiveIcon,
+  Shield: ComplianceTrackingIcon,
+  CreditCard: RentIcon,
+  BarChart3: FinancialReportingIcon,
+  MessageSquare: CommunicationsIcon,
+  Users: TenantScreeningIcon,
+  BookOpen: OwnerPortalIcon,
+  UserPlus: SignUpIcon,
+  Rocket: GoLiveIcon,
+  FileText: LeasingIcon,
+  Link2: ConnectPropertiesIcon,
+}
+
+const solutionIconMap: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
+  'self-managing-owners': PropertyOwnerIcon,
+  'property-management-companies': PMCompanyIcon,
+  'brokerages': BrokerageIcon,
+  'leasing-companies': LeasingIcon,
+  'maintenance-companies': MaintenanceCompanyIcon,
+  'reits': FinancialReportingIcon,
 }
 
 /* ── Types ────────────────────────────────────────────────────────────────── */
@@ -51,22 +89,6 @@ interface SolutionContent {
   ctaBody: string
   replaces: string[]
   relatedSolutions: { slug: string; title: string }[]
-}
-
-/* ── Animation variants ──────────────────────────────────────────────────── */
-
-const heroStagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
-}
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 10 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
-  },
 }
 
 /* ── Client component ────────────────────────────────────────────────────── */
@@ -192,15 +214,15 @@ export function SolutionDetailClient({
 
           <RevealOnScroll stagger={0.08} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {data.features.map((f) => {
-              const Icon = iconMap[f.iconName] || CheckCircle2
+              const Icon = iconMap[f.iconName] || ComplianceTrackingIcon
               return (
                 <motion.div
                   key={f.title}
                   variants={revealItem}
                   className="rounded-2xl border border-[#D3D5DB] bg-white p-7 transition-colors duration-150 hover:border-[#176FEB]/40"
                 >
-                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-[#E8F2FE] text-[#176FEB]">
-                    <Icon className="h-5 w-5" strokeWidth={1.8} />
+                  <div className="mb-4">
+                    <Icon className="h-11 w-11" />
                   </div>
                   <h3 className="font-heading text-lg font-bold text-[#2C2E33]">
                     {f.title}
@@ -358,19 +380,25 @@ export function SolutionDetailClient({
               stagger={0.1}
               className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
             >
-              {data.relatedSolutions.map((sol) => (
-                <motion.div key={sol.slug} variants={revealItem}>
-                  <Link
-                    href={`/solutions/${sol.slug}/`}
-                    className="group flex items-center justify-between rounded-2xl border border-[#D3D5DB] bg-white p-6 transition-colors duration-150 hover:border-[#176FEB]/40"
-                  >
-                    <span className="font-heading text-lg font-bold text-[#2C2E33] transition-colors duration-150 group-hover:text-[#176FEB]">
-                      {sol.title}
-                    </span>
-                    <ArrowRight className="h-5 w-5 shrink-0 text-[#D3D5DB] transition-colors duration-150 group-hover:text-[#176FEB]" />
-                  </Link>
-                </motion.div>
-              ))}
+              {data.relatedSolutions.map((sol) => {
+                const SolIcon = solutionIconMap[sol.slug] || PMCompanyIcon
+                return (
+                  <motion.div key={sol.slug} variants={revealItem}>
+                    <Link
+                      href={`/solutions/${sol.slug}/`}
+                      className="group flex items-center gap-5 rounded-2xl border border-[#D3D5DB] bg-white p-6 transition-all duration-150 hover:border-[#176FEB]/40 hover:shadow-sm"
+                    >
+                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#E8F2FE]">
+                        <SolIcon className="h-6 w-6 text-[#176FEB]" />
+                      </span>
+                      <span className="flex-1 font-heading text-base font-bold text-[#2C2E33] transition-colors duration-150 group-hover:text-[#176FEB]">
+                        {sol.title}
+                      </span>
+                      <ArrowRight className="h-5 w-5 shrink-0 text-[#D3D5DB] transition-transform duration-150 group-hover:translate-x-1 group-hover:text-[#176FEB]" />
+                    </Link>
+                  </motion.div>
+                )
+              })}
             </RevealOnScroll>
           </div>
         </section>

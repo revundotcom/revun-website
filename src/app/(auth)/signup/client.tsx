@@ -51,8 +51,8 @@ export function SignUpClient() {
   const phoneDisplay = formatPhoneInput(phoneValue)
 
   const onSubmit = async (data: SignUpFormData) => {
-    const params = new URLSearchParams({ email: data.email })
-    router.push(`/password/?${params.toString()}`)
+    sessionStorage.setItem('signup_email', data.email)
+    router.push('/password/')
   }
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {

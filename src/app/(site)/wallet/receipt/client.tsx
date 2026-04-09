@@ -63,7 +63,7 @@ export function ReceiptClient() {
 
         {/* Paid badge */}
         <motion.div variants={revealItem} className="mb-4 flex justify-center">
-          <span className="inline-flex items-center rounded-full bg-[#5EA500]/10 px-3 py-1 text-sm font-medium text-[#5EA500]">
+          <span className="inline-flex items-center rounded-full bg-[#176FEB]/10 px-3 py-1 text-sm font-medium text-[#176FEB]">
             Paid
           </span>
         </motion.div>

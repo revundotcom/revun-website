@@ -1,8 +1,18 @@
 import type { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
 import { buildProductSchema, buildBreadcrumbSchema, buildFAQPageSchema } from '@/lib/schema-builders'
-import { PricingTabs } from '@/components/blocks/pricing-tabs'
 import { PricingFaq } from '@/components/blocks/pricing-faq'
+
+const PricingTabs = dynamic(() => import('@/components/blocks/pricing-tabs').then(m => ({ default: m.PricingTabs })), {
+  loading: () => (
+    <section className="py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="h-[600px] animate-pulse rounded-xl bg-[#F5F6F8]" />
+      </div>
+    </section>
+  ),
+})
 
 export const metadata: Metadata = {
   title: 'Pricing',

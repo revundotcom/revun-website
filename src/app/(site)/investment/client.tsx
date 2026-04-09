@@ -60,7 +60,7 @@ function SectionHeader({ eyebrow, title, highlight, description, dark }: {
         {eyebrow}
       </motion.p>
       <motion.h2 variants={revealItem} className={`mt-3 font-display text-4xl font-normal md:text-5xl ${dark ? 'text-[#0A1628]' : 'text-brand-graphite'}`}>
-        {title} <span className={dark ? 'text-brand-blue-light' : 'text-accent'}>{highlight}</span>
+        {title} <span className={dark ? 'text-brand-blue-light' : 'text-keyword'}>{highlight}</span>
       </motion.h2>
       <motion.p variants={revealItem} className={`mx-auto mt-4 max-w-xl text-lg ${dark ? 'text-[#555860]' : 'text-brand-graphite/70'}`}>
         {description}
@@ -320,7 +320,7 @@ function ScheduledTours() {
                 </div>
 
                 {/* Status badge */}
-                <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium ${tour.status === 'Confirmed' ? 'bg-[#5EA500]/15 text-[#5EA500]' : 'bg-[#F59E0B]/15 text-[#F59E0B]'}`}>
+                <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium ${tour.status === 'Confirmed' ? 'bg-[#176FEB]/15 text-[#176FEB]' : 'bg-[#F59E0B]/15 text-[#F59E0B]'}`}>
                   {tour.status}
                 </span>
               </motion.div>
@@ -345,7 +345,7 @@ function ScheduledTours() {
 
 const offers = [
   { property: 'Unit 704 · Portland St, Mississauga', amount: '$1,650', moveIn: 'Mar 1, 2026', status: 'Pending', expires: '19h 59m', color: '#F59E0B' },
-  { property: 'Unit 301 · Queen St W, Toronto', amount: '$2,100', moveIn: 'Apr 1, 2026', status: 'Approved', expires: '', color: '#5EA500' },
+  { property: 'Unit 301 · Queen St W, Toronto', amount: '$2,100', moveIn: 'Apr 1, 2026', status: 'Approved', expires: '', color: '#176FEB' },
   { property: 'Unit 12 · York St, Mississauga', amount: '$1,450', moveIn: 'Mar 15, 2026', status: 'Pending', expires: '3h 12m', color: '#F59E0B' },
 ]
 
@@ -448,7 +448,7 @@ function OffersApprovals() {
 /* ═══════════════════════════════════════════ */
 
 const maintenanceStats = [
-  { label: 'Completed', count: 22, color: '#5EA500', icon: CheckCircle },
+  { label: 'Completed', count: 22, color: '#176FEB', icon: CheckCircle },
   { label: 'Pending', count: 8, color: '#F59E0B', icon: AlertCircle },
   { label: 'Canceled', count: 0, color: '#E7000B', icon: XCircle },
 ]
@@ -553,7 +553,7 @@ function MaintenanceOverview() {
                 </div>
                 <p className="mt-0.5 text-xs text-brand-graphite-mid">{item.unit} · {item.time}</p>
               </div>
-              <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium ${item.status === 'Completed' ? 'bg-[#5EA500]/15 text-[#5EA500]' : item.status === 'In Progress' ? 'bg-brand-blue/10 text-brand-blue' : 'bg-[#F59E0B]/15 text-[#F59E0B]'}`}>
+              <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium ${item.status === 'Completed' ? 'bg-[#176FEB]/15 text-[#176FEB]' : item.status === 'In Progress' ? 'bg-brand-blue/10 text-brand-blue' : 'bg-[#F59E0B]/15 text-[#F59E0B]'}`}>
                 {item.status}
               </span>
             </motion.div>
@@ -664,15 +664,15 @@ function FinancialOverview() {
                   transition={{ duration: 0.3, ease, delay: 0.4 + i * 0.1 }}
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`flex h-9 w-9 items-center justify-center rounded-full ${tx.positive ? 'bg-[#5EA500]/20' : 'bg-brand-error/20'}`}>
-                      <DollarSign className={`h-4 w-4 ${tx.positive ? 'text-[#5EA500]' : 'text-brand-error'}`} />
+                    <div className={`flex h-9 w-9 items-center justify-center rounded-full ${tx.positive ? 'bg-[#176FEB]/20' : 'bg-brand-error/20'}`}>
+                      <DollarSign className={`h-4 w-4 ${tx.positive ? 'text-[#176FEB]' : 'text-brand-error'}`} />
                     </div>
                     <div>
                       <p className="text-sm font-medium text-[#0A1628]">{tx.name}</p>
                       <p className="text-[11px] text-[#555860]">{tx.type} · {tx.time}</p>
                     </div>
                   </div>
-                  <span className={`font-heading text-sm font-bold ${tx.positive ? 'text-[#5EA500]' : 'text-brand-error'}`}>
+                  <span className={`font-heading text-sm font-bold ${tx.positive ? 'text-[#176FEB]' : 'text-brand-error'}`}>
                     {tx.amount}
                   </span>
                 </motion.div>
@@ -687,7 +687,7 @@ function FinancialOverview() {
             transition={{ delay: 0.6 }}
           >
             {[
-              { label: 'Collection Rate', value: '97.8%', icon: TrendingUp, color: '#5EA500' },
+              { label: 'Collection Rate', value: '97.8%', icon: TrendingUp, color: '#176FEB' },
               { label: 'Avg Rent', value: '$1,820', icon: DollarSign, color: '#176FEB' },
             ].map((s) => (
               <div key={s.label} className="rounded-xl border border-[#E5E7EB] bg-white p-4 text-center">
@@ -782,7 +782,7 @@ function RentGuarantee() {
         >
           <div className="mb-5 flex items-center justify-between">
             <h4 className="font-heading text-base font-semibold text-brand-graphite">Coverage Summary</h4>
-            <span className="rounded-full bg-[#5EA500]/15 px-2.5 py-0.5 text-xs font-medium text-[#5EA500]">Active</span>
+            <span className="rounded-full bg-[#176FEB]/15 px-2.5 py-0.5 text-xs font-medium text-[#176FEB]">Active</span>
           </div>
 
           {/* Coverage bars */}
@@ -946,7 +946,7 @@ function EditUnit() {
             <p className="mt-1 text-sm text-brand-graphite-mid">Mississauga, ON · 2 Bed · 2 Bath · 950 sqft</p>
             <div className="mt-4 flex gap-3">
               <span className="rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-medium text-brand-blue">$1,650/mo</span>
-              <span className="rounded-full bg-[#5EA500]/10 px-3 py-1 text-xs font-medium text-[#5EA500]">Occupied</span>
+              <span className="rounded-full bg-[#176FEB]/10 px-3 py-1 text-xs font-medium text-[#176FEB]">Occupied</span>
             </div>
           </div>
         </motion.div>

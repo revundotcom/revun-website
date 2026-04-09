@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
+import { getIntegrationIcon } from '@/lib/integration-icons'
 
 /* ── Integration partners ─────────────────────────────────────────────────── */
 
@@ -20,11 +21,13 @@ const integrations = [
   'Interac',
 ] as const
 
-/* ── Logo pill (text placeholder styled as badge) ─────────────────────────── */
+/* ── Logo pill with icon ──────────────────────────────────────────────────── */
 
 function LogoPill({ name }: { name: string }) {
+  const Logo = getIntegrationIcon(name)
   return (
-    <div className="group flex h-14 shrink-0 items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-8 transition-all duration-150 hover:border-brand-blue/20 hover:shadow-card-hover">
+    <div className="group flex h-14 shrink-0 items-center gap-3 rounded-xl border border-border bg-white px-8 transition-all duration-150 hover:border-brand-blue/20 hover:shadow-card-hover">
+      <Logo className="h-7 w-7 shrink-0" />
       <span className="whitespace-nowrap text-sm font-heading font-semibold text-[#94A3B8] transition-colors duration-150 group-hover:text-brand-graphite">
         {name}
       </span>

@@ -73,8 +73,8 @@ export function DemoForm() {
   if (status === 'success') {
     return (
       <div className="flex flex-col items-center gap-4 py-12 text-center">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#5EA500]/10">
-          <CheckCircle2 className="h-7 w-7 text-[#5EA500]" />
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#176FEB]/10">
+          <CheckCircle2 className="h-7 w-7 text-[#176FEB]" />
         </div>
         <h3 className="text-lg font-bold text-[#0A1628]">
           Demo request received

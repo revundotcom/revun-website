@@ -5,9 +5,6 @@ import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 import {
-  Building2,
-  Users,
-  Wrench,
   ArrowRight,
   TrendingUp,
   Home,
@@ -17,6 +14,7 @@ import {
   MessageSquare,
   Calendar,
 } from 'lucide-react'
+import { PMCompanyIcon, BrokerageIcon, MaintenanceCompanyIcon } from '@/lib/feature-icons'
 
 /* ── Mini sparkline for cards ── */
 function CardSparkline({ data, color, inView }: { data: number[]; color: string; inView: boolean }) {
@@ -80,18 +78,18 @@ function MiniStat({ icon: Icon, label, value, trend, color, inView, delay }: {
 }) {
   return (
     <motion.div
-      className="flex items-center justify-between rounded-lg bg-[#F5F6F8] px-3 py-2"
+      className="flex items-center justify-between rounded-lg bg-brand-off-white px-3 py-2"
       initial={{ opacity: 0, x: 8 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const, delay }}
     >
       <div className="flex items-center gap-2">
-        <Icon className="h-3.5 w-3.5 text-[#555860]" />
-        <span className="text-[11px] text-[#555860]">{label}</span>
+        <Icon className="h-3.5 w-3.5 text-brand-graphite-mid" />
+        <span className="text-[11px] text-brand-graphite-mid">{label}</span>
       </div>
       <div className="flex items-center gap-1.5">
         <span className="text-xs font-bold" style={{ color }}>{value}</span>
-        <span className="text-[9px] text-[#5EA500]">{trend}</span>
+        <span className="text-[9px]" style={{ color }}>{trend}</span>
       </div>
     </motion.div>
   )
@@ -100,7 +98,7 @@ function MiniStat({ icon: Icon, label, value, trend, color, inView, delay }: {
 /* ── Operator card data ── */
 const operators = [
   {
-    icon: Building2,
+    icon: PMCompanyIcon,
     title: 'Property Management Companies',
     description: 'Your PM runs their entire operation on Revun, from rent collection to maintenance dispatch.',
     color: '#176FEB',
@@ -113,7 +111,7 @@ const operators = [
     features: ['Rent Collection', 'Tenant Screening', 'Maintenance'],
   },
   {
-    icon: Users,
+    icon: BrokerageIcon,
     title: 'Brokerages & Agents',
     description: 'Real estate brokerages use Revun to manage deals, documents, and client communication.',
     color: '#0B5AD4',
@@ -126,10 +124,10 @@ const operators = [
     features: ['Deal Pipeline', 'Digital Docs', 'Client Portal'],
   },
   {
-    icon: Wrench,
+    icon: MaintenanceCompanyIcon,
     title: 'Maintenance Companies',
     description: "Maintenance providers dispatch, track, and invoice through Revun's work order system.",
-    color: '#5EA500',
+    color: '#4A91F0',
     sparkData: [20, 28, 32, 30, 38, 42, 46, 52],
     stats: [
       { icon: ClipboardCheck, label: 'Jobs Completed', value: '856', trend: '+9%' },
@@ -182,7 +180,7 @@ function OperatorCard({ op, index, inView }: { op: typeof operators[number]; ind
       initial={{ opacity: 0, y: 16 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const, delay: 0.15 + index * 0.15 }}
-      className="group relative z-10 flex flex-col overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white transition-all duration-150 hover:border-brand-blue/20 hover:shadow-card-hover"
+      className="group relative z-10 flex flex-col overflow-hidden rounded-2xl border border-border bg-white transition-all duration-150 hover:border-brand-blue/20 hover:shadow-card-hover"
     >
       {/* Top accent bar */}
       <div className="h-[2px] w-full transition-colors duration-150" style={{ backgroundColor: `${op.color}20` }}>
@@ -208,7 +206,7 @@ function OperatorCard({ op, index, inView }: { op: typeof operators[number]; ind
           </motion.div>
           <div>
             <h3 className="font-heading text-lg font-semibold leading-tight text-brand-graphite">{op.title}</h3>
-            <p className="mt-1.5 text-sm leading-relaxed text-[#555860]">{op.description}</p>
+            <p className="mt-1.5 text-sm leading-relaxed text-brand-graphite-mid">{op.description}</p>
           </div>
         </div>
 
@@ -217,7 +215,7 @@ function OperatorCard({ op, index, inView }: { op: typeof operators[number]; ind
           {op.features.map((f) => (
             <span
               key={f}
-              className="rounded-full border border-[#E5E7EB] px-2.5 py-0.5 text-[10px] font-medium text-[#555860] transition-colors group-hover:border-brand-blue/20 group-hover:text-brand-blue"
+              className="rounded-full border border-border px-2.5 py-0.5 text-[10px] font-medium text-brand-graphite-mid transition-colors group-hover:border-brand-blue/20 group-hover:text-brand-blue"
             >
               {f}
             </span>
@@ -225,9 +223,9 @@ function OperatorCard({ op, index, inView }: { op: typeof operators[number]; ind
         </div>
 
         {/* Sparkline chart */}
-        <div className="mb-3 rounded-lg border border-[#E5E7EB]/60 bg-[#FAFBFC] px-3 py-2.5">
+        <div className="mb-3 rounded-lg border border-border/60 bg-[#FAFBFC] px-3 py-2.5">
           <div className="mb-1.5 flex items-center justify-between">
-            <span className="text-[10px] font-medium text-[#555860]">Growth Trend</span>
+            <span className="text-[10px] font-medium text-brand-graphite-mid">Growth Trend</span>
             <span className="text-[10px] font-bold" style={{ color: op.color }}>6 months</span>
           </div>
           <CardSparkline data={op.sparkData} color={op.color} inView={inView} />
@@ -284,7 +282,7 @@ export function PoweredByRevun() {
             variants={revealItem}
             className="mx-auto mt-4 max-w-2xl text-lg text-brand-graphite/70"
           >
-            Revun powers the software &mdash; your operator provides the service.
+            Revun powers the software - your operator provides the service.
             Property management companies, brokerages, and maintenance companies
             run on Revun to deliver a better experience.
           </motion.p>

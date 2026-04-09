@@ -109,7 +109,7 @@ const safetyTools = [
 
 function StatusBadge({ status }: { status: string }) {
   const styles = {
-    confirmed: 'bg-[#5EA500]/10 text-[#5EA500]',
+    confirmed: 'bg-[#176FEB]/10 text-[#176FEB]',
     scheduled: 'bg-[#176FEB]/10 text-[#176FEB]',
     pending: 'bg-[#F59E0B]/10 text-[#F59E0B]',
   }

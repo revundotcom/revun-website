@@ -104,7 +104,7 @@ export function PasswordClient() {
 
               let colorClass = 'text-[#555860]'
               if (typed) {
-                colorClass = met ? 'text-[#5EA500]' : 'text-[#E7000B]'
+                colorClass = met ? 'text-[#176FEB]' : 'text-[#E7000B]'
               }
 
               return (

@@ -4,21 +4,8 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight, Check, X, Minus, ChevronDown } from 'lucide-react'
 import { RevealOnScroll } from '@/components/ui/reveal-on-scroll'
+import { heroStagger, fadeUp } from '@/lib/motion'
 import type { CompetitorData } from './page'
-
-const heroStagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
-}
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 10 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
-  },
-}
 
 function getStatusIcon(value: string) {
   const lower = value.toLowerCase()

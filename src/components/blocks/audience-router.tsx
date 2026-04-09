@@ -3,8 +3,9 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Home, Building2, Users, Check } from 'lucide-react'
+import { ArrowRight, Check } from 'lucide-react'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
+import { PropertyOwnerIcon, PropertyManagerIcon, TenantIcon } from '@/lib/feature-icons'
 
 /* ── Audience data ── */
 
@@ -12,7 +13,7 @@ const audiences = [
   {
     id: 'owners',
     tab: 'Property Owners',
-    icon: Home,
+    icon: PropertyOwnerIcon,
     headline: 'Manage your own properties like a pro.',
     description:
       'Institutional-grade tools for independent landlords. From screening tenants to collecting rent and tracking maintenance - everything runs from one dashboard, starting at $1/day.',
@@ -34,7 +35,7 @@ const audiences = [
   {
     id: 'managers',
     tab: 'Property Managers',
-    icon: Building2,
+    icon: PropertyManagerIcon,
     headline: 'Replace 5+ tools with one platform.',
     description:
       'One infrastructure layer for your entire portfolio. Scale operations, give owners real-time visibility, and cut admin time by 60% - without switching between disconnected systems.',
@@ -56,7 +57,7 @@ const audiences = [
   {
     id: 'tenants',
     tab: 'Tenants',
-    icon: Users,
+    icon: TenantIcon,
     headline: 'One app for your entire rental experience.',
     description:
       'Find verified rentals, apply online in minutes, pay rent from anywhere, and submit maintenance requests that actually get resolved - all from a single tenant portal.',
@@ -73,7 +74,7 @@ const audiences = [
       { value: '98%', label: 'Satisfaction' },
     ],
     href: '/solutions/tenants/',
-    color: '#5EA500',
+    color: '#4A91F0',
   },
 ]
 
@@ -112,7 +113,7 @@ export function AudienceRouter() {
         <RevealOnScroll className="mt-12">
           <motion.div
             variants={revealItem}
-            className="mx-auto flex w-fit rounded-full border border-[#E5E7EB] bg-brand-off-white p-1"
+            className="mx-auto flex w-fit rounded-full border border-border bg-brand-off-white p-1"
           >
             {audiences.map((a, i) => {
               const Icon = a.icon
@@ -125,7 +126,7 @@ export function AudienceRouter() {
                   className={`relative flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-200 ${
                     isActive
                       ? 'text-white'
-                      : 'text-[#555860] hover:text-brand-graphite'
+                      : 'text-brand-graphite-mid hover:text-brand-graphite'
                   }`}
                 >
                   {isActive && (
@@ -161,7 +162,7 @@ export function AudienceRouter() {
                 <h3 className="font-display text-3xl font-normal text-brand-graphite md:text-4xl">
                   {audience.headline}
                 </h3>
-                <p className="mt-4 text-base leading-relaxed text-[#555860]">
+                <p className="mt-4 text-base leading-relaxed text-brand-graphite-mid">
                   {audience.description}
                 </p>
 
@@ -175,7 +176,7 @@ export function AudienceRouter() {
                       >
                         <Check className="h-3 w-3" style={{ color: audience.color }} />
                       </span>
-                      <span className="text-sm text-[#555860]">{bullet}</span>
+                      <span className="text-sm text-brand-graphite-mid">{bullet}</span>
                     </li>
                   ))}
                 </ul>
@@ -190,7 +191,7 @@ export function AudienceRouter() {
               </div>
 
               {/* Right: stats panel */}
-              <div className="rounded-2xl border border-[#E5E7EB] bg-brand-off-white p-8 lg:p-10">
+              <div className="rounded-2xl border border-border bg-brand-off-white p-8 lg:p-10">
                 <p className="text-xs font-heading font-semibold uppercase tracking-wider text-[#94A3B8] mb-6">
                   Key numbers
                 </p>
@@ -204,10 +205,10 @@ export function AudienceRouter() {
                         >
                           {stat.value}
                         </span>
-                        <span className="text-sm text-[#555860]">{stat.label}</span>
+                        <span className="text-sm text-brand-graphite-mid">{stat.label}</span>
                       </div>
                       {i < audience.stats.length - 1 && (
-                        <div className="mt-4 h-px bg-[#E5E7EB]" />
+                        <div className="mt-4 h-px bg-border" />
                       )}
                     </div>
                   ))}

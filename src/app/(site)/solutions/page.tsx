@@ -12,6 +12,7 @@ import {
   ArrowRight,
 } from 'lucide-react'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
+import { heroStagger, fadeUp } from '@/lib/motion'
 
 /* ── Audience card data ─────────────────────────────────────────────────── */
 
@@ -101,22 +102,6 @@ const solutions = [
     cta: 'Explore for REITs',
   },
 ] as const
-
-/* ── Animation variants ─────────────────────────────────────────────────── */
-
-const heroStagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
-}
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 10 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
-  },
-}
 
 /* ── Page ─────────────────────────────────────────────────────────────────── */
 

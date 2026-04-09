@@ -115,7 +115,7 @@ function Av({ initials, size = 10, online, dark }: { initials: string; size?: nu
         {initials}
       </div>
       {online !== undefined && (
-        <span className={`absolute -bottom-0.5 -right-0.5 block h-2.5 w-2.5 rounded-full ring-2 ring-white ${online ? 'bg-brand-success' : 'bg-[#D3D5DB]'}`} />
+        <span className={`absolute -bottom-0.5 -right-0.5 block h-2.5 w-2.5 rounded-full ring-2 ring-white ${online ? 'bg-brand-success' : 'bg-brand-graphite-light'}`} />
       )}
     </div>
   )
@@ -152,13 +152,13 @@ function Screen1() {
   return (
     <div className="flex h-full flex-col bg-white">
       <PhoneStatusBar />
-      <div className="flex items-center justify-between border-b border-[#E5E7EB] px-4 py-2.5">
+      <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
         <span className="font-heading text-sm font-bold text-brand-graphite">Messages</span>
         <Search className="h-3.5 w-3.5 text-brand-graphite-mid" />
       </div>
       <div className="flex-1 overflow-hidden">
         {chatThreads.map((t) => (
-          <div key={t.name} className="flex items-start gap-2.5 border-b border-[#E5E7EB]/50 px-4 py-2.5">
+          <div key={t.name} className="flex items-start gap-2.5 border-b border-border/50 px-4 py-2.5">
             <Av initials={t.initials} size={9} online={t.online} />
             <div className="min-w-0 flex-1">
               <div className="flex items-center justify-between">
@@ -174,7 +174,7 @@ function Screen1() {
           </div>
         ))}
       </div>
-      <div className="border-t border-[#E5E7EB] px-4 py-2">
+      <div className="border-t border-border px-4 py-2">
         <div className="flex items-center justify-center gap-1.5 rounded-lg bg-brand-blue py-2 text-[11px] font-semibold text-white">
           <Send className="h-3 w-3" /> New Message
         </div>
@@ -188,7 +188,7 @@ function Screen2() {
   return (
     <div className="flex h-full flex-col bg-white">
       <PhoneStatusBar />
-      <div className="flex items-center gap-2.5 border-b border-[#E5E7EB] px-4 py-2">
+      <div className="flex items-center gap-2.5 border-b border-border px-4 py-2">
         <Av initials="SM" size={8} online />
         <div className="flex-1">
           <span className="text-xs font-semibold text-brand-graphite">Sarah M.</span>
@@ -210,10 +210,10 @@ function Screen2() {
           </div>
         ))}
       </div>
-      <div className="border-t border-[#E5E7EB] px-3 py-2">
-        <div className="flex items-center gap-1.5 rounded-xl border border-[#E5E7EB] bg-white px-2.5 py-1.5">
+      <div className="border-t border-border px-3 py-2">
+        <div className="flex items-center gap-1.5 rounded-xl border border-border bg-white px-2.5 py-1.5">
           <Smile className="h-4 w-4 text-brand-graphite-mid" />
-          <span className="flex-1 text-[10px] text-[#D3D5DB]">Type a message...</span>
+          <span className="flex-1 text-[10px] text-brand-graphite-light">Type a message...</span>
           <Paperclip className="h-4 w-4 text-brand-graphite-mid" />
           <div className="flex h-6 w-6 items-center justify-center rounded-md bg-brand-blue">
             <Send className="h-3 w-3 text-white" />
@@ -229,13 +229,13 @@ function Screen3() {
   return (
     <div className="flex h-full flex-col bg-white">
       <PhoneStatusBar />
-      <div className="flex items-center justify-between border-b border-[#E5E7EB] px-4 py-2.5">
+      <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
         <span className="font-heading text-sm font-bold text-brand-graphite">Contacts</span>
         <Search className="h-3.5 w-3.5 text-brand-graphite-mid" />
       </div>
       <div className="flex-1 overflow-hidden">
         {contactList.map((c) => (
-          <div key={c.name} className="flex items-center gap-2.5 border-b border-[#E5E7EB]/50 px-4 py-3">
+          <div key={c.name} className="flex items-center gap-2.5 border-b border-border/50 px-4 py-3">
             <Av initials={c.initials} size={10} />
             <div className="flex-1">
               <p className="text-xs font-semibold text-brand-graphite">{c.name}</p>
@@ -375,18 +375,18 @@ function Screen7() {
   return (
     <div className="flex h-full flex-col bg-white">
       <PhoneStatusBar />
-      <div className="flex items-center justify-between border-b border-[#E5E7EB] px-4 py-2.5">
+      <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
         <span className="font-heading text-sm font-bold text-brand-graphite">Saved</span>
         <Search className="h-3.5 w-3.5 text-brand-graphite-mid" />
       </div>
-      <div className="flex gap-1.5 border-b border-[#E5E7EB] px-4 py-2">
+      <div className="flex gap-1.5 border-b border-border px-4 py-2">
         {['All', 'Photos', 'Docs'].map((f, i) => (
           <span key={f} className={`rounded-full px-2.5 py-0.5 text-[10px] font-medium ${i === 0 ? 'bg-brand-blue text-white' : 'bg-brand-off-white text-brand-graphite-mid'}`}>{f}</span>
         ))}
       </div>
       <div className="flex-1 overflow-hidden">
         {savedFiles.map((f) => (
-          <div key={f.name} className="flex items-center gap-2.5 border-b border-[#E5E7EB]/50 px-4 py-2.5">
+          <div key={f.name} className="flex items-center gap-2.5 border-b border-border/50 px-4 py-2.5">
             <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${f.type === 'image' ? 'bg-brand-blue/10 text-brand-blue' : 'bg-brand-error/10 text-brand-error'}`}>
               {f.type === 'image' ? <ImageIcon className="h-3.5 w-3.5" /> : <FileText className="h-3.5 w-3.5" />}
             </div>
@@ -394,11 +394,11 @@ function Screen7() {
               <p className="truncate text-[11px] font-medium text-brand-graphite">{f.name}</p>
               <p className="text-[9px] text-brand-graphite-mid">{f.date}</p>
             </div>
-            <Star className="h-3 w-3 text-[#D3D5DB]" />
+            <Star className="h-3 w-3 text-brand-graphite-light" />
           </div>
         ))}
       </div>
-      <div className="border-t border-[#E5E7EB] px-4 py-2">
+      <div className="border-t border-border px-4 py-2">
         <div className="flex items-center justify-center gap-1.5 rounded-lg bg-brand-blue py-2 text-[11px] font-semibold text-white">
           Get Started <ArrowRight className="h-3 w-3" />
         </div>
@@ -455,8 +455,8 @@ function PhoneCarousel() {
   const positionConfig = (slot: number) => {
     // slot 0 = left, 1 = center, 2 = right
     if (slot === 1) return { x: 0, scale: 1, z: 20, opacity: 1, rotateY: 0 }
-    if (slot === 0) return { x: -280, scale: 0.82, z: 0, opacity: 0.6, rotateY: 12 }
-    return { x: 280, scale: 0.82, z: 0, opacity: 0.6, rotateY: -12 }
+    if (slot === 0) return { x: -340, scale: 0.82, z: 0, opacity: 0.6, rotateY: 12 }
+    return { x: 340, scale: 0.82, z: 0, opacity: 0.6, rotateY: -12 }
   }
 
   return (
@@ -467,7 +467,7 @@ function PhoneCarousel() {
       onMouseLeave={resumeAutoplay}
     >
       {/* Carousel viewport */}
-      <div className="relative mx-auto h-[540px] max-w-3xl" style={{ perspective: 1200 }}>
+      <div className="relative mx-auto h-[680px] max-w-4xl" style={{ perspective: 1200 }}>
         <AnimatePresence mode="popLayout">
           {visible.map((screenIdx, slot) => {
             const config = positionConfig(slot)
@@ -478,28 +478,28 @@ function PhoneCarousel() {
             return (
               <motion.div
                 key={screenIdx}
-                className="absolute left-1/2 top-0 w-[240px] cursor-pointer"
+                className="absolute left-1/2 top-0 w-[300px] cursor-pointer"
                 style={{ transformStyle: 'preserve-3d', zIndex: config.z }}
                 initial={{
-                  x: direction > 0 ? 400 : -400,
+                  x: direction > 0 ? 480 : -480,
                   scale: 0.7,
                   opacity: 0,
                   rotateY: direction > 0 ? -20 : 20,
-                  marginLeft: -120,
+                  marginLeft: -150,
                 }}
                 animate={{
                   x: config.x,
                   scale: config.scale,
                   opacity: config.opacity,
                   rotateY: config.rotateY,
-                  marginLeft: -120,
+                  marginLeft: -150,
                 }}
                 exit={{
-                  x: direction > 0 ? -400 : 400,
+                  x: direction > 0 ? -480 : 480,
                   scale: 0.7,
                   opacity: 0,
                   rotateY: direction > 0 ? 20 : -20,
-                  marginLeft: -120,
+                  marginLeft: -150,
                 }}
                 transition={{
                   duration: 0.5,
@@ -516,18 +516,18 @@ function PhoneCarousel() {
                   animate={{ opacity: slot === 1 ? 1 : 0.4 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <h3 className="font-heading text-sm font-semibold leading-tight text-brand-graphite md:text-base">
+                  <h3 className="font-heading text-base font-semibold leading-tight text-brand-graphite md:text-lg">
                     {screen.title}{' '}
                     <span className="text-brand-blue">{screen.highlight}</span>
                   </h3>
-                  <p className="mt-1.5 text-[11px] leading-snug text-brand-graphite-mid md:text-xs">
+                  <p className="mt-1.5 text-xs leading-snug text-brand-graphite-mid md:text-sm">
                     {screen.description}
                   </p>
                 </motion.div>
 
                 {/* Phone frame */}
                 <motion.div
-                  className={`overflow-hidden rounded-[28px] border-2 ${isDark ? 'border-white/10 bg-[#0A1628]' : 'border-[#E5E7EB] bg-white'}`}
+                  className={`overflow-hidden rounded-[32px] border-2 ${isDark ? 'border-white/10 bg-[#0A1628]' : 'border-border bg-white'}`}
                   animate={{
                     boxShadow: slot === 1
                       ? '0 20px 60px rgba(10,22,40,0.18), 0 8px 20px rgba(10,22,40,0.1)'
@@ -535,7 +535,7 @@ function PhoneCarousel() {
                   }}
                   transition={{ duration: 0.4 }}
                 >
-                  <div className="h-[400px]">
+                  <div className="h-[500px]">
                     <ScreenComp />
                   </div>
                 </motion.div>
@@ -549,7 +549,7 @@ function PhoneCarousel() {
       <div className="mt-6 flex items-center justify-center gap-6">
         <button
           onClick={() => { pauseAutoplay(); prev(); resumeAutoplay() }}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E5E7EB] bg-white text-brand-graphite-mid shadow-sm transition-all hover:border-brand-blue/30 hover:text-brand-blue hover:shadow-md"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white text-brand-graphite-mid shadow-sm transition-all hover:border-brand-blue/30 hover:text-brand-blue hover:shadow-md"
           aria-label="Previous screen"
         >
           <ChevronLeft className="h-5 w-5" />
@@ -571,7 +571,7 @@ function PhoneCarousel() {
 
         <button
           onClick={() => { pauseAutoplay(); next(); resumeAutoplay() }}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E5E7EB] bg-white text-brand-graphite-mid shadow-sm transition-all hover:border-brand-blue/30 hover:text-brand-blue hover:shadow-md"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white text-brand-graphite-mid shadow-sm transition-all hover:border-brand-blue/30 hover:text-brand-blue hover:shadow-md"
           aria-label="Next screen"
         >
           <ChevronRight className="h-5 w-5" />

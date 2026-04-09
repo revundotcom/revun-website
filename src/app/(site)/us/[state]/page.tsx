@@ -1195,17 +1195,14 @@ export default async function StatePage({ params }: Props) {
           <RevealOnScroll stagger={0.07}>
             <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {data.cities.map((city) => (
-                <div key={city.slug}>
-                  <Link
-                    href={`/us/${data.slug}/${city.slug}/`}
-                    className="group flex items-center gap-3 rounded-xl border border-border bg-brand-off-white px-5 py-4 transition-colors duration-100 hover:border-brand-blue-light hover:bg-white"
-                  >
-                    <MapPin className="h-4 w-4 shrink-0 text-brand-blue" />
-                    <span className="font-heading text-sm font-semibold text-brand-graphite transition-colors duration-100 group-hover:text-brand-blue">
-                      {city.name}
-                    </span>
-                    <ArrowRight className="ml-auto h-3.5 w-3.5 text-[#94A3B8] transition-transform duration-100 group-hover:translate-x-0.5 group-hover:text-brand-blue" />
-                  </Link>
+                <div
+                  key={city.slug}
+                  className="flex items-center gap-3 rounded-xl border border-border bg-brand-off-white px-5 py-4"
+                >
+                  <MapPin className="h-4 w-4 shrink-0 text-brand-blue" />
+                  <span className="font-heading text-sm font-semibold text-brand-graphite">
+                    {city.name}
+                  </span>
                 </div>
               ))}
             </div>

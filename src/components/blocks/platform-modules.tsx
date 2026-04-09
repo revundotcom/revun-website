@@ -3,22 +3,21 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import {
-  FileText,
-  CreditCard,
-  Wrench,
-  Shield,
-  BarChart3,
-  MessageSquare,
-  ArrowRight,
-  CheckCircle2,
-} from 'lucide-react'
+import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
+import {
+  LeasingIcon,
+  RentIcon,
+  MaintenanceIcon,
+  TenantScreeningIcon,
+  FinancialReportingIcon,
+  CommunicationsIcon,
+} from '@/lib/feature-icons'
 
 const modules = [
   {
     title: 'Leasing & Applications',
-    icon: FileText,
+    icon: LeasingIcon,
     description: 'From vacancy to signed lease, fully automated. List properties, manage showings, screen applicants, and execute leases digitally.',
     capabilities: [
       'Listing syndication to 20+ sites',
@@ -32,7 +31,7 @@ const modules = [
   },
   {
     title: 'Rent Collection',
-    icon: CreditCard,
+    icon: RentIcon,
     description: 'Automated rent collection with ACH, credit card, and Interac e-Transfer. Never chase a payment again.',
     capabilities: [
       'ACH, credit card, and Interac support',
@@ -46,7 +45,7 @@ const modules = [
   },
   {
     title: 'Maintenance',
-    icon: Wrench,
+    icon: MaintenanceIcon,
     description: 'Tenant request portal, AI-powered routing, vendor dispatch, and proof-of-completion tracking.',
     capabilities: [
       'Tenant portal with photo uploads',
@@ -60,7 +59,7 @@ const modules = [
   },
   {
     title: 'Tenant Screening',
-    icon: Shield,
+    icon: TenantScreeningIcon,
     description: 'Credit, criminal, and eviction checks through Equifax and TransUnion. Results in minutes, not days.',
     capabilities: [
       'Equifax + TransUnion credit reports',
@@ -74,7 +73,7 @@ const modules = [
   },
   {
     title: 'Financial Reporting',
-    icon: BarChart3,
+    icon: FinancialReportingIcon,
     description: 'Owner statements, P&L, cash flow, and tax-ready reports. Syncs with QuickBooks and Xero.',
     capabilities: [
       'Real-time portfolio dashboards',
@@ -88,7 +87,7 @@ const modules = [
   },
   {
     title: 'Communications',
-    icon: MessageSquare,
+    icon: CommunicationsIcon,
     description: 'Email, SMS, calling, and in-app messaging. Every conversation tied to the right tenant and property.',
     capabilities: [
       'Unified inbox across channels',
@@ -110,11 +109,11 @@ export function PlatformModules() {
     <section className="bg-white py-14">
       <div className="mx-auto max-w-7xl px-6">
         <RevealOnScroll className="mb-12 text-center" stagger={0.12}>
-          <motion.p variants={revealItem} className="mb-3 text-sm font-heading font-semibold uppercase tracking-widest text-[#176FEB]">
+          <motion.p variants={revealItem} className="mb-3 text-sm font-heading font-semibold uppercase tracking-widest text-brand-blue">
             Core Modules
           </motion.p>
           <motion.h2 variants={revealItem} className="font-display text-3xl font-normal text-[#0A1628] md:text-4xl">
-            Everything your <span className="text-[#176FEB]">operation</span> needs
+            Everything your <span className="text-brand-blue">operation</span> needs
           </motion.h2>
         </RevealOnScroll>
 
@@ -132,11 +131,11 @@ export function PlatformModules() {
                     onClick={() => setActive(i)}
                     className={`group flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition-all duration-200 ${
                       isActive
-                        ? 'bg-[#176FEB] text-white'
-                        : 'text-[#555860] hover:bg-[#F5F6F8]'
+                        ? 'bg-brand-blue text-white'
+                        : 'text-brand-graphite-mid hover:bg-brand-off-white'
                     }`}
                   >
-                    <Icon className={`h-5 w-5 shrink-0 ${isActive ? 'text-white' : 'text-[#176FEB]'}`} />
+                    <Icon className="h-7 w-7 shrink-0" />
                     <span className={`text-sm font-medium ${isActive ? 'text-white font-semibold' : ''}`}>
                       {m.title}
                     </span>
@@ -154,31 +153,29 @@ export function PlatformModules() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="rounded-2xl border border-[#E5E7EB] bg-[#F5F6F8] p-8"
+              className="rounded-2xl border border-border bg-brand-off-white p-8"
             >
               <div className="grid gap-8 md:grid-cols-2">
                 {/* Left content */}
                 <div>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#176FEB]">
-                      <selected.icon className="h-5 w-5 text-white" />
-                    </div>
+                    <selected.icon className="h-10 w-10" />
                     <div>
                       <h3 className="font-heading text-xl font-bold text-[#0A1628]">{selected.title}</h3>
                     </div>
                   </div>
-                  <p className="text-sm leading-relaxed text-[#555860]">{selected.description}</p>
+                  <p className="text-sm leading-relaxed text-brand-graphite-mid">{selected.description}</p>
 
                   {/* Stat */}
-                  <div className="mt-6 inline-flex items-center gap-3 rounded-xl border border-[#E5E7EB] bg-white px-4 py-3">
-                    <span className="font-heading text-2xl font-bold text-[#176FEB]">{selected.stat.value}</span>
-                    <span className="text-xs text-[#555860]">{selected.stat.label}</span>
+                  <div className="mt-6 inline-flex items-center gap-3 rounded-xl border border-border bg-white px-4 py-3">
+                    <span className="font-heading text-2xl font-bold text-brand-blue">{selected.stat.value}</span>
+                    <span className="text-xs text-brand-graphite-mid">{selected.stat.label}</span>
                   </div>
 
                   <div className="mt-6">
                     <Link
                       href={selected.href}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-[#176FEB] transition-colors hover:text-[#0B5AD4]"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-brand-blue transition-colors hover:text-brand-blue-dark"
                     >
                       Learn more <ArrowRight className="h-4 w-4" />
                     </Link>
@@ -186,7 +183,7 @@ export function PlatformModules() {
                 </div>
 
                 {/* Right: capabilities checklist */}
-                <div className="rounded-xl border border-[#E5E7EB] bg-white p-5">
+                <div className="rounded-xl border border-border bg-white p-5">
                   <p className="mb-4 text-xs font-heading font-semibold uppercase tracking-wider text-[#9CA3AF]">Capabilities</p>
                   <ul className="space-y-3">
                     {selected.capabilities.map((cap, i) => (
@@ -197,8 +194,8 @@ export function PlatformModules() {
                         transition={{ duration: 0.2, delay: i * 0.06 }}
                         className="flex items-start gap-2.5"
                       >
-                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#5EA500]" />
-                        <span className="text-sm text-[#555860]">{cap}</span>
+                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue" />
+                        <span className="text-sm text-brand-graphite-mid">{cap}</span>
                       </motion.li>
                     ))}
                   </ul>

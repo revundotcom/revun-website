@@ -14,7 +14,9 @@ export async function sanityFetch<T>({
       next: { tags },
     })
   } catch (error) {
-    console.error('Sanity fetch error:', error)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Sanity fetch error:', error)
+    }
     return null as T
   }
 }

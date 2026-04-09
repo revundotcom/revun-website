@@ -32,7 +32,7 @@ export function generatePageMetadata({
       images: ['/og-default.png'],
     },
     twitter: {
-      card: 'summary_large_image' as const,
+      card: 'summary_large_image',
       title,
       description,
       images: ['/og-default.png'],
@@ -97,7 +97,7 @@ export function generateGeoMetadata({
       images: ogImages,
     },
     twitter: {
-      card: 'summary_large_image' as const,
+      card: 'summary_large_image',
       title,
       description,
       images: ogImages.map((img) => img.url),

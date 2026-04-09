@@ -5,22 +5,7 @@ import Link from 'next/link'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 import { sanitizeJsonLd } from '@/lib/utils'
 import { buildBreadcrumbSchema, buildFAQPageSchema } from '@/lib/schema-builders'
-
-/* ── Animation variants ─────────────────────────────────────────────── */
-
-const heroStagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
-}
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 10 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
-  },
-}
+import { heroStagger, fadeUp } from '@/lib/motion'
 
 /* ── Data ────────────────────────────────────────────────────────────── */
 

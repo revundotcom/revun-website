@@ -2,21 +2,20 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-html {
-  scroll-behavior: smooth;
-}
+/* scroll-behavior: smooth removed - it causes scroll sticking on Windows.
+   Apply smooth scrolling only where needed via JS scrollIntoView({ behavior: 'smooth' }). */
 
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Revun — Brand Design System
+ * Revun - Brand Design System
  * ============================
  * Primary:     Revun Blue     #176FEB
  * Navy:        Deep Navy      #0A1628
  * CTA:         Action Blue    #005CE8
  * Surface:     Off-White      #F5F6F8
  * Destructive: Red            #E7000B
- * Success:     Green          #5EA500
+ * Success:     Blue Light     #4A91F0
  *
  * Personality: Technology-forward. Institutional quality.
  * Tone: Stripe meets Guesty. Confident, not flashy.
@@ -43,7 +42,7 @@ html {
   --brand-off-white: #F5F6F8;
   --brand-cta-blue: #005CE8;
   --brand-error: #E7000B;
-  --brand-success: #5EA500;
+  --brand-success: #176FEB;
 
   /* ── Shadcn semantic tokens: light mode ── */
   --background: #FFFFFF;
@@ -75,7 +74,7 @@ html {
 
   --chart-1: #176FEB;
   --chart-2: #001D3D;
-  --chart-3: #5EA500;
+  --chart-3: #4A91F0;
   --chart-4: #005CE8;
   --chart-5: #0A1628;
 
@@ -121,7 +120,7 @@ html {
 
   --chart-1: #4A91F0;
   --chart-2: #D3D5DB;
-  --chart-3: #5EA500;
+  --chart-3: #4A91F0;
   --chart-4: #005CE8;
   --chart-5: #0F2040;
 
@@ -357,16 +356,5 @@ html {
   transform-style: preserve-3d;
 }
 
-/* ── Ambient Dot Grid (Global Background Texture) ── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image: radial-gradient(circle, rgba(23,111,235,0.08) 1px, transparent 1px);
-  background-size: 24px 24px;
-  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, black 20%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, black 20%, transparent 80%);
-  contain: strict;
-}
+/* Ambient dot grid removed - position:fixed + mask-image + radial-gradient
+   caused scroll jank by forcing recomposition every frame on Windows. */

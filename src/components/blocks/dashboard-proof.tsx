@@ -20,7 +20,7 @@ export function DashboardProof() {
       <div className="mx-auto max-w-7xl px-6">
         {/* Section header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-3 py-1 text-xs font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-3 py-1 text-xs font-semibold mb-4">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-soft-ping rounded-full bg-brand-success opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-success" />
@@ -30,23 +30,23 @@ export function DashboardProof() {
           <h2 className="font-display text-3xl md:text-5xl font-normal text-brand-graphite">
             See your portfolio in <span className="text-keyword">real time</span>
           </h2>
-          <p className="mt-4 text-[#555860] text-lg max-w-xl mx-auto">
+          <p className="mt-4 text-brand-graphite-mid text-lg max-w-xl mx-auto">
             Track occupancy, revenue, maintenance, and tenant satisfaction from a single dashboard.
           </p>
         </div>
 
         {/* Dashboard frame */}
         <div ref={ref} className="mx-auto max-w-4xl">
-          <div className="shadow-device rounded-2xl overflow-hidden bg-white border border-[#E5E7EB] transition-shadow duration-200 hover:shadow-editorial">
+          <div className="shadow-device rounded-2xl overflow-hidden bg-white border border-border transition-shadow duration-200 hover:shadow-editorial">
             {/* Browser chrome */}
-            <div className="flex items-center gap-2 px-4 py-3 bg-[#F5F6F8] border-b border-[#E5E7EB]">
+            <div className="flex items-center gap-2 px-4 py-3 bg-brand-off-white border-b border-border">
               <div className="flex gap-1.5">
                 <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
                 <span className="w-3 h-3 rounded-full bg-[#FEBD2F]" />
                 <span className="w-3 h-3 rounded-full bg-[#28C840]" />
               </div>
               <div className="flex-1 flex justify-center">
-                <span className="text-xs text-[#94A3B8] bg-white rounded-md px-3 py-1 border border-[#E5E7EB]">
+                <span className="text-xs text-[#94A3B8] bg-white rounded-md px-3 py-1 border border-border">
                   app.revun.com/dashboard
                 </span>
               </div>
@@ -64,24 +64,24 @@ export function DashboardProof() {
               {/* KPI row */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 {/* Revenue */}
-                <div className="rounded-xl border border-[#E5E7EB] p-4">
+                <div className="rounded-xl border border-border p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-[#94A3B8] mb-1">Revenue</p>
                   <p className="text-2xl font-bold text-brand-graphite">${revenue.toLocaleString()}</p>
                   <Sparkline data={[12, 18, 15, 22, 28, 25, 32, 35, 30, 38]} width={80} height={20} className="mt-2" />
                 </div>
                 {/* Occupancy */}
-                <div className="rounded-xl border border-[#E5E7EB] p-4 flex flex-col items-center">
+                <div className="rounded-xl border border-border p-4 flex flex-col items-center">
                   <p className="text-xs font-semibold uppercase tracking-wider text-[#94A3B8] mb-2">Occupancy</p>
                   <ScoreRing value={occupancy} size={72} strokeWidth={5} />
                 </div>
                 {/* Active Units */}
-                <div className="rounded-xl border border-[#E5E7EB] p-4">
+                <div className="rounded-xl border border-border p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-[#94A3B8] mb-1">Active Units</p>
                   <p className="text-2xl font-bold text-brand-graphite">{activeUnits.toLocaleString()}</p>
-                  <Sparkline data={[50, 55, 58, 62, 65, 70, 72, 78, 80, 85]} width={80} height={20} color="#5EA500" className="mt-2" />
+                  <Sparkline data={[50, 55, 58, 62, 65, 70, 72, 78, 80, 85]} width={80} height={20} color="#176FEB" className="mt-2" />
                 </div>
                 {/* Satisfaction */}
-                <div className="rounded-xl border border-[#E5E7EB] p-4">
+                <div className="rounded-xl border border-border p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-[#94A3B8] mb-1">Satisfaction</p>
                   <p className="text-2xl font-bold text-brand-graphite">{(satisfaction / 10).toFixed(1)}/5.0</p>
                   <div className="flex gap-0.5 mt-2">
@@ -95,7 +95,7 @@ export function DashboardProof() {
               </div>
 
               {/* Mini bar chart */}
-              <div className="rounded-xl border border-[#E5E7EB] p-4">
+              <div className="rounded-xl border border-border p-4">
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-sm font-semibold text-brand-graphite">Monthly Revenue by Property</p>
                   <span className="text-xs text-[#94A3B8]">Last 6 months</span>
@@ -104,7 +104,7 @@ export function DashboardProof() {
                   {[45, 62, 58, 75, 82, 90].map((val, i) => (
                     <div key={i} className="flex-1 flex flex-col items-center gap-1">
                       <motion.div
-                        className="w-full rounded-t-sm bg-gradient-to-t from-[#0B5AD4] to-[#176FEB]"
+                        className="w-full rounded-t-sm bg-gradient-to-t from-brand-blue-dark to-brand-blue"
                         initial={{ height: 0 }}
                         animate={inView ? { height: `${val}%` } : { height: 0 }}
                         transition={{ duration: 0.8, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}

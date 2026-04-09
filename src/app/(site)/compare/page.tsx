@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
+import { heroStagger, fadeUp } from '@/lib/motion'
 
 const categories = [
   'All',
@@ -115,20 +116,6 @@ const badgeColors: Record<Exclude<Category, 'All'>, string> = {
   Maintenance: 'bg-[#F5F6F8] text-[#555860]',
   Communications: 'bg-[#F5F6F8] text-[#555860]',
   Screening: 'bg-[#F5F6F8] text-[#555860]',
-}
-
-const heroStagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
-}
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 10 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
-  },
 }
 
 export default function ComparePage() {

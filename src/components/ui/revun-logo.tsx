@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 interface RevunLogoProps {
-  /** Height class — e.g. "h-8", "h-9", "h-7" */
+  /** Height class - e.g. "h-8", "h-9", "h-7" */
   size?: string
   /** Wrap in a Link to "/" */
   linked?: boolean
@@ -11,7 +11,7 @@ interface RevunLogoProps {
 }
 
 /**
- * Revun brand logo — uses the exact Revun Logo.png (Instrument Sans Bold,
+ * Revun brand logo - uses the exact Revun Logo.png (Instrument Sans Bold,
  * white text on blue background). Single source of truth for every logo
  * placement across the site.
  */

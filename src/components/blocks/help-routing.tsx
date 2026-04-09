@@ -3,15 +3,11 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
+import { PoweredByIcon, SelfManageIcon } from '@/lib/feature-icons'
 
 const paths = [
   {
-    icon: (
-      <svg className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-        <rect x="4" y="2" width="16" height="20" rx="1" />
-        <path d="M9 22V18h6v4M9 6h.01M15 6h.01M9 10h.01M15 10h.01M9 14h.01M15 14h.01" />
-      </svg>
-    ),
+    icon: PoweredByIcon,
     eyebrow: 'Powered by Revun',
     title: 'Using Revun through your property manager?',
     description:
@@ -19,15 +15,9 @@ const paths = [
     cta: 'Learn about Powered by Revun',
     href: '/support/powered-by-revun/',
     bgClass: 'bg-[#E8F2FE]',
-    iconBgClass: 'bg-brand-blue/10 text-brand-blue',
   },
   {
-    icon: (
-      <svg className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z" />
-        <path d="M9 21V12h6v9" />
-      </svg>
-    ),
+    icon: SelfManageIcon,
     eyebrow: 'Self-Manage',
     title: 'Managing your own property with Revun?',
     description:
@@ -35,7 +25,6 @@ const paths = [
     cta: 'Get Self-Manage Support',
     href: '/support/self-manage/',
     bgClass: 'bg-[#F0FFF4]',
-    iconBgClass: 'bg-brand-success/10 text-brand-success',
   },
 ]
 
@@ -69,11 +58,11 @@ export function HelpRouting() {
             <motion.div
               key={path.title}
               variants={revealItem}
-              className="group relative overflow-hidden rounded-xl border border-[#E5E7EB] bg-white transition-all duration-200 hover:border-brand-blue/20 hover:shadow-card-hover"
+              className="group relative overflow-hidden rounded-xl border border-border bg-white transition-all duration-200 hover:border-brand-blue/20 hover:shadow-card-hover"
             >
               <div className={`${path.bgClass} px-8 py-6`}>
-                <div className={`mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl ${path.iconBgClass}`}>
-                  {path.icon}
+                <div className="mb-4">
+                  <path.icon className="h-14 w-14" />
                 </div>
                 <p className="text-xs font-heading font-semibold uppercase tracking-wider text-[#94A3B8]">
                   {path.eyebrow}
@@ -83,7 +72,7 @@ export function HelpRouting() {
                 </h3>
               </div>
               <div className="px-8 py-6">
-                <p className="text-sm leading-relaxed text-[#555860]">
+                <p className="text-sm leading-relaxed text-brand-graphite-mid">
                   {path.description}
                 </p>
                 <Link

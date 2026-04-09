@@ -5,9 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ChevronDown, Home, Building2, Handshake, FileText, Wrench, TrendingUp, Layers, Sparkles, Calendar, Wallet, Plug, MapPin } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import { MobileMenu } from './mobile-menu'
 import { RevunLogo } from '@/components/ui/revun-logo'
+import { iconMap } from '@/lib/icon-map'
+import { dropdownVariants, itemVariants } from '@/lib/motion'
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -90,46 +92,57 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Resources', children: RESOURCES_ITEMS },
 ]
 
-// ─── Animation variants ──────────────────────────────────────────────────────
+// ─── Reusable dropdown item with icon ───────────────────────────────────────
 
-const dropdownVariants = {
-  hidden: { opacity: 0, y: 8, scale: 0.98 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.2,
-      ease: [0.25, 0.46, 0.45, 0.94] as const as [number, number, number, number],
-      staggerChildren: 0.04,
-      delayChildren: 0.06,
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: 4,
-    scale: 0.98,
-    transition: { duration: 0.15, ease: 'easeIn' as const },
-  },
+function DropdownItem({ item, onClose }: { item: NavChild; onClose: () => void }) {
+  const Icon = item.icon ? iconMap[item.icon] : null
+  return (
+    <motion.div variants={itemVariants}>
+      <Link
+        href={item.href}
+        className="group/card flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-brand-off-white"
+        role="menuitem"
+        onClick={onClose}
+      >
+        {Icon && (
+          <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-blue/8 text-brand-blue transition-colors group-hover/card:bg-brand-blue/12">
+            <Icon className="h-5 w-5" />
+          </span>
+        )}
+        <div className="min-w-0">
+          <p className="text-sm font-heading font-semibold text-brand-graphite group-hover/card:text-brand-blue transition-colors">
+            {item.label}
+          </p>
+          <p className="mt-0.5 text-xs text-brand-graphite-mid leading-relaxed">
+            {item.description}
+          </p>
+        </div>
+      </Link>
+    </motion.div>
+  )
 }
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 6 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.2 } },
-  exit: { opacity: 0, transition: { duration: 0.1 } },
-}
+// ─── Reusable simple dropdown item (no icon) ────────────────────────────────
 
-// ─── Logo ────────────────────────────────────────────────────────────────────
-
-function Logo() {
-  return <RevunLogo size="h-8" />
+function SimpleDropdownItem({ item, onClose }: { item: NavChild; onClose: () => void }) {
+  return (
+    <motion.div variants={itemVariants}>
+      <Link
+        href={item.href}
+        className="flex flex-col rounded-lg px-3 py-2.5 transition-colors hover:bg-brand-off-white"
+        role="menuitem"
+        onClick={onClose}
+      >
+        <span className="text-sm font-heading font-semibold text-brand-graphite">
+          {item.label}
+        </span>
+        <span className="text-xs text-brand-graphite-mid">{item.description}</span>
+      </Link>
+    </motion.div>
+  )
 }
 
 // ─── Mega menu: Solutions ────────────────────────────────────────────────────
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Home, Building2, Handshake, FileText, Wrench, TrendingUp, Layers, Sparkles, Calendar, Wallet, Plug, MapPin,
-}
 
 function SolutionsMegaMenu({ onClose }: { onClose: () => void }) {
   return (
@@ -138,7 +151,7 @@ function SolutionsMegaMenu({ onClose }: { onClose: () => void }) {
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="absolute left-1/2 top-full mt-2 w-[680px] -translate-x-1/2 rounded-xl border border-[#E5E7EB] bg-white p-5"
+      className="absolute left-1/2 top-full mt-2 w-[680px] -translate-x-1/2 rounded-xl border border-border bg-white p-5"
       role="menu"
       onKeyDown={(e) => e.key === 'Escape' && onClose()}
     >
@@ -156,26 +169,7 @@ function SolutionsMegaMenu({ onClose }: { onClose: () => void }) {
       </div>
       <div className="grid grid-cols-2 gap-1">
         {SOLUTIONS_ITEMS.map((item) => (
-          <motion.div key={item.href} variants={itemVariants}>
-            <Link
-              href={item.href}
-              className="group/card flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-[#F5F6F8]"
-              role="menuitem"
-              onClick={onClose}
-            >
-              <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-blue/8 text-brand-blue transition-colors group-hover/card:bg-brand-blue/12">
-                {item.icon && iconMap[item.icon] && (() => { const Icon = iconMap[item.icon!]; return <Icon className="h-5 w-5" /> })()}
-              </span>
-              <div className="min-w-0">
-                <p className="text-sm font-heading font-semibold text-brand-graphite group-hover/card:text-brand-blue transition-colors">
-                  {item.label}
-                </p>
-                <p className="mt-0.5 text-xs text-[#555860] leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            </Link>
-          </motion.div>
+          <DropdownItem key={item.href} item={item} onClose={onClose} />
         ))}
       </div>
     </motion.div>
@@ -191,32 +185,13 @@ function PlatformDropdown({ onClose }: { onClose: () => void }) {
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="absolute left-1/2 top-full mt-2 w-[360px] -translate-x-1/2 rounded-xl border border-[#E5E7EB] bg-white p-4"
+      className="absolute left-1/2 top-full mt-2 w-[360px] -translate-x-1/2 rounded-xl border border-border bg-white p-4"
       role="menu"
       onKeyDown={(e) => e.key === 'Escape' && onClose()}
     >
       <div className="space-y-1">
         {PLATFORM_ITEMS.map((item) => (
-          <motion.div key={item.href} variants={itemVariants}>
-            <Link
-              href={item.href}
-              className="group/card flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-[#F5F6F8]"
-              role="menuitem"
-              onClick={onClose}
-            >
-              <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-blue/8 text-brand-blue transition-colors group-hover/card:bg-brand-blue/12">
-                {item.icon && iconMap[item.icon] && (() => { const Icon = iconMap[item.icon!]; return <Icon className="h-5 w-5" /> })()}
-              </span>
-              <div className="min-w-0">
-                <p className="text-sm font-heading font-semibold text-brand-graphite group-hover/card:text-brand-blue transition-colors">
-                  {item.label}
-                </p>
-                <p className="mt-0.5 text-xs text-[#555860] leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            </Link>
-          </motion.div>
+          <DropdownItem key={item.href} item={item} onClose={onClose} />
         ))}
       </div>
     </motion.div>
@@ -232,24 +207,12 @@ function ResourcesDropdown({ onClose }: { onClose: () => void }) {
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="absolute left-1/2 top-full mt-2 w-[280px] -translate-x-1/2 rounded-xl border border-[#E5E7EB] bg-white p-2"
+      className="absolute left-1/2 top-full mt-2 w-[280px] -translate-x-1/2 rounded-xl border border-border bg-white p-2"
       role="menu"
       onKeyDown={(e) => e.key === 'Escape' && onClose()}
     >
       {RESOURCES_ITEMS.map((item) => (
-        <motion.div key={item.href} variants={itemVariants}>
-          <Link
-            href={item.href}
-            className="flex flex-col rounded-lg px-3 py-2.5 transition-colors hover:bg-[#F5F6F8]"
-            role="menuitem"
-            onClick={onClose}
-          >
-            <span className="text-sm font-heading font-semibold text-brand-graphite">
-              {item.label}
-            </span>
-            <span className="text-xs text-[#555860]">{item.description}</span>
-          </Link>
-        </motion.div>
+        <SimpleDropdownItem key={item.href} item={item} onClose={onClose} />
       ))}
     </motion.div>
   )
@@ -296,13 +259,9 @@ function DesktopNavItem({
     }
   }
 
-  const textColor = scrolled
-    ? isActive
-      ? 'text-brand-blue'
-      : 'text-[#334155] hover:text-brand-graphite'
-    : isActive
-      ? 'text-brand-blue'
-      : 'text-[#334155] hover:text-brand-graphite'
+  const textColor = isActive
+    ? 'text-brand-blue'
+    : 'text-[#334155] hover:text-brand-graphite'
 
   if (hasChildren) {
     return (
@@ -359,17 +318,12 @@ function DesktopNavItem({
 
 // ─── CTA cluster ─────────────────────────────────────────────────────────────
 
-function CTACluster({ scrolled }: { scrolled: boolean }) {
+function CTACluster() {
   return (
     <div className="hidden items-center gap-2 lg:flex">
       <Link
         href="/login/"
-        className={cn(
-          'rounded-lg px-3.5 py-2 text-sm font-medium transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring',
-          scrolled
-            ? 'text-[#555860] hover:text-brand-graphite hover:bg-[#F5F6F8]'
-            : 'text-[#555860] hover:text-brand-graphite hover:bg-[#F5F6F8]'
-        )}
+        className="rounded-lg px-3.5 py-2 text-sm font-medium transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring text-brand-graphite-mid hover:text-brand-graphite hover:bg-brand-off-white"
       >
         Log In
       </Link>
@@ -385,8 +339,6 @@ function CTACluster({ scrolled }: { scrolled: boolean }) {
 
 // ─── Header (main export) ────────────────────────────────────────────────────
 
-// Pages with dark hero backgrounds where white header text works.
-// All other pages get dark header text immediately.
 const DARK_HERO_PAGES = [
   '/ca/',
   '/us/',
@@ -406,16 +358,19 @@ const DARK_HERO_PAGES = [
   '/powered-by-revun/',
 ]
 
+const DARK_HERO_PREFIXES = [
+  '/solutions/',
+  '/compare/',
+  '/integrations/',
+  '/ca/',
+  '/us/',
+  '/support/',
+  '/use-cases/',
+]
+
 function hasDarkHero(pathname: string): boolean {
   if (DARK_HERO_PAGES.includes(pathname)) return true
-  if (pathname.startsWith('/solutions/')) return true
-  if (pathname.startsWith('/compare/')) return true
-  if (pathname.startsWith('/integrations/')) return true
-  if (pathname.startsWith('/ca/')) return true
-  if (pathname.startsWith('/us/')) return true
-  if (pathname.startsWith('/support/')) return true
-  if (pathname.startsWith('/use-cases/')) return true
-  return false
+  return DARK_HERO_PREFIXES.some((prefix) => pathname.startsWith(prefix))
 }
 
 export function Header() {
@@ -435,7 +390,6 @@ export function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [forceDarkText])
 
-  // Close dropdowns on Escape anywhere
   const handleGlobalKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') setOpenDropdown(null)
   }, [])
@@ -448,17 +402,15 @@ export function Header() {
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all duration-300',
+        'fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-300',
         scrolled
-          ? 'border-b border-border bg-white/80 backdrop-blur-xl'
-          : 'bg-transparent'
+          ? 'border-b border-border bg-white/95 backdrop-blur-sm'
+          : 'bg-transparent border-b border-transparent'
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Logo */}
-        <Logo />
+        <RevunLogo size="h-8" />
 
-        {/* Desktop navigation */}
         <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Main navigation">
           {NAV_ITEMS.map((item) => (
             <DesktopNavItem
@@ -471,10 +423,7 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Desktop CTAs */}
-        <CTACluster scrolled={scrolled} />
-
-        {/* Mobile menu trigger + sheet */}
+        <CTACluster />
         <MobileMenu scrolled={scrolled} />
       </div>
     </header>

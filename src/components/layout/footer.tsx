@@ -108,11 +108,11 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#F5F6F8] border-t border-[#E5E7EB]">
+    <footer className="bg-brand-off-white border-t border-border">
       {/* Main footer */}
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Top: brand + newsletter */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pb-12 border-b border-[#E5E7EB]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pb-12 border-b border-border">
           <div className="max-w-md">
             <RevunLogo size="h-8" />
             <p className="mt-4 text-sm leading-relaxed text-[#64748B]">
@@ -131,7 +131,7 @@ export function Footer() {
               <div className="mt-4 flex gap-2">
                 <Link
                   href="/contact/"
-                  className="inline-flex items-center gap-1.5 rounded-lg bg-[#176FEB] px-4 py-2 text-sm font-semibold text-white hover:bg-[#1260CC] transition-colors focus:outline-none focus:ring-2 focus:ring-[#176FEB] focus:ring-offset-2 focus:ring-offset-[#F5F6F8]"
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-brand-blue px-4 py-2 text-sm font-semibold text-white hover:bg-[#1260CC] transition-colors focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 focus:ring-offset-brand-off-white"
                 >
                   Get in Touch
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -152,9 +152,9 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-[#E5E7EB]">
+      <div className="border-t border-border">
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-[#555860]">
+          <p className="text-sm text-brand-graphite-mid">
             &copy; 2026 Revun. All rights reserved.
           </p>
 
@@ -180,7 +180,7 @@ export function Footer() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#555860] hover:text-[#0A1628] transition-colors duration-150"
+                className="text-brand-graphite-mid hover:text-[#0A1628] transition-colors duration-150"
                 aria-label={item.label}
               >
                 <item.icon className="h-5 w-5" />

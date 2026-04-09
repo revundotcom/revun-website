@@ -19,6 +19,7 @@ import {
   Puzzle,
 } from 'lucide-react'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
+import { getIntegrationIcon } from '@/lib/integration-icons'
 import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
 import { buildBreadcrumbSchema, buildHowToSchema, buildWebPageSchema } from '@/lib/schema-builders'
 
@@ -347,14 +348,18 @@ export default function HowRevunWorksPage() {
 
           <RevealOnScroll stagger={0.06}>
             <div className="mx-auto grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-              {integrations.map((name) => (
-                <div
-                  key={name}
-                  className="flex h-16 items-center justify-center rounded-xl border border-[#D3D5DB] bg-white text-sm font-medium text-[#555860] transition hover:border-[#176FEB]/40"
-                >
-                  {name}
-                </div>
-              ))}
+              {integrations.map((name) => {
+                const Logo = getIntegrationIcon(name)
+                return (
+                  <div
+                    key={name}
+                    className="flex h-20 flex-col items-center justify-center gap-2 rounded-xl border border-[#D3D5DB] bg-white text-sm font-medium text-[#555860] transition hover:border-[#176FEB]/40 hover:shadow-sm"
+                  >
+                    <Logo className="h-8 w-8 shrink-0" />
+                    <span className="text-xs font-semibold">{name}</span>
+                  </div>
+                )
+              })}
             </div>
 
             <div className="mt-10 text-center">
