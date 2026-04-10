@@ -338,30 +338,30 @@ export function CoveragePageClient() {
   return (
     <>
       {/* ────────────────────── HERO ────────────────────── */}
-      <section className="relative overflow-hidden bg-[#0A1628] pb-20 pt-32 md:pt-40">
+      <section className="relative overflow-hidden bg-[#F5F6F8] pb-20 pt-32 md:pt-40">
         {/* Ambient blobs */}
-        <div className="absolute -right-40 top-10 h-[500px] w-[500px] rounded-full bg-[#176FEB]/[0.08] blur-[120px]" aria-hidden="true" />
-        <div className="absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-[#4A91F0]/[0.06] blur-[100px]" aria-hidden="true" />
+        <div className="absolute -right-40 top-10 h-[500px] w-[500px] rounded-full bg-[#176FEB]/[0.04] blur-[120px]" aria-hidden="true" />
+        <div className="absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-[#4A91F0]/[0.03] blur-[100px]" aria-hidden="true" />
 
         {/* Grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(23,111,235,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(23,111,235,0.03)_1px,transparent_1px)] bg-[size:48px_48px]" aria-hidden="true" />
 
-        <div ref={heroRef} className="relative mx-auto max-w-7xl px-6">
+        <div ref={heroRef} className="relative mx-auto max-w-6xl px-6">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Left: text */}
             <div>
               <motion.div
-                className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5"
+                className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-4 py-1.5"
                 initial={{ opacity: 0, y: 12 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, ease }}
               >
                 <span className="h-2 w-2 rounded-full bg-[#22C55E] animate-pulse" />
-                <span className="text-xs font-medium text-white/70">All 10 Canadian provinces live</span>
+                <span className="text-xs font-medium text-[#555860]">All 10 Canadian provinces live</span>
               </motion.div>
 
               <motion.h1
-                className="font-display text-4xl font-normal text-white md:text-5xl lg:text-6xl"
+                className="font-display text-4xl font-normal text-[#0A1628] md:text-5xl lg:text-6xl"
                 initial={{ opacity: 0, y: 16 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.1, ease }}
@@ -371,7 +371,7 @@ export function CoveragePageClient() {
               </motion.h1>
 
               <motion.p
-                className="mt-5 max-w-lg text-base leading-relaxed text-white/60 sm:text-lg"
+                className="mt-5 max-w-lg text-base leading-relaxed text-[#555860] sm:text-lg"
                 initial={{ opacity: 0, y: 16 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2, ease }}
@@ -392,10 +392,10 @@ export function CoveragePageClient() {
                   { value: 6, suffix: '', label: 'Regulatory Boards' },
                 ].map((stat, i) => (
                   <div key={stat.label}>
-                    <p className="font-heading text-3xl font-bold text-white md:text-4xl">
+                    <p className="font-heading text-3xl font-bold text-[#0A1628] md:text-4xl">
                       <AnimatedNumber target={stat.value} suffix={stat.suffix} inView={heroInView} delay={0.5 + i * 0.15} />
                     </p>
-                    <p className="mt-1 text-sm text-white/40">{stat.label}</p>
+                    <p className="mt-1 text-sm text-[#555860]">{stat.label}</p>
                   </div>
                 ))}
               </motion.div>
@@ -415,7 +415,7 @@ export function CoveragePageClient() {
                 </Link>
                 <Link
                   href="/ca/"
-                  className="inline-flex h-12 items-center gap-2 rounded-xl border border-white/15 px-7 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-white/5"
+                  className="inline-flex h-12 items-center gap-2 rounded-xl border border-[#E5E7EB] px-7 text-sm font-semibold text-[#0A1628] transition-all hover:-translate-y-0.5 hover:bg-[#176FEB]/5"
                 >
                   Explore Canada <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -435,8 +435,8 @@ export function CoveragePageClient() {
       </section>
 
       {/* ────────────────────── COVERAGE TABS ────────────────────── */}
-      <section ref={mapRef} className="bg-white py-14 lg:py-20">
-        <div className="mx-auto max-w-7xl px-6">
+      <section ref={mapRef} className="bg-white py-16 md:py-20 lg:py-20">
+        <div className="mx-auto max-w-6xl px-6">
           <RevealOnScroll className="mx-auto max-w-2xl text-center" stagger={0.1}>
             <motion.p variants={revealItem} className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
               Where We Operate
@@ -577,8 +577,8 @@ export function CoveragePageClient() {
       </section>
 
       {/* ────────────────────── WHY COMPLIANCE MATTERS ────────────────────── */}
-      <section className="bg-[#F5F6F8] py-14 lg:py-20">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="bg-[#F5F6F8] py-16 md:py-20 lg:py-20">
+        <div className="mx-auto max-w-6xl px-6">
           <RevealOnScroll className="mx-auto max-w-2xl text-center" stagger={0.1}>
             <motion.p variants={revealItem} className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
               Why It Matters
@@ -613,8 +613,8 @@ export function CoveragePageClient() {
       </section>
 
       {/* ────────────────────── PROVINCIAL COMPLIANCE DETAIL ────────────────────── */}
-      <section className="bg-white py-14 lg:py-20">
-        <div ref={complianceRef} className="mx-auto max-w-7xl px-6">
+      <section className="bg-white py-16 md:py-20 lg:py-20">
+        <div ref={complianceRef} className="mx-auto max-w-6xl px-6">
           <RevealOnScroll className="mb-12" stagger={0.1}>
             <motion.p variants={revealItem} className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
               Compliance by Province
@@ -645,21 +645,21 @@ export function CoveragePageClient() {
       </section>
 
       {/* ────────────────────── CTA ────────────────────── */}
-      <section className="relative overflow-hidden bg-[#0A1628] py-16 lg:py-20">
-        <div className="absolute -right-20 top-0 h-[400px] w-[400px] rounded-full bg-[#176FEB]/[0.08] blur-[120px]" aria-hidden="true" />
-        <div className="absolute -left-20 bottom-0 h-[300px] w-[300px] rounded-full bg-[#4A91F0]/[0.06] blur-[100px]" aria-hidden="true" />
+      <section className="relative overflow-hidden bg-[#F5F6F8] py-16 lg:py-20">
+        <div className="absolute -right-20 top-0 h-[400px] w-[400px] rounded-full bg-[#176FEB]/[0.04] blur-[120px]" aria-hidden="true" />
+        <div className="absolute -left-20 bottom-0 h-[300px] w-[300px] rounded-full bg-[#4A91F0]/[0.03] blur-[100px]" aria-hidden="true" />
 
         <RevealOnScroll className="relative mx-auto max-w-3xl px-6 text-center" stagger={0.1}>
           <motion.h2
             variants={revealItem}
-            className="font-display text-3xl font-normal text-white md:text-4xl lg:text-5xl"
+            className="font-display text-3xl font-normal text-[#0A1628] md:text-4xl lg:text-5xl"
           >
             Operating in a province or state{' '}
             <span className="text-[#4A91F0]">not listed</span>?
           </motion.h2>
           <motion.p
             variants={revealItem}
-            className="mx-auto mt-4 max-w-lg text-base text-white/60"
+            className="mx-auto mt-4 max-w-lg text-base text-[#555860]"
           >
             We are expanding coverage across North America. Contact us for early access or to request your jurisdiction.
           </motion.p>
@@ -675,7 +675,7 @@ export function CoveragePageClient() {
             </Link>
             <Link
               href="/demo/"
-              className="inline-flex h-12 items-center gap-2 rounded-xl border border-white/15 px-7 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-white/5"
+              className="inline-flex h-12 items-center gap-2 rounded-xl border border-[#E5E7EB] px-7 text-sm font-semibold text-[#0A1628] transition-all hover:-translate-y-0.5 hover:bg-[#176FEB]/5"
             >
               Book a Demo <ArrowRight className="h-4 w-4" />
             </Link>

@@ -42,7 +42,7 @@ export function IntegrationLogos() {
 
   return (
     <section className="relative bg-white py-12 md:py-16">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-6xl px-6">
         <RevealOnScroll className="text-center">
           <motion.p
             variants={revealItem}

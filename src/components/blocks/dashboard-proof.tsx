@@ -17,7 +17,7 @@ export function DashboardProof() {
 
   return (
     <section className="bg-brand-off-white py-12 md:py-16">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-6xl px-6">
         {/* Section header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-3 py-1 text-xs font-semibold mb-4">

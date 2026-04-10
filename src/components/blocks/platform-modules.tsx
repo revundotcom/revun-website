@@ -106,8 +106,8 @@ export function PlatformModules() {
   const selected = modules[active]
 
   return (
-    <section className="bg-white py-14">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="bg-white py-16 md:py-20">
+      <div className="mx-auto max-w-6xl px-6">
         <RevealOnScroll className="mb-12 text-center" stagger={0.12}>
           <motion.p variants={revealItem} className="mb-3 text-sm font-heading font-semibold uppercase tracking-widest text-brand-blue">
             Core Modules

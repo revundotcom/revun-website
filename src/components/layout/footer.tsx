@@ -2,15 +2,15 @@ import Link from 'next/link'
 import { RevunLogo } from '@/components/ui/revun-logo'
 
 const navigation = {
-  platform: {
-    title: 'Platform',
+  product: {
+    title: 'Product',
     links: [
       { label: 'Platform Overview', href: '/platform/' },
       { label: 'Features', href: '/features/' },
       { label: 'Pricing', href: '/pricing/' },
       { label: 'Integrations', href: '/integrations/' },
       { label: 'Compare', href: '/compare/' },
-      { label: 'Coverage', href: '/coverage/' },
+      { label: 'Industries', href: '/industries/' },
     ],
   },
   solutions: {
@@ -22,6 +22,7 @@ const navigation = {
       { label: 'Leasing', href: '/solutions/leasing-companies/' },
       { label: 'Maintenance', href: '/solutions/maintenance-companies/' },
       { label: 'REITs', href: '/solutions/reits/' },
+      { label: 'Tenants', href: '/tenants/' },
     ],
   },
   resources: {
@@ -29,8 +30,8 @@ const navigation = {
     links: [
       { label: 'Help Center', href: '/help/' },
       { label: 'Resources', href: '/resources/' },
-      { label: 'How Revun Works', href: '/how-revun-works/' },
-      { label: 'What is Revun', href: '/what-is-revun/' },
+      { label: 'How It Works', href: '/how-revun-works/' },
+      { label: 'Why Revun', href: '/why-revun/' },
       { label: 'Download', href: '/download/' },
       { label: 'Events', href: '/events/' },
     ],
@@ -41,7 +42,7 @@ const navigation = {
       { label: 'About', href: '/about/' },
       { label: 'Contact', href: '/contact/' },
       { label: 'Investment', href: '/investment/' },
-      { label: 'Demo', href: '/demo/' },
+      { label: 'Book Demo', href: '/demo/' },
       { label: 'Support', href: '/support/' },
     ],
   },
@@ -116,7 +117,7 @@ export function Footer() {
           <div className="max-w-md">
             <RevunLogo size="h-8" />
             <p className="mt-4 text-sm leading-relaxed text-[#64748B]">
-              Property management infrastructure for Canada and the United States.
+              The infrastructure layer for modern property operations. Leasing, payments, maintenance, compliance, communications, accounting, and reporting — one system.
             </p>
           </div>
 
@@ -187,6 +188,15 @@ export function Footer() {
               </a>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Disclaimer */}
+      <div className="border-t border-border">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <p className="text-xs text-[#94A3B8] leading-relaxed text-center">
+            Revun is a software and infrastructure platform used by property operators. The operating company remains responsible for the services it provides.
+          </p>
         </div>
       </div>
     </footer>

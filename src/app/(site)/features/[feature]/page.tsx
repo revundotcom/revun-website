@@ -93,54 +93,16 @@ const featureData: Record<string, FeatureData> = {
       { number: '03', title: 'Resolved and documented', description: 'Vendor completes the work, uploads proof, and the tenant confirms resolution.' },
     ],
   },
-  'lease-management': {
-    title: 'Lease Management',
-    metaTitle: 'Digital Lease Management for Canadian Properties',
-    metaDescription:
-      'Province-specific lease templates, electronic signatures, automated renewals, and compliance tracking for LTB, RTB, TAL, and RTDRS.',
-    iconName: 'FileText',
-    heroDescription:
-      'Generate leases from province-specific templates, collect electronic signatures, and automate renewals. Built-in compliance for LTB, RTB, TAL, and RTDRS.',
-    capabilities: [
-      { title: 'Provincial Templates', description: 'Pre-built lease templates compliant with Ontario (LTB), BC (RTB), Quebec (TAL), Alberta (RTDRS), and more.' },
-      { title: 'E-Signatures', description: 'Legally binding electronic signatures for landlords and tenants. DocuSign integration included.' },
-      { title: 'Automated Renewals', description: 'Track lease expiries, send renewal notices on schedule, and generate new agreements automatically.' },
-      { title: 'Compliance Tracking', description: 'Built-in deadline tracking for notices, rent increases, and regulatory filings by jurisdiction.' },
-    ],
-    steps: [
-      { number: '01', title: 'Select your template', description: 'Choose from province-specific lease templates that are pre-populated with your property data.' },
-      { number: '02', title: 'Customize and send', description: 'Add custom clauses, set terms, and send for electronic signature to your tenants.' },
-      { number: '03', title: 'Auto-manage lifecycle', description: 'Revun tracks expiries, sends renewal notices, and generates new leases automatically.' },
-    ],
-  },
-  accounting: {
-    title: 'Accounting & Reporting',
-    metaTitle: 'Property Management Accounting Software',
-    metaDescription:
-      'Real-time financial reporting, automated reconciliation, tax-ready statements, and owner disbursements. Integrates with QuickBooks and Xero.',
-    iconName: 'BarChart3',
-    heroDescription:
-      'Real-time financial dashboards, automated bank reconciliation, tax-ready reporting, and one-click owner disbursements. Integrates with QuickBooks and Xero.',
-    capabilities: [
-      { title: 'Real-Time Dashboards', description: 'Revenue, expenses, NOI, and cash flow updated in real-time across your entire portfolio.' },
-      { title: 'Bank Reconciliation', description: 'Automated matching of bank transactions to ledger entries. Exceptions flagged for review.' },
-      { title: 'Tax-Ready Reports', description: 'Generate T4A slips, expense summaries, and capital cost allowance reports for CRA compliance.' },
-      { title: 'Owner Disbursements', description: 'Automated owner payments with detailed statements showing income, expenses, and management fees.' },
-    ],
-    steps: [
-      { number: '01', title: 'Connect your accounts', description: 'Link bank accounts and integrate with QuickBooks or Xero for automatic data sync.' },
-      { number: '02', title: 'Track automatically', description: 'Income and expenses are categorized and reconciled in real-time as transactions flow in.' },
-      { number: '03', title: 'Report and disburse', description: 'Generate reports, send owner statements, and process disbursements with one click.' },
-    ],
-  },
+  /* lease-management redirects to /features/leasing/ which has the full rich page */
+  /* accounting redirects to /features/accounting/ which has the full rich page */
   'owner-portal': {
     title: 'Owner Portal',
     metaTitle: 'Property Owner Portal Software',
     metaDescription:
-      'Transparent owner dashboards with real-time occupancy, revenue tracking, expense reports, and document access. White-label ready for property managers.',
+      'Clear owner dashboards with real-time occupancy, revenue tracking, expense reports, and document access. White-label ready for property managers.',
     iconName: 'BookOpen',
     heroDescription:
-      'Give property owners transparent, real-time access to occupancy rates, revenue, expenses, and documents. White-label ready for your brand.',
+      'Give property owners clear, real-time access to occupancy rates, revenue, expenses, and documents. White-label ready for your brand.',
     capabilities: [
       { title: 'Real-Time Dashboard', description: 'Owners see occupancy, revenue, maintenance status, and tenant information updated in real-time.' },
       { title: 'Financial Transparency', description: 'Income statements, expense breakdowns, and management fee details available on demand.' },
@@ -151,6 +113,88 @@ const featureData: Record<string, FeatureData> = {
       { number: '01', title: 'Invite your owners', description: 'Send owner invitations with one click. They create accounts and access their portal instantly.' },
       { number: '02', title: 'Owners self-serve', description: 'Owners view financials, download reports, and access documents without calling your office.' },
       { number: '03', title: 'Build trust automatically', description: 'Real-time transparency builds owner confidence and reduces support requests by up to 60%.' },
+    ],
+  },
+  communications: {
+    title: 'Communications',
+    metaTitle: 'Secure Property Communications Platform | Revun',
+    metaDescription:
+      'Encrypted messaging, calling, and video for property operations. Full audit trail, no personal numbers shared. One inbox for owners, tenants, vendors, and applicants.',
+    iconName: 'MessageSquare',
+    heroDescription:
+      'Stop toggling between email, text, and voicemail. Revun deploys encrypted messaging, calling, and video with a full audit trail — every owner, tenant, vendor, and applicant in one unified command center.',
+    capabilities: [
+      { title: 'Unified Inbox', description: 'Every conversation with owners, tenants, vendors, and applicants in one place — tagged by property, unit, and contact type.' },
+      { title: 'Encrypted Messaging', description: 'End-to-end encrypted messaging with read receipts, delivery status, and full conversation history. No personal phone numbers shared.' },
+      { title: 'Voice & Video Calls', description: 'Call tenants, owners, and vendors directly through the platform. Calls are recorded, logged, and tied to the right property record.' },
+      { title: 'Audit-Ready Documentation', description: 'Every message, call, and file is automatically saved with timestamps — ready for disputes, compliance reviews, or tribunal proceedings.' },
+    ],
+    steps: [
+      { number: '01', title: 'Connect your contacts', description: 'Owners, tenants, vendors, and applicants are automatically linked to their properties and units.' },
+      { number: '02', title: 'Communicate from one inbox', description: 'Send messages, make calls, and share files without leaving the platform or sharing personal contact details.' },
+      { number: '03', title: 'Everything documented', description: 'Full conversation history, call recordings, and file attachments are stored and searchable — no context ever lost.' },
+    ],
+  },
+  maintenance: {
+    title: 'Maintenance Management',
+    metaTitle: 'Property Maintenance Management Software | Revun',
+    metaDescription:
+      'Streamline maintenance requests with tenant portals, vendor routing, work order tracking, and AI-powered priority routing for property managers.',
+    iconName: 'Wrench',
+    heroDescription:
+      'Tenant request portals, AI-powered priority routing, vendor dispatch, and proof-of-completion tracking. From request to resolution in one system.',
+    capabilities: [
+      { title: 'Tenant Request Portal', description: 'Tenants submit requests with photos and descriptions. AI categorizes and prioritizes automatically.' },
+      { title: 'Vendor Routing', description: 'Smart vendor matching based on skill, availability, location, and cost. Automatic dispatch and scheduling.' },
+      { title: 'Work Order Tracking', description: 'Full lifecycle tracking from request to completion with status updates, time logs, and cost tracking.' },
+      { title: 'Proof of Completion', description: 'Before/after photos, tenant sign-off, and invoice capture. Complete audit trail for every job.' },
+    ],
+    steps: [
+      { number: '01', title: 'Tenant submits request', description: 'Tenants describe the issue with photos through the portal. AI categorizes and sets priority.' },
+      { number: '02', title: 'Vendor dispatched', description: 'The right vendor is matched and dispatched automatically based on issue type and location.' },
+      { number: '03', title: 'Resolved and documented', description: 'Vendor completes the work, uploads proof, and the tenant confirms resolution.' },
+    ],
+  },
+  compliance: {
+    title: 'Compliance & Documents',
+    metaTitle: 'Property Compliance & Document Management | Revun',
+    metaDescription:
+      'Automated provincial compliance tracking, lease template generation, notice management, and document vault for Canadian property managers and landlords.',
+    iconName: 'ShieldCheck',
+    heroDescription:
+      'Provincial regulations change quarterly. Revun enforces compliance automatically — lease templates, notice deadlines, regulatory forms, and audit trails updated across all 10 Canadian provinces.',
+    capabilities: [
+      { title: 'Provincial Compliance Engine', description: 'Auto-updated rules for Ontario (LTB), BC (RTB), Quebec (TAL), Alberta (RTDRS), and all other provinces. Never miss a regulatory change.' },
+      { title: 'Document Generation', description: 'Generate province-compliant leases, notices, and forms pre-filled with property and tenant data in seconds.' },
+      { title: 'Deadline Tracking', description: 'Automated tracking of notice periods, rent increase deadlines, and filing requirements by jurisdiction.' },
+      { title: 'Document Vault', description: 'Every lease, notice, inspection report, and compliance document stored, organized, and searchable — tribunal-ready at any time.' },
+    ],
+    steps: [
+      { number: '01', title: 'Select your province', description: 'Revun detects your jurisdiction and loads the correct compliance rules, templates, and deadlines automatically.' },
+      { number: '02', title: 'Generate documents', description: 'Create leases, notices, and forms from province-specific templates — pre-filled with your property data.' },
+      { number: '03', title: 'Stay compliant automatically', description: 'Revun monitors regulatory changes and updates your templates, deadlines, and workflows in real time.' },
+    ],
+  },
+  /* ai-automation has dedicated rich page at /features/ai-automation/ */
+  /* dashboards has dedicated rich page at /features/dashboards/ */
+  'tenant-portal': {
+    title: 'Tenant Portal',
+    metaTitle: 'Self-Service Tenant Portal Software | Revun',
+    metaDescription:
+      'Give tenants a self-service portal for rent payments, maintenance requests, lease documents, and secure communication — accessible 24/7 from any device.',
+    iconName: 'KeyRound',
+    heroDescription:
+      'One secure portal for the entire rental experience. Tenants pay rent, submit maintenance requests, access lease documents, and communicate with their property team — all from one place, on any device.',
+    capabilities: [
+      { title: 'Online Rent Payments', description: 'Tenants pay rent via ACH, credit card, or Interac e-Transfer with auto-reminders and instant receipts.' },
+      { title: 'Maintenance Requests', description: 'Submit and track maintenance requests with photos, status updates, and real-time notifications on progress.' },
+      { title: 'Document Access', description: 'Lease agreements, move-in checklists, notices, and receipts available 24/7 in a secure document vault.' },
+      { title: 'Secure Messaging', description: 'Message the property team directly through the portal — no personal numbers, full conversation history, and read receipts.' },
+    ],
+    steps: [
+      { number: '01', title: 'Tenant receives invite', description: 'New tenants get a portal invitation during onboarding. They set up their account in under 2 minutes.' },
+      { number: '02', title: 'Self-serve everything', description: 'Pay rent, request maintenance, download documents, and message the property team — all from the portal.' },
+      { number: '03', title: 'Stay connected 24/7', description: 'Access the portal from any device, any time. Push notifications keep tenants informed on payments and requests.' },
     ],
   },
 }
@@ -238,8 +282,8 @@ export default async function FeatureDetailPage({
       </section>
 
       {/* Capabilities */}
-      <section className="bg-white py-14">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-6">
           <RevealOnScroll stagger={0.12}>
             <p className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
               Capabilities
@@ -250,19 +294,46 @@ export default async function FeatureDetailPage({
           </RevealOnScroll>
           <RevealOnScroll stagger={0.08}>
             <div className="mt-10 grid gap-6 md:grid-cols-2">
-              {data.capabilities.map((cap) => (
+              {data.capabilities.map((cap, i) => (
                 <div
                   key={cap.title}
-                  className="flex gap-4 rounded-xl border border-[#E5E7EB] p-5 transition-all duration-200 hover:border-[#176FEB]/30 hover:shadow-sm"
+                  className="group relative overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-all duration-300 hover:border-[#176FEB]/30 hover:shadow-card-hover hover:-translate-y-1"
                 >
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#176FEB]" />
-                  <div>
-                    <h3 className="font-heading text-base font-semibold text-[#0A1628]">
-                      {cap.title}
-                    </h3>
-                    <p className="mt-1 text-sm leading-relaxed text-[#555860]">
-                      {cap.description}
-                    </p>
+                  {/* Top gradient accent */}
+                  <div
+                    className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#176FEB] via-[#4A91F0] to-[#176FEB] scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"
+                    aria-hidden="true"
+                  />
+
+                  {/* Corner glow */}
+                  <div
+                    className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-[#176FEB]/[0.05] blur-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                    aria-hidden="true"
+                  />
+
+                  {/* Step number watermark */}
+                  <span
+                    className="absolute top-3 right-4 font-display text-[48px] font-bold leading-none text-[#176FEB]/[0.04] transition-colors duration-300 group-hover:text-[#176FEB]/[0.08] select-none"
+                    aria-hidden="true"
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+
+                  <div className="flex gap-4">
+                    {/* Animated icon container */}
+                    <div className="relative mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center">
+                      <div className="absolute inset-0 rounded-xl bg-[#176FEB]/8 transition-all duration-300 group-hover:bg-[#176FEB]/12 group-hover:scale-110" />
+                      <div className="absolute inset-0 rounded-xl ring-1 ring-[#176FEB]/0 transition-all duration-300 group-hover:ring-[#176FEB]/20" />
+                      <CheckCircle2 className="relative z-10 h-5 w-5 text-[#176FEB] transition-transform duration-300 group-hover:scale-110" />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="font-heading text-base font-semibold text-[#0A1628] transition-colors duration-200 group-hover:text-[#176FEB]">
+                        {cap.title}
+                      </h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-[#555860]">
+                        {cap.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -272,7 +343,7 @@ export default async function FeatureDetailPage({
       </section>
 
       {/* How it works */}
-      <section className="bg-[#F5F6F8] py-14">
+      <section className="bg-[#F5F6F8] py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-6">
           <RevealOnScroll className="text-center" stagger={0.12}>
             <p className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
@@ -308,25 +379,25 @@ export default async function FeatureDetailPage({
       </section>
 
       {/* CTA */}
-      <section className="bg-[#176FEB] py-14">
+      <section className="bg-[#F5F6F8] py-16 md:py-20">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <RevealOnScroll stagger={0.12}>
-            <h2 className="font-heading text-2xl font-bold text-white md:text-3xl">
+            <h2 className="font-heading text-2xl font-bold text-[#0A1628] md:text-3xl">
               Ready to try {data.title}?
             </h2>
-            <p className="mx-auto mt-4 max-w-lg text-base text-white/80">
+            <p className="mx-auto mt-4 max-w-lg text-base text-[#555860]">
               Start your free trial today. No credit card required.
             </p>
             <div className="mt-8 flex items-center justify-center gap-4">
               <Link
                 href="/pricing/"
-                className="inline-flex h-12 items-center justify-center rounded-xl bg-white px-6 text-sm font-semibold text-[#176FEB] transition-colors duration-200 hover:bg-white/90"
+                className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#1260D6]"
               >
                 Start Free Trial
               </Link>
               <Link
                 href="/contact/"
-                className="inline-flex h-12 items-center gap-2 rounded-xl border border-white/20 px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-white/10"
+                className="inline-flex h-12 items-center gap-2 rounded-xl border border-[#E5E7EB] px-6 text-sm font-semibold text-[#0A1628] transition-colors duration-200 hover:bg-[#EAECF0]"
               >
                 Contact Sales <ArrowRight className="h-4 w-4" />
               </Link>

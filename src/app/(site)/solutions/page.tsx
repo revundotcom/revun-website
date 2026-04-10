@@ -10,6 +10,8 @@ import {
   Wrench,
   Landmark,
   ArrowRight,
+  Users,
+  Shield,
 } from 'lucide-react'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 import { heroStagger, fadeUp } from '@/lib/motion'
@@ -23,11 +25,11 @@ const solutions = [
     title: 'Self-Managing',
     titleHighlight: 'Owners',
     description:
-      'List properties, schedule showings, screen tenants, collect rent, and handle maintenance. Everything you need from a single dashboard.',
+      'List units, screen tenants, generate leases, collect rent, manage maintenance, communicate securely, and track everything from one system.',
     highlights: [
       'Listing syndication to Kijiji, Rentals.ca, and more',
-      'Automated rent collection with late-notice triggers',
-      'Maintenance request portal with vendor routing',
+      'Secure rent collection — no personal banking details shared',
+      'Private communications — no personal phone numbers exchanged',
     ],
     cta: 'Explore for Owners',
   },
@@ -37,10 +39,10 @@ const solutions = [
     title: 'Property Management',
     titleHighlight: 'Companies',
     description:
-      'Owner portals, tenant workflows, vendor management, automated compliance, financials, and team coordination. Replace 5+ disconnected tools.',
+      'Owners, tenants, vendors, maintenance, compliance, communications, reporting, leasing, and payments all run through Revun.',
     highlights: [
       'Real-time owner portals with financial dashboards',
-      'Province-specific compliance automation',
+      'Province-specific compliance enforcement',
       'Trust accounting and owner disbursements',
     ],
     cta: 'Explore for PMCs',
@@ -51,11 +53,11 @@ const solutions = [
     title: 'Brokerages',
     titleHighlight: '& Agents',
     description:
-      'CRM, document automation, offer management, showing coordination, and compliance workflows purpose-built for real estate transactions.',
+      'One system for client communication, showing coordination, offer submission, document automation, signatures, compliance, and deal visibility.',
     highlights: [
       'Template-based offer packages with e-signatures',
       'Centralized showing calendar with feedback capture',
-      'FINTRAC and RECO compliance libraries built in',
+      'FINTRAC and RECO compliance infrastructure built in',
     ],
     cta: 'Explore for Brokerages',
   },
@@ -65,11 +67,11 @@ const solutions = [
     title: 'Leasing',
     titleHighlight: 'Companies',
     description:
-      'Applications, offers, lease generation, identity verification, compliance notices, and tenant onboarding. All automated, all auditable.',
+      'From inquiry to application to offer to lease to move-in, Revun runs the full leasing workflow in one place.',
     highlights: [
-      'Branded application portal with screening triggers',
+      'Branded application pipeline with screening triggers',
       'Clause-library lease generation engine',
-      'Automatic N-series and provincial notice delivery',
+      'Automatic N-series and provincial notice enforcement',
     ],
     cta: 'Explore for Leasing',
   },
@@ -79,10 +81,10 @@ const solutions = [
     title: 'Maintenance',
     titleHighlight: 'Companies',
     description:
-      'Work order intake, technician dispatch, scheduling, proof of work, invoicing, and customer communication from one platform.',
+      'One system for dispatch, scheduling, technician updates, approvals, proof of completion, invoicing, and customer communication.',
     highlights: [
-      'Drag-and-drop technician dispatch and GPS tracking',
-      'Before/after photo capture with tenant sign-off',
+      'Drag-and-drop dispatch with GPS tracking and routing',
+      'Proof of completion with photos, signatures, and audit trail',
       'Auto-generated invoices from completed work orders',
     ],
     cta: 'Explore for Maintenance',
@@ -93,13 +95,41 @@ const solutions = [
     title: 'REITs',
     titleHighlight: '& Investors',
     description:
-      'Standardize operations across properties and regions. Role-based access, advanced reporting, API integrations, and custom governance.',
+      'Standardize operating procedures, reporting, permissions, communications, payments, and oversight across your full portfolio.',
     highlights: [
       'Portfolio-wide KPI dashboard with region filters',
       'Granular role-based access with audit logging',
       'Pre-built connectors for Yardi, MRI, and Sage',
     ],
     cta: 'Explore for REITs',
+  },
+  {
+    slug: 'tenants',
+    icon: Users,
+    title: 'Tenant',
+    titleHighlight: 'Portal',
+    description:
+      'Browse listings, apply online, pay rent, submit maintenance requests, communicate securely, and access all documents in one place.',
+    highlights: [
+      'Secure rent payments with automated receipts',
+      'Maintenance requests with photo uploads and status tracking',
+      'Private messaging — no personal phone numbers exchanged',
+    ],
+    cta: 'Explore for Tenants',
+  },
+  {
+    slug: 'internal-ops-teams',
+    icon: Shield,
+    title: 'Internal Ops',
+    titleHighlight: 'Teams',
+    description:
+      'Task management, role-based access, team coordination, internal communications, and full operational visibility in one system.',
+    highlights: [
+      'Task assignment with deadlines and dependency tracking',
+      'Role-based permissions enforced at the system level',
+      'Real-time operational dashboards with zero manual reporting',
+    ],
+    cta: 'Explore for Ops Teams',
   },
 ] as const
 
@@ -141,7 +171,7 @@ export default function SolutionsPage() {
 
       {/* ── Solutions grid ────────────────────────────────────────────── */}
       <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-6xl px-6">
           <RevealOnScroll
             stagger={0.08}
             className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"

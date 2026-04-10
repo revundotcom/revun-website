@@ -139,7 +139,7 @@ export function MobileMenu({ scrolled }: { scrolled: boolean }) {
                 className="flex items-center justify-center rounded-lg bg-brand-blue px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-blue-dark"
                 onClick={() => setOpen(false)}
               >
-                Start Free
+                Get Started
               </Link>
               <Link
                 href="/demo/"

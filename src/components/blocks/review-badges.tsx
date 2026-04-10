@@ -7,7 +7,7 @@ import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 export function ReviewBadges() {
   return (
     <section className="border-y border-[#E5E7EB] bg-[#F5F6F8] py-4">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-6xl px-6">
         <RevealOnScroll className="flex items-center justify-center gap-3">
           <motion.div variants={revealItem} className="flex items-center gap-1">
             {Array.from({ length: 5 }).map((_, i) => (

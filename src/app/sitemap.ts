@@ -38,7 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url('/solutions/'), lastModified: d, changeFrequency: 'weekly', priority: 0.9 },
     ...pages('/solutions/', [
       'self-managing-owners', 'property-management-companies', 'brokerages',
-      'leasing-companies', 'maintenance-companies', 'reits',
+      'leasing-companies', 'maintenance-companies', 'reits', 'tenants', 'internal-ops-teams',
     ], { changeFrequency: 'monthly', priority: 0.8 }),
 
     // ─── Industries ─────────────────────────────────────────────────
@@ -64,6 +64,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       'property-listing', 'showing-scheduling', 'owner-reporting', 'vendor-management',
       'document-automation', 'communication-hub', 'accounting-integration', 'compliance-tracking',
     ], { changeFrequency: 'monthly', priority: 0.7 }),
+
+    // ─── Category Landing Pages ───────────────────────────────────────
+    { url: url('/owner-portal/'), lastModified: d, changeFrequency: 'monthly', priority: 0.8 },
+    { url: url('/property-operations-software/'), lastModified: d, changeFrequency: 'monthly', priority: 0.8 },
+    { url: url('/real-estate-communications-software/'), lastModified: d, changeFrequency: 'monthly', priority: 0.8 },
+    { url: url('/ai-property-management-software/'), lastModified: d, changeFrequency: 'monthly', priority: 0.8 },
+    { url: url('/property-management-operating-system/'), lastModified: d, changeFrequency: 'monthly', priority: 0.8 },
 
     // ─── Tenant / Travel / Relocation ───────────────────────────────
     { url: url('/traveling-tenants/'), lastModified: d, changeFrequency: 'monthly', priority: 0.7 },

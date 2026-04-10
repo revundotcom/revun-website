@@ -83,7 +83,7 @@ const trustSignals = [
 export function ComplianceTrust() {
   return (
     <section className="bg-white py-12 md:py-16">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-6xl px-6">
         {/* ── Header ─────────────────────────────────────────────────── */}
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p

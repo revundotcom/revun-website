@@ -117,7 +117,7 @@ const CORE_MODULES = [
     icon: OwnerPortalIcon,
     title: 'Owner Portal',
     description:
-      'Transparent dashboards with real-time occupancy, revenue tracking, and document access.',
+      'Clear dashboards with real-time occupancy, revenue tracking, and document access.',
     stats: '60%',
     statsLabel: 'Fewer owner calls',
     capabilities: [
@@ -362,8 +362,8 @@ function ModuleCard({
 
 function CoreModulesSection() {
   return (
-    <section className="bg-white py-14 lg:py-20">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="bg-white py-16 md:py-20">
+      <div className="mx-auto max-w-6xl px-6">
         <RevealOnScroll className="mx-auto max-w-2xl text-center" stagger={0.1}>
           <motion.p
             variants={revealItem}
@@ -404,8 +404,8 @@ function WorkflowSection() {
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section className="bg-[#F5F6F8] py-14 lg:py-20">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="bg-[#F5F6F8] py-16 md:py-20">
+      <div className="mx-auto max-w-6xl px-6">
         <RevealOnScroll className="mx-auto max-w-2xl text-center" stagger={0.1}>
           <motion.p
             variants={revealItem}
@@ -496,8 +496,8 @@ function WorkflowSection() {
 
 function PlatformPillarsSection() {
   return (
-    <section className="bg-white py-14 lg:py-20">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="bg-white py-16 md:py-20">
+      <div className="mx-auto max-w-6xl px-6">
         <RevealOnScroll className="mx-auto max-w-2xl text-center" stagger={0.1}>
           <motion.p
             variants={revealItem}
@@ -561,8 +561,8 @@ function PlatformPillarsSection() {
 
 function DifferentiatorsSection() {
   return (
-    <section className="bg-[#F5F6F8] py-14 lg:py-20">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="bg-[#F5F6F8] py-16 md:py-20">
+      <div className="mx-auto max-w-6xl px-6">
         <RevealOnScroll className="mx-auto max-w-2xl text-center" stagger={0.1}>
           <motion.p
             variants={revealItem}
@@ -624,7 +624,7 @@ const COMPARISON_ROWS = [
 
 function ComparisonSection() {
   return (
-    <section className="bg-white py-14 lg:py-20">
+    <section className="bg-white py-16 md:py-20">
       <div className="mx-auto max-w-4xl px-6">
         <RevealOnScroll className="mx-auto max-w-2xl text-center" stagger={0.1}>
           <motion.p
@@ -696,18 +696,18 @@ function ComparisonSection() {
 
 function CTASection() {
   return (
-    <section className="bg-[#0A1628] py-16 lg:py-20">
+    <section className="bg-[#F5F6F8] py-16 lg:py-20">
       <RevealOnScroll className="mx-auto max-w-3xl px-6 text-center" stagger={0.1}>
         <motion.h2
           variants={revealItem}
-          className="font-display text-3xl font-normal text-white md:text-4xl lg:text-5xl"
+          className="font-display text-3xl font-normal text-[#0A1628] md:text-4xl lg:text-5xl"
         >
           Ready to replace your{' '}
           <span className="text-[#4A91F0]">tool stack</span>?
         </motion.h2>
         <motion.p
           variants={revealItem}
-          className="mx-auto mt-4 max-w-xl text-base text-white/70"
+          className="mx-auto mt-4 max-w-xl text-base text-[#555860]"
         >
           Start your free trial today. Import your portfolio, invite your team, and go live in
           minutes - not months.
@@ -724,7 +724,7 @@ function CTASection() {
           </Link>
           <Link
             href="/demo/"
-            className="inline-flex h-12 items-center justify-center rounded-xl border border-white/20 px-8 font-heading text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/5"
+            className="inline-flex h-12 items-center justify-center rounded-xl border border-[#E5E7EB] px-8 font-heading text-sm font-semibold text-[#0A1628] transition-all hover:-translate-y-0.5 hover:border-[#E5E7EB] hover:bg-[#176FEB]/5"
           >
             Book a Demo
           </Link>

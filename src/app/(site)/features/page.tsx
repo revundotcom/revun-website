@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Features | Revun',
     description:
-      'Six core modules that replace fragmented tools with one connected platform for Canadian property management.',
+      'Six core modules that replace fragmented tools with one connected property operations platform.',
     url: buildCanonicalUrl('/features'),
   },
 }

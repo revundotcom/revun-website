@@ -21,14 +21,14 @@ import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
 import { buildBreadcrumbSchema, buildOrganizationSchema, buildWebPageSchema } from '@/lib/schema-builders'
 
 export const metadata: Metadata = {
-  title: 'What Is Revun? | Property Management Operating System',
+  title: 'Why Revun Exists | Property Management Operating System',
   description:
-    'Revun is the property management operating system for Canada and the US. Learn how PMCs, brokerages, maintenance companies, and self-managing owners use Revun as their infrastructure layer.',
+    'Revun exists because property businesses should not need five to ten disconnected systems to run one portfolio. Learn how PMCs, brokerages, maintenance companies, and self-managing owners use Revun as their infrastructure layer.',
   alternates: { canonical: buildCanonicalUrl('/what-is-revun') },
   openGraph: {
-    title: 'What Is Revun? | Property Management Operating System',
+    title: 'Why Revun Exists | Property Management Operating System',
     description:
-      'Revun is the infrastructure layer for property management. Two paths: B2B operators use it as their stack. B2C owners use it directly.',
+      'Revun exists because property businesses should not need five to ten disconnected systems to run one portfolio.',
     url: buildCanonicalUrl('/what-is-revun'),
   },
 }
@@ -96,11 +96,11 @@ export default function WhatIsRevunPage() {
               Brand Overview
             </p>
             <h1 className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-[#0A1628] sm:text-5xl lg:text-6xl">
-              What is{' '}
-              <span className="text-[#176FEB]">Revun?</span>
+              Why Revun{' '}
+              <span className="text-[#176FEB]">exists</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#555860]">
-              Revun is the property management operating system for Canada and the United States. It replaces disconnected tools with a single infrastructure layer for leasing, payments, maintenance, screening, compliance, and reporting.
+              Revun exists because property businesses should not need five to ten disconnected systems to run one portfolio.
             </p>
           </RevealOnScroll>
         </div>
@@ -254,7 +254,7 @@ export default function WhatIsRevunPage() {
                   For Self-Managing Owners (B2C)
                 </h3>
                 <p className="mt-3 text-[0.938rem] leading-relaxed text-[#555860]">
-                  Individual property owners sign up directly on Revun to manage their own properties. Same powerful platform, simplified for owners who want professional tools without hiring a property manager.
+                  Individual property owners sign up directly on Revun to manage their own properties. Same powerful platform, configured for owners who want professional tools without hiring a property manager.
                 </p>
                 <ul className="mt-5 space-y-2.5">
                   {['Free plan for 1-2 units', 'Tenant screening and leases', 'Rent collection with guarantee', 'Maintenance tracking'].map((item) => (

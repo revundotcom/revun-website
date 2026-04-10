@@ -2,17 +2,17 @@ const faqs = [
   {
     question: 'What is Revun?',
     answer:
-      'Revun is a property management infrastructure platform for Canada and the United States. It replaces disconnected tools with a single operating system for leasing, payments, maintenance, screening, and more.',
+      'Revun is the operating system for property operations — an infrastructure layer that unifies leasing, payments, maintenance, compliance, communications, accounting, and reporting into one system. It replaces disconnected tools with a single platform built for Canada and the United States.',
   },
   {
     question: 'Who is Revun built for?',
     answer:
-      'Revun serves self-managing property owners, property management companies, brokerages, leasing companies, maintenance companies, and REITs. Whether you manage one unit or one thousand, the platform adapts to your role.',
+      'Revun serves self-managing property owners, property management companies, brokerages, leasing teams, maintenance companies, REITs, and tenants. Whether you manage one unit or an entire national portfolio, the platform gives every role — including internal ops teams — the exact workflows and visibility they need.',
   },
   {
     question: 'How much does Revun cost?',
     answer:
-      'Revun offers a free tier for self-managing owners. Growth starts at $29/unit/month, Professional at $49/unit/month, and Enterprise pricing is customized. All plans include a free trial with no credit card required.',
+      'Revun is free for self-managing owners with 1-2 units. The Operator plan starts at $29/unit/month, Brokerage & Leasing at $49/unit/month, and Enterprise & REIT pricing is custom. All paid plans include a 14-day free trial with no credit card required.',
   },
   {
     question: 'Is Revun available in my province or state?',
@@ -27,7 +27,7 @@ const faqs = [
   {
     question: 'How do I get started?',
     answer:
-      'Sign up for a free account at revun.com. No credit card required. You can start managing properties immediately with our free tier, or book a demo to see the full platform in action.',
+      'See the full platform at revun.com/platform, or book a live demo to walk through it with our team. You can also sign up for a free account — no credit card required — and start managing properties immediately.',
   },
 ]
 

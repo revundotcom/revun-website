@@ -418,38 +418,38 @@ function VizAI({ inView }: { inView: boolean }) {
 
 const features = [
   {
-    title: 'Unified workflows',
-    description: 'One system of record for tenants, owners, and vendors. Replace 5+ disconnected tools with a single operating system.',
+    title: 'Unified Operations',
+    description: 'Operators lose hours every day toggling between disconnected tools that never sync. Revun consolidates leasing, payments, maintenance, and communications into one system of record — giving you full control, real-time visibility, and zero data gaps.',
     viz: VizWorkflows,
     href: '/platform/',
   },
   {
-    title: 'Automated compliance',
-    description: 'Province and state-specific workflows built in. Notices, forms, and deadlines handled automatically.',
+    title: 'Compliance Engine',
+    description: 'Manual compliance tracking fails. Deadlines slip, notices ship late, and regulators find gaps you never knew existed. Revun enforces provincial and state-specific rules automatically — forms, notices, deadlines, and audit trails generated on every action.',
     viz: VizCompliance,
     href: '/features/lease-management/',
   },
   {
-    title: 'Integrated payments',
-    description: 'Rent collection via ACH, card, and Interac. Vendor payouts and reporting reconciled in one place.',
+    title: 'Payments Infrastructure',
+    description: 'Spreadsheets, e-transfers, and manual reconciliation destroy your cash flow visibility. Revun replaces your entire financial stack — rent collection, owner disbursements, vendor payouts, trust accounting, and compliance reporting under one ledger.',
     viz: VizPayments,
     href: '/features/rent-collection/',
   },
   {
-    title: 'Communications hub',
-    description: 'Email, SMS, calling, and in-app messaging. Every conversation tracked in context.',
+    title: 'Communications Layer',
+    description: 'Personal phone numbers, scattered emails, and unlogged calls leave you exposed in every dispute. Revun deploys secure, encrypted messaging, calling, and video with a full audit trail — no personal information shared, every conversation documented.',
     viz: VizComms,
     href: '/features/',
   },
   {
-    title: 'Rent guarantee',
-    description: 'Protect rental income with built-in coverage up to $60K. Never worry about missed payments.',
+    title: 'Rent Protection',
+    description: 'One missed payment cascades into owner distrust, cash flow pressure, and operational chaos. Revun provides built-in rent coverage up to $60K — protecting your revenue, strengthening owner confidence, and eliminating the financial shock of defaults.',
     viz: VizGuarantee,
     href: '/features/',
   },
   {
-    title: 'AI-powered automation',
-    description: 'Smart maintenance routing, automated comms, and predictive analytics that learn from your portfolio.',
+    title: 'AI Operations',
+    description: 'Manual triage, vendor matching, and tenant follow-ups consume hours that should go to growth. Revun deploys workflow intelligence that classifies, routes, schedules, and notifies automatically — turning reactive operations into predictable execution.',
     viz: VizAI,
     href: '/features/',
   },
@@ -502,18 +502,17 @@ export function FeatureShowcase() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6">
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
         {/* Header */}
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p variants={revealItem} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">
-            Platform
+            The Operating System
           </motion.p>
           <motion.h2 variants={revealItem} className="mt-3 font-display text-4xl font-normal text-brand-graphite md:text-5xl">
-            Everything you need. <span className="text-keyword">Nothing</span>{' '}you don&apos;t.
+            Disconnected tools cost you speed, control, and <span className="text-keyword">revenue</span>
           </motion.h2>
           <motion.p variants={revealItem} className="mx-auto mt-4 max-w-2xl text-lg text-brand-graphite/70">
-            Six core modules that replace your entire property management stack -
-            unified, automated, and built for Canadian compliance from day one.
+            Every gap between your systems is a missed payment, a compliance failure, or a tenant you lose. Revun unifies leasing, payments, maintenance, compliance, communications, accounting, and reporting into one infrastructure layer — so nothing falls through.
           </motion.p>
         </RevealOnScroll>
 

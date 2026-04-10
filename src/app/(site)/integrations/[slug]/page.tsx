@@ -249,7 +249,7 @@ export default async function IntegrationDetailPage({
       </section>
 
       {/* What This Integration Does */}
-      <section className="bg-white py-14">
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <RevealOnScroll className="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
             <div>
@@ -282,7 +282,7 @@ export default async function IntegrationDetailPage({
       </section>
 
       {/* Setup Info */}
-      <section className="bg-[#F5F6F8] py-14">
+      <section className="bg-[#F5F6F8] py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <div className="rounded-2xl border border-[#D3D5DB] bg-white p-8 md:p-12">
             <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
@@ -336,7 +336,7 @@ export default async function IntegrationDetailPage({
       </section>
 
       {/* CTA */}
-      <section className="bg-[#F5F6F8] py-14">
+      <section className="bg-[#F5F6F8] py-16 md:py-20">
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
           <div className="mx-auto flex w-fit items-center gap-3 rounded-full bg-white border border-[#E5E7EB] px-5 py-2">
             <Plug className="size-4 text-[#176FEB]" />

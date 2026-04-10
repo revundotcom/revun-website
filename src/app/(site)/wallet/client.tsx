@@ -41,8 +41,8 @@ function SectionWrapper({
   dark?: boolean
 }) {
   return (
-    <section id={id} className={`py-14 lg:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
-      <div className="mx-auto max-w-7xl px-6">{children}</div>
+    <section id={id} className={`py-16 md:py-20 lg:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
+      <div className="mx-auto max-w-6xl px-6">{children}</div>
     </section>
   )
 }
@@ -914,15 +914,15 @@ function ReceiptPreviewSection() {
 
 function CTASection() {
   return (
-    <section className="bg-[#0A1628] py-16 lg:py-20">
+    <section className="bg-[#F5F6F8] py-16 lg:py-20">
       <RevealOnScroll className="mx-auto max-w-3xl px-6 text-center">
         <motion.h2
           variants={revealItem}
-          className="font-display text-3xl font-normal text-white md:text-4xl lg:text-5xl"
+          className="font-display text-3xl font-normal text-[#0A1628] md:text-4xl lg:text-5xl"
         >
           Take Control of Your <span className="text-[#4A91F0]">Property Finances</span>
         </motion.h2>
-        <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-base text-white/70">
+        <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-base text-[#555860]">
           Join thousands of property managers and tenants who use Revun to simplify payments,
           track investments, and stay on top of their finances.
         </motion.p>
@@ -935,7 +935,7 @@ function CTASection() {
           </a>
           <a
             href="/demo/"
-            className="inline-flex h-12 items-center justify-center rounded-xl border border-white/20 px-8 font-heading text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/5"
+            className="inline-flex h-12 items-center justify-center rounded-xl border border-[#E5E7EB] px-8 font-heading text-sm font-semibold text-[#0A1628] transition-all hover:-translate-y-0.5 hover:border-[#E5E7EB] hover:bg-[#176FEB]/5"
           >
             Book a Demo
           </a>

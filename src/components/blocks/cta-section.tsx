@@ -8,27 +8,22 @@ import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 
 export function CTASection() {
   return (
-    <section className="relative overflow-hidden bg-[#176FEB] py-12 md:py-16">
-      {/* Subtle grid background */}
-      <div className="absolute inset-0 bg-grid bg-grid-mask opacity-[0.03]" aria-hidden />
-      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-[400px] h-[400px] rounded-full bg-brand-blue/10 blur-[100px]" aria-hidden />
-
-      {/* Content */}
-      <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
+    <section className="bg-[#F5F6F8] py-12 md:py-16">
+      <div className="mx-auto max-w-3xl px-6 text-center">
         <RevealOnScroll>
           <motion.h2
             variants={revealItem}
-            className="font-heading text-3xl font-extrabold tracking-tight text-white md:text-5xl"
+            className="font-heading text-3xl font-extrabold tracking-tight text-[#0A1628] md:text-5xl"
           >
-            Start building on <span className="font-display italic">Revun</span> today
+            Deploy <span className="font-display italic">Revun</span> across your operation today
           </motion.h2>
 
           <motion.p
             variants={revealItem}
-            className="mx-auto mt-5 max-w-lg text-lg text-white/80"
+            className="mx-auto mt-5 max-w-lg text-lg text-[#555860]"
           >
-            Join property managers, brokerages, and self-managing owners already
-            running on Revun.
+            Join property managers, brokerages, leasing teams, and self-managing owners already
+            running their entire business on Revun.
           </motion.p>
 
           <motion.div
@@ -36,22 +31,22 @@ export function CTASection() {
             className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <Link
-              href="/signup/"
-              className="shadow-cta-glow inline-flex h-14 items-center justify-center rounded-lg bg-white px-8 text-base font-semibold text-[#176FEB] transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#176FEB]"
+              href="/platform/"
+              className="inline-flex h-14 items-center justify-center rounded-lg bg-[#176FEB] px-8 text-base font-semibold text-white transition-colors hover:bg-[#1260D6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#176FEB] focus-visible:ring-offset-2"
             >
-              Start Free
+              See the Platform
             </Link>
             <Link
               href="/demo/"
-              className="inline-flex h-14 items-center justify-center rounded-lg border border-white/20 px-8 text-base font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#176FEB]"
+              className="inline-flex h-14 items-center justify-center rounded-lg border border-[#E5E7EB] px-8 text-base font-semibold text-[#0A1628] transition-colors hover:bg-[#EAECF0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#176FEB] focus-visible:ring-offset-2"
             >
-              Book a Demo
+              Book a Live Demo
             </Link>
           </motion.div>
 
           <motion.p
             variants={revealItem}
-            className="mt-6 text-sm text-white/60"
+            className="mt-6 text-sm text-[#555860]"
           >
             From $1/day per unit. No long-term contracts.
           </motion.p>

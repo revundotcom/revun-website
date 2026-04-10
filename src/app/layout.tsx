@@ -38,7 +38,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://revun.com'),
   title: {
-    default: 'Revun | Property Management Infrastructure for Canada and the United States',
+    default: 'Revun | The Operating System for Modern Property Operations',
     template: '%s | Revun',
   },
   description:
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
         url: '/og-default.png',
         width: 1200,
         height: 630,
-        alt: 'Revun - Property Management Infrastructure',
+        alt: 'Revun - Infrastructure Layer for Modern Property Operations',
       },
     ],
   },
@@ -108,7 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en-CA"
       className={`${inter.variable} ${instrumentSans.variable} ${instrumentSerif.variable} ${geistMono.variable}`}
     >
-      <body className="flex min-h-screen flex-col font-sans antialiased">
+      <body className="flex min-h-screen flex-col font-sans antialiased" suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

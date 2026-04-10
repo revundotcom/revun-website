@@ -13,22 +13,22 @@ const features = [
   {
     icon: RentCollectionIcon,
     title: 'Rent Collection',
-    description: 'Accept PAD (pre-authorized debit), credit card, and Interac e-Transfer. Automated reminders and receipts.',
+    description: 'Chasing e-transfers and tracking manual payments burns hours and misses deadlines. Revun automates collection via PAD, credit card, and Interac e-Transfer with automated reminders, receipts, and a full payment ledger — so you know exactly who paid and who did not.',
   },
   {
     icon: OwnerDisbursementsIcon,
     title: 'Owner Disbursements',
-    description: 'Automated owner payouts with detailed statements. Direct deposit to any Canadian or US bank account.',
+    description: 'Owners waiting on manual payouts lose trust fast. Revun automates disbursements with detailed statements and direct deposit to any Canadian or US bank account — on schedule, every time, with full transparency.',
   },
   {
     icon: VendorPaymentsIcon,
     title: 'Vendor Payments',
-    description: 'Pay maintenance vendors and contractors directly through the platform. Track invoices and approvals.',
+    description: 'Disconnected invoicing means vendors chase you for payment and jobs stall. Revun routes vendor payments through the platform with invoice matching, approval workflows, and complete spend visibility across your portfolio.',
   },
   {
     icon: FinancialReportingIcon,
     title: 'Financial Reporting',
-    description: 'Real-time P&L, cash flow statements, and tax-ready reports. Export to QuickBooks, Xero, or CSV.',
+    description: 'Manually assembling financial reports from three different systems is a quarterly fire drill. Revun generates real-time P&L, cash flow statements, and tax-ready reports on demand — export to QuickBooks, Xero, or CSV in one click.',
   },
 ]
 
@@ -48,26 +48,25 @@ export function PaymentsFintech() {
       <div className="absolute inset-0 bg-grid bg-grid-mask opacity-[0.03]" aria-hidden="true" />
       <div className="absolute bottom-0 right-0 translate-y-1/3 translate-x-1/4 w-[500px] h-[500px] rounded-full bg-brand-blue/[0.06] blur-[120px]" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6">
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
             variants={revealItem}
             className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue"
           >
-            Payments & Fintech
+            Financial Operating Layer
           </motion.p>
           <motion.h2
             variants={revealItem}
             className="mt-3 font-display text-4xl font-normal text-[#0A1628] md:text-5xl"
           >
-            Money in. Money out. <span className="text-keyword">Automated</span>.
+            E-transfers, spreadsheets, and manual reconciliation are <span className="text-keyword">destroying your visibility</span>
           </motion.h2>
           <motion.p
             variants={revealItem}
             className="mx-auto mt-4 max-w-xl text-lg text-brand-graphite-mid"
           >
-            Rent collection, owner disbursements, vendor payments, and financial
-            reporting - all in one platform.
+            When rent collection, owner payouts, and vendor invoicing run through disconnected tools, you lose track of every dollar. Late payments go unnoticed. Trust accounting fails audits. Revun replaces your entire financial stack with one infrastructure layer — full revenue visibility, automated compliance, and complete control over every transaction.
           </motion.p>
         </RevealOnScroll>
 

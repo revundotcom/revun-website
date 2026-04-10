@@ -643,7 +643,7 @@ export default async function ProvincePage({ params }: Props) {
       />
       {/* ── Hero ── */}
       <section className="bg-[#F5F6F8]">
-        <div className="mx-auto max-w-7xl px-6 py-16 sm:py-16 lg:px-8">
+        <div className="mx-auto max-w-6xl px-6 py-16 sm:py-16 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-brand-blue">
               Canada / {data.name}
@@ -675,7 +675,7 @@ export default async function ProvincePage({ params }: Props) {
       </section>
 
       {/* ── Regulation Summary ── */}
-      <section className="bg-white py-14">
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <RevealOnScroll>
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-blue">
@@ -708,8 +708,8 @@ export default async function ProvincePage({ params }: Props) {
       </section>
 
       {/* ── Value Props ── */}
-      <section className="bg-brand-off-white py-14">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="bg-brand-off-white py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <RevealOnScroll>
             <div className="mb-8 text-center">
               <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-blue">
@@ -749,8 +749,8 @@ export default async function ProvincePage({ params }: Props) {
       </section>
 
       {/* ── Cities Grid ── */}
-      <section className="bg-white py-14">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <RevealOnScroll>
             <div className="mb-10 text-center">
               <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-blue">
@@ -782,20 +782,20 @@ export default async function ProvincePage({ params }: Props) {
       </section>
 
       {/* ── CTA ── */}
-      <section className="bg-[#176FEB] py-12 md:py-12">
+      <section className="bg-[#F5F6F8] py-12 md:py-12">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <RevealOnScroll>
-            <h2 className="font-heading font-extrabold text-4xl tracking-tight text-white md:text-5xl">
+            <h2 className="font-heading font-extrabold text-4xl tracking-tight text-[#0A1628] md:text-5xl">
               Ready to manage {data.name} properties the right way?
             </h2>
-            <p className="mx-auto mt-5 max-w-lg text-lg text-white/80">
+            <p className="mx-auto mt-5 max-w-lg text-lg text-[#555860]">
               Revun handles {data.regulation.title.split('&')[0].trim()} compliance so you can
               focus on your portfolio.
             </p>
             <div className="mt-10">
               <Link
                 href="/contact/"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-white px-8 text-base font-semibold text-[#176FEB] transition-colors duration-100 hover:bg-white/90"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white transition-colors duration-100 hover:bg-[#1260D6]"
               >
                 {data.ctaText}
                 <ArrowRight className="h-4 w-4" />

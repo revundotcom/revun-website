@@ -157,7 +157,7 @@ export default function UseCasesPage() {
 
       {/* ── Filter + Grid ─────────────────────────────────────────────── */}
       <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-6xl px-6">
           {/* Category filter */}
           <div className="mb-12 flex flex-wrap justify-center gap-3">
             {categories.map((cat) => (

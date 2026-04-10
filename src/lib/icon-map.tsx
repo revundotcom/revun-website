@@ -15,6 +15,18 @@ import {
   CreditCard,
   BarChart3,
   BookOpen,
+  MessageSquare,
+  DollarSign,
+  ShieldCheck,
+  Bot,
+  LayoutDashboard,
+  Smartphone,
+  Monitor,
+  UserCircle,
+  KeyRound,
+  Briefcase,
+  HeadphonesIcon,
+  Lock,
 } from 'lucide-react'
 
 export const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -34,6 +46,18 @@ export const iconMap: Record<string, React.ComponentType<{ className?: string }>
   CreditCard,
   BarChart3,
   BookOpen,
+  MessageSquare,
+  DollarSign,
+  ShieldCheck,
+  Bot,
+  LayoutDashboard,
+  Smartphone,
+  Monitor,
+  UserCircle,
+  KeyRound,
+  Briefcase,
+  HeadphonesIcon,
+  Lock,
 }
 
 export function renderIcon(name: string | undefined, className = 'h-5 w-5') {

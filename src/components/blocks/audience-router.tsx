@@ -14,9 +14,9 @@ const audiences = [
     id: 'owners',
     tab: 'Property Owners',
     icon: PropertyOwnerIcon,
-    headline: 'Manage your own properties like a pro.',
+    headline: 'Run your rentals like a full property operation.',
     description:
-      'Institutional-grade tools for independent landlords. From screening tenants to collecting rent and tracking maintenance - everything runs from one dashboard, starting at $1/day.',
+      'List units, screen tenants, generate leases, collect rent, manage maintenance, communicate securely, and track everything from one system.',
     bullets: [
       'Tenant screening with credit, criminal & eviction checks',
       'Automated rent collection via ACH, card & Interac',
@@ -36,9 +36,9 @@ const audiences = [
     id: 'managers',
     tab: 'Property Managers',
     icon: PropertyManagerIcon,
-    headline: 'Replace 5+ tools with one platform.',
+    headline: 'Run your entire property management company on one system.',
     description:
-      'One infrastructure layer for your entire portfolio. Scale operations, give owners real-time visibility, and cut admin time by 60% - without switching between disconnected systems.',
+      'Owners, tenants, vendors, maintenance, compliance, communications, reporting, leasing, and payments all run through Revun.',
     bullets: [
       'Portfolio-wide analytics & reporting dashboard',
       'White-label owner portals with live financials',
@@ -58,9 +58,9 @@ const audiences = [
     id: 'tenants',
     tab: 'Tenants',
     icon: TenantIcon,
-    headline: 'One app for your entire rental experience.',
+    headline: 'One secure portal for your entire rental experience.',
     description:
-      'Find verified rentals, apply online in minutes, pay rent from anywhere, and submit maintenance requests that actually get resolved - all from a single tenant portal.',
+      'Browse listings, apply online, pay rent, submit maintenance requests, communicate with your property team, and access all your documents in one place.',
     bullets: [
       'Browse verified listings with virtual tours',
       'Apply online in under 2 minutes',
@@ -86,7 +86,7 @@ export function AudienceRouter() {
 
   return (
     <section className="bg-white py-12 md:py-16">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-6xl px-6">
         {/* Header */}
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
@@ -99,13 +99,13 @@ export function AudienceRouter() {
             variants={revealItem}
             className="mt-3 font-display text-4xl font-normal text-brand-graphite md:text-5xl"
           >
-            Built for how you actually <span className="text-keyword">work</span>
+            Built for every role in <span className="text-keyword">property operations</span>
           </motion.h2>
           <motion.p
             variants={revealItem}
             className="mx-auto mt-4 max-w-2xl text-lg text-brand-graphite/70"
           >
-            Whether you manage one unit or one thousand, Revun adapts to your role.
+            Whether you manage one unit, one hundred units, or an entire national portfolio, Revun gives every role the exact workflows, controls, and visibility they need.
           </motion.p>
         </RevealOnScroll>
 

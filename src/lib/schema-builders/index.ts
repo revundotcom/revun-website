@@ -111,7 +111,7 @@ export function buildWebSiteSchema(): Record<string, unknown> {
     name: 'Revun',
     url: SITE_URL,
     description:
-      'Canadian-native property management platform for landlords, property managers, and tenants across Canada and the United States.',
+      'Revun is the infrastructure layer for modern property operations. Leasing, payments, maintenance, compliance, communications, accounting, and reporting all run in one system.',
     publisher: {
       '@type': 'Organization',
       name: 'Revun',
@@ -220,7 +220,7 @@ export function buildSoftwareApplicationSchema(): Record<string, unknown> {
     operatingSystem: 'Web',
     url: SITE_URL,
     description:
-      'Canadian-native property management platform for landlords, property managers, and tenants. Covers rent collection, tenant screening, lease management, maintenance, accounting, and provincial compliance across Canada and the US.',
+      'Revun is the operating system that runs your entire property business. One platform for leasing, payments, maintenance, compliance, communications, accounting, and reporting across Canada and the US.',
     offers: {
       '@type': 'AggregateOffer',
       priceCurrency: 'CAD',
@@ -230,31 +230,31 @@ export function buildSoftwareApplicationSchema(): Record<string, unknown> {
       offers: [
         {
           '@type': 'Offer',
-          name: 'Free',
+          name: 'Self-Managing Owner',
           price: '0',
           priceCurrency: 'CAD',
-          description: 'For 1-2 units. Core features included.',
+          description: 'Free for 1-2 units. Leasing, payments, maintenance, communications, and mobile app.',
         },
         {
           '@type': 'Offer',
-          name: 'Starter',
+          name: 'Operator',
           price: '29',
           priceCurrency: 'CAD',
-          description: 'For growing portfolios up to 20 units.',
+          description: 'For property managers and growing portfolios. Full automation, vendor dispatch, and owner reporting.',
         },
         {
           '@type': 'Offer',
-          name: 'Professional',
-          price: '79',
+          name: 'Brokerage & Leasing',
+          price: '49',
           priceCurrency: 'CAD',
-          description: 'For professional property managers.',
+          description: 'For brokerages, leasing companies, and PMCs. Multi-entity reporting, API access, and telephony.',
         },
         {
           '@type': 'Offer',
-          name: 'Enterprise',
-          price: '299',
+          name: 'Enterprise & REIT',
+          price: '0',
           priceCurrency: 'CAD',
-          description: 'For large portfolios and multi-location operations.',
+          description: 'Custom pricing for large operators, REITs, and asset managers.',
         },
       ],
     },
@@ -293,9 +293,9 @@ export function buildProductSchema(tiers: PricingTier[]): Record<string, unknown
   return {
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: 'Revun Property Management Platform',
+    name: 'Revun Property Operations Platform',
     description:
-      'All-in-one property management software for Canadian landlords and property managers. Rent collection, tenant screening, lease management, maintenance, and compliance.',
+      'The infrastructure layer for modern property operations. Leasing, payments, maintenance, compliance, communications, accounting, and reporting all run in one system.',
     brand: {
       '@type': 'Brand',
       name: 'Revun',

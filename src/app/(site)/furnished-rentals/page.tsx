@@ -79,7 +79,7 @@ export default function FurnishedRentalsPage() {
             Furnished Rentals
           </p>
           <h1 className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-[#0A1628] sm:text-5xl md:text-6xl">
-            Furnished Rental Management, Simplified
+            Furnished Rental Management, Centralized
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#555860]">
             Manage furnished properties with inventory tracking, flexible lease terms, and automated turnover workflows. For operators and tenants alike.
@@ -131,7 +131,7 @@ export default function FurnishedRentalsPage() {
                 Move in ready, <span className="text-[#176FEB]">stress free</span>
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-[#555860]">
-                When you rent a furnished property through a Revun-powered operator, everything is documented and transparent from day one.
+                When you rent a furnished property through a Revun-powered operator, everything is documented and visible from day one.
               </p>
             </div>
             <ul className="space-y-4">

@@ -131,7 +131,7 @@ export default function RelocationRentalsPage() {
           <RevealOnScroll className="mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">What you get</p>
             <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] sm:text-4xl">
-              Relocation made <span className="text-[#176FEB]">simple</span>
+              Relocation made <span className="text-[#176FEB]">streamlined</span>
             </h2>
           </RevealOnScroll>
           <RevealOnScroll stagger={0.08} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

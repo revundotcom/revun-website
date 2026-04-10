@@ -73,7 +73,7 @@ export default function TermsOfServicePage() {
 
         <h2>2. Description of Services</h2>
         <p>
-          Revun provides a property management platform that includes tools for listing properties, scheduling showings, screening tenants, executing leases, collecting rent, managing maintenance, and related workflows. The Services are offered through self-serve plans for individual owners and operator plans for property management companies, brokerages, and service providers.
+          Revun provides a property operations platform that includes tools for listing properties, scheduling showings, screening tenants, executing leases, collecting rent, managing maintenance, and related workflows. The Services are offered through self-serve plans for individual owners and operator plans for property management companies, brokerages, and service providers.
         </p>
         <p>
           Revun is a technology platform. We are not a property management company, real estate brokerage, financial institution, or legal advisor. Use of the Services does not create an agency, fiduciary, or professional-client relationship between you and Revun.

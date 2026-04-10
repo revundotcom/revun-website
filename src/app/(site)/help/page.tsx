@@ -10,6 +10,11 @@ import {
   Puzzle,
   LifeBuoy,
   Search,
+  Users,
+  Briefcase,
+  KeyRound,
+  Wrench,
+  ShieldCheck,
 } from 'lucide-react'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 import { buildBreadcrumbSchema } from '@/lib/schema-builders'
@@ -26,22 +31,46 @@ const categories = [
     icon: Rocket,
   },
   {
-    slug: 'account-billing',
-    title: 'Account & Billing',
-    description: 'Manage your subscription, payment methods, and invoices.',
-    icon: CreditCard,
+    slug: 'owners',
+    title: 'Owners',
+    description: 'Owner portals, statements, distributions, and reporting guides.',
+    icon: KeyRound,
   },
   {
-    slug: 'self-manage',
-    title: 'Self-Manage',
-    description: 'Guides for listing, screening, leases, rent collection, and maintenance.',
+    slug: 'tenants',
+    title: 'Tenants',
+    description: 'Rent payments, maintenance requests, lease documents, and self-service tools.',
     icon: Home,
   },
   {
-    slug: 'operator',
-    title: 'Operator',
-    description: 'Resources for property management companies, brokerages, and service providers.',
+    slug: 'property-managers',
+    title: 'Property Managers',
+    description: 'Day-to-day operations, portfolio management, and workflow automation.',
     icon: Building2,
+  },
+  {
+    slug: 'brokerages',
+    title: 'Brokerages',
+    description: 'Agent onboarding, transaction management, and CRM configuration.',
+    icon: Briefcase,
+  },
+  {
+    slug: 'leasing-teams',
+    title: 'Leasing Teams',
+    description: 'Listings, applications, screening, showings, and lease execution.',
+    icon: Users,
+  },
+  {
+    slug: 'maintenance-teams',
+    title: 'Maintenance Teams',
+    description: 'Work orders, vendor dispatch, inspections, and field coordination.',
+    icon: Wrench,
+  },
+  {
+    slug: 'billing',
+    title: 'Billing',
+    description: 'Manage your subscription, payment methods, invoices, and pricing plans.',
+    icon: CreditCard,
   },
   {
     slug: 'integrations',
@@ -50,10 +79,10 @@ const categories = [
     icon: Puzzle,
   },
   {
-    slug: 'troubleshooting',
-    title: 'Troubleshooting',
-    description: 'Fix common issues, error messages, and technical problems.',
-    icon: LifeBuoy,
+    slug: 'compliance',
+    title: 'Compliance',
+    description: 'Provincial regulations, lease requirements, privacy rules, and audit trails.',
+    icon: ShieldCheck,
   },
 ]
 
@@ -68,7 +97,7 @@ export default function HelpPage() {
           __html: sanitizeJsonLd(
             buildBreadcrumbSchema([
               { name: 'Home', url: 'https://revun.com/' },
-              { name: 'Help Center', url: 'https://revun.com/help/' },
+              { name: 'Support & Training', url: 'https://revun.com/help/' },
             ])
           ),
         }}
@@ -85,14 +114,14 @@ export default function HelpPage() {
             variants={fadeUp}
             className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-[#0A1628] sm:text-5xl"
           >
-            Help{' '}
-            <span className="text-[#176FEB]">Center</span>
+            Support and{' '}
+            <span className="text-[#176FEB]">training</span>
           </motion.h1>
           <motion.p
             variants={fadeUp}
             className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#555860]"
           >
-            Find guides, tutorials, and answers to common questions.
+            Find guides, tutorials, and answers organized by role and product area.
           </motion.p>
 
           {/* Search bar (visual only for MVP) */}

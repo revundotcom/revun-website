@@ -149,7 +149,7 @@ export default function PlatformPage() {
         dangerouslySetInnerHTML={{
           __html: sanitizeJsonLd(buildHowToSchema({
             name: 'How to Get Started with Revun Property Management',
-            description: 'Set up your property management account in three simple steps.',
+            description: 'Set up your property management account in three streamlined steps.',
             steps: [
               { name: 'Sign Up', text: 'Create your account in under 2 minutes. No credit card required for Free plan.' },
               { name: 'Connect Properties', text: 'Add your properties, import tenant data, and connect your existing tools.' },
@@ -166,7 +166,7 @@ export default function PlatformPage() {
       <PlatformModules />
 
       {/* ── How It Works ── */}
-      <section className="bg-[#F5F6F8] py-14">
+      <section className="bg-[#F5F6F8] py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-6">
           <RevealOnScroll className="mb-10 text-center" stagger={0.12}>
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
@@ -207,7 +207,7 @@ export default function PlatformPage() {
       </section>
 
       {/* ── Integrations ── */}
-      <section className="bg-white py-14">
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-6">
           <RevealOnScroll className="mb-10 text-center" stagger={0.12}>
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
@@ -252,7 +252,7 @@ export default function PlatformPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="bg-[#F5F6F8] py-14">
+      <section className="bg-[#F5F6F8] py-16 md:py-20">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <RevealOnScroll stagger={0.12}>
             <h2 className="font-heading text-4xl font-extrabold tracking-tight text-[#0A1628] md:text-5xl">

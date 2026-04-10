@@ -20,18 +20,19 @@ import {
 } from 'lucide-react'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 import { getIntegrationIcon } from '@/lib/integration-icons'
+import { OperatorPlatformBlock } from '@/components/blocks/operator-platform-block'
 import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
 import { buildBreadcrumbSchema, buildHowToSchema, buildWebPageSchema } from '@/lib/schema-builders'
 
 export const metadata: Metadata = {
-  title: 'How Revun Works | Product Overview',
+  title: 'How Revun Gets Deployed | Product Overview',
   description:
-    'See how Revun works for B2B operators and self-managing owners. From onboarding to daily operations: leasing, maintenance, payments, compliance, analytics, and integrations.',
+    'See how Revun gets deployed for operators and self-managing owners. From onboarding to full-scale operations: leasing, maintenance, payments, compliance, analytics, and integrations.',
   alternates: { canonical: buildCanonicalUrl('/how-revun-works') },
   openGraph: {
-    title: 'How Revun Works | Product Overview',
+    title: 'How Revun Gets Deployed | Product Overview',
     description:
-      'Two paths to Revun: operators deploy it as their stack, owners use it directly. See the full workflow.',
+      'Revun can be rolled out as the operating system for your company, or used directly by self-managing owners. One system for the full workflow.',
     url: buildCanonicalUrl('/how-revun-works'),
   },
 }
@@ -42,25 +43,25 @@ const operatorSteps = [
   {
     step: '01',
     title: 'Apply',
-    description: 'Submit your operator application. Tell us about your business, portfolio size, and current tech stack. We will review within 48 hours.',
+    description: 'Submit your operator application. Provide your portfolio size, current tech stack, and operational scope. Our team reviews and responds within 48 hours.',
     icon: ClipboardCheck,
   },
   {
     step: '02',
     title: 'Onboard',
-    description: 'Our team helps migrate your data, configure your workflows, and set up your branded portal. Typical onboarding takes 1-2 weeks.',
+    description: 'Our deployment team migrates your data, configures workflows, and provisions your branded portal. Standard onboarding completes in 1-2 weeks.',
     icon: Settings,
   },
   {
     step: '03',
     title: 'Configure',
-    description: 'Customize your portal branding, payment workflows, maintenance routing, lease templates, and reporting dashboards to match your operations.',
+    description: 'Configure portal branding, payment workflows, maintenance routing, lease templates, and reporting dashboards to match your operational requirements.',
     icon: Layers,
   },
   {
     step: '04',
     title: 'Launch',
-    description: 'Go live with your Powered by Revun operation. Invite your team, tenants, owners, and vendors. Start managing from day one.',
+    description: 'Roll out your Powered by Revun operation. Onboard your team, tenants, owners, and vendors. Full-scale operations begin on day one.',
     icon: Rocket,
   },
 ]
@@ -68,20 +69,20 @@ const operatorSteps = [
 const ownerSteps = [
   {
     step: '01',
-    title: 'Sign Up',
-    description: 'Create your free account in under 2 minutes. No credit card required. Choose the Self-Manage path during onboarding.',
+    title: 'Register',
+    description: 'Create your account in under 2 minutes. No credit card required. Select the Self-Manage deployment path during onboarding.',
     icon: UserPlus,
   },
   {
     step: '02',
-    title: 'Add Property',
-    description: 'Enter your property details, configure units, set rental rates, and upload photos. Import existing tenant data if you have it.',
+    title: 'Configure Property',
+    description: 'Enter property details, configure units, set rental rates, and upload photos. Import existing tenant data to accelerate setup.',
     icon: Home,
   },
   {
     step: '03',
-    title: 'Manage Everything',
-    description: 'List vacancies, screen tenants, generate leases, collect rent, handle maintenance, and track finances. All from one dashboard.',
+    title: 'Operate',
+    description: 'List vacancies, screen tenants, generate leases, collect rent, handle maintenance, and track finances. One dashboard, full control.',
     icon: BarChart3,
   },
 ]
@@ -146,7 +147,7 @@ export default function HowRevunWorksPage() {
           __html: sanitizeJsonLd(
             buildHowToSchema({
               name: 'How to Deploy Revun as an Operator',
-              description: 'Steps for property management companies to deploy Revun as their technology stack.',
+              description: 'Deployment steps for property management companies rolling out Revun as their operating system.',
               steps: operatorSteps.map((s) => ({ name: s.title, text: s.description })),
             })
           ),
@@ -158,7 +159,7 @@ export default function HowRevunWorksPage() {
           __html: sanitizeJsonLd(
             buildHowToSchema({
               name: 'How to Self-Manage Properties with Revun',
-              description: 'Steps for property owners to start self-managing with Revun.',
+              description: 'Deployment steps for property owners to self-manage with Revun.',
               steps: ownerSteps.map((s) => ({ name: s.title, text: s.description })),
             })
           ),
@@ -170,7 +171,7 @@ export default function HowRevunWorksPage() {
           __html: sanitizeJsonLd(
             buildWebPageSchema({
               name: 'How Revun Works',
-              description: 'Product overview and workflow for Revun property management platform.',
+              description: 'Product overview and workflow for Revun property operations platform.',
               url: 'https://revun.com/how-revun-works/',
             })
           ),
@@ -185,10 +186,11 @@ export default function HowRevunWorksPage() {
               Product Overview
             </p>
             <h1 className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-[#0A1628] sm:text-5xl lg:text-6xl">
-              How <span className="text-[#176FEB]">Revun</span> works
+              How Revun gets{' '}
+              <span className="text-[#176FEB]">deployed</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#555860]">
-              Two paths to one platform. Operators deploy Revun as their technology stack. Self-managing owners use it directly. Here is how each path works.
+              Revun can be rolled out as the operating system for your company, or used directly by self-managing owners. Either way, the result is the same: one system for the full workflow.
             </p>
           </RevealOnScroll>
         </div>
@@ -209,7 +211,7 @@ export default function HowRevunWorksPage() {
               <span className="text-[#176FEB]">technology stack</span>
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-[#555860]">
-              Property management companies, brokerages, and maintenance companies go through a guided onboarding process to launch on Revun.
+              Property management companies, brokerages, and maintenance companies go through a structured deployment process to roll out Revun as their operating system.
             </p>
           </RevealOnScroll>
 
@@ -253,11 +255,11 @@ export default function HowRevunWorksPage() {
               For Self-Managing Owners (B2C)
             </p>
             <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] md:text-4xl">
-              Start self-managing in{' '}
+              Self-manage in{' '}
               <span className="text-[#176FEB]">three steps</span>
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-[#555860]">
-              Individual property owners sign up directly and start managing their properties immediately. No sales call required.
+              Individual property owners deploy Revun directly and begin operations immediately. No sales call required.
             </p>
           </RevealOnScroll>
 
@@ -298,10 +300,10 @@ export default function HowRevunWorksPage() {
               Platform Modules
             </p>
             <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] md:text-4xl">
-              What you can <span className="text-[#176FEB]">do</span> with Revun
+              Core <span className="text-[#176FEB]">operational modules</span>
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-[#555860]">
-              Six core modules that cover every aspect of property management. All connected, all in one platform.
+              Six modules that cover the full property operations workflow. All connected, all configurable, all in one system.
             </p>
           </RevealOnScroll>
 
@@ -339,10 +341,10 @@ export default function HowRevunWorksPage() {
               Integrations
             </p>
             <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] md:text-4xl">
-              Connects to <span className="text-[#176FEB]">40+</span> tools
+              Plugs into <span className="text-[#176FEB]">40+</span> systems
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-[#555860]">
-              Revun integrates with the accounting, payment, screening, and communication tools you already use.
+              Revun connects to the accounting, payment, screening, and communication infrastructure your team already relies on.
             </p>
           </RevealOnScroll>
 
@@ -375,16 +377,18 @@ export default function HowRevunWorksPage() {
         </div>
       </section>
 
+      <OperatorPlatformBlock />
+
       {/* ── CTA Cluster ── */}
       <section className="bg-[#F5F6F8] py-12">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <RevealOnScroll>
             <h2 className="font-heading font-extrabold text-4xl tracking-tight text-[#0A1628] md:text-5xl">
-              Ready to see Revun{' '}
-              <span className="text-[#176FEB]">in action?</span>
+              Ready to{' '}
+              <span className="text-[#176FEB]">deploy?</span>
             </h2>
             <p className="mx-auto mt-5 max-w-lg text-lg text-[#555860]">
-              Whether you are an operator deploying your stack or an owner managing your own properties, we are ready when you are.
+              Whether you are an operator rolling out your technology stack or an owner configuring your first property, we are ready when you are.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
@@ -406,7 +410,7 @@ export default function HowRevunWorksPage() {
 
       {/* AEO quick answer */}
       <p className="sr-only">
-        Revun works two ways. For B2B operators like property management companies and brokerages, the process is: apply, onboard, configure, and launch. For B2C self-managing owners, the process is: sign up, add your property, and start managing. The platform includes six core modules: leasing, maintenance, communications, payments, compliance, and analytics. Revun integrates with 40+ tools including QuickBooks, Xero, Stripe, DocuSign, and more.
+        Revun gets deployed two ways. For B2B operators like property management companies and brokerages, the deployment process is: apply, onboard, configure, and roll out. For self-managing owners, the process is: register, configure your property, and begin operations. The platform includes six operational modules: leasing, maintenance, communications, payments, compliance, and analytics. Revun plugs into 40+ systems including QuickBooks, Xero, Stripe, DocuSign, and more.
       </p>
     </>
   )

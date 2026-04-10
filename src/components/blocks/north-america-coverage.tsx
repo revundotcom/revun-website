@@ -29,7 +29,7 @@ const usStates = [
 export function NorthAmericaCoverage() {
   return (
     <section className="bg-[#F5F6F8] py-12 md:py-16">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-6xl px-6">
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
             variants={revealItem}

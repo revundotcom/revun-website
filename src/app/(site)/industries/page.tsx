@@ -202,7 +202,7 @@ export default function IndustriesPage() {
 
       {/* ── Industries grid ───────────────────────────────────────────── */}
       <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-6xl px-6">
           <RevealOnScroll
             stagger={0.08}
             className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
@@ -263,24 +263,24 @@ export default function IndustriesPage() {
       </section>
 
       {/* ── Bottom CTA ────────────────────────────────────────────────── */}
-      <section className="bg-[#176FEB] py-12">
+      <section className="bg-[#F5F6F8] py-12">
         <RevealOnScroll className="mx-auto max-w-2xl px-6 text-center">
           <motion.p
             variants={revealItem}
-            className="mb-3 text-sm font-medium uppercase tracking-widest text-white/60"
+            className="mb-3 text-sm font-medium uppercase tracking-widest text-[#555860]"
           >
             Not sure where to start?
           </motion.p>
           <motion.h2
             variants={revealItem}
-            className="font-heading text-3xl font-bold tracking-tight text-white sm:text-4xl"
+            className="font-heading text-3xl font-bold tracking-tight text-[#0A1628] sm:text-4xl"
           >
             Tell us about your{' '}
-            <span className="text-white/80">portfolio</span>
+            <span className="text-[#555860]">portfolio</span>
           </motion.h2>
           <motion.p
             variants={revealItem}
-            className="mt-4 text-lg leading-relaxed text-white/80"
+            className="mt-4 text-lg leading-relaxed text-[#555860]"
           >
             Book a 15-minute discovery call and we will map Revun to your exact
             property type and workflow.
@@ -291,13 +291,13 @@ export default function IndustriesPage() {
           >
             <Link
               href="/demo/"
-              className="inline-flex h-12 items-center justify-center rounded-xl bg-white px-8 text-base font-semibold text-[#176FEB] transition-colors duration-150 hover:bg-white/90"
+              className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white transition-colors duration-150 hover:bg-[#1260D6]"
             >
               Book a Demo
             </Link>
             <Link
               href="/pricing/"
-              className="inline-flex h-12 items-center justify-center rounded-xl border border-white/20 px-8 text-base font-semibold text-white transition-colors duration-150 hover:bg-white/10"
+              className="inline-flex h-12 items-center justify-center rounded-xl border border-[#E5E7EB] px-8 text-base font-semibold text-[#0A1628] transition-colors duration-150 hover:bg-[#EAECF0]"
             >
               View Pricing
             </Link>

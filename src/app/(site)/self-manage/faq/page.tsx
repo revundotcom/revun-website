@@ -21,7 +21,7 @@ const faqCategories: FAQCategory[] = [
       {
         question: 'What is Revun Self-Manage?',
         answer:
-          'Revun Self-Manage is a property management platform built for landlords who want to manage their own rental properties. It replaces spreadsheets, email chains, and disconnected tools with a single dashboard for listings, screening, leases, rent collection, and maintenance.',
+          'Revun Self-Manage is the operating system for landlords who want to manage their own rental properties. It replaces spreadsheets, email chains, and disconnected tools with a single dashboard for listings, screening, leases, rent collection, and maintenance.',
       },
       {
         question: 'Do I need any property management experience?',
@@ -66,7 +66,7 @@ const faqCategories: FAQCategory[] = [
       {
         question: 'Are there any hidden fees?',
         answer:
-          'No. Monthly plan pricing is transparent and all-inclusive for platform access. Add-on services like tenant screening ($25/check) and rent guarantee (2.5% of rent) are optional and priced separately. Standard payment processing fees apply to rent collection.',
+          'No. Monthly plan pricing is clear and all-inclusive for platform access. Add-on services like tenant screening ($25/check) and rent guarantee (2.5% of rent) are optional and priced separately. Standard payment processing fees apply to rent collection.',
       },
       {
         question: 'Can I cancel at any time?',
@@ -241,7 +241,7 @@ const faqCategories: FAQCategory[] = [
       {
         question: 'How do I contact support?',
         answer:
-          'Support is available via in-app chat and email on all plans. Growth plan users receive priority support with faster response times. Portfolio plan users get dedicated phone support and an account manager.',
+          'Support is available via in-app chat and email on all plans. Operator plan users receive priority support with faster response times. Brokerage & Leasing plan users get dedicated phone support and an account manager.',
       },
     ],
   },

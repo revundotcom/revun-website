@@ -7,13 +7,13 @@ import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
 import { buildBreadcrumbSchema } from '@/lib/schema-builders'
 
 export const metadata: Metadata = {
-  title: 'Contact',
+  title: 'Contact the Revun Team | Sales, Owners & Support',
   description:
-    'Get in touch with Revun. Book a demo, start self-managing, or reach our support team.',
+    'Talk to the Revun team. Whether you are evaluating Revun for your company, scaling a portfolio, or need help with an account, we will get you to the right team fast.',
   alternates: { canonical: buildCanonicalUrl('/contact') },
   openGraph: {
-    title: 'Contact | Revun',
-    description: 'Book a demo or get in touch with our team.',
+    title: 'Contact the Revun Team | Sales, Owners & Support',
+    description: 'Talk to the Revun team. Sales, owners, and customer support — we will get you to the right team fast.',
     url: buildCanonicalUrl('/contact'),
   },
 }
@@ -21,22 +21,22 @@ export const metadata: Metadata = {
 const contactPaths = [
   {
     icon: Calendar,
-    title: 'Book a demo',
-    description: 'For property management companies, brokerages, and operators.',
+    title: 'Sales',
+    description: 'For property management companies, brokerages, and operators evaluating Revun.',
     href: '/demo/',
     cta: 'Schedule a call',
   },
   {
     icon: Home,
-    title: 'Start self-managing',
-    description: 'For individual owners managing their own properties.',
+    title: 'Owners',
+    description: 'For individual owners who want to self-manage their properties with Revun.',
     href: '/self-manage/',
     cta: 'Get started',
   },
   {
     icon: Headphones,
-    title: 'Support',
-    description: 'For existing Revun users who need help.',
+    title: 'Customer Support',
+    description: 'For existing Revun users who need help with their account or platform.',
     href: '/support/',
     cta: 'Open a ticket',
   },
@@ -58,7 +58,7 @@ export default function ContactPage() {
       {/* Top accent bar */}
       <div className="h-1 w-full bg-[#176FEB]" aria-hidden />
 
-      <div className="mx-auto max-w-7xl px-6 pb-24 pt-32 md:pt-40">
+      <div className="mx-auto max-w-6xl px-6 pb-24 pt-32 md:pt-40">
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
           {/* ── Left Column ── */}
           <div className="flex flex-col justify-center">
@@ -67,11 +67,13 @@ export default function ContactPage() {
                 Contact
               </p>
               <h1 className="font-display font-extrabold text-4xl tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl">
-                Get in <span className="text-[#176FEB]">touch</span>
+                Talk to the{' '}
+                <span className="text-[#176FEB]">Revun team</span>
               </h1>
               <p className="mt-5 max-w-md text-lg leading-relaxed text-[#555860]">
-                Whether you are exploring Revun for your business or need help
-                with an existing account, we are here.
+                Whether you are evaluating Revun for your company, scaling a
+                portfolio, or need help with an account, we will get you to
+                the right team fast.
               </p>
             </RevealOnScroll>
 

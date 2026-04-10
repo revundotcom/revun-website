@@ -263,7 +263,7 @@ export function PoweredByRevun() {
       {/* Subtle ambient blob */}
       <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[700px] rounded-full bg-[#176FEB]/[0.025] blur-[120px]" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6">
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
         {/* Header */}
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p

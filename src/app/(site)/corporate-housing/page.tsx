@@ -26,7 +26,7 @@ const features = [
 ]
 
 const useCases = [
-  { title: 'Employee Relocation', description: 'Provide temporary housing for employees relocating to a new office. Seamless handoff from HR to housing.' },
+  { title: 'Employee Relocation', description: 'Provide temporary housing for employees relocating to a new office. Unified handoff from HR to housing.' },
   { title: 'Project-Based Housing', description: 'House construction crews, consultants, or project teams for defined periods. Flexible terms with project-aligned billing.' },
   { title: 'Executive Housing', description: 'Premium furnished units for senior leaders and visiting executives. Concierge-level service coordination.' },
   { title: 'Intern & Training Programs', description: 'Batch housing for seasonal interns, training cohorts, or rotational programs. Group management tools included.' },

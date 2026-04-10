@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
+import Image from 'next/image'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 import {
   Phone,
@@ -15,15 +16,10 @@ import {
   Mic,
   MicOff,
   PhoneOff,
-  Check,
   CheckCheck,
-  Clock,
-  Star,
-  Image as ImageIcon,
-  FileText,
-  ArrowRight,
   ChevronLeft,
   ChevronRight,
+  Volume2,
 } from 'lucide-react'
 
 /* ═══════════════════════════════════════════ */
@@ -31,62 +27,78 @@ import {
 /* ═══════════════════════════════════════════ */
 const screens = [
   {
-    title: 'Close In',
+    title: 'Chats In',
     highlight: 'One Place',
-    description: 'Manage owners, tenants, vendors, and applicants from a single inbox.',
-  },
-  {
-    title: 'Clear',
-    highlight: 'Conversations',
-    description: 'Rich messages, read receipts, and delivery status. Always know where things stand.',
+    description: 'Manage tenants, owners, vendors, and team messages all in one unified inbox.',
+    screenshot: '/screenshots/comms/chats-inbox.png',
   },
   {
     title: 'Connect &',
     highlight: 'Talk',
-    description: 'Instantly phone or video call any contact. One-tap calling with full context.',
+    description: 'Voice and video calls built in. See who\u2019s online and call directly from any record.',
+    screenshot: '/screenshots/comms/connect-talk.png',
+  },
+  {
+    title: 'Clear',
+    highlight: 'Conversations',
+    description: 'Full message threads with timestamps, read receipts, and file attachments.',
+    screenshot: '/screenshots/comms/clear-conversations.png',
   },
   {
     title: 'Incoming',
     highlight: 'Call',
-    description: 'Accept or decline with a tap. Caller info and linked requests shown automatically.',
+    description: 'Accept calls from tenants and team members with caller ID and property context.',
+    screenshot: '/screenshots/comms/incoming-call.png',
   },
   {
     title: 'On a',
     highlight: 'Call',
-    description: 'Crystal-clear VoIP with mute, video toggle, and automatic recording.',
+    description: 'Crystal-clear voice and video with mute, speaker, and screen share controls.',
+    screenshot: '/screenshots/comms/on-a-call.png',
   },
   {
     title: 'Meet Together,',
     highlight: 'All at Once',
-    description: 'Group video calls with owners, tenants, and vendors. No third-party app needed.',
+    description: 'Group video calls with your team, owners, or vendors \u2014 no external tools needed.',
+    screenshot: '/screenshots/comms/group-video.png',
   },
   {
     title: 'Everything,',
     highlight: 'Saved for Later',
-    description: 'Photos, documents, and recordings automatically linked to the right property.',
+    description: 'Every message, call recording, file, and document saved and searchable.',
+    screenshot: '/screenshots/comms/saved-later.png',
   },
 ] as const
 
-/* ─── Mock data ─── */
+/* ─── Mock data matching Figma designs ─── */
 const chatThreads = [
-  { name: 'Sarah M.', role: 'Tenant · Unit 4B', message: 'The dishwasher is making a weird noise...', time: '2m', unread: 2, initials: 'SM', online: true },
-  { name: 'David K.', role: 'Owner · 45 Queen', message: 'Can you send me the Q1 report?', time: '15m', unread: 1, initials: 'DK', online: true },
-  { name: 'ProFix Plumbing', role: 'Vendor', message: 'Job #1247 done. Invoice attached.', time: '1h', unread: 0, initials: 'PF', online: false },
-  { name: 'James L.', role: 'Tenant · Unit 2A', message: 'Thanks! Key fob works perfectly.', time: '3h', unread: 0, initials: 'JL', online: false },
+  { name: '172 King St London', role: 'Group', message: 'Sarah: Meeting confirmed for Thursday', time: '2m', unread: 0, initials: '172', online: false, isGroup: true },
+  { name: 'Beata J', role: '', message: 'Can you check the lease terms?', time: '15m', unread: 2, initials: 'BJ', online: true, isGroup: false },
+  { name: 'Mark O', role: '', message: 'Thanks for the update!', time: '1h', unread: 0, initials: 'MO', online: false, isGroup: false },
+  { name: 'Sarah & Mike', role: '', message: 'We will be there at 10am', time: '3h', unread: 0, initials: 'SM', online: false, isGroup: false },
+  { name: 'Tony S', role: '', message: 'Call me when you get a chance', time: '5h', unread: 0, initials: 'TS', online: true, isGroup: false },
+  { name: 'London peeps 3bhk', role: 'Group', message: 'Anyone available this weekend?', time: '1d', unread: 0, initials: 'LP', online: false, isGroup: true },
+  { name: 'Jessica W', role: '', message: 'Document signed and sent', time: '2d', unread: 0, initials: 'JW', online: false, isGroup: false },
 ]
 
-const messages = [
-  { text: 'Hi, the dishwasher started making a grinding noise.', time: '10:32', mine: false },
-  { text: "I'll create a maintenance ticket right away.", time: '10:34', mine: true, status: 'read' as const },
-  { text: 'Scheduled ProFix for tomorrow 9-11 AM. Work for you?', time: '10:35', mine: true, status: 'read' as const },
-  { text: "Perfect, I'll be home!", time: '10:38', mine: false },
-  { text: 'Avoid running it until the tech looks at it.', time: '10:39', mine: true, status: 'sent' as const },
+const connectMenuItems = [
+  { icon: '👤', label: 'New contact' },
+  { icon: '👥', label: 'Create group chat' },
+  { icon: '📅', label: 'Schedule call' },
+  { icon: '📞', label: 'Call a number' },
 ]
 
-const contactList = [
-  { name: 'Sarah Mitchell', role: 'Tenant · Unit 4B', initials: 'SM', last: 'Yesterday' },
-  { name: 'David Kim', role: 'Owner · 45 Queen', initials: 'DK', last: '2 days ago' },
-  { name: 'ProFix Plumbing', role: 'Vendor', initials: 'PF', last: 'Last week' },
+const favoriteContacts = [
+  { name: 'Amelia W', initials: 'AW' },
+  { name: 'Bella F', initials: 'BF' },
+  { name: 'Aiden O', initials: 'AO' },
+  { name: 'Amelia W', initials: 'AW' },
+  { name: 'Asher S', initials: 'AS' },
+]
+
+const chatMessages = [
+  { text: 'Hey, are you available for a quick call?', time: '', mine: false },
+  { text: 'Sure, give me 5 minutes', time: '', mine: true, status: 'read' as const },
 ]
 
 const meetParticipants = [
@@ -94,14 +106,6 @@ const meetParticipants = [
   { name: 'David K.', initials: 'DK', muted: false },
   { name: 'Sarah M.', initials: 'SM', muted: true },
   { name: 'James L.', initials: 'JL', muted: false },
-]
-
-const savedFiles = [
-  { type: 'image' as const, name: 'Unit 4B · Kitchen', date: 'Mar 12' },
-  { type: 'doc' as const, name: 'Q1-Financial-Report.pdf', date: 'Mar 10' },
-  { type: 'image' as const, name: 'Move-in · Unit 7A', date: 'Mar 8' },
-  { type: 'doc' as const, name: 'Lease-Agreement-MG.pdf', date: 'Mar 5' },
-  { type: 'image' as const, name: 'Plumbing fix photo', date: 'Mar 3' },
 ]
 
 /* ─── Reusable: Avatar ─── */
@@ -148,35 +152,63 @@ function PhoneHomeBar({ dark }: { dark?: boolean }) {
 /*  7 Phone Screen Contents                   */
 /* ═══════════════════════════════════════════ */
 
+/* Screen 1: Chats In One Place — Inbox with All/Unread tabs, chat list */
 function Screen1() {
   return (
     <div className="flex h-full flex-col bg-white">
       <PhoneStatusBar />
-      <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
-        <span className="font-heading text-sm font-bold text-brand-graphite">Messages</span>
-        <Search className="h-3.5 w-3.5 text-brand-graphite-mid" />
+      {/* Header with Chats title + search/plus icons */}
+      <div className="flex items-center justify-between px-4 py-2.5">
+        <span className="font-heading text-lg font-bold text-brand-graphite">Chats</span>
+        <div className="flex items-center gap-2.5">
+          <Search className="h-4 w-4 text-brand-graphite-mid" />
+          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-blue text-xs font-bold text-white">+</div>
+        </div>
       </div>
+      {/* All / Unread tabs */}
+      <div className="flex gap-1 px-4 pb-2">
+        <span className="rounded-full bg-brand-blue px-3 py-1 text-[10px] font-semibold text-white">All</span>
+        <span className="rounded-full bg-brand-off-white px-3 py-1 text-[10px] font-medium text-brand-graphite-mid">Unread</span>
+      </div>
+      {/* Chat list */}
       <div className="flex-1 overflow-hidden">
         {chatThreads.map((t) => (
-          <div key={t.name} className="flex items-start gap-2.5 border-b border-border/50 px-4 py-2.5">
-            <Av initials={t.initials} size={9} online={t.online} />
+          <div key={t.name} className="flex items-center gap-2.5 px-4 py-2.5">
+            {/* Avatar */}
+            <div className="relative shrink-0">
+              <div className={`flex h-10 w-10 items-center justify-center rounded-full font-heading text-xs font-semibold ${t.isGroup ? 'bg-brand-blue/15 text-brand-blue' : 'bg-brand-blue/10 text-brand-blue'}`}>
+                {t.isGroup ? (
+                  <Users className="h-4 w-4" />
+                ) : (
+                  t.initials
+                )}
+              </div>
+              {t.online && (
+                <span className="absolute -bottom-0.5 -right-0.5 block h-2.5 w-2.5 rounded-full bg-brand-success ring-2 ring-white" />
+              )}
+            </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-brand-graphite">{t.name}</span>
+                <span className="text-[12px] font-semibold text-brand-graphite">{t.name}</span>
                 <span className="text-[9px] text-brand-graphite-mid">{t.time}</span>
               </div>
-              <p className="text-[10px] text-brand-graphite-mid">{t.role}</p>
-              <p className="mt-0.5 truncate text-[11px] text-brand-graphite/70">{t.message}</p>
+              <p className="mt-0.5 truncate text-[11px] text-brand-graphite/60">{t.message}</p>
             </div>
             {t.unread > 0 && (
-              <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brand-blue text-[8px] font-bold text-white">{t.unread}</span>
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-blue text-[9px] font-bold text-white">{t.unread}</span>
             )}
           </div>
         ))}
       </div>
-      <div className="border-t border-border px-4 py-2">
-        <div className="flex items-center justify-center gap-1.5 rounded-lg bg-brand-blue py-2 text-[11px] font-semibold text-white">
-          <Send className="h-3 w-3" /> New Message
+      {/* Chats / Calls bottom tabs */}
+      <div className="flex border-t border-border">
+        <div className="flex flex-1 flex-col items-center gap-0.5 py-2">
+          <Send className="h-4 w-4 text-brand-blue" />
+          <span className="text-[9px] font-semibold text-brand-blue">Chats</span>
+        </div>
+        <div className="flex flex-1 flex-col items-center gap-0.5 py-2">
+          <Phone className="h-4 w-4 text-brand-graphite-mid" />
+          <span className="text-[9px] text-brand-graphite-mid">Calls</span>
         </div>
       </div>
       <PhoneHomeBar />
@@ -184,40 +216,120 @@ function Screen1() {
   )
 }
 
+/* Screen 2: Connect & Talk — Menu + Favorites list */
 function Screen2() {
   return (
     <div className="flex h-full flex-col bg-white">
       <PhoneStatusBar />
-      <div className="flex items-center gap-2.5 border-b border-border px-4 py-2">
-        <Av initials="SM" size={8} online />
-        <div className="flex-1">
-          <span className="text-xs font-semibold text-brand-graphite">Sarah M.</span>
-          <p className="text-[9px] text-brand-success">Online</p>
-        </div>
-        <Phone className="h-3.5 w-3.5 text-brand-graphite-mid" />
-        <Video className="h-3.5 w-3.5 text-brand-graphite-mid" />
+      {/* Header */}
+      <div className="px-4 py-2.5">
+        <span className="font-heading text-lg font-bold text-brand-graphite">Connect</span>
       </div>
-      <div className="flex-1 space-y-2 overflow-hidden px-3 py-3">
-        {messages.map((m, i) => (
-          <div key={i} className={`flex ${m.mine ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[82%] rounded-2xl px-3 py-1.5 ${m.mine ? 'rounded-br-sm bg-brand-blue text-white' : 'rounded-bl-sm bg-[#F0F2F5] text-brand-graphite'}`}>
-              <p className="text-[11px] leading-snug">{m.text}</p>
-              <div className={`mt-0.5 flex items-center justify-end gap-0.5 ${m.mine ? 'text-white/50' : 'text-brand-graphite-mid'}`}>
-                <span className="text-[8px]">{m.time}</span>
-                {m.mine && (m.status === 'read' ? <CheckCheck className="h-2.5 w-2.5" /> : <Check className="h-2.5 w-2.5" />)}
-              </div>
+      {/* Menu items */}
+      <div className="border-b border-border px-4 pb-3">
+        {connectMenuItems.map((item) => (
+          <div key={item.label} className="flex items-center gap-3 py-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-blue/10">
+              <span className="text-sm">{item.icon}</span>
+            </div>
+            <span className="text-[12px] font-medium text-brand-graphite">{item.label}</span>
+          </div>
+        ))}
+      </div>
+      {/* Favorites section */}
+      <div className="flex-1 px-4 pt-3">
+        <p className="mb-2.5 text-[11px] font-semibold uppercase tracking-wider text-brand-graphite-mid">Favorites</p>
+        {favoriteContacts.map((c, i) => (
+          <div key={`${c.name}-${i}`} className="flex items-center gap-2.5 py-2">
+            <Av initials={c.initials} size={9} />
+            <span className="text-[12px] font-medium text-brand-graphite">{c.name}</span>
+            <div className="ml-auto flex gap-2">
+              <Phone className="h-3.5 w-3.5 text-brand-graphite-mid" />
+              <Video className="h-3.5 w-3.5 text-brand-graphite-mid" />
             </div>
           </div>
         ))}
       </div>
+      <PhoneHomeBar />
+    </div>
+  )
+}
+
+/* Screen 3: Clear Conversations — Chat with Aiden O */
+function Screen3() {
+  return (
+    <div className="flex h-full flex-col bg-white">
+      <PhoneStatusBar />
+      {/* Chat header */}
+      <div className="flex items-center gap-2.5 border-b border-border px-4 py-2">
+        <ChevronLeft className="h-4 w-4 text-brand-graphite-mid" />
+        <Av initials="AO" size={8} />
+        <div className="flex-1">
+          <span className="text-xs font-semibold text-brand-graphite">Aiden O</span>
+        </div>
+        <Phone className="h-3.5 w-3.5 text-brand-graphite-mid" />
+        <Video className="h-3.5 w-3.5 text-brand-graphite-mid" />
+        <MoreVertical className="h-3.5 w-3.5 text-brand-graphite-mid" />
+      </div>
+      {/* Date marker */}
+      <div className="px-4 py-2 text-center">
+        <span className="text-[9px] text-brand-graphite-mid">Sat, Aug 30</span>
+      </div>
+      {/* New messages badge */}
+      <div className="flex justify-center py-1">
+        <span className="rounded-full bg-brand-blue/10 px-3 py-0.5 text-[9px] font-medium text-brand-blue">New messages (2) Today</span>
+      </div>
+      {/* Messages */}
+      <div className="flex-1 space-y-2.5 overflow-hidden px-3 py-2">
+        {/* Received */}
+        <div className="flex justify-start">
+          <div className="max-w-[80%] rounded-2xl rounded-bl-sm bg-[#F0F2F5] px-3 py-2">
+            <p className="text-[11px] leading-snug text-brand-graphite">Hey, are you available for a quick call?</p>
+          </div>
+        </div>
+        {/* Sent */}
+        <div className="flex justify-end">
+          <div className="max-w-[80%] rounded-2xl rounded-br-sm bg-brand-blue px-3 py-2">
+            <p className="text-[11px] leading-snug text-white">Sure, give me 5 minutes</p>
+            <div className="mt-0.5 flex items-center justify-end gap-0.5 text-white/50">
+              <CheckCheck className="h-2.5 w-2.5" />
+            </div>
+          </div>
+        </div>
+        {/* Received */}
+        <div className="flex justify-start">
+          <div className="max-w-[80%] rounded-2xl rounded-bl-sm bg-[#F0F2F5] px-3 py-2">
+            <p className="text-[11px] leading-snug text-brand-graphite">Sounds good!</p>
+          </div>
+        </div>
+        {/* Voice message */}
+        <div className="flex justify-start">
+          <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-[#F0F2F5] px-3 py-2">
+            <div className="flex items-center gap-2">
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-blue">
+                <span className="text-[10px] text-white">&#9654;</span>
+              </div>
+              <div className="flex-1">
+                {/* Waveform bars */}
+                <div className="flex items-center gap-[1.5px]">
+                  {[3, 5, 8, 6, 10, 7, 4, 8, 5, 9, 6, 3, 7, 5, 8, 4, 6, 9, 5, 7].map((h, i) => (
+                    <div key={i} className="w-[2px] rounded-full bg-brand-graphite-mid/40" style={{ height: h }} />
+                  ))}
+                </div>
+                <p className="mt-0.5 text-[8px] text-brand-graphite-mid">0:12</p>
+              </div>
+            </div>
+            <p className="mt-1 text-[9px] font-medium text-brand-blue">See transcript</p>
+          </div>
+        </div>
+      </div>
+      {/* Input bar */}
       <div className="border-t border-border px-3 py-2">
         <div className="flex items-center gap-1.5 rounded-xl border border-border bg-white px-2.5 py-1.5">
           <Smile className="h-4 w-4 text-brand-graphite-mid" />
           <span className="flex-1 text-[10px] text-brand-graphite-light">Type a message...</span>
           <Paperclip className="h-4 w-4 text-brand-graphite-mid" />
-          <div className="flex h-6 w-6 items-center justify-center rounded-md bg-brand-blue">
-            <Send className="h-3 w-3 text-white" />
-          </div>
+          <Mic className="h-4 w-4 text-brand-graphite-mid" />
         </div>
       </div>
       <PhoneHomeBar />
@@ -225,49 +337,13 @@ function Screen2() {
   )
 }
 
-function Screen3() {
-  return (
-    <div className="flex h-full flex-col bg-white">
-      <PhoneStatusBar />
-      <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
-        <span className="font-heading text-sm font-bold text-brand-graphite">Contacts</span>
-        <Search className="h-3.5 w-3.5 text-brand-graphite-mid" />
-      </div>
-      <div className="flex-1 overflow-hidden">
-        {contactList.map((c) => (
-          <div key={c.name} className="flex items-center gap-2.5 border-b border-border/50 px-4 py-3">
-            <Av initials={c.initials} size={10} />
-            <div className="flex-1">
-              <p className="text-xs font-semibold text-brand-graphite">{c.name}</p>
-              <p className="text-[10px] text-brand-graphite-mid">{c.role}</p>
-              <p className="mt-0.5 flex items-center gap-0.5 text-[9px] text-brand-graphite-mid">
-                <Clock className="h-2.5 w-2.5" /> {c.last}
-              </p>
-            </div>
-            <div className="flex gap-1.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-success/10">
-                <Phone className="h-3.5 w-3.5 text-brand-success" />
-              </div>
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-blue/10">
-                <Video className="h-3.5 w-3.5 text-brand-blue" />
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="px-4 py-2 text-center text-[9px] text-brand-graphite-mid">
-        All calls recorded &amp; linked to property records
-      </div>
-      <PhoneHomeBar />
-    </div>
-  )
-}
-
+/* Screen 4: Incoming Call — Tony S */
 function Screen4() {
   return (
     <div className="flex h-full flex-col items-center justify-center bg-gradient-to-b from-white to-brand-blue-tint text-center">
       <PhoneStatusBar />
       <div className="flex flex-1 flex-col items-center justify-center px-6">
+        <p className="mb-4 text-[10px] font-medium uppercase tracking-widest text-brand-graphite-mid">Incoming voice call</p>
         <div className="relative mb-4">
           <motion.div
             className="absolute -inset-3 rounded-full border-2 border-brand-blue/20"
@@ -279,11 +355,13 @@ function Screen4() {
             animate={{ scale: [1, 1.4, 1], opacity: [0.4, 0, 0.4] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
           />
-          <Av initials="SM" size={14} />
+          {/* Large circular avatar for Tony S */}
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue to-brand-blue/80">
+            <span className="font-heading text-2xl font-bold text-white">TS</span>
+          </div>
         </div>
-        <p className="text-[10px] font-medium uppercase tracking-widest text-brand-blue">Incoming Call</p>
-        <p className="mt-1.5 font-heading text-base font-semibold text-brand-graphite">Sarah Mitchell</p>
-        <p className="mt-0.5 text-[11px] text-brand-graphite-mid">Tenant · Unit 4B</p>
+        <p className="mt-2 font-heading text-xl font-semibold text-brand-graphite">Tony S</p>
+        <p className="mt-3 text-[11px] text-brand-graphite-mid">Decline with a message</p>
         <div className="mt-8 flex items-center gap-10">
           <motion.div
             className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-error shadow-lg"
@@ -305,31 +383,38 @@ function Screen4() {
   )
 }
 
+/* Screen 5: On a Call — Recording indicator, Alice R */
 function Screen5() {
   return (
     <div className="flex h-full flex-col bg-[#0A1628] text-white">
       <PhoneStatusBar dark />
       <div className="flex flex-1 flex-col items-center justify-center px-6">
-        <Av initials="DK" size={16} dark />
-        <p className="mt-4 font-heading text-sm font-semibold">David Kim</p>
-        <p className="mt-0.5 text-[10px] text-white/50">Owner · 45 Queen St</p>
-        <motion.p
-          className="mt-3 font-mono text-xl tabular-nums text-brand-blue-light"
-          animate={{ opacity: [1, 0.4, 1] }}
-          transition={{ duration: 2.5, repeat: Infinity }}
-        >
-          12:34
-        </motion.p>
-        <p className="mt-1 text-[9px] text-white/30">Call being recorded</p>
-        <div className="mt-8 flex items-center gap-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10">
-            <Mic className="h-4 w-4 text-white/70" />
+        {/* Recording indicator */}
+        <div className="mb-6 flex items-center gap-1.5">
+          <motion.span
+            className="h-2 w-2 rounded-full bg-brand-error"
+            animate={{ opacity: [1, 0.3, 1] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          />
+          <span className="font-mono text-xs text-white/60">00:01</span>
+        </div>
+        {/* Large circular avatar */}
+        <div className="flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue to-brand-blue/70">
+          <span className="font-heading text-3xl font-bold text-white">AR</span>
+        </div>
+        <p className="mt-4 font-heading text-base font-semibold">Alice R</p>
+        <div className="mt-10 flex items-center gap-3.5">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10">
+            <Volume2 className="h-4.5 w-4.5 text-white/70" />
+          </div>
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10">
+            <MicOff className="h-4.5 w-4.5 text-white/70" />
+          </div>
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10">
+            <Video className="h-4.5 w-4.5 text-white/70" />
           </div>
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-error">
             <PhoneOff className="h-5 w-5 text-white" />
-          </div>
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10">
-            <Video className="h-4 w-4 text-white/70" />
           </div>
         </div>
       </div>
@@ -338,14 +423,27 @@ function Screen5() {
   )
 }
 
+/* Screen 6: Meet Together, All at Once — Group video with John D, Ali... */
 function Screen6() {
   return (
     <div className="flex h-full flex-col bg-[#0A1628]">
       <PhoneStatusBar dark />
-      <div className="border-b border-white/10 px-4 py-2">
-        <span className="text-xs font-semibold text-white">Q1 Property Review</span>
-        <p className="text-[9px] text-white/40">4 participants</p>
+      {/* Header with name and recording */}
+      <div className="flex items-center justify-between border-b border-white/10 px-4 py-2">
+        <div>
+          <span className="text-xs font-semibold text-white">John D, Ali...</span>
+          <div className="mt-0.5 flex items-center gap-1">
+            <motion.span
+              className="h-1.5 w-1.5 rounded-full bg-brand-error"
+              animate={{ opacity: [1, 0.3, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            />
+            <span className="font-mono text-[9px] text-white/40">00:48</span>
+          </div>
+        </div>
+        <Users className="h-4 w-4 text-white/50" />
       </div>
+      {/* 4 participant video tiles */}
       <div className="grid flex-1 grid-cols-2 gap-1.5 p-2">
         {meetParticipants.map((p) => (
           <div key={p.name} className="relative flex flex-col items-center justify-center rounded-xl bg-white/5">
@@ -359,11 +457,12 @@ function Screen6() {
           </div>
         ))}
       </div>
+      {/* Bottom controls: camera, share, video, cast, end */}
       <div className="flex items-center justify-center gap-3 border-t border-white/10 px-4 py-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10"><Mic className="h-3.5 w-3.5 text-white/70" /></div>
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10"><Video className="h-3.5 w-3.5 text-white/70" /></div>
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10"><Send className="h-3.5 w-3.5 text-white/70" /></div>
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10"><Mic className="h-3.5 w-3.5 text-white/70" /></div>
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-error"><PhoneOff className="h-4 w-4 text-white" /></div>
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10"><Users className="h-3.5 w-3.5 text-white/70" /></div>
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10"><MoreVertical className="h-3.5 w-3.5 text-white/70" /></div>
       </div>
       <PhoneHomeBar dark />
@@ -371,36 +470,65 @@ function Screen6() {
   )
 }
 
+/* Screen 7: Everything, Saved for Later — Overview with tabs */
 function Screen7() {
   return (
     <div className="flex h-full flex-col bg-white">
       <PhoneStatusBar />
-      <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
-        <span className="font-heading text-sm font-bold text-brand-graphite">Saved</span>
-        <Search className="h-3.5 w-3.5 text-brand-graphite-mid" />
+      {/* Header */}
+      <div className="flex items-center gap-2.5 border-b border-border px-4 py-2.5">
+        <ChevronLeft className="h-4 w-4 text-brand-graphite-mid" />
+        <span className="font-heading text-sm font-bold text-brand-graphite">Overview</span>
       </div>
-      <div className="flex gap-1.5 border-b border-border px-4 py-2">
-        {['All', 'Photos', 'Docs'].map((f, i) => (
-          <span key={f} className={`rounded-full px-2.5 py-0.5 text-[10px] font-medium ${i === 0 ? 'bg-brand-blue text-white' : 'bg-brand-off-white text-brand-graphite-mid'}`}>{f}</span>
+      {/* Tabs: Summary / Recording & Transcript / Parties */}
+      <div className="flex border-b border-border">
+        {['Summary', 'Recording & Transcript', 'Parties'].map((tab, i) => (
+          <span
+            key={tab}
+            className={`flex-1 py-2 text-center text-[9px] font-medium ${i === 1 ? 'border-b-2 border-brand-blue text-brand-blue' : 'text-brand-graphite-mid'}`}
+          >
+            {tab}
+          </span>
         ))}
       </div>
-      <div className="flex-1 overflow-hidden">
-        {savedFiles.map((f) => (
-          <div key={f.name} className="flex items-center gap-2.5 border-b border-border/50 px-4 py-2.5">
-            <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${f.type === 'image' ? 'bg-brand-blue/10 text-brand-blue' : 'bg-brand-error/10 text-brand-error'}`}>
-              {f.type === 'image' ? <ImageIcon className="h-3.5 w-3.5" /> : <FileText className="h-3.5 w-3.5" />}
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="truncate text-[11px] font-medium text-brand-graphite">{f.name}</p>
-              <p className="text-[9px] text-brand-graphite-mid">{f.date}</p>
-            </div>
-            <Star className="h-3 w-3 text-brand-graphite-light" />
+      {/* Video player area */}
+      <div className="mx-4 mt-3 overflow-hidden rounded-xl bg-[#0A1628]">
+        <div className="relative flex h-36 items-center justify-center">
+          {/* Play button overlay */}
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+            <span className="ml-0.5 text-lg text-white">&#9654;</span>
           </div>
-        ))}
+          {/* Duration badge */}
+          <span className="absolute bottom-2 right-2 rounded bg-black/50 px-1.5 py-0.5 text-[8px] text-white/80">12:34</span>
+        </div>
       </div>
-      <div className="border-t border-border px-4 py-2">
-        <div className="flex items-center justify-center gap-1.5 rounded-lg bg-brand-blue py-2 text-[11px] font-semibold text-white">
-          Get Started <ArrowRight className="h-3 w-3" />
+      {/* Playback controls */}
+      <div className="mt-2 px-4">
+        {/* Progress bar */}
+        <div className="h-1 w-full rounded-full bg-brand-graphite-light/20">
+          <div className="h-1 w-[35%] rounded-full bg-brand-blue" />
+        </div>
+        <div className="mt-1 flex items-center justify-between">
+          <span className="text-[8px] text-brand-graphite-mid">4:21</span>
+          <span className="text-[8px] text-brand-graphite-mid">12:34</span>
+        </div>
+      </div>
+      {/* Transcript preview */}
+      <div className="flex-1 overflow-hidden px-4 pt-3">
+        <p className="mb-2 text-[10px] font-semibold text-brand-graphite">Transcript</p>
+        <div className="space-y-2">
+          <div>
+            <p className="text-[8px] font-semibold text-brand-blue">John D · 0:00</p>
+            <p className="text-[10px] leading-snug text-brand-graphite/70">Hey everyone, thanks for joining. Let&apos;s go over the quarterly numbers.</p>
+          </div>
+          <div>
+            <p className="text-[8px] font-semibold text-brand-blue">Alice R · 0:15</p>
+            <p className="text-[10px] leading-snug text-brand-graphite/70">Sure, I have the occupancy report ready to share.</p>
+          </div>
+          <div>
+            <p className="text-[8px] font-semibold text-brand-blue">Sarah M · 0:28</p>
+            <p className="text-[10px] leading-snug text-brand-graphite/70">Great, I also prepared the maintenance summary...</p>
+          </div>
         </div>
       </div>
       <PhoneHomeBar />
@@ -587,33 +715,49 @@ function PhoneCarousel() {
 export function CommunicationsSystem() {
   return (
     <section className="overflow-hidden bg-white py-12 md:py-16">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-6xl px-6">
         {/* Section header */}
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
             variants={revealItem}
             className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue"
           >
-            Communications
+            Communications Infrastructure
           </motion.p>
           <motion.h2
             variants={revealItem}
             className="mt-3 font-display text-4xl font-normal text-brand-graphite md:text-5xl"
           >
-            Every conversation in <span className="text-keyword">one place</span>
+            Personal phones, scattered emails, and zero <span className="text-keyword">audit trail</span>
           </motion.h2>
           <motion.p
             variants={revealItem}
             className="mx-auto mt-4 max-w-xl text-lg text-brand-graphite/70"
           >
-            Built-in phone, video, and messaging for tenants, owners, and vendors.
-            No more switching between apps.
+            Every time a tenant texts your personal number or a vendor call goes unlogged, you lose control. Disputes escalate without proof. Boundaries disappear. Revun deploys encrypted messaging, calling, and video with a full audit trail — no personal information shared, every conversation documented and under your control.
           </motion.p>
         </RevealOnScroll>
 
         {/* 3D Phone Carousel */}
         <div className="mt-16">
           <PhoneCarousel />
+        </div>
+      </div>
+
+      {/* Individual screenshot showcase */}
+      <div className="mx-auto mt-16 max-w-6xl px-6">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
+          {screens.map((s) => (
+            <div key={s.screenshot} className="overflow-hidden rounded-xl border border-border shadow-sm transition-shadow hover:shadow-md">
+              <Image
+                src={s.screenshot}
+                alt={`Revun ${s.title} ${s.highlight}`}
+                width={340}
+                height={680}
+                className="h-auto w-full"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>

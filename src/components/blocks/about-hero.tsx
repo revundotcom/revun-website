@@ -33,9 +33,8 @@ export function AboutHero() {
           variants={fadeUp}
           className="font-display font-extrabold text-5xl leading-[1.08] tracking-tight text-[#0A1628] md:text-7xl"
         >
-          Built for{' '}
-          <span className="text-[#176FEB]">Canadian</span>
-          <br className="hidden sm:block" /> Property Managers
+          Built for property operations across{' '}
+          <span className="text-[#176FEB]">Canada and the United States</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -43,8 +42,9 @@ export function AboutHero() {
           variants={fadeUp}
           className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#555860]"
         >
-          Property management infrastructure designed from the ground up for the
-          Canadian market, with full US coverage built in.
+          The software platform and infrastructure layer behind modern property
+          operations for owners, property managers, brokerages, leasing teams,
+          maintenance companies, and REITs.
         </motion.p>
       </motion.div>
     </section>

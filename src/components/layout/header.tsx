@@ -28,6 +28,23 @@ interface NavItem {
 
 // ─── Navigation data ─────────────────────────────────────────────────────────
 
+const PRODUCT_ITEMS: NavChild[] = [
+  { label: 'Communications', description: 'Messaging, email, and notifications', href: '/features/communications/', icon: 'MessageSquare' },
+  { label: 'Leasing', description: 'Applications, screening, and renewals', href: '/features/lease-management/', icon: 'FileText' },
+  { label: 'Maintenance', description: 'Work orders, dispatch, and tracking', href: '/features/maintenance/', icon: 'Wrench' },
+  { label: 'Payments & Wallet', description: 'Collect rent and manage finances', href: '/wallet/', icon: 'Wallet' },
+  { label: 'Accounting & Reporting', description: 'Books, reports, and reconciliation', href: '/features/accounting/', icon: 'BarChart3' },
+  { label: 'Compliance & Documents', description: 'Leases, notices, and document vault', href: '/features/compliance/', icon: 'ShieldCheck' },
+  { label: 'Document Vault', description: 'Secure storage, ID verification, credit reports', href: '/features/document-vault/', icon: 'Lock' },
+  { label: 'AI & Automation', description: 'Smart workflows and auto-responses', href: '/features/ai-automation/', icon: 'Bot' },
+  { label: 'Dashboards', description: 'Real-time insights at a glance', href: '/features/dashboards/', icon: 'LayoutDashboard' },
+  { label: 'Mobile App', description: 'Manage from anywhere', href: '/download/', icon: 'Smartphone' },
+  { label: 'Desktop Platform', description: 'The full operating system', href: '/platform/', icon: 'Monitor' },
+  { label: 'Owner Portal', description: 'Visibility for property owners', href: '/features/owner-portal/', icon: 'UserCircle' },
+  { label: 'Tenant Portal', description: 'Self-service for tenants', href: '/features/tenant-portal/', icon: 'KeyRound' },
+  { label: 'Roommate Matching', description: 'Find compatible roommates', href: '/features/roommates/', icon: 'Users' },
+]
+
 const SOLUTIONS_ITEMS: NavChild[] = [
   {
     label: 'Self-Managing Owners',
@@ -65,30 +82,35 @@ const SOLUTIONS_ITEMS: NavChild[] = [
     href: '/solutions/reits/',
     icon: 'TrendingUp',
   },
-]
-
-const PLATFORM_ITEMS: NavChild[] = [
-  { label: 'Platform Overview', description: 'The full operating system', href: '/platform/', icon: 'Layers' },
-  { label: 'Features', description: 'Six core modules', href: '/features/', icon: 'Sparkles' },
-  { label: 'Events & Tours', description: 'Schedule and manage tours', href: '/events/', icon: 'Calendar' },
-  { label: 'Wallet', description: 'Payments and financials', href: '/wallet/', icon: 'Wallet' },
-  { label: 'Integrations', description: '40+ connected tools', href: '/integrations/', icon: 'Plug' },
-  { label: 'Coverage', description: 'Canada & US availability', href: '/coverage/', icon: 'MapPin' },
+  {
+    label: 'Tenants',
+    description: 'Pay rent, submit requests, and more',
+    href: '/solutions/tenants/',
+    icon: 'KeyRound',
+  },
+  {
+    label: 'Internal Ops Teams',
+    description: 'Centralize operations across teams',
+    href: '/solutions/internal-ops-teams/',
+    icon: 'Briefcase',
+  },
 ]
 
 const RESOURCES_ITEMS: NavChild[] = [
   { label: 'Help Center', description: 'Guides and documentation', href: '/help/' },
-  { label: 'About', description: 'Our story and mission', href: '/about/' },
-  { label: 'Compare', description: 'See how Revun stacks up', href: '/compare/' },
-  { label: 'Contact', description: 'Get in touch with our team', href: '/contact/' },
+  { label: 'Resources', description: 'Articles, guides, and insights', href: '/resources/' },
+  { label: 'How It Works', description: 'See the platform in action', href: '/how-revun-works/' },
+  { label: 'Why Revun', description: 'What makes Revun different', href: '/why-revun/' },
+  { label: 'Download', description: 'Get the mobile and desktop apps', href: '/download/' },
 ]
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: 'Platform', children: PLATFORM_ITEMS },
+  { label: 'Product', children: PRODUCT_ITEMS },
   { label: 'Solutions', children: SOLUTIONS_ITEMS },
-  { label: 'Investment', href: '/investment/' },
+  { label: 'Tenants', href: '/tenants/' },
+  { label: 'Industries', href: '/industries/' },
   { label: 'Pricing', href: '/pricing/' },
-  { label: 'Demo', href: '/demo/' },
+  { label: 'Compare', href: '/compare/' },
   { label: 'Resources', children: RESOURCES_ITEMS },
 ]
 
@@ -142,6 +164,40 @@ function SimpleDropdownItem({ item, onClose }: { item: NavChild; onClose: () => 
   )
 }
 
+// ─── Mega menu: Product ─────────────────────────────────────────────────────
+
+function ProductMegaMenu({ onClose }: { onClose: () => void }) {
+  return (
+    <motion.div
+      variants={dropdownVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      className="absolute left-1/2 top-full mt-2 w-[820px] -translate-x-1/2 rounded-xl border border-border bg-white p-5"
+      role="menu"
+      onKeyDown={(e) => e.key === 'Escape' && onClose()}
+    >
+      <div className="mb-3 flex items-center justify-between">
+        <p className="text-xs font-heading font-semibold uppercase tracking-wider text-[#94A3B8]">
+          Product
+        </p>
+        <Link
+          href="/platform/"
+          className="text-xs font-medium text-brand-blue hover:underline"
+          onClick={onClose}
+        >
+          Platform overview
+        </Link>
+      </div>
+      <div className="grid grid-cols-3 gap-1">
+        {PRODUCT_ITEMS.map((item) => (
+          <DropdownItem key={item.href} item={item} onClose={onClose} />
+        ))}
+      </div>
+    </motion.div>
+  )
+}
+
 // ─── Mega menu: Solutions ────────────────────────────────────────────────────
 
 function SolutionsMegaMenu({ onClose }: { onClose: () => void }) {
@@ -169,28 +225,6 @@ function SolutionsMegaMenu({ onClose }: { onClose: () => void }) {
       </div>
       <div className="grid grid-cols-2 gap-1">
         {SOLUTIONS_ITEMS.map((item) => (
-          <DropdownItem key={item.href} item={item} onClose={onClose} />
-        ))}
-      </div>
-    </motion.div>
-  )
-}
-
-// ─── Dropdown: Platform ──────────────────────────────────────────────────────
-
-function PlatformDropdown({ onClose }: { onClose: () => void }) {
-  return (
-    <motion.div
-      variants={dropdownVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      className="absolute left-1/2 top-full mt-2 w-[360px] -translate-x-1/2 rounded-xl border border-border bg-white p-4"
-      role="menu"
-      onKeyDown={(e) => e.key === 'Escape' && onClose()}
-    >
-      <div className="space-y-1">
-        {PLATFORM_ITEMS.map((item) => (
           <DropdownItem key={item.href} item={item} onClose={onClose} />
         ))}
       </div>
@@ -290,10 +324,10 @@ function DesktopNavItem({
         </button>
         <AnimatePresence>
           {isOpen && (
-            item.label === 'Solutions' ? (
+            item.label === 'Product' ? (
+              <ProductMegaMenu onClose={() => setOpenDropdown(null)} />
+            ) : item.label === 'Solutions' ? (
               <SolutionsMegaMenu onClose={() => setOpenDropdown(null)} />
-            ) : item.label === 'Platform' ? (
-              <PlatformDropdown onClose={() => setOpenDropdown(null)} />
             ) : (
               <ResourcesDropdown onClose={() => setOpenDropdown(null)} />
             )
@@ -322,10 +356,10 @@ function CTACluster() {
   return (
     <div className="hidden items-center gap-2 lg:flex">
       <Link
-        href="/login/"
-        className="rounded-lg px-3.5 py-2 text-sm font-medium transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring text-brand-graphite-mid hover:text-brand-graphite hover:bg-brand-off-white"
+        href="/demo/"
+        className="rounded-lg border border-border px-3.5 py-2 text-sm font-semibold transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring text-brand-graphite hover:bg-brand-off-white"
       >
-        Log In
+        Book Demo
       </Link>
       <Link
         href="/signup/"
@@ -356,6 +390,8 @@ const DARK_HERO_PAGES = [
   '/traveling-tenants/',
   '/use-cases/',
   '/powered-by-revun/',
+  '/why-revun/',
+  '/tenants/',
 ]
 
 const DARK_HERO_PREFIXES = [

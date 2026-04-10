@@ -31,7 +31,7 @@ const paths = [
 export function HelpRouting() {
   return (
     <section className="bg-white py-12 md:py-16">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-6xl px-6">
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
             variants={revealItem}

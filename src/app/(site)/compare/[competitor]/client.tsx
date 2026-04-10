@@ -24,7 +24,7 @@ export function CompareDetailClient({ data }: { data: CompetitorData }) {
       {/* ── Hero ── */}
       <section className="relative overflow-hidden bg-[#F5F6F8]">
         <motion.div
-          className="relative mx-auto max-w-7xl px-6 py-16 text-center sm:py-16 lg:px-8"
+          className="relative mx-auto max-w-6xl px-6 py-16 text-center sm:py-16 lg:px-8"
           variants={heroStagger}
           initial="hidden"
           animate="visible"
@@ -79,7 +79,7 @@ export function CompareDetailClient({ data }: { data: CompetitorData }) {
       )}
 
       {/* ── Quick Comparison Cards ── */}
-      <section className="bg-white py-14">
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-5xl px-6 lg:px-8">
           <RevealOnScroll stagger={0.1}>
             <div className="grid gap-6 md:grid-cols-2">
@@ -156,7 +156,7 @@ export function CompareDetailClient({ data }: { data: CompetitorData }) {
       </section>
 
       {/* ── Feature Comparison Table ── */}
-      <section className="bg-[#F5F6F8] py-14">
+      <section className="bg-[#F5F6F8] py-16 md:py-20">
         <div className="mx-auto max-w-5xl px-6 lg:px-8">
           <RevealOnScroll>
             <motion.div variants={fadeUp} className="mb-8 text-center">
@@ -208,7 +208,7 @@ export function CompareDetailClient({ data }: { data: CompetitorData }) {
       </section>
 
       {/* ── Pricing Comparison ── */}
-      <section className="bg-white py-14">
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
           <RevealOnScroll>
             <motion.div variants={fadeUp}>
@@ -225,7 +225,7 @@ export function CompareDetailClient({ data }: { data: CompetitorData }) {
                     {data.revunPricingSummary}
                   </p>
                   <p className="mt-2 text-sm text-[#555860]">
-                    Transparent, per-unit pricing. No hidden fees.
+                    Clear, per-unit pricing. No hidden fees.
                   </p>
                 </div>
                 <div className="rounded-2xl border border-[#D3D5DB] bg-[#F5F6F8] p-6">
@@ -244,7 +244,7 @@ export function CompareDetailClient({ data }: { data: CompetitorData }) {
       </section>
 
       {/* ── Why Teams Choose Revun ── */}
-      <section className="bg-[#F5F6F8] py-14">
+      <section className="bg-[#F5F6F8] py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <RevealOnScroll>
             <motion.div variants={fadeUp} className="mb-8 text-center">
@@ -281,7 +281,7 @@ export function CompareDetailClient({ data }: { data: CompetitorData }) {
 
       {/* ── FAQ ── */}
       {data.faq && data.faq.length > 0 && (
-        <section className="bg-white py-14">
+        <section className="bg-white py-16 md:py-20">
           <div className="mx-auto max-w-3xl px-6 lg:px-8">
             <RevealOnScroll>
               <motion.div variants={fadeUp} className="mb-10 text-center">
@@ -332,7 +332,7 @@ export function CompareDetailClient({ data }: { data: CompetitorData }) {
                 Ready to switch?
               </h2>
               <p className="mx-auto mt-5 max-w-lg text-lg text-[#555860]">
-                See why property managers are choosing Revun over {data.name}. Start free or book a personalized demo.
+                See why property managers are choosing Revun over {data.name}. Start free or book a live demo.
               </p>
               <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
                 <Link

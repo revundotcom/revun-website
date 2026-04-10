@@ -35,7 +35,7 @@ const integrations: Integration[] = [
   {
     name: 'DocuSign',
     slug: 'docusign',
-    category: 'Documents',
+    category: 'Signatures',
     description: 'Electronic lease signing and document management.',
   },
   {
@@ -47,10 +47,47 @@ const integrations: Integration[] = [
   {
     name: 'Zapier',
     slug: 'zapier',
-    category: 'Productivity',
+    category: 'Analytics',
     description: 'Connect Revun to 5,000+ apps with custom automations.',
   },
+  {
+    name: 'Certn',
+    slug: 'certn',
+    category: 'Identity Verification',
+    description: 'Automated background checks and identity verification for applicants.',
+  },
+  {
+    name: 'Realtor.ca',
+    slug: 'realtor-ca',
+    category: 'Listing Distribution',
+    description: 'Syndicate vacancies to Realtor.ca and other Canadian listing networks.',
+  },
+  {
+    name: 'Plaid',
+    slug: 'plaid',
+    category: 'Banking',
+    description: 'Secure bank account connections for payment verification and income checks.',
+  },
+  {
+    name: 'Intercom',
+    slug: 'intercom',
+    category: 'Support',
+    description: 'In-app messaging and help desk for tenant and owner support.',
+  },
 ]
+
+const categoryOrder = [
+  'Accounting',
+  'Communications',
+  'Payments',
+  'Signatures',
+  'CRM',
+  'Identity Verification',
+  'Listing Distribution',
+  'Analytics',
+  'Banking',
+  'Support',
+] as const
 
 function IntegrationCard({ integration }: { integration: Integration }) {
   return (
@@ -95,46 +132,49 @@ export default function IntegrationsPage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-[#F5F6F8]">
-        <div className="relative mx-auto max-w-7xl px-6 py-16 text-center sm:py-16 lg:px-8">
+        <div className="relative mx-auto max-w-6xl px-6 py-16 text-center sm:py-16 lg:px-8">
           <RevealOnScroll>
             <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-4 py-1.5 text-sm text-[#555860]">
               <Plug className="size-4" />
               Integrations
             </div>
             <h1 className="font-display text-4xl font-normal text-[#0A1628] sm:text-5xl lg:text-6xl">
-              Connect Revun with Your Favorite{' '}
-              <span className="text-[#176FEB]">Tools</span>
+              Connect Revun to the systems your{' '}
+              <span className="text-[#176FEB]">business already relies on</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-[#555860]">
-              Revun connects to the tools your business already runs on, from accounting and payments to communications and identity verification.
+              Revun sits at the center of your operation, connecting accounting, communications, screening, identity verification, signatures, CRM, and reporting.
             </p>
           </RevealOnScroll>
         </div>
       </section>
 
-      {/* Featured Integrations */}
-      <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-bold text-[#2C2E33] sm:text-3xl">
-            Featured <span className="text-[#176FEB]">Integrations</span>
-          </h2>
-          <p className="mt-2 text-[#555860]">
-            Our most popular connections, ready to go out of the box.
-          </p>
-          <RevealOnScroll stagger={0.05}>
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {integrations.map((integration) => (
-                <motion.div key={integration.slug} variants={revealItem}>
-                  <IntegrationCard integration={integration} />
-                </motion.div>
-              ))}
+      {/* Integrations grouped by category */}
+      {categoryOrder.map((category) => {
+        const items = integrations.filter((i) => i.category === category)
+        if (items.length === 0) return null
+        return (
+          <section key={category} className="bg-[#F5F6F8] py-12">
+            <div className="mx-auto max-w-6xl px-6 lg:px-8">
+              <h2 className="font-heading text-2xl font-bold text-[#2C2E33] sm:text-3xl">
+                {category}
+              </h2>
+              <RevealOnScroll stagger={0.05}>
+                <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                  {items.map((integration) => (
+                    <motion.div key={integration.slug} variants={revealItem}>
+                      <IntegrationCard integration={integration} />
+                    </motion.div>
+                  ))}
+                </div>
+              </RevealOnScroll>
             </div>
-          </RevealOnScroll>
-        </div>
-      </section>
+          </section>
+        )
+      })}
 
       {/* Bottom CTA */}
-      <section className="bg-white py-14">
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-3xl border-t border-[#D3D5DB] px-6 pt-20 text-center lg:px-8">
           <h2 className="font-heading text-2xl font-bold text-[#2C2E33] sm:text-3xl">
             Need a Custom <span className="text-[#176FEB]">Integration</span>?

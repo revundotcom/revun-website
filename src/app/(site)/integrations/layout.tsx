@@ -3,14 +3,14 @@ import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
 import { buildBreadcrumbSchema } from '@/lib/schema-builders'
 
 export const metadata: Metadata = {
-  title: 'Integrations',
+  title: 'Integrations | Connect Revun to Your Business Systems',
   description:
-    'Revun integrates with 40+ tools including QuickBooks, Xero, Stripe, DocuSign, Twilio, and more. Connect your existing workflow in minutes.',
+    'Revun sits at the center of your operation, connecting accounting, communications, screening, identity verification, signatures, CRM, and reporting.',
   alternates: { canonical: buildCanonicalUrl('/integrations') },
   openGraph: {
-    title: 'Integrations | Revun',
+    title: 'Integrations | Connect Revun to Your Business Systems',
     description:
-      'Connect Revun with 40+ accounting, payment, screening, and communication tools.',
+      'Connect Revun to accounting, communications, payments, screening, signatures, CRM, and reporting.',
     url: buildCanonicalUrl('/integrations'),
   },
 }

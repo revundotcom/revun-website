@@ -3,33 +3,34 @@ import { buildFAQPageSchema, buildBreadcrumbSchema } from '@/lib/schema-builders
 import { sanitizeJsonLd } from '@/lib/utils'
 import { HeroSection } from '@/components/blocks/hero-section'
 import { AudienceRouter } from '@/components/blocks/audience-router'
-import { PoweredByRevun } from '@/components/blocks/powered-by-revun'
-import { SelfManageCallout } from '@/components/blocks/self-manage-callout'
 import { FeatureShowcase } from '@/components/blocks/feature-showcase'
-import { DocumentCompliance } from '@/components/blocks/document-compliance'
-import { CommunicationsSystem } from '@/components/blocks/communications-system'
 import { PaymentsFintech } from '@/components/blocks/payments-fintech'
 import { Testimonials } from '@/components/blocks/testimonials'
 import { HomepageFaq } from '@/components/blocks/homepage-faq'
 import { CTASection } from '@/components/blocks/cta-section'
+import { OperatorPlatformBlock } from '@/components/blocks/operator-platform-block'
 import { ReviewBadges } from '@/components/blocks/review-badges'
+import ProblemSection from '@/components/blocks/problem-section'
+import EcosystemMap from '@/components/blocks/ecosystem-map'
+import VisualLibrary from '@/components/blocks/visual-library'
+import ComparisonPreview from '@/components/blocks/comparison-preview'
 
 export const metadata: Metadata = {
-  title: 'Revun | Canada\'s Only Full-Stack Property Management Platform',
+  title: 'Revun | The Operating System for Property Operations',
   description:
-    'Revun is the first Canadian-native property management platform combining rent guarantee, tenant screening, lease management, maintenance, and provincial compliance automation for landlords across Canada and the US.',
+    'Revun is the infrastructure layer for modern property operations. Leasing, payments, maintenance, compliance, communications, accounting, and reporting — all unified in one system for Canada and the United States.',
   alternates: {
     canonical: '/',
   },
 }
 
 const homepageFaqs = [
-  { question: 'What is Revun?', answer: 'Revun is a property management infrastructure platform for Canada and the United States. It replaces disconnected tools with a single operating system for leasing, payments, maintenance, screening, and more.' },
-  { question: 'Who is Revun built for?', answer: 'Revun serves self-managing property owners, property management companies, brokerages, leasing companies, maintenance companies, and REITs. Whether you manage one unit or one thousand, the platform adapts to your role.' },
-  { question: 'How much does Revun cost?', answer: 'Revun offers a free tier for self-managing owners. Growth starts at $29/unit/month, Professional at $49/unit/month, and Enterprise pricing is customized. All plans include a free trial with no credit card required.' },
+  { question: 'What is Revun?', answer: 'Revun is the operating system for property operations — an infrastructure layer that unifies leasing, payments, maintenance, compliance, communications, accounting, and reporting into one system. It replaces disconnected tools with a single platform built for Canada and the United States.' },
+  { question: 'Who is Revun built for?', answer: 'Revun serves self-managing property owners, property management companies, brokerages, leasing teams, maintenance companies, REITs, and tenants. Whether you manage one unit or an entire national portfolio, the platform gives every role — including internal ops teams — the exact workflows and visibility they need.' },
+  { question: 'How much does Revun cost?', answer: 'Revun is free for self-managing owners with 1-2 units. The Operator plan starts at $29/unit/month, Brokerage & Leasing at $49/unit/month, and Enterprise & REIT pricing is custom. All paid plans include a 14-day free trial with no credit card required.' },
   { question: 'Is Revun available in my province or state?', answer: 'Revun currently operates across all Canadian provinces including Ontario, British Columbia, Alberta, Quebec, Nova Scotia, and Manitoba. US expansion is underway with initial coverage in key states.' },
   { question: 'What integrations does Revun support?', answer: 'Revun integrates with 40+ tools including Stripe, QuickBooks, Xero, DocuSign, Twilio, Salesforce, HubSpot, Zapier, Google Workspace, Microsoft 365, Plaid, and Interac.' },
-  { question: 'How do I get started?', answer: 'Sign up for a free account at revun.com. No credit card required. You can start managing properties immediately with our free tier, or book a demo to see the full platform in action.' },
+  { question: 'How do I get started?', answer: 'See the full platform at revun.com/platform, or book a live demo to walk through it with our team. You can also sign up for a free account — no credit card required — and start managing properties immediately.' },
 ]
 
 export default function HomePage() {
@@ -51,16 +52,17 @@ export default function HomePage() {
       />
       <HeroSection />
       <ReviewBadges />
+      <ProblemSection />
+      <EcosystemMap />
       <AudienceRouter />
-      <PoweredByRevun />
-      <SelfManageCallout />
-      <FeatureShowcase />
-      <DocumentCompliance />
-      <CommunicationsSystem />
+      <VisualLibrary />
       <PaymentsFintech />
+      <FeatureShowcase />
+      <ComparisonPreview />
       <Testimonials />
-      <HomepageFaq />
       <CTASection />
+      <HomepageFaq />
+      <OperatorPlatformBlock />
     </>
   )
 }

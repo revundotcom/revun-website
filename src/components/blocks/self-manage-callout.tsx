@@ -244,7 +244,7 @@ export function SelfManageCallout() {
       <div className="absolute inset-0 bg-grid bg-grid-mask opacity-[0.03]" aria-hidden="true" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#176FEB]/[0.03] blur-[120px]" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6">
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           {/* Left: Text + Steps */}
           <div>

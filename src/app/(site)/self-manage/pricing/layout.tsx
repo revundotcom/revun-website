@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: buildCanonicalUrl('/self-manage/pricing') },
   openGraph: {
     title: 'Self-Manage Pricing | Revun',
-    description: 'Transparent pricing for self-managing landlords. Free tier available.',
+    description: 'Clear pricing for self-managing landlords. Free tier available.',
     url: buildCanonicalUrl('/self-manage/pricing'),
   },
 }

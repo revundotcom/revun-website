@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: 'Is there a free trial?',
-    a: 'The Free plan is free forever for 1-2 units. Growth and Professional plans include a 14-day free trial with full access.',
+    a: 'The Self-Managing Owner plan is free forever for 1-2 units. Operator and Brokerage & Leasing plans include a 14-day free trial with full access.',
   },
   {
     q: 'What payment methods do you accept?',
@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     q: 'Do you offer annual billing?',
-    a: 'Yes. Save 20% with annual billing on Growth and Professional plans.',
+    a: 'Yes. Save 20% with annual billing on Operator and Brokerage & Leasing plans.',
   },
   {
     q: 'What happens if I exceed my plan limits?',

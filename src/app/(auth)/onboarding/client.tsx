@@ -38,10 +38,10 @@ const slides = [
   },
   {
     icon: BarChart3,
-    heading: 'Your Entire Portfolio, Simplified',
+    heading: 'Your Entire Portfolio, Centralized',
     highlight: 'Portfolio',
     description:
-      'Oversee tours, leases, and tenants effortlessly. Connect with experts directly for tenant placement, property management, legal, etc.',
+      'Gain full visibility over tours, leases, and tenants from one control layer. Connect with experts directly for tenant placement, property management, legal, etc.',
   },
   {
     icon: Users,

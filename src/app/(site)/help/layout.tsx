@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 import { buildCanonicalUrl } from '@/lib/utils'
 
 export const metadata: Metadata = {
-  title: 'Help Center | Revun',
-  description: 'Find guides, tutorials, and answers to common questions about using Revun for property management.',
+  title: 'Support & Training | Revun',
+  description: 'Find guides, tutorials, and answers organized by role and product area. Support for owners, tenants, property managers, and more.',
   alternates: { canonical: buildCanonicalUrl('/help') },
   openGraph: {
-    title: 'Help Center | Revun',
-    description: 'Guides and answers for Revun property management.',
+    title: 'Support & Training | Revun',
+    description: 'Guides, tutorials, and answers organized by role and product area.',
     url: buildCanonicalUrl('/help'),
   },
 }

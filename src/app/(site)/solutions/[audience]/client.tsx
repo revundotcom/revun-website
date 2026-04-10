@@ -57,6 +57,8 @@ const solutionIconMap: Record<string, React.ComponentType<React.SVGProps<SVGSVGE
   'leasing-companies': LeasingIcon,
   'maintenance-companies': MaintenanceCompanyIcon,
   'reits': FinancialReportingIcon,
+  'tenants': PropertyOwnerIcon,
+  'internal-ops-teams': PMCompanyIcon,
 }
 
 /* ── Types ────────────────────────────────────────────────────────────────── */
@@ -331,7 +333,7 @@ export function SolutionDetailClient({
             variants={revealItem}
             className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]"
           >
-            Simple pricing
+            Streamlined pricing
           </motion.p>
           <motion.div variants={revealItem}>
             <p className="font-heading text-5xl font-bold tracking-tight text-[#2C2E33] sm:text-6xl">

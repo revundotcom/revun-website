@@ -154,7 +154,7 @@ const faqs = [
   {
     question: 'Are there any hidden fees?',
     answer:
-      'No. The monthly price covers platform access. Add-ons like tenant screening and rent guarantee are optional and priced transparently. Payment processing fees from Stripe or Interac apply to rent collection.',
+      'No. The monthly price covers platform access. Add-ons like tenant screening and rent guarantee are optional and clearly priced. Payment processing fees from Stripe or Interac apply to rent collection.',
   },
   {
     question: 'Can I switch plans at any time?',
@@ -241,7 +241,7 @@ export default function SelfManagePricingPage() {
 
       {/* ── Pricing Tiers ─────────────────────────────────────────── */}
       <section className="bg-brand-off-white py-12">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-6xl px-6">
           <RevealOnScroll
             stagger={0.08}
             className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"

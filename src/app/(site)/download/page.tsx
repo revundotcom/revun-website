@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import {
   Smartphone,
   ArrowRight,
@@ -16,16 +17,17 @@ import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
 import { buildBreadcrumbSchema, buildWebPageSchema } from '@/lib/schema-builders'
 import { SITE_URL } from '@/lib/metadata'
+import { OperatorPlatformBlock } from '@/components/blocks/operator-platform-block'
 
 export const metadata: Metadata = {
-  title: 'Download the Revun App | Manage Properties on the Go',
+  title: 'Download Revun | Mobile, Desktop & Web Access',
   description:
-    'Download the Revun mobile app for iOS and Android. Manage properties, collect rent, handle maintenance, and communicate with tenants from anywhere.',
+    'Access Revun across mobile, desktop, and web. Whether you are on iPhone, Android, tablet, laptop, or desktop, Revun keeps your entire operation connected.',
   alternates: { canonical: buildCanonicalUrl('/download') },
   openGraph: {
-    title: 'Download the Revun App | Manage Properties on the Go',
+    title: 'Download Revun | Mobile, Desktop & Web Access',
     description:
-      'Manage your entire property portfolio from your phone. Rent collection, maintenance, tenant screening, and more.',
+      'Access Revun across mobile, desktop, and web. Owner app, tenant app, field team app, and operator dashboard — all connected.',
     url: buildCanonicalUrl('/download'),
   },
 }
@@ -40,12 +42,12 @@ const mobileFeatures = [
   },
   {
     title: 'Rent Collection',
-    description: 'Track payments in real time. Send reminders, process late fees, and view payment history on the go.',
+    description: 'Track payments in real time. Send reminders, process late fees, and view payment history across mobile, desktop, and web.',
     icon: CreditCard,
   },
   {
     title: 'Maintenance Management',
-    description: 'Receive work orders, assign vendors, approve estimates, and track completion from your phone.',
+    description: 'Receive work orders, assign vendors, approve estimates, and track completion from any device.',
     icon: Wrench,
   },
   {
@@ -60,7 +62,7 @@ const mobileFeatures = [
   },
   {
     title: 'Financial Overview',
-    description: 'View owner statements, P&L summaries, and portfolio performance from anywhere.',
+    description: 'View owner statements, P&L summaries, and portfolio performance across mobile, desktop, and web.',
     icon: BarChart3,
   },
   {
@@ -86,7 +88,7 @@ function buildMobileAppSchema(): Record<string, unknown> {
     operatingSystem: 'iOS, Android',
     url: `${SITE_URL}/download/`,
     description:
-      'Manage properties on the go with the Revun mobile app. Rent collection, maintenance management, tenant communication, and financial reporting from your phone.',
+      'Manage properties across mobile, desktop, and web with the Revun mobile app. Rent collection, maintenance management, tenant communication, and financial reporting from your phone.',
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -157,11 +159,11 @@ export default function DownloadPage() {
               Mobile App
             </p>
             <h1 className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-[#0A1628] sm:text-5xl lg:text-6xl">
-              Manage properties{' '}
-              <span className="text-[#176FEB]">on the go</span>
+              Revun works across{' '}
+              <span className="text-[#176FEB]">mobile, desktop, and web</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#555860]">
-              The Revun mobile app puts your entire property management operation in your pocket. Collect rent, handle maintenance, communicate with tenants, and track finances from anywhere.
+              Whether you are on iPhone, Android, Samsung, tablet, laptop, or desktop, Revun keeps your entire operation connected.
             </p>
           </RevealOnScroll>
         </div>
@@ -179,6 +181,12 @@ export default function DownloadPage() {
             </h2>
           </RevealOnScroll>
 
+          <RevealOnScroll className="mt-10 text-center">
+            <p className="mx-auto max-w-xl text-[#555860]">
+              Mobile access is being rolled out in phases. Join the early access list for iPhone and Android. Access Revun today on desktop and mobile web.
+            </p>
+          </RevealOnScroll>
+
           <RevealOnScroll stagger={0.12} className="mt-12">
             <div className="grid gap-6 md:grid-cols-2">
               {/* iOS */}
@@ -190,9 +198,12 @@ export default function DownloadPage() {
                 </div>
                 <h3 className="font-heading text-xl font-bold text-[#2C2E33]">iOS</h3>
                 <p className="mt-2 text-sm text-[#555860]">iPhone and iPad</p>
-                <div className="mt-6 inline-flex h-12 items-center justify-center rounded-xl bg-[#D3D5DB] px-8 text-base font-semibold text-[#555860]">
-                  Coming Soon
-                </div>
+                <Link
+                  href="/contact/"
+                  className="mt-6 inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white transition-colors hover:bg-[#1259c1]"
+                >
+                  Join Early Access
+                </Link>
                 <p className="mt-3 text-xs text-[#94A3B8]">iOS 16.0 or later required</p>
               </div>
 
@@ -205,26 +216,36 @@ export default function DownloadPage() {
                 </div>
                 <h3 className="font-heading text-xl font-bold text-[#2C2E33]">Android</h3>
                 <p className="mt-2 text-sm text-[#555860]">Phone and tablet</p>
-                <div className="mt-6 inline-flex h-12 items-center justify-center rounded-xl bg-[#D3D5DB] px-8 text-base font-semibold text-[#555860]">
-                  Coming Soon
-                </div>
+                <Link
+                  href="/contact/"
+                  className="mt-6 inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white transition-colors hover:bg-[#1259c1]"
+                >
+                  Join Early Access
+                </Link>
                 <p className="mt-3 text-xs text-[#94A3B8]">Android 10 or later required</p>
               </div>
             </div>
           </RevealOnScroll>
 
-          {/* QR Code Placeholder */}
-          <RevealOnScroll className="mt-16 text-center">
-            <div className="mx-auto max-w-sm rounded-2xl border border-[#D3D5DB] bg-[#F5F6F8] p-8">
-              <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
-                Scan to Download
-              </p>
-              <div className="mx-auto flex h-40 w-40 items-center justify-center rounded-xl border-2 border-dashed border-[#D3D5DB] bg-white">
-                <span className="text-sm text-[#94A3B8]">QR Code</span>
-              </div>
-              <p className="mt-4 text-xs text-[#94A3B8]">
-                Available when the app launches
-              </p>
+          {/* App Types */}
+          <RevealOnScroll stagger={0.1} className="mt-12">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { label: 'Owner app', desc: 'Portfolio overview, financials, and approvals' },
+                { label: 'Tenant app', desc: 'Payments, requests, and lease documents' },
+                { label: 'Field team app', desc: 'Work orders, inspections, and photo capture' },
+                { label: 'Operator dashboard', desc: 'Full operations, reporting, and team management' },
+              ].map((app) => (
+                <div
+                  key={app.label}
+                  className="rounded-2xl border border-[#D3D5DB] bg-[#F5F6F8] p-6 text-center"
+                >
+                  <h3 className="font-heading text-base font-bold text-[#2C2E33]">
+                    {app.label}
+                  </h3>
+                  <p className="mt-2 text-sm text-[#555860]">{app.desc}</p>
+                </div>
+              ))}
             </div>
           </RevealOnScroll>
         </div>
@@ -238,10 +259,10 @@ export default function DownloadPage() {
               Everything You Need
             </p>
             <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] md:text-4xl">
-              Your <span className="text-[#176FEB]">full operation</span> in your pocket
+              Your <span className="text-[#176FEB]">full operation</span> across every device
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-[#555860]">
-              The Revun mobile app is not a stripped-down companion. It is the full platform, optimized for mobile. Everything you do on desktop, you can do on your phone.
+              Revun is not a stripped-down companion app. It is the full platform, optimized for every screen. Everything you do on desktop, you can do across mobile and web.
             </p>
           </RevealOnScroll>
         </div>
@@ -285,29 +306,56 @@ export default function DownloadPage() {
         </div>
       </section>
 
-      {/* ── Screenshots Placeholder ── */}
-      <section className="bg-[#F5F6F8] py-12">
+      {/* ── App Screenshots ── */}
+      <section className="bg-[#F5F6F8] py-16">
         <div className="mx-auto max-w-5xl px-6">
-          <RevealOnScroll className="mb-10 text-center">
+          <RevealOnScroll className="mb-12 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Screenshots
             </p>
             <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] md:text-4xl">
               See it in <span className="text-[#176FEB]">action</span>
             </h2>
+            <p className="mx-auto mt-4 max-w-xl text-[#555860]">
+              Real screens from the Revun app. Every feature designed for property managers who need speed, clarity, and control.
+            </p>
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.08}>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {['Dashboard', 'Maintenance', 'Payments', 'Messaging'].map((label) => (
-                <div
-                  key={label}
-                  className="flex aspect-[9/16] items-center justify-center rounded-2xl border-2 border-dashed border-[#D3D5DB] bg-white"
-                >
-                  <div className="text-center">
-                    <Smartphone className="mx-auto mb-2 h-8 w-8 text-[#D3D5DB]" />
-                    <span className="text-sm font-medium text-[#94A3B8]">{label}</span>
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-3">
+              {[
+                { src: '/screenshots/app/home-listings.png', label: 'Property Listings', alt: 'Revun app home screen showing property listings' },
+                { src: '/screenshots/app/events-scheduled.png', label: 'Events & Tours', alt: 'Revun app events and scheduled tours screen' },
+                { src: '/screenshots/app/investment-portfolio.png', label: 'Investment Portfolio', alt: 'Revun app investment portfolio overview' },
+                { src: '/screenshots/comms/chats-inbox.png', label: 'Communications', alt: 'Revun app messaging and communications inbox' },
+                { src: '/screenshots/app/maintenance-overview.png', label: 'Maintenance', alt: 'Revun app maintenance management overview' },
+                { src: '/screenshots/app/financial-overview.png', label: 'Financials', alt: 'Revun app financial overview and reporting' },
+              ].map((s) => (
+                <div key={s.label} className="group flex flex-col items-center gap-3">
+                  <div className="w-full max-w-[200px] transition-transform duration-300 group-hover:-translate-y-2 group-hover:scale-[1.03]">
+                    <div className="overflow-hidden rounded-[28px] border-2 border-[#1a1a1a] bg-[#1a1a1a] shadow-[0_4px_24px_rgba(0,0,0,0.10)] transition-shadow duration-300 group-hover:shadow-[0_12px_40px_rgba(23,111,235,0.20)]">
+                      {/* Dynamic Island only — no status bar (Figma has its own) */}
+                      <div className="flex justify-center bg-white pt-1">
+                        <div className="h-[14px] w-[60px] rounded-full bg-[#1a1a1a]" />
+                      </div>
+                      {/* Screenshot — locked 9:16, Figma includes its own status bar */}
+                      <div className="relative aspect-[9/16] w-full overflow-hidden">
+                        <Image
+                          src={s.src}
+                          alt={s.alt}
+                          fill
+                          className="object-cover object-top"
+                          sizes="(max-width: 640px) 50vw, 200px"
+                          quality={95}
+                        />
+                      </div>
+                      {/* Home indicator */}
+                      <div className="flex justify-center bg-white py-1.5">
+                        <div className="h-[3px] w-16 rounded-full bg-[#1a1a1a]/20" />
+                      </div>
+                    </div>
                   </div>
+                  <span className="text-sm font-semibold text-[#0A1628] transition-colors duration-200 group-hover:text-[#176FEB]">{s.label}</span>
                 </div>
               ))}
             </div>
@@ -315,16 +363,18 @@ export default function DownloadPage() {
         </div>
       </section>
 
+      <OperatorPlatformBlock />
+
       {/* ── CTA ── */}
       <section className="bg-[#F5F6F8] py-12">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <RevealOnScroll>
             <h2 className="font-heading font-extrabold text-4xl tracking-tight text-[#0A1628] md:text-5xl">
-              Get notified at{' '}
-              <span className="text-[#176FEB]">launch</span>
+              Access Revun{' '}
+              <span className="text-[#176FEB]">today</span>
             </h2>
             <p className="mx-auto mt-5 max-w-lg text-lg text-[#555860]">
-              The Revun mobile app is coming soon. Start with the web platform today and be the first to know when the app launches.
+              Start with the desktop and mobile web platform now. Join the early access list to be first in line when native iPhone and Android apps roll out.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
@@ -346,7 +396,7 @@ export default function DownloadPage() {
 
       {/* AEO quick answer */}
       <p className="sr-only">
-        The Revun mobile app is coming soon for iOS and Android. It will allow property managers and landlords to manage properties on the go, including rent collection, maintenance management, tenant communication, photo documentation, financial reporting, and lease management. The app requires iOS 16.0 or Android 10 or later.
+        Revun works across mobile, desktop, and web. Mobile access is being rolled out in phases for iPhone and Android. Access Revun today on desktop and mobile web. The platform includes owner app, tenant app, field team app, and operator dashboard for rent collection, maintenance management, tenant communication, photo documentation, financial reporting, and lease management.
       </p>
     </>
   )

@@ -39,7 +39,7 @@ function StarRating() {
 export function Testimonials() {
   return (
     <section className="bg-white py-12 md:py-16">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-6xl px-6">
         <RevealOnScroll className="text-center mb-16">
           <motion.p variants={revealItemBlur} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">
             Testimonials

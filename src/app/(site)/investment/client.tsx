@@ -2,7 +2,9 @@
 
 import { useRef, useState, useEffect, useId } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { DeviceFrame } from '@/components/ui/device-frame'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 import {
   Building2,
@@ -45,8 +47,8 @@ const ease = [0.22, 1, 0.36, 1] as const
 
 function SectionWrapper({ children, id, dark }: { children: React.ReactNode; id: string; dark?: boolean }) {
   return (
-    <section id={id} className={`py-14 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
-      <div className="mx-auto max-w-7xl px-6">{children}</div>
+    <section id={id} className={`py-16 md:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
+      <div className="mx-auto max-w-6xl px-6">{children}</div>
     </section>
   )
 }
@@ -151,6 +153,26 @@ function InvestmentGlance() {
         highlight="At A Glance"
         description="See all your properties in one place. Track occupancy, activity, and performance across your entire portfolio."
       />
+      {/* Figma screenshot proof */}
+      <motion.div
+        className="mt-10 flex justify-center"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.7, ease }}
+      >
+        <DeviceFrame device="iphone" label="Portfolio Overview">
+          <Image
+            src="/screenshots/investment/portfolio-overview.png"
+            alt="Revun investment portfolio overview showing 95% occupancy across 80 properties"
+            width={390}
+            height={844}
+            className="w-full"
+            quality={90}
+          />
+        </DeviceFrame>
+      </motion.div>
+
       <div ref={ref} className="mt-14 grid gap-6 lg:grid-cols-12">
         {/* Main dashboard card */}
         <motion.div
@@ -272,7 +294,7 @@ function ScheduledTours() {
         highlight="Tours"
         description="View upcoming showings, who is attending, and when each tour is happening. All organized by date."
       />
-      <div ref={ref} className="mt-14">
+      <div ref={ref} className="mt-14 grid items-center gap-10 lg:grid-cols-[1fr_auto]">
         <motion.div
           className="rounded-2xl border border-[#E5E7EB] bg-white"
           initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -334,6 +356,25 @@ function ScheduledTours() {
             </button>
           </div>
         </motion.div>
+
+        {/* Figma screenshot */}
+        <motion.div
+          className="hidden lg:flex justify-center"
+          initial={{ opacity: 0, x: 20 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.7, ease, delay: 0.3 }}
+        >
+          <DeviceFrame device="iphone" label="Scheduled Tours">
+            <Image
+              src="/screenshots/investment/scheduled-tours.png"
+              alt="Revun scheduled tours screen showing agent cards with dates and locations"
+              width={390}
+              height={844}
+              className="w-full"
+              quality={90}
+            />
+          </DeviceFrame>
+        </motion.div>
       </div>
     </SectionWrapper>
   )
@@ -366,7 +407,26 @@ function OffersApprovals() {
         highlight="Approvals"
         description="Review new offers, see their status, and respond before they expire. Stay on top of every opportunity."
       />
-      <div ref={ref} className="mt-14">
+      <div ref={ref} className="mt-14 grid items-center gap-10 lg:grid-cols-[auto_1fr]">
+        {/* Figma screenshot - left side */}
+        <motion.div
+          className="hidden lg:flex justify-center"
+          initial={{ opacity: 0, x: -20 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.7, ease, delay: 0.2 }}
+        >
+          <DeviceFrame device="iphone" label="Offers & Approvals">
+            <Image
+              src="/screenshots/investment/offers-approvals.png"
+              alt="Revun offers and approvals screen with pending offers and expiry timers"
+              width={390}
+              height={844}
+              className="w-full"
+              quality={90}
+            />
+          </DeviceFrame>
+        </motion.div>
+
         <motion.div
           className="rounded-2xl border border-[#E5E7EB] bg-white"
           initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -560,6 +620,26 @@ function MaintenanceOverview() {
           ))}
         </div>
       </div>
+
+      {/* Figma screenshot proof */}
+      <motion.div
+        className="mt-10 flex justify-center"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.7, ease }}
+      >
+        <DeviceFrame device="iphone" label="Maintenance Overview">
+          <Image
+            src="/screenshots/investment/maintenance-overview.png"
+            alt="Revun maintenance overview showing 30 requests with priority levels"
+            width={390}
+            height={844}
+            className="w-full"
+            quality={90}
+          />
+        </DeviceFrame>
+      </motion.div>
     </SectionWrapper>
   )
 }
@@ -699,6 +779,26 @@ function FinancialOverview() {
           </motion.div>
         </div>
       </div>
+
+      {/* Figma screenshot proof */}
+      <motion.div
+        className="mt-10 flex justify-center"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.7, ease }}
+      >
+        <DeviceFrame device="iphone" label="Financial Overview">
+          <Image
+            src="/screenshots/investment/financial-overview.png"
+            alt="Revun financial overview showing net income $200,900 with bar chart"
+            width={390}
+            height={844}
+            className="w-full"
+            quality={90}
+          />
+        </DeviceFrame>
+      </motion.div>
     </SectionWrapper>
   )
 }
@@ -725,7 +825,7 @@ function RentGuarantee() {
         highlight="Your Rent"
         description="Protect your rental income with coverage for missed rent and property damage. Never miss a payment again."
       />
-      <div ref={ref} className="mt-14 grid items-center gap-10 lg:grid-cols-2">
+      <div ref={ref} className="mt-14 grid items-center gap-10 lg:grid-cols-[1fr_auto_1fr]">
         {/* Left: Feature list */}
         <div className="space-y-4">
           <motion.div
@@ -772,6 +872,25 @@ function RentGuarantee() {
             </Link>
           </motion.div>
         </div>
+
+        {/* Center: Figma screenshot */}
+        <motion.div
+          className="hidden lg:flex justify-center"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={inView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.7, ease, delay: 0.3 }}
+        >
+          <DeviceFrame device="iphone" label="Rent Guarantee">
+            <Image
+              src="/screenshots/investment/rent-guarantee.png"
+              alt="Revun rent guarantee screen showing coverage details and $60K protection"
+              width={390}
+              height={844}
+              className="w-full"
+              quality={90}
+            />
+          </DeviceFrame>
+        </motion.div>
 
         {/* Right: Visual card */}
         <motion.div
@@ -825,7 +944,7 @@ function RentGuarantee() {
 
 const services = [
   { title: 'Tenant Placement', description: 'Find your perfect tenant with our screening and placement service.', icon: Users, tag: '' },
-  { title: 'Property Management', description: 'Hassle-free property care with dedicated managers.', icon: Building2, tag: 'Recommended' },
+  { title: 'Property Management', description: 'Fully managed property operations with dedicated managers.', icon: Building2, tag: 'Recommended' },
   { title: 'Maintenance', description: 'Home upkeep essentials with vetted vendors.', icon: Wrench, tag: '' },
   { title: 'Property Essentials', description: 'Insurance, inspections, and compliance tools.', icon: Shield, tag: '' },
 ]
@@ -1011,13 +1130,13 @@ function InvestmentHero() {
               href="/pricing/"
               className="inline-flex h-14 items-center justify-center rounded-xl bg-brand-blue px-8 text-base font-semibold text-white transition-all hover:bg-brand-blue-dark"
             >
-              Get Started Free
+              See the Platform
             </Link>
             <Link
               href="/demo/"
               className="inline-flex h-14 items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-8 text-base font-semibold text-brand-graphite transition-all hover:border-brand-blue/30 hover:shadow-sm"
             >
-              Book a Demo
+              Book a Live Demo
             </Link>
           </motion.div>
         </RevealOnScroll>

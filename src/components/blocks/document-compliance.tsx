@@ -35,7 +35,7 @@ const features = [
 export function DocumentCompliance() {
   return (
     <section className="bg-brand-off-white py-12 md:py-16">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-6xl px-6">
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
             variants={revealItem}

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import {
   Calendar,
@@ -21,8 +22,20 @@ import {
   CheckCircle2,
   ChevronRight,
   ArrowRight,
+  Heart,
+  CalendarCheck,
+  Send,
+  Compass,
+  Bookmark,
+  Library,
+  Home,
+  Search,
+  Grid3X3,
+  List,
+  Eye,
 } from 'lucide-react'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
+import { DeviceFrame } from '@/components/ui/device-frame'
 
 /* ── Sample event data ── */
 
@@ -65,36 +78,93 @@ const features = [
     title: 'Everything, Scheduled',
     description: 'Update events, reschedule if needed, or use directions and ride options to get there on time.',
     color: 'bg-[#176FEB]',
+    screenshot: '/screenshots/events/everything-scheduled.png',
+    bullets: ['Reschedule or cancel with one tap', 'Integrated directions and ride options', 'Real-time status updates for every event'],
   },
   {
     icon: MapPin,
     title: 'See Events on the Map',
     description: 'View all your upcoming events by location, so you can plan where you are going next.',
     color: 'bg-[#176FEB]',
+    screenshot: '/screenshots/events/map-view.png',
+    bullets: ['Interactive map with all tour locations', 'Plan your route across multiple events', 'See nearby properties and amenities'],
   },
   {
     icon: Navigation,
     title: 'Navigate the Best Route',
     description: 'See the route, share your location, and invite others so everyone arrives on time.',
     color: 'bg-[#176FEB]',
+    screenshot: '/screenshots/events/navigate-route.png',
+    bullets: ['Turn-by-turn navigation built in', 'Share your live location with others', 'Invite attendees so everyone arrives together'],
   },
   {
     icon: Shield,
     title: 'Start Your Tour Safely',
     description: 'Live arrival updates, property details, and a secure PIN to start once your agent arrives.',
     color: 'bg-[#176FEB]',
+    screenshot: '/screenshots/events/tour-safety.png',
+    bullets: ['Secure PIN verification before entry', 'Live arrival updates for all parties', 'Full property details at your fingertips'],
   },
   {
     icon: Star,
     title: 'Rate Your Experience',
     description: 'Your feedback helps keep schedules accurate and events running smoothly.',
     color: 'bg-[#176FEB]',
+    screenshot: '/screenshots/events/rate-experience.png',
+    bullets: ['Star ratings and detailed feedback', 'Tag agents with helpful traits', 'Improve the community for everyone'],
   },
   {
     icon: Phone,
     title: 'Safety Tools, Built In',
     description: 'Quick access to help, recordings, and verification, so you feel confident during the tour.',
     color: 'bg-[#176FEB]',
+    screenshot: '/screenshots/events/safety-tools.png',
+    bullets: ['Audio recording for your records', 'One-tap access to emergency services', 'Share location with trusted contacts'],
+  },
+]
+
+const tourDiscoveryFeatures = [
+  {
+    icon: Heart,
+    title: 'Like What You See',
+    description: 'Like tours to get more homes that match your style.',
+    src: '/screenshots/tours/like-tours.png',
+    bullets: ['AI-powered recommendations', 'Personalized feed', 'One-tap interaction'],
+  },
+  {
+    icon: CalendarCheck,
+    title: 'Book Tours Instantly',
+    description: 'Schedule a tour or reserve a unit while browsing.',
+    src: '/screenshots/tours/book-instantly.png',
+    bullets: ['Real-time availability', 'Instant booking', 'Reserve before visiting'],
+  },
+  {
+    icon: Send,
+    title: 'Share with Others',
+    description: 'Share tours with friends, family, or anyone helping you decide.',
+    src: '/screenshots/tours/share-tours.png',
+    bullets: ['Share via any app', 'Invite co-viewers', 'Collaborative decisions'],
+  },
+  {
+    icon: Compass,
+    title: 'Swipe to Discover',
+    description: 'Browse tours by swiping to explore available homes nearby.',
+    src: '/screenshots/tours/swipe-discover.png',
+    bullets: ['Location-based discovery', 'Swipe interface', 'Explore neighborhoods'],
+  },
+  {
+    icon: Bookmark,
+    title: 'Saved Tours & Homes',
+    description: 'Keep all your saved tours and properties in one place.',
+    src: '/screenshots/tours/saved-tours.png',
+    bullets: ['Video & photo library', 'Create collections', 'Quick access'],
+  },
+  {
+    icon: Library,
+    title: 'Save Your Favorites',
+    description: 'Save tours and organize them so you can come back later.',
+    src: '/screenshots/tours/save-favorites.png',
+    bullets: ['Organized by city', 'Custom libraries', 'Properties & tours tabs'],
   },
 ]
 
@@ -133,7 +203,7 @@ export function EventsClient() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-[#F5F6F8] py-14 overflow-hidden">
+      <section className="relative bg-[#F5F6F8] py-16 md:py-20 overflow-hidden">
         {/* Ambient blob */}
         <div className="absolute top-[-100px] left-[-150px] h-[400px] w-[400px] rounded-full bg-[#176FEB]/[0.04] blur-[100px]" aria-hidden="true" />
         <RevealOnScroll className="mx-auto max-w-4xl px-6 text-center relative z-10">
@@ -148,51 +218,308 @@ export function EventsClient() {
           </motion.p>
           <motion.div variants={revealItem} className="mt-8 flex items-center justify-center gap-4">
             <Link
-              href="/pricing/"
+              href="/platform/"
               className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#0B5AD4]"
             >
-              Start Free Trial
+              See the Platform
             </Link>
             <Link
               href="/demo/"
               className="inline-flex h-12 items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-6 text-sm font-semibold text-[#2C2E33] transition-colors duration-200 hover:border-[#176FEB]/30"
             >
-              Book a Demo
+              Book a Live Demo
             </Link>
           </motion.div>
         </RevealOnScroll>
       </section>
 
-      {/* Feature grid */}
-      <section className="bg-white py-14">
-        <div className="mx-auto max-w-7xl px-6">
-          <RevealOnScroll className="text-center mb-12">
+      {/* Feature sections — alternating layout with real screenshots */}
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <RevealOnScroll className="text-center mb-16">
             <motion.h2 variants={revealItem} className="font-heading text-2xl font-bold text-[#0A1628] md:text-3xl">
               How it works
             </motion.h2>
           </RevealOnScroll>
 
-          <RevealOnScroll className="grid gap-5 md:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
-            {features.map((f) => (
-              <motion.div
-                key={f.title}
-                variants={revealItem}
-                className="group relative rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-all duration-200 hover:border-[#176FEB]/30"
-              >
-                <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-gradient-to-r from-[#176FEB] to-[#4A91F0] opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
-                <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${f.color}`}>
-                  <f.icon className="h-6 w-6 text-white" />
+          <div className="space-y-20 md:space-y-28">
+            {features.map((f, i) => {
+              const isReversed = i % 2 === 1
+              return (
+                <RevealOnScroll key={f.title}>
+                  <motion.div
+                    variants={revealItem}
+                    className={`flex flex-col items-center gap-10 md:gap-16 ${
+                      isReversed ? 'md:flex-row-reverse' : 'md:flex-row'
+                    }`}
+                  >
+                    {/* Text side */}
+                    <div className="flex-1 space-y-5">
+                      <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${f.color}`}>
+                        <f.icon className="h-6 w-6 text-white" />
+                      </div>
+                      <h3 className="font-heading text-xl font-bold text-[#0A1628] md:text-2xl">
+                        {f.title}
+                      </h3>
+                      <p className="text-base leading-relaxed text-[#555860]">
+                        {f.description}
+                      </p>
+                      <ul className="space-y-2.5">
+                        {f.bullets.map((bullet) => (
+                          <li key={bullet} className="flex items-start gap-2.5 text-sm text-[#555860]">
+                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#176FEB]" />
+                            {bullet}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Screenshot side */}
+                    <div className="flex-1 flex justify-center">
+                      <DeviceFrame device="iphone" className="max-w-[260px] w-full">
+                        <Image
+                          src={f.screenshot}
+                          alt={`${f.title} — Revun mobile screenshot`}
+                          width={390}
+                          height={844}
+                          className="h-auto w-full"
+                        />
+                      </DeviceFrame>
+                    </div>
+                  </motion.div>
+                </RevealOnScroll>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Tour Discovery — alternating layout */}
+      <section className="bg-[#F5F6F8] py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <RevealOnScroll className="text-center mb-16">
+            <motion.p variants={revealItem} className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
+              Tour Discovery
+            </motion.p>
+            <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-4xl">
+              Find your next home with <span className="text-[#176FEB] font-semibold">intelligent tours</span>
+            </motion.h2>
+            <motion.p variants={revealItem} className="mx-auto mt-4 max-w-2xl text-lg text-[#555860]">
+              Like, swipe, save, share, and book — all from one app.
+            </motion.p>
+          </RevealOnScroll>
+
+          <div className="space-y-20 md:space-y-28">
+            {tourDiscoveryFeatures.map((f, i) => {
+              const isReversed = i % 2 === 1
+              return (
+                <RevealOnScroll key={f.title}>
+                  <motion.div
+                    variants={revealItem}
+                    className={`flex flex-col items-center gap-10 md:gap-16 ${
+                      isReversed ? 'md:flex-row-reverse' : 'md:flex-row'
+                    }`}
+                  >
+                    {/* Text side */}
+                    <div className="flex-1 space-y-5">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#176FEB]">
+                        <f.icon className="h-6 w-6 text-white" />
+                      </div>
+                      <h3 className="font-heading text-xl font-bold text-[#0A1628] md:text-2xl">
+                        {f.title}
+                      </h3>
+                      <p className="text-base leading-relaxed text-[#555860]">
+                        {f.description}
+                      </p>
+                      <ul className="space-y-2.5">
+                        {f.bullets.map((bullet) => (
+                          <li key={bullet} className="flex items-start gap-2.5 text-sm text-[#555860]">
+                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#176FEB]" />
+                            {bullet}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Screenshot side */}
+                    <div className="flex-1 flex justify-center">
+                      <DeviceFrame device="iphone" className="max-w-[260px] w-full">
+                        <Image
+                          src={f.src}
+                          alt={`${f.title} — Revun tour discovery screenshot`}
+                          width={390}
+                          height={844}
+                          className="h-auto w-full object-contain"
+                        />
+                      </DeviceFrame>
+                    </div>
+                  </motion.div>
+                </RevealOnScroll>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Desktop / Webapp events dashboard */}
+      <section className="bg-[#F5F6F8] py-16 md:py-20 overflow-hidden">
+        <div className="mx-auto max-w-6xl px-6">
+          <RevealOnScroll className="text-center mb-12">
+            <motion.p variants={revealItem} className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
+              Desktop &amp; Web
+            </motion.p>
+            <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-4xl">
+              Full event management on the <span className="text-[#176FEB] font-semibold">web</span>
+            </motion.h2>
+            <motion.p variants={revealItem} className="mx-auto mt-4 max-w-2xl text-lg text-[#555860]">
+              The same powerful events system, designed for desktop operators and property teams.
+            </motion.p>
+          </RevealOnScroll>
+
+          <RevealOnScroll>
+            <motion.div variants={revealItem}>
+              <DeviceFrame device="desktop" className="w-full max-w-5xl mx-auto">
+                {/* Browser-style webapp mockup */}
+                <div className="min-h-[420px] bg-[#F5F6F8] text-left select-none" style={{ fontSize: 13 }}>
+                  {/* Top bar */}
+                  <div className="flex items-center justify-between border-b border-[#E5E7EB] bg-white px-5 py-3">
+                    <div className="flex items-center gap-3">
+                      <h3 className="font-heading text-base font-bold text-[#0A1628]">My Events</h3>
+                      <div className="flex items-center gap-1.5">
+                        <span className="flex h-7 w-7 items-center justify-center rounded-md border border-[#E5E7EB] bg-[#F5F6F8] text-[#555860]">
+                          <Plus className="h-3.5 w-3.5" />
+                        </span>
+                        <span className="flex h-7 w-7 items-center justify-center rounded-md border border-[#E5E7EB] bg-[#F5F6F8] text-[#555860]">
+                          <SlidersHorizontal className="h-3.5 w-3.5" />
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 rounded-lg border border-[#E5E7EB] bg-[#F5F6F8] px-3 py-1.5 text-xs text-[#555860]">
+                      <Calendar className="h-3.5 w-3.5 text-[#176FEB]" />
+                      Thursday, 15 May
+                    </div>
+                  </div>
+
+                  {/* Body: list + map */}
+                  <div className="flex">
+                    {/* Left: event list (60%) */}
+                    <div className="w-[60%] border-r border-[#E5E7EB] bg-white">
+                      {/* Tabs */}
+                      <div className="flex gap-0 border-b border-[#E5E7EB]">
+                        <span className="border-b-2 border-[#176FEB] px-4 py-2.5 text-xs font-semibold text-[#176FEB]">Upcoming</span>
+                        <span className="px-4 py-2.5 text-xs font-medium text-[#9CA3AF]">Past</span>
+                      </div>
+
+                      {/* Event card 1 - Confirmed */}
+                      <div className="border-b border-[#E5E7EB] p-4 hover:bg-[#F5F6F8]/50 transition-colors">
+                        <div className="flex items-start justify-between">
+                          <div className="min-w-0 flex-1">
+                            <div className="mb-1 flex items-center gap-2">
+                              <span className="inline-flex rounded-full bg-[#176FEB]/10 px-2 py-0.5 text-[10px] font-semibold text-[#176FEB]">Confirmed Tour</span>
+                            </div>
+                            <p className="truncate font-heading text-sm font-semibold text-[#0A1628]">1241-123 Main Street</p>
+                            <p className="text-xs text-[#555860]">Niagara Falls, ON</p>
+                            <div className="mt-1.5 flex items-center gap-3 text-[10px] text-[#9CA3AF]">
+                              <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />Thu May 15</span>
+                              <span className="flex items-center gap-1"><Clock className="h-3 w-3" />10:30 AM</span>
+                            </div>
+                          </div>
+                          <div className="ml-3 flex shrink-0 items-center gap-1.5">
+                            <span className="rounded-md border border-[#E5E7EB] px-2.5 py-1 text-[10px] font-medium text-[#555860]">Cancel</span>
+                            <span className="rounded-md border border-[#F59E0B]/30 bg-[#F59E0B]/5 px-2.5 py-1 text-[10px] font-medium text-[#F59E0B]">Running Late?</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Event card 2 - Scheduled */}
+                      <div className="border-b border-[#E5E7EB] p-4 hover:bg-[#F5F6F8]/50 transition-colors">
+                        <div className="flex items-start justify-between">
+                          <div className="min-w-0 flex-1">
+                            <div className="mb-1 flex items-center gap-2">
+                              <span className="inline-flex rounded-full bg-[#176FEB]/10 px-2 py-0.5 text-[10px] font-semibold text-[#176FEB]">Scheduled Tour</span>
+                            </div>
+                            <p className="truncate font-heading text-sm font-semibold text-[#0A1628]">704-75 Portland St.</p>
+                            <p className="text-xs text-[#555860]">Mississauga, ON</p>
+                            <div className="mt-1.5 flex items-center gap-3 text-[10px] text-[#9CA3AF]">
+                              <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />Wed May 14</span>
+                              <span className="flex items-center gap-1"><Clock className="h-3 w-3" />10:30 AM</span>
+                            </div>
+                          </div>
+                          <div className="ml-3 flex shrink-0 items-center gap-1.5">
+                            <span className="rounded-md bg-[#176FEB] px-2.5 py-1 text-[10px] font-medium text-white">View Details</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Event card 3 - Pending */}
+                      <div className="border-b border-[#E5E7EB] p-4 hover:bg-[#F5F6F8]/50 transition-colors">
+                        <div className="flex items-start justify-between">
+                          <div className="min-w-0 flex-1">
+                            <div className="mb-1 flex items-center gap-2">
+                              <span className="inline-flex rounded-full bg-[#F59E0B]/10 px-2 py-0.5 text-[10px] font-semibold text-[#F59E0B]">Pending</span>
+                            </div>
+                            <p className="truncate font-heading text-sm font-semibold text-[#0A1628]">55 Harbour Square</p>
+                            <p className="text-xs text-[#555860]">Toronto, ON</p>
+                            <div className="mt-1.5 flex items-center gap-3 text-[10px] text-[#9CA3AF]">
+                              <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />Fri May 16</span>
+                              <span className="flex items-center gap-1"><Clock className="h-3 w-3" />2:00 PM</span>
+                            </div>
+                          </div>
+                          <div className="ml-3 flex shrink-0 items-center gap-1.5">
+                            <span className="rounded-md border border-[#E5E7EB] px-2.5 py-1 text-[10px] font-medium text-[#555860]">Awaiting confirmation</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right: map placeholder (40%) */}
+                    <div className="relative min-h-[370px] w-[40%] bg-[#E8EDF3]">
+                      {/* Fake map grid lines */}
+                      <div className="absolute inset-0 opacity-[0.15]" style={{ backgroundImage: 'linear-gradient(#9CA3AF 1px, transparent 1px), linear-gradient(90deg, #9CA3AF 1px, transparent 1px)', backgroundSize: '48px 48px' }} />
+                      {/* Map road lines */}
+                      <div className="absolute top-[40%] right-0 left-0 h-[2px] bg-[#D3D5DB]" />
+                      <div className="absolute top-0 bottom-0 left-[35%] w-[2px] bg-[#D3D5DB]" />
+                      <div className="absolute top-[65%] right-[10%] left-[20%] h-[2px] origin-left rotate-[15deg] bg-[#D3D5DB]" />
+
+                      {/* Pin 1 - Niagara */}
+                      <div className="absolute top-[30%] left-[25%] flex flex-col items-center">
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#176FEB] shadow-md shadow-[#176FEB]/30">
+                          <MapPin className="h-3.5 w-3.5 text-white" />
+                        </div>
+                        <div className="h-2 w-[2px] bg-[#176FEB]" />
+                      </div>
+
+                      {/* Pin 2 - Mississauga */}
+                      <div className="absolute top-[50%] left-[55%] flex flex-col items-center">
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#176FEB] shadow-md shadow-[#176FEB]/30">
+                          <MapPin className="h-3.5 w-3.5 text-white" />
+                        </div>
+                        <div className="h-2 w-[2px] bg-[#176FEB]" />
+                      </div>
+
+                      {/* Pin 3 - Toronto (pending = amber) */}
+                      <div className="absolute top-[70%] left-[70%] flex flex-col items-center">
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#F59E0B] shadow-md shadow-[#F59E0B]/30">
+                          <MapPin className="h-3.5 w-3.5 text-white" />
+                        </div>
+                        <div className="h-2 w-[2px] bg-[#F59E0B]" />
+                      </div>
+
+                      {/* Map label */}
+                      <div className="absolute bottom-3 left-3 rounded-md bg-white/90 px-2.5 py-1.5 text-[10px] font-medium text-[#555860] shadow-sm backdrop-blur-sm">
+                        <span className="flex items-center gap-1"><MapPin className="h-3 w-3 text-[#176FEB]" /> 3 events on map</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="font-heading text-base font-bold text-[#0A1628]">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#555860]">{f.description}</p>
-              </motion.div>
-            ))}
+              </DeviceFrame>
+            </motion.div>
           </RevealOnScroll>
         </div>
       </section>
 
       {/* Upcoming events preview */}
-      <section className="bg-[#F5F6F8] py-14">
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-6">
           <div className="mb-8 flex items-center justify-between">
             <div>
@@ -233,9 +560,15 @@ export function EventsClient() {
                 key={event.id}
                 className="group flex items-center gap-5 rounded-xl border border-[#E5E7EB] bg-white p-5 transition-all duration-200 hover:border-[#176FEB]/30 cursor-pointer"
               >
-                {/* Property image placeholder */}
-                <div className="hidden sm:flex h-20 w-28 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#E8F2FE] to-[#F5F6F8]">
-                  <MapPin className="h-6 w-6 text-[#176FEB]/40" />
+                {/* Property image */}
+                <div className="hidden sm:block h-20 w-28 shrink-0 overflow-hidden rounded-lg">
+                  <Image
+                    src="/screenshots/events/everything-scheduled.png"
+                    alt={`Property tour — ${event.property}`}
+                    width={112}
+                    height={80}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
 
                 {/* Event details */}
@@ -279,8 +612,8 @@ export function EventsClient() {
       </section>
 
       {/* Tour safety section */}
-      <section className="bg-white py-14">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-6">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Left: info */}
             <RevealOnScroll>
@@ -324,8 +657,254 @@ export function EventsClient() {
         </div>
       </section>
 
+      {/* Desktop Tours Discovery webapp mockup */}
+      <section className="bg-[#F5F6F8] py-16 md:py-20 overflow-hidden">
+        <div className="mx-auto max-w-6xl px-6">
+          <RevealOnScroll className="text-center mb-12">
+            <motion.p variants={revealItem} className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
+              Desktop &amp; Web
+            </motion.p>
+            <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-4xl">
+              Tour discovery on the <span className="text-[#176FEB] font-semibold">web</span>
+            </motion.h2>
+            <motion.p variants={revealItem} className="mx-auto mt-4 max-w-2xl text-lg text-[#555860]">
+              Browse, save, share, and book tours from your desktop with the same powerful discovery tools.
+            </motion.p>
+          </RevealOnScroll>
+
+          <RevealOnScroll>
+            <motion.div variants={revealItem}>
+              {/* Browser chrome frame */}
+              <div className="mx-auto w-full max-w-5xl overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-lg">
+                {/* Browser title bar */}
+                <div className="flex items-center gap-3 border-b border-[#E5E7EB] bg-[#F5F6F8] px-4 py-2.5">
+                  <div className="flex items-center gap-1.5">
+                    <div className="h-3 w-3 rounded-full bg-[#FF5F57]" />
+                    <div className="h-3 w-3 rounded-full bg-[#FEBC2E]" />
+                    <div className="h-3 w-3 rounded-full bg-[#28C840]" />
+                  </div>
+                  <div className="flex flex-1 items-center justify-center">
+                    <div className="flex h-7 w-full max-w-md items-center gap-2 rounded-md border border-[#E5E7EB] bg-white px-3 text-[10px] text-[#9CA3AF]">
+                      <div className="h-3 w-3 rounded-full border border-[#28C840] flex items-center justify-center">
+                        <div className="h-1.5 w-1.5 rounded-full bg-[#28C840]" />
+                      </div>
+                      app.revun.com/discover
+                    </div>
+                  </div>
+                  <div className="w-[52px]" />
+                </div>
+
+                {/* Webapp content */}
+                <div className="min-h-[440px] bg-[#F5F6F8] text-left select-none" style={{ fontSize: 11 }}>
+                  {/* Top bar */}
+                  <div className="flex items-center justify-between border-b border-[#E5E7EB] bg-white px-4 py-2.5">
+                    <div className="flex items-center gap-2.5">
+                      <Home className="h-3.5 w-3.5 text-[#176FEB]" />
+                      <h3 className="font-heading text-[13px] font-bold text-[#0A1628]">Discover Properties</h3>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {/* Search bar */}
+                      <div className="flex h-7 w-48 items-center gap-1.5 rounded-md border border-[#E5E7EB] bg-[#F5F6F8] px-2 text-[10px] text-[#9CA3AF]">
+                        <Search className="h-3 w-3" />
+                        Search by city, address...
+                      </div>
+                      {/* View toggles */}
+                      <div className="flex items-center rounded-md border border-[#E5E7EB] bg-[#F5F6F8]">
+                        <span className="flex h-7 items-center gap-1 rounded-l-md bg-[#176FEB] px-2 text-[9px] font-semibold text-white">
+                          <Grid3X3 className="h-3 w-3" /> Grid
+                        </span>
+                        <span className="flex h-7 items-center gap-1 border-l border-[#E5E7EB] px-2 text-[9px] text-[#9CA3AF]">
+                          <MapPin className="h-3 w-3" /> Map
+                        </span>
+                        <span className="flex h-7 items-center gap-1 border-l border-[#E5E7EB] rounded-r-md px-2 text-[9px] text-[#9CA3AF]">
+                          <Eye className="h-3 w-3" /> Swipe
+                        </span>
+                      </div>
+                      {/* Filter button */}
+                      <span className="flex h-7 items-center gap-1 rounded-md border border-[#E5E7EB] bg-white px-2 text-[9px] text-[#555860]">
+                        <SlidersHorizontal className="h-3 w-3" /> Filters
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Body: discovery feed + sidebar */}
+                  <div className="flex">
+                    {/* Left panel: property grid (65%) */}
+                    <div className="w-[65%] border-r border-[#E5E7EB] bg-white p-3">
+                      <div className="grid grid-cols-2 gap-3">
+                        {/* Property card 1 */}
+                        <div className="group overflow-hidden rounded-lg border border-[#E5E7EB] bg-white transition-all hover:border-[#176FEB]/30">
+                          <div className="relative h-28 w-full" style={{ background: 'linear-gradient(135deg, #E8926A 0%, #D4734E 50%, #C4613E 100%)' }}>
+                            <div className="absolute top-2 right-2 flex items-center gap-1">
+                              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/90 text-[#555860] shadow-sm backdrop-blur-sm">
+                                <Heart className="h-3 w-3" />
+                              </span>
+                              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/90 text-[#555860] shadow-sm backdrop-blur-sm">
+                                <Share2 className="h-3 w-3" />
+                              </span>
+                            </div>
+                          </div>
+                          <div className="p-2.5">
+                            <p className="font-heading text-[12px] font-bold text-[#0A1628]">$1,650<span className="font-normal text-[#9CA3AF]">/mo</span></p>
+                            <p className="mt-0.5 text-[10px] text-[#555860] flex items-center gap-1"><MapPin className="h-2.5 w-2.5 text-[#176FEB]" />123 Anywhere St, Toronto</p>
+                            <div className="mt-1 flex items-center gap-2 text-[9px] text-[#9CA3AF]">
+                              <span>2B / 2B</span>
+                              <span className="h-0.5 w-0.5 rounded-full bg-[#D3D5DB]" />
+                              <span>850 sqft</span>
+                            </div>
+                            <div className="mt-2 flex items-center gap-1.5">
+                              <span className="rounded-md bg-[#176FEB] px-2 py-1 text-[9px] font-semibold text-white">Reserve</span>
+                              <span className="rounded-md border border-[#E5E7EB] px-2 py-1 text-[9px] font-medium text-[#555860]">Schedule Tour</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Property card 2 */}
+                        <div className="group overflow-hidden rounded-lg border border-[#E5E7EB] bg-white transition-all hover:border-[#176FEB]/30">
+                          <div className="relative h-28 w-full" style={{ background: 'linear-gradient(135deg, #C9865B 0%, #B07347 50%, #9A6340 100%)' }}>
+                            <div className="absolute top-2 right-2 flex items-center gap-1">
+                              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/90 text-[#176FEB] shadow-sm backdrop-blur-sm">
+                                <Heart className="h-3 w-3 fill-[#176FEB]" />
+                              </span>
+                              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/90 text-[#555860] shadow-sm backdrop-blur-sm">
+                                <Share2 className="h-3 w-3" />
+                              </span>
+                            </div>
+                          </div>
+                          <div className="p-2.5">
+                            <p className="font-heading text-[12px] font-bold text-[#0A1628]">$2,100<span className="font-normal text-[#9CA3AF]">/mo</span></p>
+                            <p className="mt-0.5 text-[10px] text-[#555860] flex items-center gap-1"><MapPin className="h-2.5 w-2.5 text-[#176FEB]" />75 Portland St, Mississauga</p>
+                            <div className="mt-1 flex items-center gap-2 text-[9px] text-[#9CA3AF]">
+                              <span>3B / 2B</span>
+                              <span className="h-0.5 w-0.5 rounded-full bg-[#D3D5DB]" />
+                              <span>1,120 sqft</span>
+                            </div>
+                            <div className="mt-2 flex items-center gap-1.5">
+                              <span className="rounded-md bg-[#176FEB] px-2 py-1 text-[9px] font-semibold text-white">Reserve</span>
+                              <span className="rounded-md border border-[#E5E7EB] px-2 py-1 text-[9px] font-medium text-[#555860]">Schedule Tour</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Property card 3 — spans bottom left */}
+                        <div className="group overflow-hidden rounded-lg border border-[#E5E7EB] bg-white transition-all hover:border-[#176FEB]/30">
+                          <div className="relative h-28 w-full" style={{ background: 'linear-gradient(135deg, #D9A07A 0%, #C48B63 50%, #B57A55 100%)' }}>
+                            <div className="absolute top-2 right-2 flex items-center gap-1">
+                              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/90 text-[#555860] shadow-sm backdrop-blur-sm">
+                                <Heart className="h-3 w-3" />
+                              </span>
+                              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/90 text-[#555860] shadow-sm backdrop-blur-sm">
+                                <Share2 className="h-3 w-3" />
+                              </span>
+                            </div>
+                          </div>
+                          <div className="p-2.5">
+                            <p className="font-heading text-[12px] font-bold text-[#0A1628]">$1,850<span className="font-normal text-[#9CA3AF]">/mo</span></p>
+                            <p className="mt-0.5 text-[10px] text-[#555860] flex items-center gap-1"><MapPin className="h-2.5 w-2.5 text-[#176FEB]" />55 Harbour Square, Toronto</p>
+                            <div className="mt-1 flex items-center gap-2 text-[9px] text-[#9CA3AF]">
+                              <span>1B / 1B</span>
+                              <span className="h-0.5 w-0.5 rounded-full bg-[#D3D5DB]" />
+                              <span>580 sqft</span>
+                            </div>
+                            <div className="mt-2 flex items-center gap-1.5">
+                              <span className="rounded-md bg-[#176FEB] px-2 py-1 text-[9px] font-semibold text-white">Reserve</span>
+                              <span className="rounded-md border border-[#E5E7EB] px-2 py-1 text-[9px] font-medium text-[#555860]">Schedule Tour</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right panel: activity sidebar (35%) */}
+                    <div className="w-[35%] bg-white p-3 space-y-4">
+                      {/* Saved Properties */}
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <h4 className="font-heading text-[11px] font-bold text-[#0A1628]">Saved Properties</h4>
+                          <span className="rounded-full bg-[#176FEB]/10 px-2 py-0.5 text-[9px] font-semibold text-[#176FEB]">20 saved</span>
+                        </div>
+                        <div className="flex items-center gap-2 rounded-md border border-[#E5E7EB] p-2">
+                          <Heart className="h-3.5 w-3.5 text-[#176FEB] fill-[#176FEB]" />
+                          <div>
+                            <p className="text-[10px] font-medium text-[#0A1628]">View all saved</p>
+                            <p className="text-[9px] text-[#9CA3AF]">3 new this week</p>
+                          </div>
+                          <ChevronRight className="ml-auto h-3 w-3 text-[#D3D5DB]" />
+                        </div>
+                      </div>
+
+                      {/* Upcoming Tours */}
+                      <div>
+                        <h4 className="font-heading text-[11px] font-bold text-[#0A1628] mb-2">Upcoming Tours</h4>
+                        <div className="space-y-1.5">
+                          <div className="flex items-center gap-2 rounded-md border border-[#E5E7EB] p-2">
+                            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#176FEB]/10">
+                              <Calendar className="h-3 w-3 text-[#176FEB]" />
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <p className="truncate text-[10px] font-medium text-[#0A1628]">123 Anywhere St</p>
+                              <p className="text-[9px] text-[#9CA3AF]">Thu, May 15 - 10:30 AM</p>
+                            </div>
+                            <span className="shrink-0 rounded-full bg-[#176FEB]/10 px-1.5 py-0.5 text-[8px] font-semibold text-[#176FEB]">Confirmed</span>
+                          </div>
+                          <div className="flex items-center gap-2 rounded-md border border-[#E5E7EB] p-2">
+                            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#F59E0B]/10">
+                              <Calendar className="h-3 w-3 text-[#F59E0B]" />
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <p className="truncate text-[10px] font-medium text-[#0A1628]">55 Harbour Square</p>
+                              <p className="text-[9px] text-[#9CA3AF]">Fri, May 16 - 2:00 PM</p>
+                            </div>
+                            <span className="shrink-0 rounded-full bg-[#F59E0B]/10 px-1.5 py-0.5 text-[8px] font-semibold text-[#F59E0B]">Pending</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Shared With You */}
+                      <div>
+                        <h4 className="font-heading text-[11px] font-bold text-[#0A1628] mb-2">Shared With You</h4>
+                        <div className="flex items-center gap-2 rounded-md border border-[#E5E7EB] p-2">
+                          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#E8F2FE] font-heading text-[10px] font-bold text-[#176FEB]">
+                            SK
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <p className="truncate text-[10px] font-medium text-[#0A1628]">Sarah shared 704-75 Portland St</p>
+                            <p className="text-[9px] text-[#9CA3AF]">2 hours ago</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Your Libraries */}
+                      <div>
+                        <h4 className="font-heading text-[11px] font-bold text-[#0A1628] mb-2">Your Libraries</h4>
+                        <div className="space-y-1.5">
+                          <div className="flex items-center justify-between rounded-md border border-[#E5E7EB] px-2 py-1.5">
+                            <div className="flex items-center gap-2">
+                              <Bookmark className="h-3 w-3 text-[#176FEB]" />
+                              <span className="text-[10px] font-medium text-[#0A1628]">Toronto</span>
+                            </div>
+                            <span className="text-[9px] text-[#9CA3AF]">8</span>
+                          </div>
+                          <div className="flex items-center justify-between rounded-md border border-[#E5E7EB] px-2 py-1.5">
+                            <div className="flex items-center gap-2">
+                              <Bookmark className="h-3 w-3 text-[#176FEB]" />
+                              <span className="text-[10px] font-medium text-[#0A1628]">Good Ones</span>
+                            </div>
+                            <span className="text-[9px] text-[#9CA3AF]">3</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </RevealOnScroll>
+        </div>
+      </section>
+
       {/* Agent rating preview */}
-      <section className="bg-[#F5F6F8] py-14">
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-6">
           <RevealOnScroll className="text-center mb-10">
             <motion.h2 variants={revealItem} className="font-heading text-2xl font-bold text-[#0A1628] md:text-3xl">
@@ -394,24 +973,24 @@ export function EventsClient() {
       </section>
 
       {/* CTA */}
-      <section className="bg-[#176FEB] py-14">
+      <section className="bg-[#F5F6F8] py-16 md:py-20">
         <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="font-heading text-2xl font-bold text-white md:text-3xl">
+          <h2 className="font-heading text-2xl font-bold text-[#0A1628] md:text-3xl">
             Ready to schedule your first tour?
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-base text-white/80">
+          <p className="mx-auto mt-4 max-w-lg text-base text-[#555860]">
             Start your free trial today. No credit card required.
           </p>
           <div className="mt-8 flex items-center justify-center gap-4">
             <Link
               href="/pricing/"
-              className="inline-flex h-12 items-center justify-center rounded-xl bg-white px-6 text-sm font-semibold text-[#176FEB] transition-colors duration-200 hover:bg-white/90"
+              className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#1260D6]"
             >
               Start Free Trial
             </Link>
             <Link
               href="/contact/"
-              className="inline-flex h-12 items-center gap-2 rounded-xl border border-white/20 px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-white/10"
+              className="inline-flex h-12 items-center gap-2 rounded-xl border border-[#E5E7EB] px-6 text-sm font-semibold text-[#0A1628] transition-colors duration-200 hover:bg-[#EAECF0]"
             >
               Contact Sales <ArrowRight className="h-4 w-4" />
             </Link>
