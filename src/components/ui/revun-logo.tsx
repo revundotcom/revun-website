@@ -7,23 +7,34 @@ interface RevunLogoProps {
   size?: string
   /** Wrap in a Link to "/" */
   linked?: boolean
+  /**
+   * Background context the logo is being placed on.
+   * - 'light' (default) → dark-navy wordmark for white/off-white backgrounds
+   * - 'dark' → blue wordmark for dark backgrounds
+   */
+  variant?: 'light' | 'dark'
   className?: string
 }
 
-/**
- * Revun brand logo - uses the exact Revun Logo.png (Instrument Sans Bold,
- * white text on blue background). Single source of truth for every logo
- * placement across the site.
- */
-export function RevunLogo({ size = 'h-8', linked = true, className }: RevunLogoProps) {
+const LOGO_SRC = {
+  light: '/revun-logo-on-light.png',
+  dark: '/revun-logo-on-dark.png',
+} as const
+
+export function RevunLogo({
+  size = 'h-8',
+  linked = true,
+  variant = 'light',
+  className,
+}: RevunLogoProps) {
   const logo = (
     <Image
-      src="/revun-logo.png"
+      src={LOGO_SRC[variant]}
       alt="Revun"
       width={140}
       height={44}
       priority
-      className={cn('w-auto rounded', size, className)}
+      className={cn('w-auto', size, className)}
     />
   )
 
