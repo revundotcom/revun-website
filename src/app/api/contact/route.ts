@@ -1,35 +1,8 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod/v4'
+import { getClientIp, isRateLimited } from '@/lib/rate-limit'
 
-/* ── Simple in-memory rate limiter ─────────────────────────────────────────── */
-const RATE_LIMIT_WINDOW_MS = 60_000 // 1 minute
-const RATE_LIMIT_MAX = 5 // max 5 requests per window per IP
-const ipRequestMap = new Map<string, { count: number; resetAt: number }>()
-
-let lastCleanup = Date.now()
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now()
-
-  // Lazily clean up stale entries instead of using setInterval
-  // (setInterval at module scope prevents clean shutdown in serverless)
-  if (now - lastCleanup > RATE_LIMIT_WINDOW_MS * 2) {
-    for (const [key, entry] of ipRequestMap) {
-      if (now > entry.resetAt) ipRequestMap.delete(key)
-    }
-    lastCleanup = now
-  }
-
-  const entry = ipRequestMap.get(ip)
-
-  if (!entry || now > entry.resetAt) {
-    ipRequestMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS })
-    return false
-  }
-
-  entry.count++
-  return entry.count > RATE_LIMIT_MAX
-}
+const NO_STORE = { 'cache-control': 'no-store' } as const
 
 const contactSchema = z.object({
   name: z.string().min(2).max(200),
@@ -49,14 +22,12 @@ const contactSchema = z.object({
 
 export async function POST(request: Request) {
   try {
-    /* ── Rate limiting ───────────────────────────────────────────────────── */
-    const forwarded = request.headers.get('x-forwarded-for')
-    const ip = forwarded?.split(',')[0]?.trim() || 'unknown'
+    const ip = getClientIp(request)
 
-    if (isRateLimited(ip)) {
+    if (isRateLimited(ip, { windowMs: 60_000, max: 5, key: 'contact' })) {
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },
-        { status: 429 },
+        { status: 429, headers: NO_STORE },
       )
     }
 
@@ -66,7 +37,7 @@ export async function POST(request: Request) {
     } catch {
       return NextResponse.json(
         { error: 'Invalid request body.' },
-        { status: 400 },
+        { status: 400, headers: NO_STORE },
       )
     }
     const parsed = contactSchema.safeParse(body)
@@ -74,7 +45,7 @@ export async function POST(request: Request) {
     if (!parsed.success) {
       return NextResponse.json(
         { error: 'Invalid form data. Please check your inputs and try again.' },
-        { status: 400 },
+        { status: 400, headers: NO_STORE },
       )
     }
 
@@ -94,12 +65,12 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       { message: 'Thank you. We will be in touch within one business day.' },
-      { status: 200 },
+      { status: 200, headers: NO_STORE },
     )
   } catch {
     return NextResponse.json(
       { error: 'Something went wrong. Please try again later.' },
-      { status: 500 },
+      { status: 500, headers: NO_STORE },
     )
   }
 }

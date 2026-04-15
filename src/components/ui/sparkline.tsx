@@ -19,6 +19,11 @@ export function Sparkline({
   showFill = true,
   className,
 }: SparklineProps) {
+  // Hooks must run unconditionally — call useId before any early return
+  // (prior version broke rules-of-hooks and triggered hydration mismatches
+  // whenever data.length < 2 on server vs client).
+  const gradientId = useId()
+
   if (data.length < 2) return null
 
   const max = Math.max(...data)
@@ -34,7 +39,6 @@ export function Sparkline({
 
   const polylinePoints = points.join(' ')
   const fillPoints = `${padding},${height - padding} ${polylinePoints} ${width - padding},${height - padding}`
-  const gradientId = useId()
 
   return (
     <svg

@@ -35,7 +35,11 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
+              // 'unsafe-inline' is required for Next.js hydration scripts
+              // until nonce support is wired. 'unsafe-eval' is intentionally
+              // omitted — Next.js 16 production bundles and standard GTM
+              // loaders do not require it.
+              "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' https: data:",
               "font-src 'self' https://fonts.gstatic.com",
