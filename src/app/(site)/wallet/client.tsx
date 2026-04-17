@@ -666,13 +666,6 @@ function FinancesDashboard() {
               <TransactionRow key={`${tx.name}-${tx.time}-${tx.amount}`} tx={tx} index={i} />
             ))}
           </ul>
-
-          <a
-            href="/wallet/transactions/"
-            className="mt-4 flex items-center justify-center gap-1.5 rounded-xl border border-[#E5E7EB] py-2.5 text-sm font-semibold text-[#176FEB] transition-all hover:border-[#176FEB] hover:bg-[#E8F2FE]"
-          >
-            View all transactions <ArrowRight className="size-4" />
-          </a>
         </motion.div>
       </div>
     </SectionWrapper>

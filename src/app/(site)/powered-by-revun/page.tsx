@@ -38,7 +38,7 @@ const operatorTypes = [
     description:
       'Full-service PMCs use Revun to manage leasing, payments, maintenance, owner reporting, and tenant communications across their entire portfolio.',
     icon: Building2,
-    href: '/solutions/property-managers/',
+    href: '/solutions/property-management-companies/',
   },
   {
     title: 'Real Estate Brokerages',

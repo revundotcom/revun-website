@@ -63,6 +63,72 @@ export function MobileMenu({ scrolled }: { scrolled: boolean }) {
           <nav className="flex-1 px-3 py-3" aria-label="Mobile navigation">
             <Accordion>
               {NAV_ITEMS.map((item) => {
+                const renderChildLink = (child: {
+                  label: string
+                  description: string
+                  href: string
+                  icon?: string
+                }) => {
+                  const isActive = pathname.startsWith(child.href)
+                  const Icon = child.icon ? iconMap[child.icon] : null
+                  return (
+                    <Link
+                      key={`${child.href}-${child.label}`}
+                      href={child.href}
+                      className={cn(
+                        'group flex items-center gap-3 rounded-lg px-3 py-2.5 transition-colors',
+                        isActive
+                          ? 'bg-brand-blue/8 text-brand-blue'
+                          : 'text-brand-graphite-mid hover:bg-brand-off-white hover:text-brand-graphite'
+                      )}
+                      onClick={() => setOpen(false)}
+                    >
+                      {Icon && (
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-brand-blue/8 text-brand-blue">
+                          <Icon className="h-4 w-4" />
+                        </span>
+                      )}
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-medium">{child.label}</p>
+                        <p className="mt-0.5 text-xs text-[#94A3B8] leading-snug">
+                          {child.description}
+                        </p>
+                      </div>
+                      <ChevronRight className="h-3.5 w-3.5 shrink-0 text-brand-graphite-light transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                  )
+                }
+
+                if (item.sections) {
+                  return (
+                    <AccordionItem key={item.label} value={item.label} className="border-none">
+                      <AccordionTrigger className="px-3 py-3 text-[15px] font-heading font-semibold text-brand-graphite hover:no-underline hover:bg-brand-off-white rounded-lg">
+                        {item.label}
+                      </AccordionTrigger>
+                      <AccordionContent className="pb-1">
+                        <div className="flex flex-col gap-3 pl-3">
+                          {item.sections.map((section) => (
+                            <div key={section.title}>
+                              <p className="px-3 pb-1 pt-2 text-[10px] font-heading font-semibold uppercase tracking-wider text-[#94A3B8]">
+                                {section.title}
+                              </p>
+                              {section.items.length === 0 ? (
+                                <p className="px-3 py-1 text-xs italic text-brand-graphite-light">
+                                  Coming soon
+                                </p>
+                              ) : (
+                                <div className="flex flex-col gap-0.5">
+                                  {section.items.map(renderChildLink)}
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  )
+                }
+
                 if (item.children) {
                   return (
                     <AccordionItem key={item.label} value={item.label} className="border-none">
@@ -71,36 +137,7 @@ export function MobileMenu({ scrolled }: { scrolled: boolean }) {
                       </AccordionTrigger>
                       <AccordionContent className="pb-1">
                         <div className="flex flex-col gap-0.5 pl-3">
-                          {item.children.map((child) => {
-                            const isActive = pathname.startsWith(child.href)
-                            const Icon = child.icon ? iconMap[child.icon] : null
-                            return (
-                              <Link
-                                key={child.href}
-                                href={child.href}
-                                className={cn(
-                                  'group flex items-center gap-3 rounded-lg px-3 py-2.5 transition-colors',
-                                  isActive
-                                    ? 'bg-brand-blue/8 text-brand-blue'
-                                    : 'text-brand-graphite-mid hover:bg-brand-off-white hover:text-brand-graphite'
-                                )}
-                                onClick={() => setOpen(false)}
-                              >
-                                {Icon && (
-                                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-brand-blue/8 text-brand-blue">
-                                    <Icon className="h-4 w-4" />
-                                  </span>
-                                )}
-                                <div className="min-w-0 flex-1">
-                                  <p className="text-sm font-medium">{child.label}</p>
-                                  <p className="mt-0.5 text-xs text-[#94A3B8] leading-snug">
-                                    {child.description}
-                                  </p>
-                                </div>
-                                <ChevronRight className="h-3.5 w-3.5 shrink-0 text-brand-graphite-light transition-transform group-hover:translate-x-0.5" />
-                              </Link>
-                            )
-                          })}
+                          {item.children.map(renderChildLink)}
                         </div>
                       </AccordionContent>
                     </AccordionItem>

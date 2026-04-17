@@ -111,7 +111,7 @@ function WorkflowMap() {
 
 export default function EcosystemMap() {
   return (
-    <section className="relative overflow-hidden bg-white py-12 md:py-16">
+    <section id="ecosystem" className="relative overflow-hidden bg-white py-12 md:py-16 scroll-mt-24">
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[700px] w-[700px] rounded-full bg-[#176FEB]/[0.03] blur-[120px]" aria-hidden />
 
       <div className="relative z-10 mx-auto max-w-6xl px-6">

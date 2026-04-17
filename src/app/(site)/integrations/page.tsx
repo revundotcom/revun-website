@@ -50,30 +50,6 @@ const integrations: Integration[] = [
     category: 'Analytics',
     description: 'Connect Revun to 5,000+ apps with custom automations.',
   },
-  {
-    name: 'Certn',
-    slug: 'certn',
-    category: 'Identity Verification',
-    description: 'Automated background checks and identity verification for applicants.',
-  },
-  {
-    name: 'Realtor.ca',
-    slug: 'realtor-ca',
-    category: 'Listing Distribution',
-    description: 'Syndicate vacancies to Realtor.ca and other Canadian listing networks.',
-  },
-  {
-    name: 'Plaid',
-    slug: 'plaid',
-    category: 'Banking',
-    description: 'Secure bank account connections for payment verification and income checks.',
-  },
-  {
-    name: 'Intercom',
-    slug: 'intercom',
-    category: 'Support',
-    description: 'In-app messaging and help desk for tenant and owner support.',
-  },
 ]
 
 const categoryOrder = [
@@ -82,11 +58,7 @@ const categoryOrder = [
   'Payments',
   'Signatures',
   'CRM',
-  'Identity Verification',
-  'Listing Distribution',
   'Analytics',
-  'Banking',
-  'Support',
 ] as const
 
 function IntegrationCard({ integration }: { integration: Integration }) {

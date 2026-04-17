@@ -153,10 +153,7 @@ export default function HelpPage() {
               const Icon = cat.icon
               return (
                 <motion.div key={cat.slug} variants={revealItem}>
-                  <Link
-                    href={`/help/${cat.slug}/`}
-                    className="group flex flex-col rounded-2xl border border-[#D3D5DB] bg-white p-8 transition-colors hover:border-[#176FEB]/40"
-                  >
+                  <div className="flex flex-col rounded-2xl border border-[#D3D5DB] bg-white p-8">
                     <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[#E8F2FE] text-[#176FEB]">
                       <Icon className="h-5 w-5" strokeWidth={1.8} />
                     </div>
@@ -166,13 +163,7 @@ export default function HelpPage() {
                     <p className="mt-2 flex-1 text-[0.938rem] leading-relaxed text-muted-foreground">
                       {cat.description}
                     </p>
-                    <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue transition-colors group-hover:underline">
-                      Browse articles
-                      <span className="transition-transform group-hover:translate-x-1" aria-hidden>
-                        &rarr;
-                      </span>
-                    </span>
-                  </Link>
+                  </div>
                 </motion.div>
               )
             })}

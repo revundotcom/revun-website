@@ -45,11 +45,11 @@ export function HeroSection() {
         {/* H1 - use font-display for the serif impact */}
         <motion.h1
           variants={fadeUp}
-          className="font-display text-5xl font-normal leading-[1.1] tracking-tight text-[#0A1628] md:text-7xl lg:text-[5.5rem]"
+          className="font-display text-4xl font-normal leading-[1.1] tracking-tight text-[#0A1628] text-balance md:text-6xl lg:text-[4.5rem]"
         >
-          Run your entire property business on
+          Run your entire property business
           <br className="hidden md:block" />
-          {' '}<span className="text-brand-blue font-semibold">one system</span>
+          {' '}on <span className="text-brand-blue font-semibold">one system</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -79,6 +79,54 @@ export function HeroSection() {
           >
             Book a Live Demo
           </Link>
+        </motion.div>
+
+        {/* Trust row under CTAs */}
+        <motion.div
+          variants={fadeUp}
+          className="mt-8 flex flex-col items-center justify-center gap-3 text-xs text-brand-graphite-mid sm:flex-row sm:gap-6"
+        >
+          <div className="flex items-center gap-2">
+            <div className="flex -space-x-2">
+              {[
+                'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&h=100&q=80',
+                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80',
+                'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&h=100&q=80',
+                'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&h=100&q=80',
+              ].map((src) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={src}
+                  src={src}
+                  alt=""
+                  loading="lazy"
+                  className="h-7 w-7 rounded-full border-2 border-white object-cover"
+                />
+              ))}
+            </div>
+            <span>
+              Built with{' '}
+              <span className="font-semibold text-[#0A1628]">owners, PMCs, and brokerages</span>
+            </span>
+          </div>
+          <span className="hidden h-3 w-px bg-border sm:block" aria-hidden="true" />
+          <div className="flex items-center gap-2">
+            <span className="flex items-center gap-0.5 text-[#F59E0B]">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <svg key={i} className="h-3.5 w-3.5" viewBox="0 0 20 20" fill={i < 4 ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+                  <path d="M10 1.5l2.6 5.9 6.4.6-4.8 4.4 1.4 6.3L10 15.3l-5.6 3.3 1.4-6.3L1 7.9l6.4-.5L10 1.5z" />
+                </svg>
+              ))}
+            </span>
+            <span>
+              <span className="font-semibold text-[#0A1628]">4.7 / 5</span>{' '}
+              operator satisfaction
+            </span>
+          </div>
+          <span className="hidden h-3 w-px bg-border sm:block" aria-hidden="true" />
+          <span>
+            Across <span className="font-semibold text-[#0A1628]">10 Canadian provinces</span>
+          </span>
         </motion.div>
 
         {/* AEO quick answer for AI search engines */}

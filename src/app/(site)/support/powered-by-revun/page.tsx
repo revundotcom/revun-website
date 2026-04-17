@@ -69,7 +69,7 @@ const operatorTypes = [
     title: 'Property Management Companies',
     description: 'Full-service PMCs managing residential and commercial portfolios.',
     icon: Building2,
-    href: '/solutions/property-managers/',
+    href: '/solutions/property-management-companies/',
   },
   {
     title: 'Real Estate Brokerages',

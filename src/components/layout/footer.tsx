@@ -117,7 +117,7 @@ export function Footer() {
           <div className="max-w-md">
             <RevunLogo size="h-8" />
             <p className="mt-4 text-sm leading-relaxed text-[#64748B]">
-              The infrastructure layer for modern property operations. Leasing, payments, maintenance, compliance, communications, accounting, and reporting — one system.
+              The infrastructure layer for modern property operations. Leasing, payments, maintenance, compliance, communications, accounting, and reporting: one system.
             </p>
           </div>
 

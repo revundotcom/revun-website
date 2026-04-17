@@ -88,8 +88,8 @@ export default function FurnishedRentalsPage() {
             <Link href="/demo/" className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white transition-colors duration-150 hover:bg-[#005CE8]">
               Book a Demo
             </Link>
-            <Link href="/self-manage/furnished-rental/" className="inline-flex h-12 items-center justify-center rounded-xl border border-[#E5E7EB] px-8 text-base font-semibold text-[#0A1628] transition-colors duration-150 hover:bg-white">
-              Self-Manage a Furnished Rental
+            <Link href="/self-manage/" className="inline-flex h-12 items-center justify-center rounded-xl border border-[#E5E7EB] px-8 text-base font-semibold text-[#0A1628] transition-colors duration-150 hover:bg-white">
+              Self-Manage Your Rental
             </Link>
           </div>
         </div>

@@ -2,12 +2,12 @@ const faqs = [
   {
     question: 'What is Revun?',
     answer:
-      'Revun is the operating system for property operations — an infrastructure layer that unifies leasing, payments, maintenance, compliance, communications, accounting, and reporting into one system. It replaces disconnected tools with a single platform built for Canada and the United States.',
+      'Revun is the operating system for property operations: an infrastructure layer that unifies leasing, payments, maintenance, compliance, communications, accounting, and reporting into one system. It replaces disconnected tools with a single platform built for Canada and the United States.',
   },
   {
     question: 'Who is Revun built for?',
     answer:
-      'Revun serves self-managing property owners, property management companies, brokerages, leasing teams, maintenance companies, REITs, and tenants. Whether you manage one unit or an entire national portfolio, the platform gives every role — including internal ops teams — the exact workflows and visibility they need.',
+      'Revun serves self-managing property owners, property management companies, brokerages, leasing teams, maintenance companies, REITs, and tenants. Whether you manage one unit or an entire national portfolio, the platform gives every role, including internal ops teams, the exact workflows and visibility they need.',
   },
   {
     question: 'How much does Revun cost?',
@@ -27,7 +27,7 @@ const faqs = [
   {
     question: 'How do I get started?',
     answer:
-      'See the full platform at revun.com/platform, or book a live demo to walk through it with our team. You can also sign up for a free account — no credit card required — and start managing properties immediately.',
+      'See the full platform at revun.com/platform, or book a live demo to walk through it with our team. You can also sign up for a free account, no credit card required, and start managing properties immediately.',
   },
 ]
 

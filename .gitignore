@@ -48,3 +48,7 @@ next-env.d.ts
 # claude code (local only)
 .agents/
 .claude/
+
+.vercel
+# Added by code-review-graph
+.code-review-graph/

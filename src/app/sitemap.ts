@@ -80,28 +80,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ─── Compare ────────────────────────────────────────────────────
     { url: url('/compare/'), lastModified: d, changeFrequency: 'weekly', priority: 0.8 },
-    ...pages('/compare/', [
-      // PM Software
-      'appfolio', 'buildium', 'doorloop', 'yardi', 'propertyware', 'rent-manager',
-      'entrata', 'mri-software', 'tenantcloud', 'hemlane', 'avail', 'turbo-tenant',
-      'innago', 'rentec-direct', 'simplifyem', 'resman', 'payrop',
-      // Canadian Platforms
-      'singlekey', 'liv-rent', 'frontlobby', 'rhenti', 'rentmoola', 'openroom',
-      'zumper', 'padmapper', 'rent-panda',
-      // Brokerage / CRM
-      'follow-up-boss', 'kvcore', 'lone-wolf', 'dotloop', 'skyslope', 'brokermint',
-      'transaction-desk', 'wise-agent', 'top-producer', 'boomtown', 'real-geeks',
-      'cinc', 'liondesk',
-      // Maintenance
-      'property-meld', 'jobber', 'servicetitan', 'happyco', 'upkeep',
-      'housecall-pro', 'maintainx', 'fieldpulse', 'appwork', 'building-engines',
-      // Communications
-      'ringcentral', 'openphone', 'dialpad', 'aircall', 'zoom-phone',
-      'intercom', 'zendesk', 'freshdesk',
-      // Screening
-      'transunion-smartmove', 'naborly', 'rentprep', 'sure', 'the-guarantors',
-      'insurent', 'rhino', 'jetty', 'leaselock', 'trustii', 'persona',
-    ], { changeFrequency: 'monthly', priority: 0.6 }),
 
     // ─── Integrations ───────────────────────────────────────────────
     { url: url('/integrations/'), lastModified: d, changeFrequency: 'weekly', priority: 0.8 },

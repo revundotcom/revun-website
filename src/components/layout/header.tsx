@@ -20,30 +20,63 @@ interface NavChild {
   icon?: string
 }
 
+interface NavSection {
+  title: string
+  items: NavChild[]
+}
+
 interface NavItem {
   label: string
   href?: string
   children?: NavChild[]
+  sections?: NavSection[]
 }
 
 // ─── Navigation data ─────────────────────────────────────────────────────────
 
-const PRODUCT_ITEMS: NavChild[] = [
-  { label: 'Communications', description: 'Messaging, email, and notifications', href: '/features/communications/', icon: 'MessageSquare' },
-  { label: 'Leasing', description: 'Applications, screening, and renewals', href: '/features/lease-management/', icon: 'FileText' },
-  { label: 'Maintenance', description: 'Work orders, dispatch, and tracking', href: '/features/maintenance/', icon: 'Wrench' },
-  { label: 'Payments & Wallet', description: 'Collect rent and manage finances', href: '/wallet/', icon: 'Wallet' },
-  { label: 'Accounting & Reporting', description: 'Books, reports, and reconciliation', href: '/features/accounting/', icon: 'BarChart3' },
-  { label: 'Compliance & Documents', description: 'Leases, notices, and document vault', href: '/features/compliance/', icon: 'ShieldCheck' },
-  { label: 'Document Vault', description: 'Secure storage, ID verification, credit reports', href: '/features/document-vault/', icon: 'Lock' },
-  { label: 'AI & Automation', description: 'Smart workflows and auto-responses', href: '/features/ai-automation/', icon: 'Bot' },
-  { label: 'Dashboards', description: 'Real-time insights at a glance', href: '/features/dashboards/', icon: 'LayoutDashboard' },
-  { label: 'Mobile App', description: 'Manage from anywhere', href: '/download/', icon: 'Smartphone' },
-  { label: 'Desktop Platform', description: 'The full operating system', href: '/platform/', icon: 'Monitor' },
-  { label: 'Owner Portal', description: 'Visibility for property owners', href: '/features/owner-portal/', icon: 'UserCircle' },
-  { label: 'Tenant Portal', description: 'Self-service for tenants', href: '/features/tenant-portal/', icon: 'KeyRound' },
-  { label: 'Roommate Matching', description: 'Find compatible roommates', href: '/features/roommates/', icon: 'Users' },
+const FEATURES_SECTIONS: NavSection[] = [
+  {
+    title: 'Listings & Screening',
+    items: [
+      { label: 'Communications', description: 'Unified inbox for owners, tenants, and vendors', href: '/features/communications/', icon: 'MessageSquare' },
+      { label: 'Leasing', description: 'Applications, showings, and renewals', href: '/features/leasing/', icon: 'FileText' },
+      { label: 'Tenant Screening', description: 'Credit, identity, and risk reports', href: '/features/tenant-screening/', icon: 'ShieldCheck' },
+    ],
+  },
+  {
+    title: 'Tenant Operations',
+    items: [
+      { label: 'Tenant Portal', description: 'Self-service access for renters', href: '/features/tenant-portal/', icon: 'KeyRound' },
+      { label: 'Roommate Matching', description: 'Find compatible co-tenants fast', href: '/features/roommates/', icon: 'Users' },
+      { label: 'Maintenance', description: 'Requests, dispatch, and proof-of-work', href: '/features/maintenance/', icon: 'Wrench' },
+    ],
+  },
+  {
+    title: 'Leases & Documents',
+    items: [
+      { label: 'Lease Management', description: 'Full contract lifecycle tracking', href: '/features/lease-management/', icon: 'FileText' },
+      { label: 'Document Vault', description: 'Encrypted storage with role access', href: '/features/document-vault/', icon: 'Lock' },
+      { label: 'Compliance', description: 'Provincial rules enforced automatically', href: '/features/compliance/', icon: 'ShieldCheck' },
+    ],
+  },
+  {
+    title: 'Payments & Accounting',
+    items: [
+      { label: 'Rent Collection', description: 'Automated recurring rent payments', href: '/features/rent-collection/', icon: 'Wallet' },
+      { label: 'Accounting', description: 'Property books with zero spreadsheets', href: '/features/accounting/', icon: 'BarChart3' },
+      { label: 'Wallet', description: 'Payments and cash flow command center', href: '/wallet/', icon: 'CreditCard' },
+    ],
+  },
+  {
+    title: 'Platform & Access',
+    items: [
+      { label: 'AI & Automation', description: 'Smart workflows across the platform', href: '/features/ai-automation/', icon: 'Bot' },
+      { label: 'Dashboards', description: 'Real-time operational insights', href: '/features/dashboards/', icon: 'LayoutDashboard' },
+      { label: 'Owner Portal', description: 'Financial transparency for investors', href: '/features/owner-portal/', icon: 'UserCircle' },
+    ],
+  },
 ]
+
 
 const SOLUTIONS_ITEMS: NavChild[] = [
   {
@@ -101,48 +134,18 @@ const RESOURCES_ITEMS: NavChild[] = [
   { label: 'Resources', description: 'Articles, guides, and insights', href: '/resources/' },
   { label: 'How It Works', description: 'See the platform in action', href: '/how-revun-works/' },
   { label: 'Why Revun', description: 'What makes Revun different', href: '/why-revun/' },
-  { label: 'Download', description: 'Get the mobile and desktop apps', href: '/download/' },
+  { label: 'Mobile App', description: 'Run your portfolio from anywhere', href: '/download/' },
+  { label: 'Desktop Platform', description: 'The full OS for your team', href: '/platform/' },
 ]
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: 'Product', children: PRODUCT_ITEMS },
-  { label: 'Solutions', children: SOLUTIONS_ITEMS },
+  { label: 'Features', sections: FEATURES_SECTIONS },
   { label: 'Tenants', href: '/tenants/' },
   { label: 'Industries', href: '/industries/' },
   { label: 'Pricing', href: '/pricing/' },
   { label: 'Compare', href: '/compare/' },
   { label: 'Resources', children: RESOURCES_ITEMS },
 ]
-
-// ─── Reusable dropdown item with icon ───────────────────────────────────────
-
-function DropdownItem({ item, onClose }: { item: NavChild; onClose: () => void }) {
-  const Icon = item.icon ? iconMap[item.icon] : null
-  return (
-    <motion.div variants={itemVariants}>
-      <Link
-        href={item.href}
-        className="group/card flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-brand-off-white"
-        role="menuitem"
-        onClick={onClose}
-      >
-        {Icon && (
-          <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-blue/8 text-brand-blue transition-colors group-hover/card:bg-brand-blue/12">
-            <Icon className="h-5 w-5" />
-          </span>
-        )}
-        <div className="min-w-0">
-          <p className="text-sm font-heading font-semibold text-brand-graphite group-hover/card:text-brand-blue transition-colors">
-            {item.label}
-          </p>
-          <p className="mt-0.5 text-xs text-brand-graphite-mid leading-relaxed">
-            {item.description}
-          </p>
-        </div>
-      </Link>
-    </motion.div>
-  )
-}
 
 // ─── Reusable simple dropdown item (no icon) ────────────────────────────────
 
@@ -164,69 +167,76 @@ function SimpleDropdownItem({ item, onClose }: { item: NavChild; onClose: () => 
   )
 }
 
-// ─── Mega menu: Product ─────────────────────────────────────────────────────
+// ─── Compact dropdown item (icon + label + short desc) ──────────────────────
 
-function ProductMegaMenu({ onClose }: { onClose: () => void }) {
+function CompactDropdownItem({ item, onClose }: { item: NavChild; onClose: () => void }) {
+  const Icon = item.icon ? iconMap[item.icon] : null
   return (
-    <motion.div
-      variants={dropdownVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      className="absolute left-1/2 top-full mt-2 w-[820px] -translate-x-1/2 rounded-xl border border-border bg-white p-5"
-      role="menu"
-      onKeyDown={(e) => e.key === 'Escape' && onClose()}
-    >
-      <div className="mb-3 flex items-center justify-between">
-        <p className="text-xs font-heading font-semibold uppercase tracking-wider text-[#94A3B8]">
-          Product
-        </p>
-        <Link
-          href="/platform/"
-          className="text-xs font-medium text-brand-blue hover:underline"
-          onClick={onClose}
-        >
-          Platform overview
-        </Link>
-      </div>
-      <div className="grid grid-cols-3 gap-1">
-        {PRODUCT_ITEMS.map((item) => (
-          <DropdownItem key={item.href} item={item} onClose={onClose} />
-        ))}
-      </div>
+    <motion.div variants={itemVariants}>
+      <Link
+        href={item.href}
+        className="group/card flex min-h-[58px] items-start gap-2.5 rounded-md px-2 py-2 transition-colors hover:bg-brand-off-white"
+        role="menuitem"
+        onClick={onClose}
+      >
+        {Icon && (
+          <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-brand-blue">
+            <Icon className="h-4 w-4" />
+          </span>
+        )}
+        <div className="min-w-0 flex-1">
+          <p className="text-[13px] font-heading font-semibold text-brand-graphite group-hover/card:text-brand-blue transition-colors leading-tight">
+            {item.label}
+          </p>
+          <p className="mt-0.5 line-clamp-2 text-[11px] text-brand-graphite-mid leading-snug">
+            {item.description}
+          </p>
+        </div>
+      </Link>
     </motion.div>
   )
 }
 
-// ─── Mega menu: Solutions ────────────────────────────────────────────────────
+// ─── Mega menu: Features ────────────────────────────────────────────────────
 
-function SolutionsMegaMenu({ onClose }: { onClose: () => void }) {
+function FeaturesMegaMenu({ onClose }: { onClose: () => void }) {
   return (
     <motion.div
       variants={dropdownVariants}
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="absolute left-1/2 top-full mt-2 w-[680px] -translate-x-1/2 rounded-xl border border-border bg-white p-5"
+      className="fixed left-1/2 top-[4.5rem] w-[1100px] max-w-[calc(100vw-2rem)] -translate-x-1/2 rounded-xl border border-border bg-white p-6 shadow-lg"
       role="menu"
       onKeyDown={(e) => e.key === 'Escape' && onClose()}
     >
-      <div className="mb-3 flex items-center justify-between">
-        <p className="text-xs font-heading font-semibold uppercase tracking-wider text-[#94A3B8]">
-          By audience
-        </p>
-        <Link
-          href="/solutions/"
-          className="text-xs font-medium text-brand-blue hover:underline"
-          onClick={onClose}
-        >
-          View all solutions
-        </Link>
-      </div>
-      <div className="grid grid-cols-2 gap-1">
-        {SOLUTIONS_ITEMS.map((item) => (
-          <DropdownItem key={item.href} item={item} onClose={onClose} />
+      <div className="grid grid-cols-5 gap-x-4">
+        {FEATURES_SECTIONS.map((section) => (
+          <div key={section.title}>
+            <p className="mb-3 px-2 pb-2 border-b border-border/60 text-[11px] font-heading font-semibold uppercase tracking-wider text-brand-graphite">
+              {section.title}
+            </p>
+            <div className="flex flex-col gap-0.5">
+              {section.items.map((item) => (
+                <CompactDropdownItem key={item.label} item={item} onClose={onClose} />
+              ))}
+            </div>
+          </div>
         ))}
+      </div>
+
+      {/* By Audience - solutions integrated into features menu */}
+      <div className="mt-6 border-t border-border/60 pt-5">
+        <div className="mb-3 px-2">
+          <p className="text-[11px] font-heading font-semibold uppercase tracking-wider text-brand-graphite">
+            By Audience
+          </p>
+        </div>
+        <div className="grid grid-cols-4 gap-x-4">
+          {SOLUTIONS_ITEMS.map((item) => (
+            <CompactDropdownItem key={item.href} item={item} onClose={onClose} />
+          ))}
+        </div>
       </div>
     </motion.div>
   )
@@ -267,12 +277,15 @@ function DesktopNavItem({
 }) {
   const pathname = usePathname()
   const isOpen = openDropdown === item.label
-  const hasChildren = !!item.children
+  const hasChildren = !!item.children || !!item.sections
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const dropdownChildren: NavChild[] =
+    item.children ?? (item.sections ? item.sections.flatMap((s) => s.items) : [])
 
   const isActive = item.href
     ? pathname === item.href || pathname.startsWith(item.href)
-    : item.children?.some((c) => pathname.startsWith(c.href))
+    : dropdownChildren.some((c) => pathname.startsWith(c.href))
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current)
@@ -324,10 +337,8 @@ function DesktopNavItem({
         </button>
         <AnimatePresence>
           {isOpen && (
-            item.label === 'Product' ? (
-              <ProductMegaMenu onClose={() => setOpenDropdown(null)} />
-            ) : item.label === 'Solutions' ? (
-              <SolutionsMegaMenu onClose={() => setOpenDropdown(null)} />
+            item.label === 'Features' ? (
+              <FeaturesMegaMenu onClose={() => setOpenDropdown(null)} />
             ) : (
               <ResourcesDropdown onClose={() => setOpenDropdown(null)} />
             )

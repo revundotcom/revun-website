@@ -1,26 +1,37 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Star } from 'lucide-react'
+import { MapPin, Building2, Clock, Zap } from 'lucide-react'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
+
+const trustStats = [
+  { icon: Building2, value: 'Built for', label: 'operators managing 1 – 10,000+ units' },
+  { icon: MapPin,    value: '10 / 10',   label: 'Canadian provinces supported' },
+  { icon: Clock,     value: '99.9%',     label: 'platform uptime, last 12 months' },
+  { icon: Zap,       value: '40+',       label: 'native integrations live' },
+]
 
 export function ReviewBadges() {
   return (
-    <section className="border-y border-[#E5E7EB] bg-[#F5F6F8] py-4">
+    <section className="border-y border-[#E5E7EB] bg-[#F5F6F8] py-6 md:py-8">
       <div className="mx-auto max-w-6xl px-6">
-        <RevealOnScroll className="flex items-center justify-center gap-3">
-          <motion.div variants={revealItem} className="flex items-center gap-1">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star
-                key={i}
-                className="h-4 w-4 fill-[#F59E0B] text-[#F59E0B]"
-              />
+        <RevealOnScroll>
+          <motion.div
+            variants={revealItem}
+            className="grid w-full grid-cols-2 gap-x-6 gap-y-4 md:grid-cols-4"
+          >
+            {trustStats.map(({ icon: Icon, value, label }) => (
+              <div key={label} className="flex items-center justify-center gap-2.5 text-center md:justify-start md:text-left">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-blue/10">
+                  <Icon className="h-4 w-4 text-brand-blue" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold leading-tight text-[#0A1628]">{value}</p>
+                  <p className="text-[11px] leading-tight text-[#555860]">{label}</p>
+                </div>
+              </div>
             ))}
           </motion.div>
-          <motion.p variants={revealItem} className="text-sm text-[#555860]">
-            Trusted by property managers across{' '}
-            <span className="font-semibold text-[#0A1628]">all 10 Canadian provinces</span>
-          </motion.p>
         </RevealOnScroll>
       </div>
     </section>

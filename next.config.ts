@@ -3,6 +3,18 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
   trailingSlash: true,
   async headers() {
+    const isDev = process.env.NODE_ENV !== 'production'
+    // React dev mode (Turbopack/Fast Refresh) needs 'unsafe-eval' for callstack
+    // reconstruction and HMR. Production bundles never use eval.
+    const scriptSrc = [
+      "script-src 'self' 'unsafe-inline'",
+      isDev && "'unsafe-eval'",
+      'https://www.googletagmanager.com',
+      'https://www.google-analytics.com',
+    ]
+      .filter(Boolean)
+      .join(' ')
+
     return [
       {
         source: '/(.*)',
@@ -35,11 +47,7 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              // 'unsafe-inline' is required for Next.js hydration scripts
-              // until nonce support is wired. 'unsafe-eval' is intentionally
-              // omitted — Next.js 16 production bundles and standard GTM
-              // loaders do not require it.
-              "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
+              scriptSrc,
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' https: data:",
               "font-src 'self' https://fonts.gstatic.com",
@@ -70,6 +78,10 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn.sanity.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
       },
     ],
   },
