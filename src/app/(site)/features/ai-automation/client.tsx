@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
@@ -8,8 +9,9 @@ import {
   Sparkles, Bot, Zap, Brain, Target, TrendingUp, Shield, Users,
   CheckCircle2, AlertTriangle, Clock, ArrowRight, Settings, BarChart3,
   Wrench, Flame, Thermometer, Lightbulb, MessageSquare, Star,
-  Send, Bell, ToggleRight, Play, Eye, Phone, Mail,
+  Send, Bell, Eye, Building2, MapPin, Quote, ChevronDown,
 } from 'lucide-react'
+import { sanitizeJsonLd } from '@/lib/utils'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -50,48 +52,193 @@ function Anim({ children, className, delay = 0.1, x, y = 12 }: { children: React
 function Hero() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
+
+  const pipeline = [
+    { icon: Target, label: 'Classified', meta: 'Appliance · Medium', color: '#F59E0B' },
+    { icon: Users, label: 'Matched vendor', meta: 'Pro Appliance Co.', color: '#22C55E' },
+    { icon: Clock, label: 'Scheduled', meta: 'Tomorrow · 10 AM', color: '#176FEB' },
+    { icon: Bell, label: 'Tenant notified', meta: 'SMS + in-app', color: '#176FEB' },
+  ]
+
   return (
-    <section id="hero" className="relative overflow-hidden bg-white pt-32 pb-16 md:pt-40 md:pb-20">
+    <section id="hero" className="relative overflow-hidden bg-white pb-16 pt-28 md:pb-20 md:pt-32">
       {/* Grid overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(23,111,235,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(23,111,235,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" aria-hidden="true" />
-      {/* Blue blur */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 h-[420px] w-[420px] rounded-full bg-[#176FEB]/[0.06] blur-[100px]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(23,111,235,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(23,111,235,0.035)_1px,transparent_1px)] bg-[size:40px_40px]" aria-hidden="true" />
+      <div className="absolute top-0 right-[-200px] h-[500px] w-[500px] rounded-full bg-[#176FEB]/[0.08] blur-[120px]" aria-hidden="true" />
+      <div className="absolute bottom-[-100px] left-[-150px] h-[400px] w-[400px] rounded-full bg-[#60A5FA]/[0.06] blur-[100px]" aria-hidden="true" />
 
-      <div ref={ref} className="relative mx-auto max-w-4xl px-6 text-center">
-        <motion.div
-          className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-[#176FEB]/20 bg-[#E8F2FE] px-4 py-1.5"
-          initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, ease }}
-        >
-          <Sparkles className="h-4 w-4 text-[#176FEB]" />
-          <span className="text-sm font-heading font-semibold text-[#176FEB]">AI-Powered Operations</span>
-        </motion.div>
+      <div ref={ref} className="relative mx-auto max-w-6xl px-6">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+          {/* Left: copy */}
+          <div>
+            <motion.div
+              className="inline-flex items-center gap-2 rounded-full border border-[#176FEB]/20 bg-[#E8F2FE] px-4 py-1.5"
+              initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, ease }}
+            >
+              <Sparkles className="h-4 w-4 text-[#176FEB]" />
+              <span className="text-sm font-heading font-semibold text-[#176FEB]">AI-Powered Operations</span>
+            </motion.div>
 
-        <motion.h1
-          className="font-display text-4xl font-normal text-[#0A1628] md:text-6xl"
-          initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.1 }}
-        >
-          AI that runs property operations,{' '}
-          <span className="text-[#176FEB]">not just answers questions</span>
-        </motion.h1>
+            <motion.h1
+              className="mt-6 font-display text-5xl font-normal leading-[1.05] tracking-tight text-[#0A1628] md:text-6xl lg:text-7xl"
+              initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.1 }}
+            >
+              AI that runs your operations,{' '}
+              <span className="text-[#176FEB]">not just answers questions.</span>
+            </motion.h1>
 
-        <motion.p
-          className="mx-auto mt-5 max-w-2xl text-lg text-[#555860] md:text-xl"
-          initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.2 }}
-        >
-          Workflow intelligence that classifies, routes, schedules, and notifies automatically — turning reactive operations into predictable execution.
-        </motion.p>
+            <motion.p
+              className="mt-6 max-w-xl text-lg leading-relaxed text-[#555860] md:text-xl"
+              initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.2 }}
+            >
+              Workflow intelligence that classifies, routes, schedules, and notifies automatically — turning reactive work into predictable execution.
+            </motion.p>
 
-        <motion.div
-          className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row"
-          initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.3 }}
-        >
-          <Link href="/pricing/" className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-7 text-sm font-semibold text-white transition-colors hover:bg-[#0B5AD4]">
-            Start Free Trial
-          </Link>
-          <Link href="/demo/" className="inline-flex h-12 items-center gap-2 rounded-xl border border-[#E5E7EB] bg-white px-7 text-sm font-semibold text-[#2C2E33] transition-colors hover:border-[#176FEB]/30">
-            Book a Demo <ArrowRight className="h-4 w-4" />
-          </Link>
-        </motion.div>
+            <motion.div
+              className="mt-9 flex flex-col items-start gap-3 sm:flex-row"
+              initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.3 }}
+            >
+              <Link href="/pricing/" className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white shadow-[0_8px_24px_-8px_rgba(23,111,235,0.5)] transition-all hover:bg-[#0B5AD4] hover:shadow-[0_12px_28px_-8px_rgba(23,111,235,0.6)]">
+                Start Free Trial <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="/demo/" className="inline-flex h-14 items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-8 text-base font-semibold text-[#0A1628] transition-all hover:border-[#176FEB]/30 hover:text-[#176FEB] hover:shadow-sm">
+                Book a Demo
+              </Link>
+            </motion.div>
+
+            {/* Trust row */}
+            <motion.div
+              className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-[#E5E7EB] pt-6"
+              initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.4 }}
+            >
+              {[
+                { icon: Brain, label: 'Natural language understanding' },
+                { icon: Shield, label: 'Audit-logged decisions' },
+                { icon: Zap, label: 'Sub-second orchestration' },
+              ].map((t) => (
+                <div key={t.label} className="flex items-center gap-2 text-xs text-[#555860]">
+                  <t.icon className="h-4 w-4 text-[#176FEB]" />
+                  <span>{t.label}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Right: animated orchestration preview */}
+          <div className="relative mx-auto w-full max-w-md">
+            <div className="absolute -inset-4 rounded-[32px] bg-gradient-to-br from-[#176FEB]/15 to-transparent blur-2xl" aria-hidden="true" />
+
+            <motion.div
+              className="relative overflow-hidden rounded-3xl border border-[#E5E7EB] bg-white p-6 shadow-[0_24px_60px_-20px_rgba(10,22,40,0.2)]"
+              initial={{ opacity: 0, y: 16, scale: 0.97 }}
+              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{ duration: 0.7, ease, delay: 0.25 }}
+            >
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#176FEB]/10">
+                  <Bot className="h-5 w-5 text-[#176FEB]" />
+                </div>
+                <div className="flex-1">
+                  <p className="font-heading text-sm font-semibold text-[#0A1628]">Revun AI Assistant</p>
+                  <p className="text-[11px] text-[#555860]">Orchestrating request · Unit 7C</p>
+                </div>
+                <span className="inline-flex items-center gap-1 rounded-full bg-[#22C55E]/10 px-2.5 py-1 text-[10px] font-semibold text-[#22C55E]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#22C55E] animate-pulse" /> Live
+                </span>
+              </div>
+
+              {/* User message */}
+              <motion.div
+                className="ml-auto mt-5 max-w-[85%] rounded-2xl rounded-br-md bg-[#176FEB] px-4 py-2.5 text-sm text-white shadow-sm"
+                initial={{ opacity: 0, x: 16 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.4, ease, delay: 0.5 }}
+              >
+                Broken dishwasher in Unit 7C. Handle it.
+              </motion.div>
+
+              {/* AI steps */}
+              <div className="mt-4 space-y-2">
+                <motion.p
+                  className="text-xs font-semibold text-[#0A1628]"
+                  initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.7 }}
+                >
+                  On it. Here&apos;s what I did:
+                </motion.p>
+                {pipeline.map((s, i) => (
+                  <motion.div
+                    key={s.label}
+                    className="flex items-center gap-3 rounded-xl border border-[#E5E7EB] bg-[#F5F6F8] px-3 py-2.5"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.35, ease, delay: 0.85 + i * 0.18 }}
+                  >
+                    <div
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
+                      style={{ backgroundColor: `${s.color}15` }}
+                    >
+                      <s.icon className="h-4 w-4" style={{ color: s.color }} />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="font-heading text-xs font-semibold text-[#0A1628]">{s.label}</p>
+                      <p className="text-[11px] text-[#555860]">{s.meta}</p>
+                    </div>
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-[#22C55E]" />
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.div
+                className="mt-4 flex items-center justify-between border-t border-[#E5E7EB] pt-3"
+                initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 1.7 }}
+              >
+                <span className="text-[11px] text-[#555860]">Completed in 1.4s</span>
+                <span className="text-[11px] font-semibold text-[#22C55E]">4 / 4 steps</span>
+              </motion.div>
+            </motion.div>
+
+            {/* Floating badge */}
+            <motion.div
+              className="absolute -bottom-5 -left-5 flex items-center gap-2 rounded-2xl border border-[#E5E7EB] bg-white px-4 py-3 shadow-xl md:-left-8"
+              initial={{ opacity: 0, y: 16, scale: 0.9 }}
+              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{ duration: 0.5, ease, delay: 1.5 }}
+            >
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#176FEB]/10">
+                <Zap className="h-4 w-4 text-[#176FEB]" />
+              </div>
+              <div>
+                <p className="font-heading text-xs font-semibold text-[#0A1628]">1,243 actions</p>
+                <p className="text-[11px] text-[#555860]">auto-orchestrated today</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ── Stats bar ────────────────────────────────────────────────────── */
+
+function StatsBar() {
+  const stats = [
+    { value: '23%', label: 'Faster resolution' },
+    { value: '12 hrs', label: 'Saved per manager / week' },
+    { value: '94%', label: 'Message open rate' },
+    { value: '97.8%', label: 'On-time collection' },
+  ]
+  return (
+    <section className="border-y border-[#E5E7EB] bg-white py-10">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+          {stats.map((s) => (
+            <div key={s.label} className="text-center">
+              <p className="font-display text-3xl font-bold text-[#0A1628] md:text-4xl">{s.value}</p>
+              <p className="mt-2 text-xs font-medium uppercase tracking-wider text-[#555860]">{s.label}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -166,7 +313,7 @@ function AICommandCenter() {
               className="flex flex-wrap items-center gap-2 pt-2"
               initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.4, ease, delay: 1.6 }}
             >
-              {badges.map((b, i) => (
+              {badges.map((b) => (
                 <span key={b} className="inline-flex items-center rounded-full bg-[#E8F2FE] px-3 py-1 text-xs font-medium text-[#176FEB]">
                   <CheckCircle2 className="mr-1 h-3 w-3" />{b}
                 </span>
@@ -217,7 +364,8 @@ function SmartTriageEngine() {
   return (
     <SW id="smart-triage">
       <SH eyebrow="Triage" title="Auto-classify every" highlight="request" description="AI reads the description, assigns category, priority, and confidence in milliseconds." />
-      <div ref={ref} className="mt-12 mx-auto max-w-3xl">
+      <div ref={ref} className="mt-12 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        {/* Triage card */}
         <motion.div
           className="rounded-2xl border border-[#E5E7EB] bg-white overflow-hidden"
           initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease }}
@@ -263,6 +411,51 @@ function SmartTriageEngine() {
             })}
           </div>
         </motion.div>
+
+        {/* Image + feature bullets */}
+        <div className="space-y-6">
+          <motion.div
+            className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[#E5E7EB]"
+            initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.15 }}
+          >
+            <Image
+              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85"
+              alt="Property manager reviewing an AI-triaged maintenance queue on a laptop"
+              fill
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628]/50 via-transparent to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold text-[#176FEB] backdrop-blur">
+                <Brain className="h-3 w-3" /> Trained on 2.4M tickets
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold text-[#22C55E] backdrop-blur">
+                <CheckCircle2 className="h-3 w-3" /> 94% accuracy
+              </span>
+            </div>
+          </motion.div>
+
+          <div className="space-y-3">
+            {[
+              { icon: Brain, title: 'Reads intent, not keywords', desc: 'Understands slang, typos, and half-sentences — no structured form required.' },
+              { icon: Target, title: 'Confidence + category in ms', desc: 'Every ticket gets a category, priority, and a confidence score so you know when to step in.' },
+              { icon: Shield, title: 'Escalates what matters', desc: 'Safety and critical tickets surface instantly with the right on-call vendor paged.' },
+            ].map((f, i) => (
+              <Anim key={f.title} className="rounded-xl border border-[#E5E7EB] bg-white p-4" delay={0.3 + i * 0.08} x={12} y={0}>
+                <div className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#176FEB]/10">
+                    <f.icon className="h-5 w-5 text-[#176FEB]" />
+                  </div>
+                  <div>
+                    <h4 className="font-heading text-sm font-semibold text-[#0A1628]">{f.title}</h4>
+                    <p className="mt-1 text-xs leading-relaxed text-[#555860]">{f.desc}</p>
+                  </div>
+                </div>
+              </Anim>
+            ))}
+          </div>
+        </div>
       </div>
     </SW>
   )
@@ -799,30 +992,159 @@ function OperationsAnalytics() {
   )
 }
 
+/* ── Testimonials ─────────────────────────────────────────────────── */
+
+const testimonials = [
+  {
+    quote: 'Maintenance triage used to eat my Monday mornings. Revun AI classifies and dispatches before I open my laptop — our resolution time dropped 31% in the first quarter.',
+    name: 'Jasmine Walsh',
+    title: 'Operations Director · Harbourview Rentals',
+    location: 'Halifax, NS',
+    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=256&q=90',
+  },
+  {
+    quote: 'The workflow builder replaced three Zapier zaps and a Google Sheet. Late-payment reminders, lease renewals, move-out surveys — all automatic, all audited.',
+    name: 'Olivier Fortin',
+    title: 'Founder · Campus Living Québec',
+    location: 'Montréal, QC',
+    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=256&q=90',
+  },
+  {
+    quote: 'Predictive insights told us two leases were flight-risks weeks before renewal. We intervened, kept both tenants, saved ~$14k in turnover costs.',
+    name: 'Amanda Kaur',
+    title: 'Portfolio Manager · Pacific Coast Group',
+    location: 'Vancouver, BC',
+    photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=256&q=90',
+  },
+]
+
+function Testimonials() {
+  return (
+    <SW id="testimonials" dark>
+      <SH eyebrow="Proof" title="Canadian operators run" highlight="leaner with AI." description="Real numbers from PMs in the first 90 days on Revun." />
+      <div className="mt-12 grid gap-6 md:grid-cols-3">
+        {testimonials.map((t, i) => (
+          <motion.div
+            key={t.name}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.5, ease, delay: 0.05 + i * 0.1 }}
+            className="relative flex h-full flex-col rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-all hover:border-[#176FEB]/30 hover:shadow-md md:p-8"
+          >
+            <Quote className="absolute right-6 top-6 h-10 w-10 text-[#176FEB]/10" />
+            <div className="mb-4 flex gap-0.5">
+              {Array.from({ length: 5 }).map((_, s) => (
+                <Star key={s} className="h-4 w-4 fill-[#176FEB] stroke-[#176FEB]" />
+              ))}
+            </div>
+            <p className="relative z-10 font-display text-lg leading-snug text-[#0A1628] md:text-xl">
+              &ldquo;{t.quote}&rdquo;
+            </p>
+            <div className="mt-6 flex items-center gap-3 border-t border-[#E5E7EB] pt-6">
+              <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full">
+                <Image src={t.photo} alt={`${t.name}, ${t.title}`} fill sizes="48px" className="object-cover" />
+              </div>
+              <div className="min-w-0">
+                <div className="truncate font-bold text-[#0A1628]">{t.name}</div>
+                <div className="mt-0.5 flex items-center gap-1 text-xs text-[#555860]">
+                  <Building2 className="h-3 w-3 shrink-0" />
+                  <span className="truncate">{t.title}</span>
+                </div>
+                <div className="mt-0.5 flex items-center gap-1 text-xs text-[#555860]">
+                  <MapPin className="h-3 w-3 shrink-0" />
+                  <span className="truncate">{t.location}</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </SW>
+  )
+}
+
+/* ── FAQ ──────────────────────────────────────────────────────────── */
+
+const AI_AUTOMATION_FAQS = [
+  { q: 'What AI models power Revun automation?', a: 'Revun uses a combination of in-house fine-tuned transformer models for classification and intent, plus best-in-class LLMs for natural-language understanding. Every decision is logged with its model version, confidence, and reasoning.' },
+  { q: 'Can I see why the AI made a decision?', a: 'Yes. Every AI action — classification, vendor match, auto-dispatch, reminder — is logged with its inputs, confidence score, and reasoning. You can audit any decision in seconds, and override it one-click.' },
+  { q: 'Does the AI ever act without my approval?', a: 'You control the autonomy. Each workflow can run fully automatic, suggest-and-approve, or notify-only. Most operators start in suggest-and-approve and move to full autonomy as trust builds.' },
+  { q: 'How accurate is the triage classification?', a: 'Production accuracy sits at 94% on our standard category set (Plumbing, Electrical, HVAC, Appliance, Safety, General). Ambiguous tickets are flagged for human review rather than misclassified.' },
+  { q: 'Is my data used to train Revun models?', a: 'No. Customer data is never used to train global models. Per-account fine-tuning is opt-in and isolated to your account only.' },
+  { q: 'How does vendor matching score work?', a: 'Each vendor gets a 0-100 match score based on five weighted factors: rating, proximity, availability, past performance on similar tickets, and price. You can tune the weights per property.' },
+  { q: 'Can I build custom automations without code?', a: 'Yes. The visual Workflow Builder uses a When [trigger] → Then [action] pattern. Triggers include ticket events, calendar dates, tenant actions, payment events, and more — with any action chained after.' },
+  { q: 'Does this work alongside my existing tools?', a: 'Revun connects to Slack, Microsoft Teams, QuickBooks, Xero, Sage, and any webhook/REST endpoint. Actions can be triggered from or pushed out to your existing stack.' },
+] as const
+
+function FAQ() {
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: AI_AUTOMATION_FAQS.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  }
+  return (
+    <SW id="faq">
+      <SH eyebrow="FAQ" title="Questions about" highlight="AI & automation." description="Straight answers on control, accuracy, and how it fits your stack." />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: sanitizeJsonLd(faqJsonLd) }} />
+      <RevealOnScroll className="mx-auto mt-12 max-w-3xl">
+        {AI_AUTOMATION_FAQS.map((item, idx) => (
+          <motion.div key={idx} variants={revealItem}>
+            <details className="group border-b border-[#E5E7EB] [&[open]>summary>svg]:rotate-180">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left">
+                <span className="text-base font-semibold text-[#0A1628] sm:text-lg">{item.q}</span>
+                <ChevronDown className="h-5 w-5 flex-shrink-0 text-[#555860] transition-transform duration-300" aria-hidden="true" />
+              </summary>
+              <p className="pb-5 pr-10 text-sm leading-relaxed text-[#555860] sm:text-base">{item.a}</p>
+            </details>
+          </motion.div>
+        ))}
+      </RevealOnScroll>
+    </SW>
+  )
+}
+
 /* ── Section 10: CTA ──────────────────────────────────────────────── */
 
 function CTASection() {
   return (
-    <section id="cta" className="bg-[#F5F6F8] py-16 md:py-20">
-      <div className="mx-auto max-w-3xl px-6 text-center">
-        <RevealOnScroll stagger={0.12}>
-          <motion.h2 variants={revealItem} className="font-display text-3xl font-normal text-[#0A1628] md:text-4xl">
-            Turn reactive operations into{' '}
-            <span className="text-[#176FEB]">predictable execution</span>
-          </motion.h2>
-          <motion.p variants={revealItem} className="mx-auto mt-4 max-w-lg text-base text-[#555860]">
-            Let AI handle classification, routing, scheduling, and follow-ups — so you can focus on growth, not firefighting.
-          </motion.p>
-          <motion.div variants={revealItem} className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link href="/pricing/" className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-7 text-sm font-semibold text-white transition-colors hover:bg-[#0B5AD4]">
-              Start Free Trial
-            </Link>
-            <Link href="/contact/" className="inline-flex h-12 items-center gap-2 rounded-xl border border-[#E5E7EB] bg-white px-7 text-sm font-semibold text-[#2C2E33] transition-colors hover:border-[#176FEB]/30">
-              Contact Sales <ArrowRight className="h-4 w-4" />
-            </Link>
-          </motion.div>
-        </RevealOnScroll>
-      </div>
+    <section id="cta" className="relative overflow-hidden bg-[#0A1628] px-6 py-24 text-white md:py-28">
+      <div className="absolute top-0 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-[#176FEB]/25 blur-[120px]" aria-hidden="true" />
+      <RevealOnScroll className="relative mx-auto max-w-3xl text-center" stagger={0.12}>
+        <motion.span variants={revealItem} className="inline-flex items-center rounded-full border border-[#176FEB]/30 bg-[#176FEB]/10 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-[#60A5FA]">
+          Ready when you are
+        </motion.span>
+        <motion.h2 variants={revealItem} className="mt-6 font-display text-4xl font-normal tracking-tight md:text-5xl lg:text-6xl">
+          Turn reactive operations into{' '}
+          <span className="text-[#60A5FA]">predictable execution.</span>
+        </motion.h2>
+        <motion.p variants={revealItem} className="mx-auto mt-6 max-w-xl text-lg text-white/70">
+          Let AI handle classification, routing, scheduling, and follow-ups — so you can focus on growth, not firefighting.
+        </motion.p>
+        <motion.div variants={revealItem} className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <Link
+            href="/pricing/"
+            className="group inline-flex items-center justify-center gap-2 rounded-xl bg-[#176FEB] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_0_40px_-8px_rgba(23,111,235,0.8)] transition-all hover:brightness-110 hover:shadow-[0_0_50px_-4px_rgba(23,111,235,0.9)]"
+          >
+            Start Free Trial
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+          </Link>
+          <Link
+            href="/demo/"
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all hover:border-white/40 hover:bg-white/15"
+          >
+            Book a Demo
+          </Link>
+        </motion.div>
+        <motion.p variants={revealItem} className="mt-8 text-xs text-white/50">
+          Questions?{' '}
+          <Link href="/contact/" className="text-[#60A5FA] transition-colors hover:text-white">Talk to our team →</Link>
+        </motion.p>
+      </RevealOnScroll>
     </section>
   )
 }
@@ -833,6 +1155,7 @@ export function AIAutomationClient() {
   return (
     <>
       <Hero />
+      <StatsBar />
       <AICommandCenter />
       <SmartTriageEngine />
       <VendorMatching />
@@ -841,6 +1164,8 @@ export function AIAutomationClient() {
       <PredictiveInsights />
       <AIScreening />
       <OperationsAnalytics />
+      <Testimonials />
+      <FAQ />
       <CTASection />
     </>
   )

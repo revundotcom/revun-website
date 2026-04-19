@@ -2,10 +2,11 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useInView } from 'framer-motion'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 import {
-  ArrowRight, FileText, Clock, Timer, MapPin, Calendar,
+  ArrowRight, ArrowDown, FileText, Clock, Timer, MapPin, Calendar,
   CheckCircle2, XCircle, PenTool, Users, Shield,
   Home, Fingerprint, BarChart3, Sparkles, MessageCircle,
   Wrench, ShoppingCart, AlertTriangle,
@@ -14,22 +15,100 @@ import {
 const ease = [0.22, 1, 0.36, 1] as const
 const fadeUp = { initial: { opacity: 0, y: 12 }, transition: { duration: 0.6, ease, delay: 0.1 } }
 
+/* ── Workflow steps: single source of truth ──────────────────────── */
+
+const workflowSteps = [
+  { id: 'intake', num: '01', label: 'Intake', handoff: 'Offers land here with expiry timers' },
+  { id: 'screen', num: '02', label: 'Screen', handoff: 'Verify identity and pull credit' },
+  { id: 'compare', num: '03', label: 'Compare', handoff: 'Rank offers against tenant context' },
+  { id: 'negotiate', num: '04', label: 'Negotiate', handoff: 'Counter with better terms or decline cleanly' },
+  { id: 'sign', num: '05', label: 'Sign', handoff: 'Close with multi-party e-signatures' },
+  { id: 'organize', num: '06', label: 'Organize', handoff: 'Tenants, occupants, and docs in one place' },
+  { id: 'protect', num: '07', label: 'Protect', handoff: 'Optional rental protection with your lease' },
+] as const
+
+type StepId = (typeof workflowSteps)[number]['id']
+
+/* ── Between-section handoff cue ─────────────────────────────────── */
+
+function StepHandoff({ currentId }: { currentId: StepId }) {
+  const idx = workflowSteps.findIndex((s) => s.id === currentId)
+  const next = workflowSteps[idx + 1]
+  if (!next) return null
+  return (
+    <div className="bg-white">
+      <div className="mx-auto flex max-w-6xl items-center justify-center gap-4 px-6 py-8">
+        <span className="h-px flex-1 max-w-[120px] bg-[#E5E7EB]" />
+        <a
+          href={`#${next.id}`}
+          className="group flex items-center gap-2.5 text-xs uppercase tracking-widest text-brand-graphite-mid transition-colors hover:text-brand-blue"
+        >
+          <span>Up next</span>
+          <span className="font-heading font-bold text-brand-blue">{next.num}</span>
+          <span className="font-semibold text-brand-graphite">{next.label}</span>
+          <span className="text-brand-graphite-mid normal-case tracking-normal">· {next.handoff}</span>
+          <ArrowDown
+            className="h-3.5 w-3.5 text-brand-blue transition-transform duration-200 group-hover:translate-y-0.5"
+            strokeWidth={2}
+          />
+        </a>
+        <span className="h-px flex-1 max-w-[120px] bg-[#E5E7EB]" />
+      </div>
+    </div>
+  )
+}
+
 function SW({ children, id, dark }: { children: React.ReactNode; id: string; dark?: boolean }) {
   return (
-    <section id={id} className={`py-16 md:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
+    <section id={id} className={`scroll-mt-32 py-16 md:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
       <div className="mx-auto max-w-6xl px-6">{children}</div>
     </section>
   )
 }
 
-function SH({ eyebrow, title, highlight, description }: { eyebrow: string; title: string; highlight: string; description: string }) {
+function SH({
+  step,
+  eyebrow,
+  title,
+  highlight,
+  description,
+}: {
+  step?: string
+  eyebrow: string
+  title: string
+  highlight: string
+  description: string
+}) {
   return (
     <RevealOnScroll className="mx-auto max-w-2xl text-center">
-      <motion.p variants={revealItem} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">{eyebrow}</motion.p>
-      <motion.h2 variants={revealItem} className="mt-3 font-display text-4xl font-normal md:text-5xl text-brand-graphite">
+      <motion.div
+        variants={revealItem}
+        className="mb-4 flex items-center justify-center gap-3"
+      >
+        {step && (
+          <>
+            <span className="font-display text-2xl font-normal leading-none text-brand-blue">
+              Step {step}
+            </span>
+            <span className="h-px w-8 bg-brand-blue/30" />
+          </>
+        )}
+        <span className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">
+          {eyebrow}
+        </span>
+      </motion.div>
+      <motion.h2
+        variants={revealItem}
+        className="font-display text-4xl font-normal md:text-5xl text-brand-graphite"
+      >
         {title} <span className="text-keyword">{highlight}</span>
       </motion.h2>
-      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-lg text-brand-graphite/70">{description}</motion.p>
+      <motion.p
+        variants={revealItem}
+        className="mx-auto mt-4 max-w-xl text-lg text-brand-graphite/70"
+      >
+        {description}
+      </motion.p>
     </RevealOnScroll>
   )
 }
@@ -52,13 +131,13 @@ function ReviewOffers() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const offers = [
-    { status: 'Pending', term: '6 months', amount: '$2,000.00', color: '#F59E0B' },
-    { status: 'Accepted', term: '12 months', amount: '$2,100.00', color: '#176FEB' },
-    { status: 'Declined', term: '24 months', amount: '$1,900.00', color: '#EF4444' },
+    { status: 'Pending', term: '6 months', amount: '$2,000.00', pill: 'bg-[#E8F2FE] text-[#176FEB]' },
+    { status: 'Accepted', term: '12 months', amount: '$2,100.00', pill: 'bg-[#176FEB] text-white' },
+    { status: 'Declined', term: '24 months', amount: '$1,900.00', pill: 'bg-[#F5F6F8] text-[#555860]' },
   ]
   return (
-    <SW id="review-offers">
-      <SH eyebrow="Offers" title="Review" highlight="Offers" description="Compare rent, move-in dates, and terms side by side." />
+    <SW id="compare">
+      <SH step="03" eyebrow="Compare" title="Rank and pick the" highlight="best offer" description="With verified tenants in hand, compare rent, lease term, and move-in dates side by side. Every offer carries tenant context so you decide with full information." />
       <div ref={ref} className="mt-12 grid gap-8 lg:grid-cols-2">
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white overflow-hidden" {...fadeUp} animate={inView ? { opacity: 1, y: 0 } : {}}>
           <div className="border-b border-[#E5E7EB] px-6 py-4">
@@ -79,7 +158,10 @@ function ReviewOffers() {
               <motion.div key={o.status} className="flex items-center gap-4 px-6 py-4" initial={{ opacity: 0, x: -8 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.35, ease, delay: 0.2 + i * 0.08 }}>
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-blue/10"><Users className="h-5 w-5 text-brand-blue/40" /></div>
                 <div className="flex-1 space-y-1">
-                  <div className="flex justify-between"><span className="text-xs text-brand-graphite-mid">Status</span><span className="text-xs font-semibold" style={{ color: o.color }}>{o.status}</span></div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-brand-graphite-mid">Status</span>
+                    <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${o.pill}`}>{o.status}</span>
+                  </div>
                   <div className="flex justify-between"><span className="text-xs text-brand-graphite-mid">Term</span><span className="text-xs text-brand-graphite">{o.term}</span></div>
                   <div className="flex justify-between"><span className="text-xs text-brand-graphite-mid">Amount</span><span className="text-sm font-bold text-brand-graphite">{o.amount}</span></div>
                 </div>
@@ -87,16 +169,17 @@ function ReviewOffers() {
             ))}
           </div>
         </motion.div>
-        <div className="space-y-4">
+        <div className="flex flex-col divide-y divide-[#E5E7EB] border-y border-[#E5E7EB]">
           {[
-            { icon: BarChart3, title: 'Side-by-side comparison', desc: 'Compare rent amounts, lease terms, and move-in dates across all offers.' },
-            { icon: Clock, title: 'Status tracking', desc: 'See pending, accepted, and declined offers at a glance.' },
-            { icon: Users, title: 'Tenant context', desc: 'View tenant profiles alongside their offers — occupation, references, and verification.' },
+            { icon: BarChart3, title: 'Side-by-side comparison', desc: 'Compare rent amounts, lease terms, and move-in dates across every offer on a unit.' },
+            { icon: Clock, title: 'Status tracking', desc: 'Pending, accepted, and declined offers all live in one view with timestamps and history.' },
+            { icon: Users, title: 'Tenant context', desc: 'Occupation, references, and Persona-verified ID sit next to each offer so you decide with full context.' },
           ].map((f, i) => (
-            <Anim key={f.title} className="rounded-2xl border border-[#E5E7EB] bg-white p-6" delay={0.2 + i * 0.12} x={16} y={0}>
-              <div className="flex items-start gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-blue/10"><f.icon className="h-5 w-5 text-brand-blue" /></div>
-                <div><h4 className="font-heading text-base font-semibold text-brand-graphite">{f.title}</h4><p className="mt-1 text-sm text-brand-graphite-mid">{f.desc}</p></div>
+            <Anim key={f.title} className="group flex flex-1 items-start gap-5 py-6" delay={0.2 + i * 0.12} x={16} y={0}>
+              <f.icon className="mt-0.5 h-5 w-5 shrink-0 text-brand-blue transition-transform duration-200 group-hover:scale-110" strokeWidth={1.8} />
+              <div className="flex-1">
+                <h4 className="font-heading text-base font-semibold text-brand-graphite">{f.title}</h4>
+                <p className="mt-1 text-sm leading-relaxed text-brand-graphite-mid">{f.desc}</p>
               </div>
             </Anim>
           ))}
@@ -116,8 +199,8 @@ function TimeSensitiveOffers() {
     { property: 'Unit 301 · Queen St W, Toronto, ON', amount: '$2,100', moveIn: 'Apr 1, 2026', expires: '3h 12m' },
   ]
   return (
-    <SW id="time-offers" dark>
-      <SH eyebrow="Offer Pipeline" title="Time-Sensitive" highlight="Offers" description="Review incoming offers and respond before they expire." />
+    <SW id="intake" dark>
+      <SH step="01" eyebrow="Intake" title="Offers land in one" highlight="inbox" description="Every incoming offer is timestamped and timed out. Pending, approved, declined — all visible in a single pipeline with expiry counters so nothing stales." />
       <div ref={ref} className="mt-12 mx-auto max-w-3xl">
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white" {...fadeUp} animate={inView ? { opacity: 1, y: 0 } : {}}>
           <div className="flex flex-col gap-4 border-b border-[#E5E7EB] px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
@@ -132,7 +215,7 @@ function TimeSensitiveOffers() {
             {offers.map((o, i) => (
               <motion.div key={o.property} className="px-6 py-5" initial={{ opacity: 0, y: 8 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.4, ease, delay: 0.2 + i * 0.1 }}>
                 <div className="mb-3 flex items-center gap-2">
-                  <span className="rounded-full bg-[#F59E0B]/15 px-3 py-1 text-xs font-medium text-[#F59E0B]">Pending</span>
+                  <span className="rounded-full bg-[#E8F2FE] px-3 py-1 text-xs font-medium text-brand-blue">Pending</span>
                   <span className="flex items-center gap-1 text-[11px] text-brand-graphite-mid"><Timer className="h-3 w-3" /> Expires in {o.expires}</span>
                 </div>
                 <p className="flex items-center gap-1.5 text-sm font-medium text-brand-graphite"><MapPin className="h-3.5 w-3.5 text-brand-blue" /> {o.property}</p>
@@ -155,17 +238,17 @@ function Negotiation() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   return (
-    <SW id="negotiation">
-      <SH eyebrow="Negotiation" title="Decline or" highlight="Counter" description="Reject offers or counter with updated rent, terms, or dates — instantly." />
+    <SW id="negotiate">
+      <SH step="04" eyebrow="Negotiate" title="Decline or" highlight="counter" description="Reject offers or counter with updated rent, terms, or dates. Tenants see your response in seconds with a full audit trail of every revision." />
       <div ref={ref} className="mt-12 grid gap-8 lg:grid-cols-2">
         {/* Left: decline/counter choice */}
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white p-6" {...fadeUp} animate={inView ? { opacity: 1, y: 0 } : {}}>
           <h3 className="mb-2 font-heading text-lg font-semibold text-brand-graphite">Respond to offer</h3>
           <p className="mb-5 text-sm text-brand-graphite-mid">Decline or send a counter offer with updated terms.</p>
           <div className="space-y-3">
-            <div className="flex items-start gap-4 rounded-xl border border-[#E5E7EB] p-5 hover:border-red-200 transition-colors">
-              <XCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-500" />
-              <div><h4 className="font-heading text-sm font-semibold text-brand-graphite">Decline Offer</h4><p className="mt-1 text-xs text-brand-graphite-mid">Reject the offer. The tenant will be notified.</p></div>
+            <div className="flex items-start gap-4 rounded-xl border border-[#E5E7EB] p-5 transition-colors hover:border-brand-graphite-mid/40">
+              <XCircle className="mt-0.5 h-5 w-5 shrink-0 text-brand-graphite-mid" />
+              <div><h4 className="font-heading text-sm font-semibold text-brand-graphite">Decline Offer</h4><p className="mt-1 text-xs text-brand-graphite-mid">Reject the offer. The tenant will be notified automatically with your reason code.</p></div>
             </div>
             <div className="flex items-start gap-4 rounded-xl border-2 border-brand-blue bg-brand-blue/5 p-5">
               <MessageCircle className="mt-0.5 h-5 w-5 shrink-0 text-brand-blue" />
@@ -206,8 +289,24 @@ function Signing() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   return (
-    <SW id="signing" dark>
-      <SH eyebrow="E-Signatures" title="Sign the" highlight="Deal" description="Sign electronically using a secure, legally valid digital signature." />
+    <SW id="sign" dark>
+      <SH step="05" eyebrow="Sign" title="Close the" highlight="deal" description="Execute leases electronically with legally binding digital signatures. Every signer, every initial, and every revision is stamped with a tamper-proof audit trail." />
+
+      {/* Editorial banner image */}
+      <div className="relative mx-auto mt-10 aspect-[21/7] max-w-5xl overflow-hidden rounded-2xl">
+        <Image
+          src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=2000&q=80"
+          alt="Landlord and tenant signing a lease agreement"
+          fill
+          sizes="(max-width: 1024px) 100vw, 1024px"
+          className="object-cover"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-[#F5F6F8] via-[#F5F6F8]/10 to-transparent"
+          aria-hidden="true"
+        />
+      </div>
+
       <div ref={ref} className="mt-12 grid gap-8 lg:grid-cols-2">
         {/* Signature options */}
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white p-6" {...fadeUp} animate={inView ? { opacity: 1, y: 0 } : {}}>
@@ -252,8 +351,8 @@ function LeaseInfo() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   return (
-    <SW id="lease-info">
-      <SH eyebrow="Lease Details" title="Lease Info" highlight="Organized" description="View tenant details, occupants, and documents in one place." />
+    <SW id="organize">
+      <SH step="06" eyebrow="Organize" title="Everything about the" highlight="lease, in one place" description="Tenants on the lease, occupants who aren't, signed documents, pets, and household details. The single source of truth for the next 12 months." />
       <div ref={ref} className="mt-12 mx-auto max-w-2xl">
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white overflow-hidden" {...fadeUp} animate={inView ? { opacity: 1, y: 0 } : {}}>
           <div className="border-b border-[#E5E7EB] px-6 py-4"><h3 className="font-heading text-base font-semibold text-brand-graphite">Lease Information</h3></div>
@@ -289,15 +388,15 @@ function LeaseInfo() {
 function IdentityCredit() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
-  const size = 160; const sw = 10; const r = (size - sw) / 2; const circ = Math.PI * r; const filled = (493 / 900) * circ
+  const size = 160; const sw = 10; const r = (size - sw) / 2; const circ = Math.PI * r; const filled = (742 / 900) * circ
   const idChecks = [
     { label: 'Name match', pass: true }, { label: 'Date of birth match', pass: true },
     { label: 'Valid ID', pass: false }, { label: 'Valid selfie', pass: true },
     { label: 'Selfie matches ID photo', pass: false },
   ]
   return (
-    <SW id="screening" dark>
-      <SH eyebrow="Screening" title="Identity &" highlight="Credit" description="Verify tenant identity and assess financial risk — all inline." />
+    <SW id="screen" dark>
+      <SH step="02" eyebrow="Screen" title="Verify identity and" highlight="credit, inline" description="Government ID verification through Persona and Equifax Canada credit reports pulled directly inside the leasing workflow. No side portals, no PDF email chains." />
       <div ref={ref} className="mt-12 grid gap-8 lg:grid-cols-2">
         {/* ID Verification */}
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white overflow-hidden" {...fadeUp} animate={inView ? { opacity: 1, y: 0 } : {}}>
@@ -309,8 +408,8 @@ function IdentityCredit() {
             {idChecks.map((c, i) => (
               <motion.div key={c.label} className="flex items-center justify-between px-6 py-3.5" initial={{ opacity: 0, x: -8 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.3, ease, delay: 0.2 + i * 0.06 }}>
                 <div className="flex items-center gap-3"><Fingerprint className="h-4 w-4 text-brand-graphite-mid" /><span className="text-sm text-brand-graphite">{c.label}</span></div>
-                <span className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${c.pass ? 'bg-[#176FEB]/10 text-[#176FEB]' : 'bg-red-50 text-red-500'}`}>
-                  {c.pass ? <CheckCircle2 className="h-3 w-3" /> : <AlertTriangle className="h-3 w-3" />} {c.pass ? 'Pass' : 'Fail'}
+                <span className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${c.pass ? 'bg-[#E8F2FE] text-brand-blue' : 'bg-[#F5F6F8] text-brand-graphite-mid'}`}>
+                  {c.pass ? <CheckCircle2 className="h-3 w-3" /> : <AlertTriangle className="h-3 w-3" />} {c.pass ? 'Pass' : 'Review'}
                 </span>
               </motion.div>
             ))}
@@ -344,10 +443,10 @@ function IdentityCredit() {
                 strokeDasharray={`${circ} ${2 * Math.PI * r}`}
                 transform={`rotate(180 ${size / 2} ${size / 2})`}
               />
-              {/* Filled arc — red score gauge */}
+              {/* Filled arc, brand-blue score gauge */}
               <motion.circle
                 cx={size / 2} cy={size / 2} r={r}
-                fill="none" stroke="#EF4444" strokeWidth={sw}
+                fill="none" stroke="#176FEB" strokeWidth={sw}
                 strokeLinecap="round"
                 strokeDasharray={`${circ} ${2 * Math.PI * r}`}
                 initial={{ strokeDashoffset: circ }}
@@ -357,18 +456,18 @@ function IdentityCredit() {
               />
             </svg>
             <div className="relative -mt-10 text-center">
-              <p className="font-heading text-3xl font-bold text-brand-graphite">493</p>
+              <p className="font-heading text-3xl font-bold text-brand-graphite">742</p>
               <p className="text-xs text-brand-graphite-mid">Credit Score</p>
-              <p className="text-[10px] text-brand-graphite-light">Out of 900</p>
+              <p className="text-[10px] text-brand-graphite-light">Equifax Canada · Good</p>
             </div>
           </div>
           <div className="mt-6 grid grid-cols-2 gap-4">
-            {[{ label: 'Debt to Income', value: '14%' }, { label: 'Rent to Income', value: '19%' }].map((m) => (
+            {[{ label: 'Debt to Income', value: '14%' }, { label: 'Rent to Income', value: '28%' }].map((m) => (
               <div key={m.label} className="rounded-xl bg-brand-off-white p-4 text-center"><p className="font-heading text-xl font-bold text-brand-graphite">{m.value}</p><p className="text-xs text-brand-graphite">{m.label}</p></div>
             ))}
           </div>
           <div className="mt-5 rounded-xl bg-brand-blue/5 border border-brand-blue/10 p-4">
-            <div className="flex items-start gap-3"><Sparkles className="h-5 w-5 shrink-0 text-brand-blue" /><div><p className="text-sm font-medium text-brand-graphite">Inline credit review</p><p className="mt-1 text-xs text-brand-graphite-mid">Credit reports display directly in the leasing workflow — no separate portal required.</p></div></div>
+            <div className="flex items-start gap-3"><Sparkles className="h-5 w-5 shrink-0 text-brand-blue" /><div><p className="text-sm font-medium text-brand-graphite">Inline credit review</p><p className="mt-1 text-xs text-brand-graphite-mid">Credit reports display directly in the leasing workflow. No separate portal required.</p></div></div>
           </div>
         </motion.div>
       </div>
@@ -380,30 +479,42 @@ function IdentityCredit() {
 
 function RentalProtection() {
   return (
-    <SW id="protection">
-      <SH eyebrow="Protection" title="Rental" highlight="Protection" description="Optional protection to help safeguard your rental income and property." />
-      <div className="mt-12 mx-auto max-w-3xl">
-        <Anim className="rounded-xl border border-brand-blue/20 bg-brand-blue/5 px-6 py-5 mb-6">
-          <p className="text-xs font-medium text-brand-blue">With Rental Guarantee Protection</p>
-          <p className="mt-1 font-heading text-xl font-semibold text-brand-graphite">Never miss a rent payment again</p>
+    <SW id="protect">
+      <SH step="07" eyebrow="Protect" title="Safeguard your" highlight="rental income" description="Optional coverage that activates at signing and runs for the lease term. Guaranteed rent, damage protection, and legal support, backed by Canadian underwriters." />
+      <div className="mx-auto mt-12 max-w-3xl">
+        <Anim className="mb-10 rounded-xl border border-brand-blue/20 bg-brand-blue/5 px-6 py-5">
+          <p className="text-xs font-medium uppercase tracking-wider text-brand-blue">With Rental Guarantee Protection</p>
+          <p className="mt-2 font-heading text-xl font-semibold text-brand-graphite">Never miss a rent payment again</p>
           <p className="mt-1 text-sm text-brand-graphite-mid">Your rental income is protected, even if tenants default.</p>
         </Anim>
-        <div className="grid gap-4 sm:grid-cols-3">
+
+        {/* Editorial coverage list (no cards) */}
+        <div className="flex flex-col divide-y divide-[#E5E7EB] border-y border-[#E5E7EB]">
           {[
-            { icon: Home, title: 'Guaranteed Rent', desc: 'Up to 12 months or $60,000 if a tenant defaults' },
-            { icon: Shield, title: 'Damage Protection', desc: 'Covered up to $10,000 for vandalism or misuse' },
-            { icon: FileText, title: 'Legal Support', desc: 'Paralegal services and court fees covered up to $2,000' },
-          ].map((f, i) => (
-            <Anim key={f.title} className="rounded-xl border border-[#E5E7EB] bg-white p-5" delay={0.15 + i * 0.1}>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-blue/10 mb-3"><f.icon className="h-5 w-5 text-brand-blue" /></div>
-              <h4 className="font-heading text-sm font-semibold text-brand-graphite">{f.title}</h4>
-              <p className="mt-1 text-sm text-brand-graphite-mid">{f.desc}</p>
-            </Anim>
-          ))}
+            { icon: Home, title: 'Guaranteed Rent', amount: 'Up to $60,000', desc: 'Rent paid on time even after a default, for up to 12 months while you re-lease.' },
+            { icon: Shield, title: 'Damage Protection', amount: 'Up to $10,000', desc: 'Coverage for vandalism, misuse, and beyond-wear-and-tear damage found at move-out.' },
+            { icon: FileText, title: 'Legal Support', amount: 'Up to $2,000', desc: 'Paralegal services, LTB/RTB filing fees, and court costs covered for eligible disputes.' },
+          ].map((f, i) => {
+            const Icon = f.icon
+            return (
+              <Anim key={f.title} className="group grid flex-1 grid-cols-[auto_1fr_auto] items-start gap-5 py-6" delay={0.15 + i * 0.1}>
+                <Icon className="mt-1 h-5 w-5 shrink-0 text-brand-blue transition-transform duration-200 group-hover:scale-110" strokeWidth={1.8} />
+                <div>
+                  <h4 className="font-heading text-base font-semibold text-brand-graphite">{f.title}</h4>
+                  <p className="mt-1 text-sm leading-relaxed text-brand-graphite-mid">{f.desc}</p>
+                </div>
+                <span className="whitespace-nowrap rounded-full bg-[#E8F2FE] px-3 py-1 font-heading text-xs font-bold text-brand-blue">
+                  {f.amount}
+                </span>
+              </Anim>
+            )
+          })}
         </div>
-        <div className="mt-8 text-center">
-          <Link href="/signup/" className="inline-flex h-12 items-center justify-center rounded-xl bg-brand-blue px-10 text-base font-semibold text-white hover:bg-brand-blue-dark transition-colors">
-            Get Started <ArrowRight className="ml-2 h-4 w-4" />
+        <p className="mt-4 text-center text-[11px] text-brand-graphite-mid">Coverage amounts vary by plan and province. Terms and eligibility apply.</p>
+
+        <div className="mt-10 text-center">
+          <Link href="/demo/" className="inline-flex h-12 items-center justify-center rounded-xl bg-brand-blue px-10 text-base font-semibold text-white transition-colors hover:bg-brand-blue-dark">
+            Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </div>
       </div>
@@ -427,11 +538,22 @@ function LeasingHero() {
             The complete{' '}<span className="text-brand-blue">leasing workflow</span>
           </motion.h1>
           <motion.p variants={revealItem} className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-brand-graphite-mid md:text-xl">
-            Review offers, negotiate terms, sign leases electronically, verify tenant IDs, pull credit reports, and activate rental protection — all in one flow.
+            Intake offers, screen tenants with Persona and Equifax Canada, compare and negotiate, sign electronically, and activate rental protection. One leasing workflow, zero tab-switching.
           </motion.p>
           <motion.div variants={revealItem} className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/signup/" className="inline-flex h-14 items-center justify-center rounded-xl bg-brand-blue px-8 text-base font-semibold text-white hover:bg-brand-blue-dark">Get Started Free</Link>
-            <Link href="/demo/" className="inline-flex h-14 items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-8 text-base font-semibold text-brand-graphite hover:border-brand-blue/30 hover:shadow-sm">Book a Demo</Link>
+            <Link href="/demo/" className="inline-flex h-14 items-center justify-center rounded-xl bg-brand-blue px-8 text-base font-semibold text-white hover:bg-brand-blue-dark">Book a Demo</Link>
+            <Link href="/pricing/" className="inline-flex h-14 items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-8 text-base font-semibold text-brand-graphite hover:border-brand-blue/30 hover:shadow-sm">See Pricing</Link>
+          </motion.div>
+
+          {/* Scroll cue pointing at the sticky workflow nav below */}
+          <motion.div
+            variants={revealItem}
+            className="mt-14 flex items-center justify-center gap-2 text-[11px] uppercase tracking-widest text-brand-graphite-mid"
+          >
+            <span className="h-px w-8 bg-[#E5E7EB]" />
+            <span>Scroll for the 7-step workflow</span>
+            <ArrowDown className="h-3 w-3 text-brand-blue" strokeWidth={2} />
+            <span className="h-px w-8 bg-[#E5E7EB]" />
           </motion.div>
         </RevealOnScroll>
       </div>
@@ -445,15 +567,21 @@ export function LeasingClient() {
   return (
     <>
       <LeasingHero />
-      <ReviewOffers />
       <TimeSensitiveOffers />
-      <Negotiation />
-      <Signing />
-      <LeaseInfo />
+      <StepHandoff currentId="intake" />
       <IdentityCredit />
+      <StepHandoff currentId="screen" />
+      <ReviewOffers />
+      <StepHandoff currentId="compare" />
+      <Negotiation />
+      <StepHandoff currentId="negotiate" />
+      <Signing />
+      <StepHandoff currentId="sign" />
+      <LeaseInfo />
+      <StepHandoff currentId="organize" />
       <RentalProtection />
       <p className="sr-only">
-        Revun Leasing provides a complete leasing workflow including offer review with side-by-side comparison, time-sensitive offer tracking, offer decline and counter capabilities, electronic signatures with multi-party execution, lease information management, government ID verification powered by Persona, Equifax credit report review, and rental protection with guaranteed rent up to $60,000, property damage coverage up to $10,000, and legal support up to $2,000.
+        Revun Leasing orchestrates the full Canadian leasing workflow in a single surface. Operators intake time-sensitive offers with expiry timers, screen applicants through Persona government ID verification and Equifax Canada credit reports, compare offers side-by-side with tenant context, decline or counter with updated rent/term/move-in, execute leases through multi-party electronic signatures, organize tenants, occupants, and lease documents, and optionally activate rental protection covering guaranteed rent up to $60,000, damage up to $10,000, and legal support up to $2,000 (coverage varies by plan and province).
       </p>
     </>
   )

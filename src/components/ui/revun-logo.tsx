@@ -9,15 +9,18 @@ interface RevunLogoProps {
   linked?: boolean
   /**
    * Background context the logo is being placed on.
-   * - 'light' (default) → dark-navy wordmark for white/off-white backgrounds
-   * - 'dark' → blue wordmark for dark backgrounds
+   * Both variants now render the blue Revun wordmark per brand direction.
+   * The prop is kept for API compatibility with existing callsites.
    */
   variant?: 'light' | 'dark'
   className?: string
 }
 
+// Brand direction: use the blue Revun wordmark everywhere.
+// The file revun-logo-on-dark.png contains the blue wordmark on transparent
+// background and reads cleanly on both light and dark surfaces.
 const LOGO_SRC = {
-  light: '/revun-logo-on-light.png',
+  light: '/revun-logo-on-dark.png',
   dark: '/revun-logo-on-dark.png',
 } as const
 

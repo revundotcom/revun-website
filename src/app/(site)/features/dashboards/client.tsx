@@ -513,7 +513,7 @@ function PortfolioKPIs() {
   return (
     <SW id="portfolio-kpis">
       <SH eyebrow="Portfolio Metrics" title="Track what matters" highlight="in real time" description="Animated KPI cards and sparklines give you instant insight into portfolio health." />
-      <div ref={ref} className="mt-12 grid gap-6 md:grid-cols-4">
+      <div ref={ref} className="mt-12 grid gap-6 grid-cols-2 md:grid-cols-4">
         {bigMetrics.map((m, i) => (
           <motion.div key={m.label}
             initial={{ opacity: 0, y: 16 }}
@@ -772,51 +772,125 @@ function LeasingPipeline() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   const stages = [
-    { label: 'Inquiries', value: 45, width: 100 },
-    { label: 'Applications', value: 18, width: 40 },
-    { label: 'Screening', value: 8, width: 18 },
-    { label: 'Approved', value: 5, width: 11 },
-    { label: 'Lease Signed', value: 3, width: 7 },
+    { label: 'Inquiries', description: 'Top-of-funnel leads captured', value: 45, icon: Users, color: '#176FEB' },
+    { label: 'Applications', description: 'Applicants who submitted forms', value: 18, icon: FileText, color: '#2563EB' },
+    { label: 'Screening', description: 'Credit & background checks', value: 8, icon: Search, color: '#3B82F6' },
+    { label: 'Approved', description: 'Cleared to sign a lease', value: 5, icon: CheckCircle2, color: '#60A5FA' },
+    { label: 'Lease Signed', description: 'Closed & ready for move-in', value: 3, icon: Sparkles, color: '#22C55E' },
   ]
 
+  const maxValue = stages[0].value
   const conversions = ['40%', '44%', '63%', '60%']
+  const dropOffs = [
+    { from: 'Inquiries', to: 'Applications', lost: 27, rate: 60 },
+  ]
+
+  const summary = [
+    { label: 'Total Leads', value: '45', accent: '#176FEB' },
+    { label: 'Signed Leases', value: '3', accent: '#22C55E' },
+    { label: 'Overall Conversion', value: '6.7%', accent: '#0A1628' },
+  ]
 
   return (
     <SW id="leasing-pipeline" dark>
       <SH eyebrow="Leasing" title="Visualize your" highlight="leasing funnel" description="From inquiry to signed lease. See conversion rates at every stage and identify where leads drop off." />
-      <div ref={ref} className="mx-auto mt-12 max-w-3xl">
+      <div ref={ref} className="mx-auto mt-12 max-w-5xl">
         <Anim delay={0.15}>
-          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6">
-            <h3 className="text-sm font-heading font-semibold text-[#0A1628] mb-6">Leasing Pipeline</h3>
-            <div className="space-y-3">
-              {stages.map((s, i) => (
-                <div key={s.label}>
-                  <motion.div
-                    initial={{ opacity: 0, scaleX: 0 }}
-                    animate={inView ? { opacity: 1, scaleX: 1 } : {}}
-                    transition={{ duration: 0.6, ease, delay: 0.25 + i * 0.1 }}
-                    style={{ width: `${s.width}%`, transformOrigin: 'left' }}
-                    className="mx-auto"
-                  >
-                    <div className="flex items-center justify-between rounded-xl bg-[#176FEB] px-4 py-3" style={{ opacity: 1 - i * 0.12 }}>
-                      <span className="text-[12px] font-semibold text-white">{s.label}</span>
-                      <span className="text-sm font-bold text-white">{s.value}</span>
-                    </div>
-                  </motion.div>
-                  {i < conversions.length && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={inView ? { opacity: 1 } : {}}
-                      transition={{ duration: 0.3, ease, delay: 0.5 + i * 0.1 }}
-                      className="flex items-center justify-center py-1"
-                    >
-                      <ChevronDown className="h-3 w-3 text-[#555860]/40" />
-                      <span className="ml-1 text-[10px] font-semibold text-[#22C55E]">{conversions[i]} conversion</span>
-                    </motion.div>
-                  )}
-                </div>
+          <div className="rounded-3xl border border-[#E5E7EB] bg-white p-6 md:p-8 shadow-sm">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E5E7EB] pb-5">
+              <div>
+                <h3 className="font-heading text-lg font-semibold text-[#0A1628]">Leasing Pipeline</h3>
+                <p className="text-[11px] text-[#555860] mt-0.5">Last 30 days · Portfolio-wide</p>
+              </div>
+              <span className="inline-flex items-center gap-1 rounded-full bg-[#22C55E]/10 px-3 py-1 text-[11px] font-semibold text-[#22C55E]">
+                <TrendingUp className="h-3 w-3" /> +12% vs prev period
+              </span>
+            </div>
+
+            <div className="mt-6 grid grid-cols-3 gap-3">
+              {summary.map((k, i) => (
+                <motion.div key={k.label}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.4, ease, delay: 0.2 + i * 0.08 }}
+                  className="rounded-xl bg-[#F5F6F8] p-4"
+                >
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-[#555860]">{k.label}</p>
+                  <p className="mt-1 font-display text-2xl font-semibold tabular-nums" style={{ color: k.accent }}>{k.value}</p>
+                </motion.div>
               ))}
             </div>
+
+            <div className="mt-8 space-y-1">
+              {stages.map((s, i) => {
+                const Icon = s.icon
+                const widthPct = Math.max(6, (s.value / maxValue) * 100)
+                return (
+                  <div key={s.label}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={inView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.45, ease, delay: 0.35 + i * 0.1 }}
+                    >
+                      <div className="flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: s.color + '18' }}>
+                            <Icon className="h-4 w-4" style={{ color: s.color }} />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-[13px] font-semibold text-[#0A1628] truncate">{s.label}</p>
+                            <p className="text-[11px] text-[#555860] truncate">{s.description}</p>
+                          </div>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <p className="font-display text-lg font-semibold tabular-nums text-[#0A1628]">{s.value}</p>
+                          <p className="text-[10px] text-[#555860]">{((s.value / maxValue) * 100).toFixed(1)}% of top</p>
+                        </div>
+                      </div>
+                      <div className="mt-2.5 h-2.5 w-full rounded-full bg-[#F5F6F8] overflow-hidden">
+                        <motion.div
+                          initial={{ scaleX: 0 }}
+                          animate={inView ? { scaleX: 1 } : {}}
+                          transition={{ duration: 0.7, ease, delay: 0.45 + i * 0.1 }}
+                          className="h-full rounded-full origin-left"
+                          style={{ width: `${widthPct}%`, backgroundColor: s.color }}
+                        />
+                      </div>
+                    </motion.div>
+
+                    {i < conversions.length && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={inView ? { opacity: 1 } : {}}
+                        transition={{ duration: 0.3, ease, delay: 0.55 + i * 0.1 }}
+                        className="flex items-center gap-2 py-2 pl-4"
+                      >
+                        <div className="h-4 w-px bg-[#E5E7EB]" />
+                        <span className="inline-flex items-center gap-1 rounded-md bg-[#22C55E]/10 px-1.5 py-0.5 text-[10px] font-semibold text-[#22C55E]">
+                          <ChevronDown className="h-2.5 w-2.5" /> {conversions[i]} conversion
+                        </span>
+                        <span className="text-[10px] text-[#555860]">{stages[i].value - stages[i + 1].value} dropped off</span>
+                      </motion.div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.4, ease, delay: 1.15 }}
+              className="mt-7 flex items-start gap-3 rounded-xl border border-[#176FEB]/20 bg-[#176FEB]/5 p-4"
+            >
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#176FEB]">
+                <AlertTriangle className="h-4 w-4 text-white" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-[12px] font-semibold text-[#0A1628]">Biggest drop-off: {dropOffs[0].from} → {dropOffs[0].to}</p>
+                <p className="text-[11px] text-[#555860] mt-0.5">{dropOffs[0].lost} of 45 leads ({dropOffs[0].rate}%) never completed an application. Trigger automated follow-ups to recover them.</p>
+              </div>
+            </motion.div>
           </div>
         </Anim>
       </div>

@@ -33,46 +33,8 @@ interface FeatureData {
 }
 
 const featureData: Record<string, FeatureData> = {
-  'tenant-screening': {
-    title: 'Tenant Screening',
-    metaTitle: 'Tenant Screening Software for Canadian Landlords',
-    metaDescription:
-      'Screen tenants with Equifax and TransUnion credit checks, identity verification, and background reports. Built for Canadian landlords and property managers.',
-    iconName: 'Users',
-    heroDescription:
-      'Run comprehensive credit checks, verify identities, and assess tenant risk in minutes. Powered by Equifax and TransUnion with Canadian-specific scoring models.',
-    capabilities: [
-      { title: 'Credit Reports', description: 'Full Equifax and TransUnion credit reports with Canadian scoring models and payment history.' },
-      { title: 'Identity Verification', description: 'Government ID verification, employment confirmation, and reference checks in one workflow.' },
-      { title: 'Risk Assessment', description: 'AI-powered risk scoring that considers Canadian rental market factors and provincial regulations.' },
-      { title: 'Applicant Comparison', description: 'Side-by-side applicant comparison with weighted scoring across credit, income, and history.' },
-    ],
-    steps: [
-      { number: '01', title: 'Send application link', description: 'Share a branded application link with prospective tenants. They consent and submit their information securely.' },
-      { number: '02', title: 'Reports generated instantly', description: 'Credit, identity, and background reports are pulled automatically from Equifax and TransUnion.' },
-      { number: '03', title: 'Review and decide', description: 'Compare applicants side by side, review risk scores, and make informed decisions from your dashboard.' },
-    ],
-  },
-  'rent-collection': {
-    title: 'Rent Collection',
-    metaTitle: 'Automated Rent Collection Software for Canada',
-    metaDescription:
-      'Collect rent automatically via ACH, credit card, and Interac e-Transfer. Auto-reminders, split payments, and real-time reconciliation for Canadian landlords.',
-    iconName: 'CreditCard',
-    heroDescription:
-      'Automated rent collection with ACH, credit card, and Interac e-Transfer support. Set up once and let Revun handle reminders, late fees, and reconciliation.',
-    capabilities: [
-      { title: 'Multiple Payment Methods', description: 'Accept ACH, credit card, debit, and Interac e-Transfer. Tenants choose their preferred method.' },
-      { title: 'Auto-Reminders', description: 'Automated payment reminders before due dates and escalating notices for late payments.' },
-      { title: 'Split Payments', description: 'Roommates and co-tenants can split rent automatically with individual payment tracking.' },
-      { title: 'Real-Time Reconciliation', description: 'Payments reconcile instantly with your accounting. Export to QuickBooks or Xero with one click.' },
-    ],
-    steps: [
-      { number: '01', title: 'Set up payment schedule', description: 'Configure rent amounts, due dates, and accepted payment methods for each unit.' },
-      { number: '02', title: 'Tenants pay online', description: 'Tenants receive reminders and pay through their portal via their preferred payment method.' },
-      { number: '03', title: 'Track and reconcile', description: 'Monitor payments in real-time, handle exceptions, and export reports automatically.' },
-    ],
-  },
+  /* tenant-screening has a dedicated rich page at /features/tenant-screening/ */
+  /* rent-collection has a dedicated rich page at /features/rent-collection/ */
   'maintenance-management': {
     title: 'Maintenance Management',
     metaTitle: 'Property Maintenance Management Software',
@@ -95,26 +57,7 @@ const featureData: Record<string, FeatureData> = {
   },
   /* lease-management redirects to /features/leasing/ which has the full rich page */
   /* accounting redirects to /features/accounting/ which has the full rich page */
-  'owner-portal': {
-    title: 'Owner Portal',
-    metaTitle: 'Property Owner Portal Software',
-    metaDescription:
-      'Clear owner dashboards with real-time occupancy, revenue tracking, expense reports, and document access. White-label ready for property managers.',
-    iconName: 'BookOpen',
-    heroDescription:
-      'Give property owners clear, real-time access to occupancy rates, revenue, expenses, and documents. White-label ready for your brand.',
-    capabilities: [
-      { title: 'Real-Time Dashboard', description: 'Owners see occupancy, revenue, maintenance status, and tenant information updated in real-time.' },
-      { title: 'Financial Transparency', description: 'Income statements, expense breakdowns, and management fee details available on demand.' },
-      { title: 'Document Vault', description: 'Leases, inspection reports, insurance documents, and tax records organized and accessible 24/7.' },
-      { title: 'White-Label Ready', description: 'Brand the portal with your logo, colors, and domain. Owners see your brand, not Revun.' },
-    ],
-    steps: [
-      { number: '01', title: 'Invite your owners', description: 'Send owner invitations with one click. They create accounts and access their portal instantly.' },
-      { number: '02', title: 'Owners self-serve', description: 'Owners view financials, download reports, and access documents without calling your office.' },
-      { number: '03', title: 'Build trust automatically', description: 'Real-time transparency builds owner confidence and reduces support requests by up to 60%.' },
-    ],
-  },
+  /* owner-portal has dedicated rich page at /features/owner-portal/ */
   communications: {
     title: 'Communications',
     metaTitle: 'Secure Property Communications Platform | Revun',
@@ -155,26 +98,7 @@ const featureData: Record<string, FeatureData> = {
       { number: '03', title: 'Resolved and documented', description: 'Vendor completes the work, uploads proof, and the tenant confirms resolution.' },
     ],
   },
-  compliance: {
-    title: 'Compliance & Documents',
-    metaTitle: 'Property Compliance & Document Management | Revun',
-    metaDescription:
-      'Automated provincial compliance tracking, lease template generation, notice management, and document vault for Canadian property managers and landlords.',
-    iconName: 'ShieldCheck',
-    heroDescription:
-      'Provincial regulations change quarterly. Revun enforces compliance automatically — lease templates, notice deadlines, regulatory forms, and audit trails updated across all 10 Canadian provinces.',
-    capabilities: [
-      { title: 'Provincial Compliance Engine', description: 'Auto-updated rules for Ontario (LTB), BC (RTB), Quebec (TAL), Alberta (RTDRS), and all other provinces. Never miss a regulatory change.' },
-      { title: 'Document Generation', description: 'Generate province-compliant leases, notices, and forms pre-filled with property and tenant data in seconds.' },
-      { title: 'Deadline Tracking', description: 'Automated tracking of notice periods, rent increase deadlines, and filing requirements by jurisdiction.' },
-      { title: 'Document Vault', description: 'Every lease, notice, inspection report, and compliance document stored, organized, and searchable — tribunal-ready at any time.' },
-    ],
-    steps: [
-      { number: '01', title: 'Select your province', description: 'Revun detects your jurisdiction and loads the correct compliance rules, templates, and deadlines automatically.' },
-      { number: '02', title: 'Generate documents', description: 'Create leases, notices, and forms from province-specific templates — pre-filled with your property data.' },
-      { number: '03', title: 'Stay compliant automatically', description: 'Revun monitors regulatory changes and updates your templates, deadlines, and workflows in real time.' },
-    ],
-  },
+  /* compliance has dedicated rich page at /features/compliance/ */
   /* ai-automation has dedicated rich page at /features/ai-automation/ */
   /* dashboards has dedicated rich page at /features/dashboards/ */
   'tenant-portal': {

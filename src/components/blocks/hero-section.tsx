@@ -125,7 +125,7 @@ export function HeroSection() {
           </div>
           <span className="hidden h-3 w-px bg-border sm:block" aria-hidden="true" />
           <span>
-            Across <span className="font-semibold text-[#0A1628]">10 Canadian provinces</span>
+            Across <span className="font-semibold text-[#0A1628]">Canada and the United States</span>
           </span>
         </motion.div>
 

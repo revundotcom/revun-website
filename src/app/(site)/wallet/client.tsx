@@ -1,7 +1,9 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import Link from 'next/link'
+import Image from 'next/image'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 import {
   ArrowDownLeft,
@@ -26,7 +28,22 @@ import {
   HandCoins,
   Eye,
   EyeOff,
+  Lock,
+  ShieldCheck,
+  Check,
+  X,
+  Minus,
+  AlertCircle,
+  ChevronDown,
+  Home,
+  Users,
+  Star,
+  Quote,
+  MapPin,
+  CheckCircle2,
+  Wrench,
 } from 'lucide-react'
+import { sanitizeJsonLd } from '@/lib/utils'
 
 /* ---------- shared ---------- */
 const ease = [0.22, 1, 0.36, 1] as const
@@ -939,18 +956,558 @@ function CTASection() {
 }
 
 /* ================================================================== */
+/*  NEW: Scroll Progress Bar                                          */
+/* ================================================================== */
+
+function ScrollProgressBar() {
+  const { scrollYProgress } = useScroll()
+  return (
+    <motion.div
+      aria-hidden
+      style={{ scaleX: scrollYProgress, transformOrigin: '0% 50%' }}
+      className="fixed inset-x-0 top-0 z-50 h-[2px] bg-[#176FEB]"
+    />
+  )
+}
+
+/* ================================================================== */
+/*  NEW: Sticky Section Nav                                           */
+/* ================================================================== */
+
+function SectionNav() {
+  const links = [
+    { href: '#dashboard', label: 'Dashboard' },
+    { href: '#payments', label: 'Payments' },
+    { href: '#features', label: 'Features' },
+    { href: '#receipt', label: 'Receipts' },
+    { href: '#comparison', label: 'Compare' },
+    { href: '#faq', label: 'FAQ' },
+  ]
+  return (
+    <nav aria-label="Wallet sections" className="sticky top-0 z-40 hidden border-b border-[#E5E7EB] bg-white/80 backdrop-blur md:block">
+      <div className="mx-auto max-w-6xl overflow-x-auto px-6">
+        <ul className="flex items-center gap-2 py-3">
+          {links.map((l) => (
+            <li key={l.href}>
+              <a href={l.href} className="inline-flex items-center rounded-full border border-transparent px-3 py-1.5 text-xs font-heading font-semibold text-[#555860] transition hover:border-[#E5E7EB] hover:bg-[#F5F6F8] hover:text-[#176FEB]">
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+  )
+}
+
+/* ================================================================== */
+/*  NEW: Wallet Hero (parallax + mockup)                              */
+/* ================================================================== */
+
+function WalletHero() {
+  const ref = useRef<HTMLDivElement | null>(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
+  const gridY = useTransform(scrollYProgress, [0, 1], [0, 60])
+  const cardY = useTransform(scrollYProgress, [0, 1], [0, -40])
+  const badges = [
+    { icon: Banknote, label: 'Interac e-Transfer' },
+    { icon: ShieldCheck, label: 'PCI-DSS L1' },
+    { icon: Lock, label: 'PIPEDA' },
+    { icon: CheckCircle2, label: 'FINTRAC' },
+  ]
+  const stats = [
+    { value: '$2.4B', label: 'Processed annually' },
+    { value: '10', label: 'Canadian provinces' },
+    { value: '< 2s', label: 'Interac transfers' },
+    { value: '100%', label: 'PIPEDA compliant' },
+  ]
+  return (
+    <section id="hero" ref={ref} className="relative overflow-hidden bg-white py-20 md:py-28">
+      <motion.div aria-hidden style={{ y: gridY }} className="pointer-events-none absolute inset-0 opacity-[0.35]">
+        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(#E5E7EB 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+      </motion.div>
+      <div className="relative mx-auto max-w-6xl px-6">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div>
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.05 }} className="inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-[#E8F2FE] px-3 py-1">
+              <Wallet className="h-3.5 w-3.5 text-[#176FEB]" />
+              <span className="text-xs font-heading font-semibold uppercase tracking-wider text-[#176FEB]">Wallet</span>
+            </motion.div>
+            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.15 }} className="mt-4 font-display text-5xl font-normal leading-tight md:text-6xl text-[#0A1628]">
+              Your Property Financials, <span className="text-[#176FEB]">unified.</span>
+            </motion.h1>
+            <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.25 }} className="mt-5 max-w-xl text-lg text-[#555860]">
+              One wallet for rent, deposits, and owner disbursements — every Interac, PAD, and card payment reconciled to the lease. Receipts, taxes, and P&amp;L ready whenever CRA asks.
+            </motion.p>
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.35 }} className="mt-8 flex flex-wrap gap-3">
+              <Link href="/signup/" className="inline-flex items-center gap-2 rounded-xl bg-[#176FEB] px-6 py-3 text-sm font-heading font-semibold text-white transition hover:brightness-110">
+                Get Started <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a href="#dashboard" className="inline-flex items-center gap-2 rounded-xl border border-[#E5E7EB] bg-white px-6 py-3 text-sm font-heading font-semibold text-[#0A1628] transition hover:border-[#176FEB] hover:text-[#176FEB]">
+                See it in action
+              </a>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.45 }} className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+              {badges.map((b) => (
+                <div key={b.label} className="flex items-center gap-2 text-xs text-[#555860]">
+                  <b.icon className="h-4 w-4 text-[#176FEB]" /><span>{b.label}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          <motion.div style={{ y: cardY }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.3 }} className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0A1628] to-[#1a2a42] p-6 text-white shadow-[0_30px_80px_-20px_rgba(10,22,40,0.45)]">
+              <div className="absolute right-5 top-5 flex items-center gap-1.5">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#176FEB] opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#176FEB]" />
+                </span>
+                <span className="text-[10px] uppercase tracking-wider text-white/70">Live</span>
+              </div>
+              <div className="flex items-center gap-2 text-[11px] uppercase tracking-wider text-white/60">
+                <Wallet className="h-3.5 w-3.5" /> Available Balance
+              </div>
+              <div className="mt-2 font-display text-5xl leading-none">
+                $8,420<span className="text-3xl text-white/70">.55</span>
+              </div>
+              <div aria-hidden className="my-5 h-px w-full border-t border-dashed border-white/15" />
+              <div className="flex items-center justify-between text-xs">
+                <div>
+                  <div className="text-white/50">This month</div>
+                  <div className="mt-0.5 font-heading font-semibold text-[#7FB4F6]">+$1,850.00</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-white/50">Last transaction</div>
+                  <div className="mt-0.5 font-heading font-semibold text-white">Mar 1 · Rent paid</div>
+                </div>
+              </div>
+              <div className="mt-6 grid grid-cols-3 gap-3">
+                {[
+                  { icon: CreditCard, label: 'Add' },
+                  { icon: ArrowRight, label: 'Send' },
+                  { icon: Banknote, label: 'Withdraw' },
+                ].map((a) => (
+                  <div key={a.label} className="flex flex-col items-center gap-1.5">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/10">
+                      <a.icon className="h-4 w-4 text-white" />
+                    </div>
+                    <span className="text-[10px] uppercase tracking-wider text-white/60">{a.label}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 flex items-center justify-between rounded-xl bg-white/5 px-3 py-2 ring-1 ring-white/10">
+                <div className="flex items-center gap-2">
+                  <Building2 className="h-4 w-4 text-white/70" />
+                  <span className="text-[11px] text-white/70">RBC Royal Bank</span>
+                </div>
+                <span className="font-mono text-[11px] tracking-wider text-white/80">•••• 4829</span>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.55 }} className="mt-14 grid grid-cols-2 gap-4 rounded-2xl border border-[#E5E7EB] bg-[#FAFBFC] p-6 md:grid-cols-4">
+          {stats.map((s) => (
+            <div key={s.label}>
+              <div className="font-display text-3xl text-[#0A1628]">{s.value}</div>
+              <div className="mt-1 text-xs text-[#555860]">{s.label}</div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+/* ================================================================== */
+/*  NEW: Wallet Problem (before / after)                              */
+/* ================================================================== */
+
+function WalletProblemSection() {
+  const headerRef = useRef<HTMLDivElement | null>(null)
+  const headerInView = useInView(headerRef, { once: true, margin: '-60px' })
+  const leftRef = useRef<HTMLDivElement | null>(null)
+  const leftInView = useInView(leftRef, { once: true, margin: '-60px' })
+  const rightRef = useRef<HTMLDivElement | null>(null)
+  const rightInView = useInView(rightRef, { once: true, margin: '-60px' })
+  const oldWay = [
+    'E-transfers land in a personal inbox, not a ledger',
+    'Receipts live in email attachments, lose them once',
+    'Owner disbursements are manual bank runs',
+    'Year-end tax prep takes days of spreadsheet work',
+  ]
+  const revunWay = [
+    'Every Interac/PAD/card payment auto-matched to the lease',
+    'Receipts generated and archived per transaction',
+    'Owner disbursements scheduled and wired automatically',
+    'T5, NR4, and property P&L exported in one click',
+  ]
+  return (
+    <SectionWrapper id="problem" dark>
+      <motion.div ref={headerRef} initial={{ opacity: 0, y: 12 }} animate={headerInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.1 }} className="mb-12 max-w-3xl lg:mb-16">
+        <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-3 py-1">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#E7000B]" />
+          <span className="text-xs font-heading font-semibold uppercase tracking-wider text-[#555860]">Why wallets break</span>
+        </div>
+        <h2 className="font-display text-4xl font-normal md:text-5xl text-[#0A1628]">
+          Most rental money moves on <span className="text-[#176FEB]">scattered rails.</span>
+        </h2>
+        <p className="mt-4 max-w-2xl text-lg text-[#555860]">
+          Banks, inboxes, spreadsheets, accountants — each holds a piece of the story. Revun wallet pulls every cent onto one Canadian ledger, reconciled in real time.
+        </p>
+      </motion.div>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <motion.div ref={leftRef} initial={{ opacity: 0, x: -16 }} animate={leftInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.15 }} className="overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white">
+          <div className="relative h-56 w-full overflow-hidden">
+            <Image src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=900&q=80" alt="Scattered receipts and spreadsheets" fill className="object-cover" sizes="(min-width: 1024px) 50vw, 100vw" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628]/60 to-transparent" />
+            <div className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 shadow-sm">
+              <Clock className="h-3.5 w-3.5 text-[#E7000B]" />
+              <span className="text-xs font-heading font-semibold text-[#0A1628]">3-5 days reconciliation</span>
+            </div>
+          </div>
+          <div className="p-6">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#E7000B]/10 px-3 py-1">
+              <X className="h-3.5 w-3.5 text-[#E7000B]" />
+              <span className="text-xs font-heading font-semibold uppercase tracking-wider text-[#E7000B]">Status quo</span>
+            </div>
+            <ul className="space-y-3">
+              {oldWay.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-[#E7000B]" />
+                  <span className="text-sm text-[#0A1628]">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </motion.div>
+
+        <motion.div ref={rightRef} initial={{ opacity: 0, x: 16 }} animate={rightInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.25 }} className="relative overflow-hidden rounded-2xl border border-[#176FEB]/30 bg-white shadow-[0_30px_80px_-30px_rgba(23,111,235,0.45)]">
+          <div aria-hidden className="pointer-events-none absolute -inset-px rounded-2xl ring-1 ring-inset ring-[#176FEB]/20" />
+          <div className="relative h-56 w-full overflow-hidden">
+            <Image src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=900&q=80" alt="Unified wallet dashboard on laptop" fill className="object-cover" sizes="(min-width: 1024px) 50vw, 100vw" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#176FEB]/50 to-transparent" />
+            <div className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 shadow-sm">
+              <CheckCircle2 className="h-3.5 w-3.5 text-[#176FEB]" />
+              <span className="text-xs font-heading font-semibold text-[#0A1628]">One ledger, auto-reconciled</span>
+            </div>
+          </div>
+          <div className="p-6">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#E8F2FE] px-3 py-1">
+              <Check className="h-3.5 w-3.5 text-[#176FEB]" />
+              <span className="text-xs font-heading font-semibold uppercase tracking-wider text-[#176FEB]">With Revun</span>
+            </div>
+            <ul className="space-y-3">
+              {revunWay.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#176FEB]" />
+                  <span className="text-sm text-[#0A1628]">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </motion.div>
+      </div>
+    </SectionWrapper>
+  )
+}
+
+/* ================================================================== */
+/*  NEW: Wallet Use Cases                                             */
+/* ================================================================== */
+
+function WalletUseCases() {
+  const tiles = [
+    { img: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80', alt: 'Tenant paying rent on phone', Icon: Home, role: 'Tenants', title: 'For Tenants', desc: 'Pay rent via PAD, Interac, or card. See every receipt. Build credit with on-time rent reporting.', href: '/solutions/tenants/' },
+    { img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80', alt: 'Landlord reviewing wallet dashboard', Icon: Users, role: 'Owners', title: 'Self-Managing Landlords', desc: 'Collect rent, track expenses, disburse to co-owners, and export T5s in one dashboard.', href: '/solutions/self-managing-owners/' },
+    { img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80', alt: 'PMC office', Icon: Building2, role: 'PMCs', title: 'Property Management', desc: 'Trust accounting, owner disbursements, automated reconciliation across thousands of units.', href: '/solutions/property-management-companies/' },
+    { img: 'https://images.unsplash.com/photo-1581092918484-8313ec41389b?auto=format&fit=crop&w=800&q=80', alt: 'Technician reviewing invoice', Icon: Wrench, role: 'Vendors', title: 'Maintenance Companies', desc: 'Get paid within 48h of work completion. No chasing invoices. Full remittance history.', href: '/solutions/maintenance-companies/' },
+  ]
+  return (
+    <SectionWrapper id="use-cases" dark>
+      <SectionHeader eyebrow="Built for" title="Money moves that" highlight="match your role." description="Tenants pay and track. Owners track disbursements. Property managers settle every ledger without a spreadsheet." />
+      <RevealOnScroll className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {tiles.map((t) => (
+          <motion.div key={t.href} variants={revealItem}>
+            <Link href={t.href} className="group block h-full overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white transition-all hover:border-[#176FEB]/40 hover:shadow-md">
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <Image src={t.img} alt={t.alt} fill sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
+              </div>
+              <div className="p-5">
+                <div className="flex items-center gap-2">
+                  <t.Icon className="h-4 w-4 text-[#176FEB]" aria-hidden />
+                  <span className="text-[11px] font-heading font-semibold uppercase tracking-wider text-[#176FEB]">{t.role}</span>
+                </div>
+                <h3 className="mt-2 font-heading text-lg font-semibold text-[#0A1628]">{t.title}</h3>
+                <p className="mt-1 text-sm text-[#555860]">{t.desc}</p>
+                <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[#176FEB]">
+                  Learn more <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden />
+                </span>
+              </div>
+            </Link>
+          </motion.div>
+        ))}
+      </RevealOnScroll>
+    </SectionWrapper>
+  )
+}
+
+/* ================================================================== */
+/*  NEW: Wallet Testimonials                                          */
+/* ================================================================== */
+
+function WalletTestimonials() {
+  const ref = useRef<HTMLDivElement | null>(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const testimonials = [
+    { quote: 'We moved $600K in rent through Revun Wallet last quarter. Zero manual reconciliation. Interac settles in seconds, PAD settles overnight — everything matched to the lease automatically.', name: 'Caleb Nguyen', title: 'CFO · Pinnacle Residences', location: 'Toronto, ON', photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80', alt: 'Caleb Nguyen, CFO at Pinnacle Residences' },
+    { quote: 'Owner disbursements used to take me three days each month. Revun Wallet schedules every payout to the right trust account, files the T5, and emails the statement. I got my weekends back.', name: 'Isabela Cruz', title: 'Principal Broker · Cityline Realty', location: 'Vancouver, BC', photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80', alt: 'Isabela Cruz, Principal Broker at Cityline Realty' },
+    { quote: "Tenants love that rent receipts land instantly in the app. We cut support tickets in half once people stopped asking 'did my rent go through?' every month.", name: 'David Okonkwo', title: 'VP Operations · GreenBranch Property Group', location: 'Winnipeg, MB', photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80', alt: 'David Okonkwo, VP Operations at GreenBranch' },
+  ]
+  const stats = [
+    { number: '$2.4B', label: 'Processed in 2025' },
+    { number: '< 2s', label: 'Interac settlement' },
+    { number: '99.99%', label: 'Uptime' },
+    { number: '0', label: 'Fraud losses*' },
+  ]
+  return (
+    <SectionWrapper id="testimonials">
+      <SectionHeader eyebrow="Proof" title="Canadian operators are moving" highlight="money in seconds." description="Real property managers, real numbers — from Q1 2026 Revun Wallet customers." />
+      <div ref={ref} className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+        {testimonials.map((t, i) => (
+          <motion.div key={t.name} initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 * (i + 1), ease }}>
+            <div className="relative h-full rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-all hover:border-[#176FEB]/40 hover:shadow-sm md:p-8">
+              <Quote className="absolute right-6 top-6 h-10 w-10 text-[#176FEB]/10" />
+              <div className="mb-4 flex gap-0.5">
+                {Array.from({ length: 5 }).map((_, s) => (
+                  <Star key={s} className="h-4 w-4 fill-[#176FEB] stroke-[#176FEB]" />
+                ))}
+              </div>
+              <p className="relative z-10 font-display text-lg leading-snug text-[#0A1628]">
+                &ldquo;{t.quote}&rdquo;
+              </p>
+              <div className="mt-6 flex items-center gap-3 border-t border-[#E5E7EB] pt-6">
+                <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full">
+                  <Image src={t.photo} alt={t.alt} fill sizes="48px" className="object-cover" />
+                </div>
+                <div className="min-w-0">
+                  <div className="truncate font-bold text-[#0A1628]">{t.name}</div>
+                  <div className="mt-0.5 flex items-center gap-1 text-xs text-[#555860]">
+                    <Building2 className="h-3 w-3 shrink-0" /><span className="truncate">{t.title}</span>
+                  </div>
+                  <div className="mt-0.5 flex items-center gap-1 text-xs text-[#555860]">
+                    <MapPin className="h-3 w-3 shrink-0" /><span className="truncate">{t.location}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+      <div className="mt-10 rounded-2xl border border-[#176FEB]/20 bg-[#176FEB]/5 p-6 md:p-8">
+        <div className="grid grid-cols-2 gap-y-6 sm:grid-cols-4 sm:divide-x sm:divide-[#E5E7EB]">
+          {stats.map((s) => (
+            <div key={s.label} className="px-4 text-center">
+              <div className="font-display text-2xl text-[#0A1628] md:text-3xl">{s.number}</div>
+              <div className="mt-2 text-xs uppercase tracking-wide text-[#555860]">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <p className="mt-4 text-center text-xs text-[#555860]">*Across Revun Wallet customers in 2025.</p>
+    </SectionWrapper>
+  )
+}
+
+/* ================================================================== */
+/*  NEW: Wallet Comparison                                            */
+/* ================================================================== */
+
+type WalletStatus = 'yes' | 'no' | 'partial'
+interface WalletComparisonRow {
+  feature: string
+  revun: string
+  stripe: string
+  bank: string
+  rentmoola: string
+  status: { revun: WalletStatus; stripe: WalletStatus; bank: WalletStatus; rentmoola: WalletStatus }
+}
+
+function WalletComparison() {
+  const columns = [
+    { key: 'feature', label: 'Feature' },
+    { key: 'revun', label: 'Revun', highlight: true },
+    { key: 'stripe', label: 'Stripe / Square' },
+    { key: 'bank', label: 'Canadian Bank Tools' },
+    { key: 'rentmoola', label: 'RentMoola / e-Transfer' },
+  ]
+  const rows: WalletComparisonRow[] = [
+    { feature: 'Interac e-Transfer, PAD, card', revun: 'All three, native', stripe: 'Card only, no Interac', bank: 'PAD + Interac, no card portal', rentmoola: 'Interac + PAD only', status: { revun: 'yes', stripe: 'no', bank: 'partial', rentmoola: 'partial' } },
+    { feature: 'Auto-match to lease + unit', revun: 'Every payment linked', stripe: 'Not applicable', bank: 'Manual reconciliation', rentmoola: 'Partial lease matching', status: { revun: 'yes', stripe: 'no', bank: 'no', rentmoola: 'partial' } },
+    { feature: 'Owner disbursements + trust accounting', revun: 'Scheduled, trust-compliant', stripe: 'Not applicable', bank: 'Manual transfers', rentmoola: 'Not included', status: { revun: 'yes', stripe: 'no', bank: 'no', rentmoola: 'no' } },
+    { feature: 'Rent reporting to Equifax', revun: 'Via LCB, one toggle', stripe: 'Not included', bank: 'Not included', rentmoola: 'Separate product', status: { revun: 'yes', stripe: 'no', bank: 'no', rentmoola: 'partial' } },
+    { feature: 'T5 / NR4 generation', revun: 'Auto-generated per owner', stripe: '1099 only (US)', bank: 'Manual tax paperwork', rentmoola: 'Not included', status: { revun: 'yes', stripe: 'no', bank: 'no', rentmoola: 'no' } },
+    { feature: 'Receipt archive per transaction', revun: 'PDF + email, permanent', stripe: 'Generic receipt', bank: 'Statement only', rentmoola: 'Basic receipt', status: { revun: 'yes', stripe: 'partial', bank: 'partial', rentmoola: 'partial' } },
+    { feature: 'Vendor / maintenance payouts', revun: '48h payout on completion', stripe: 'Generic payouts', bank: 'Manual transfer per vendor', rentmoola: 'Not included', status: { revun: 'yes', stripe: 'partial', bank: 'no', rentmoola: 'no' } },
+    { feature: 'Canadian compliance (FINTRAC, PIPEDA)', revun: 'Native, province-aware', stripe: 'US-first', bank: 'Yes, but not property-aware', rentmoola: 'Partial', status: { revun: 'yes', stripe: 'no', bank: 'partial', rentmoola: 'partial' } },
+  ]
+  const StatusIcon = ({ status }: { status: WalletStatus }) => {
+    if (status === 'yes') return <Check className="h-4 w-4 shrink-0 text-[#176FEB]" strokeWidth={3} />
+    if (status === 'no') return <X className="h-4 w-4 shrink-0 text-[#E7000B]" strokeWidth={3} />
+    return <Minus className="h-4 w-4 shrink-0 text-[#D3D5DB]" strokeWidth={3} />
+  }
+  return (
+    <SectionWrapper id="comparison" dark>
+      <SectionHeader eyebrow="vs. the rest" title="Why generic payment tools" highlight="break property operations." description="Moving money is easy. Moving money that reconciles to leases, units, and owners is the hard part." />
+      <RevealOnScroll>
+        <motion.div variants={revealItem} className="mt-14 overflow-x-auto rounded-2xl border border-[#E5E7EB] shadow-sm">
+          <table className="w-full min-w-[900px] border-collapse bg-white">
+            <thead>
+              <tr className="bg-[#0A1628]">
+                {columns.map((col) => (
+                  <th key={col.key} className={`px-5 py-4 text-left text-xs font-semibold uppercase tracking-wide ${col.highlight ? 'border-l-4 border-[#176FEB] bg-[#176FEB] text-white' : 'text-white/80'} ${col.key === 'feature' ? 'sticky left-0 z-10 bg-[#0A1628] min-w-[220px]' : 'min-w-[170px]'}`}>
+                    <div className="flex items-center gap-2">
+                      {col.highlight && <ShieldCheck className="h-4 w-4" />}
+                      {col.label}
+                    </div>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row, i) => {
+                const zebra = i % 2 === 1 ? 'bg-[#FAFBFC]' : 'bg-white'
+                return (
+                  <tr key={row.feature} className={`${zebra} border-t border-[#E5E7EB]`}>
+                    <td className={`sticky left-0 z-10 border-r border-[#E5E7EB] px-5 py-4 ${zebra}`}>
+                      <div className="text-sm font-semibold text-[#0A1628]">{row.feature}</div>
+                    </td>
+                    <td className="border-l-4 border-[#176FEB] bg-[#E8F2FE] px-5 py-4">
+                      <div className="flex items-start gap-2"><StatusIcon status={row.status.revun} /><span className="text-sm font-semibold text-[#0A1628]">{row.revun}</span></div>
+                    </td>
+                    <td className="px-5 py-4"><div className="flex items-start gap-2"><StatusIcon status={row.status.stripe} /><span className="text-sm text-[#555860]">{row.stripe}</span></div></td>
+                    <td className="px-5 py-4"><div className="flex items-start gap-2"><StatusIcon status={row.status.bank} /><span className="text-sm text-[#555860]">{row.bank}</span></div></td>
+                    <td className="px-5 py-4"><div className="flex items-start gap-2"><StatusIcon status={row.status.rentmoola} /><span className="text-sm text-[#555860]">{row.rentmoola}</span></div></td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </motion.div>
+      </RevealOnScroll>
+      <p className="mx-auto mt-6 max-w-2xl text-center text-xs text-[#555860]">Comparison based on publicly listed features as of 2026.</p>
+    </SectionWrapper>
+  )
+}
+
+/* ================================================================== */
+/*  NEW: Wallet FAQ                                                   */
+/* ================================================================== */
+
+const WALLET_FAQS = [
+  { q: 'Does Revun Wallet work with my existing Canadian bank?', a: 'Yes. Revun connects to every Canadian chartered bank (RBC, TD, BMO, Scotia, CIBC, National Bank, credit unions) for PAD, Interac e-Transfer, and EFT. Your funds settle directly into your bank.' },
+  { q: 'How fast do transfers settle?', a: 'Interac e-Transfer settles in seconds. Pre-Authorized Debit (PAD) settles overnight (1-2 business days). Cards settle in 2-3 business days. Payouts to vendors arrive within 48h of work completion.' },
+  { q: 'Is this trust-account compliant?', a: "Yes. Revun Wallet supports segregated trust accounts for property management companies, with real-time balance tracking per property and auto-generated trust reports for each province's regulatory body." },
+  { q: 'Can I report rent to Equifax for tenants building credit?', a: 'Yes. We partner with the Landlord Credit Bureau (LCB) to report on-time rent payments to Equifax Canada. Tenants opt in, and every on-time PAD payment is reported automatically.' },
+  { q: 'How does owner disbursement work?', a: "After rent is received and reconciled, Revun automatically calculates management fees, subtracts expenses, and schedules disbursements to each owner's bank. You approve the batch; Revun handles the rest." },
+  { q: 'What about taxes — T5s, NR4s?', a: 'Revun auto-generates T5 slips for Canadian owner distributions and NR4 for non-resident owners. Exported as CSV or PDF, pre-filled with CRA-formatted data for you or your accountant.' },
+  { q: 'Is my payment data safe?', a: 'Yes. Revun is PCI-DSS Level 1 certified and FINTRAC-registered. Card details are tokenized — raw card numbers never touch Revun servers. All data is encrypted at rest with AES-256 and stored on Canadian servers.' },
+  { q: 'Can I export all transaction data?', a: 'Yes. Every payment, receipt, disbursement, and fee is exportable as CSV, PDF, or via API. Your data is yours — you can migrate to any system at any time.' },
+] as const
+
+function WalletFAQ() {
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: WALLET_FAQS.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  }
+  return (
+    <SectionWrapper id="faq">
+      <SectionHeader eyebrow="FAQ" title="Questions we hear from" highlight="finance teams." description="Straight answers on rails, compliance, trust accounting, and data portability." />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: sanitizeJsonLd(faqJsonLd) }} />
+      <RevealOnScroll className="mx-auto mt-12 max-w-3xl">
+        {WALLET_FAQS.map((item, idx) => (
+          <motion.div key={idx} variants={revealItem}>
+            <details className="group border-b border-[#E5E7EB] [&[open]>summary>svg]:rotate-180">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left">
+                <span className="text-base font-semibold text-[#0A1628] sm:text-lg">{item.q}</span>
+                <ChevronDown className="h-5 w-5 flex-shrink-0 text-[#555860] transition-transform duration-300" aria-hidden="true" />
+              </summary>
+              <p className="pb-5 pr-10 text-sm leading-relaxed text-[#555860] sm:text-base">{item.a}</p>
+            </details>
+          </motion.div>
+        ))}
+      </RevealOnScroll>
+    </SectionWrapper>
+  )
+}
+
+/* ================================================================== */
+/*  NEW: Wallet Final CTA (dark)                                      */
+/* ================================================================== */
+
+function WalletCTASection() {
+  return (
+    <section id="cta" className="relative overflow-hidden bg-[#0A1628] px-6 py-24 md:py-32">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 60% 55% at 50% 40%, rgba(23,111,235,0.28), rgba(23,111,235,0.08), transparent 75%)' }} />
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#176FEB]/40 to-transparent" />
+      <RevealOnScroll className="relative mx-auto max-w-3xl text-center">
+        <motion.div variants={revealItem}>
+          <span className="inline-flex items-center rounded-full border border-[#176FEB]/30 bg-[#176FEB]/10 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-[#176FEB]">
+            <Wallet className="mr-2 h-3.5 w-3.5" aria-hidden="true" />
+            Move money smarter
+          </span>
+        </motion.div>
+        <motion.h2 variants={revealItem} className="mt-6 font-display text-4xl font-normal tracking-tight text-white sm:text-5xl lg:text-6xl">
+          Stop wrangling bank statements. <span className="text-[#176FEB]">Start closing the books.</span>
+        </motion.h2>
+        <motion.p variants={revealItem} className="mx-auto mt-6 max-w-xl text-base text-white/70 sm:text-lg">
+          Try Revun Wallet free for 14 days. No setup fees, no minimums.
+        </motion.p>
+        <motion.div variants={revealItem} className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <Link href="/signup/" className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#176FEB] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_0_40px_-8px_rgba(23,111,235,0.8)] transition-all hover:brightness-110 hover:shadow-[0_0_50px_-4px_rgba(23,111,235,0.9)]">
+            Get Started
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+          </Link>
+          <Link href="/demo/" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all hover:border-white/40 hover:bg-white/15">
+            Book a Demo
+          </Link>
+        </motion.div>
+        <motion.p variants={revealItem} className="mt-8 text-xs text-white/50">
+          Questions? <Link href="/contact/" className="text-[#176FEB] transition-colors hover:text-white">Talk to our finance team →</Link>
+        </motion.p>
+      </RevealOnScroll>
+    </section>
+  )
+}
+
+/* ================================================================== */
 /*  Main export                                                        */
 /* ================================================================== */
 
 export function WalletDashboardClient() {
   return (
     <main>
-      <HeroSection />
+      <ScrollProgressBar />
+      <WalletHero />
+      <SectionNav />
+      <WalletProblemSection />
       <FinancesDashboard />
       <PaymentMethodsSection />
       <FeaturesSection />
       <ReceiptPreviewSection />
-      <CTASection />
+      <WalletUseCases />
+      <WalletTestimonials />
+      <WalletComparison />
+      <WalletFAQ />
+      <WalletCTASection />
     </main>
   )
 }

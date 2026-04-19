@@ -1,7 +1,8 @@
 'use client'
 
-import { useRef, useId } from 'react'
+import { useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useInView } from 'framer-motion'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 import {
@@ -19,12 +20,9 @@ import {
   Sparkles,
   Lock,
   Fingerprint,
-  Calendar,
-  DollarSign,
   Camera,
   Download,
   Search,
-  ChevronRight,
 } from 'lucide-react'
 import { useCounter } from '@/hooks/use-counter'
 
@@ -93,7 +91,6 @@ function DonutGauge({ value, size, sw, color, label, inView, delay = 0 }: {
 function Spark({ data, color, w = 80, h = 24, inView, delay = 0 }: {
   data: number[]; color: string; w?: number; h?: number; inView: boolean; delay?: number
 }) {
-  const id = useId()
   const max = Math.max(...data)
   const min = Math.min(...data) * 0.85
   const pts = data.map((v, i) => `${(i / (data.length - 1)) * w},${h - ((v - min) / (max - min)) * h}`).join(' ')
@@ -112,11 +109,22 @@ function Spark({ data, color, w = 80, h = 24, inView, delay = 0 }: {
 /*  Section 1: Live Dashboard (Desktop frame)  */
 /* ═══════════════════════════════════════════ */
 
+type ActivityTone = 'accent' | 'active' | 'muted'
+
+const toneClasses: Record<ActivityTone, { icon: string; pill: string }> = {
+  // Solid brand for attention items
+  accent: { icon: 'text-white', pill: 'bg-[#176FEB] text-white' },
+  // Brand-tinted for in-progress items
+  active: { icon: 'text-[#176FEB]', pill: 'bg-[#E8F2FE] text-[#176FEB]' },
+  // Neutral graphite for completed items
+  muted: { icon: 'text-[#555860]', pill: 'bg-[#F5F6F8] text-[#555860]' },
+}
+
 const activity = [
-  { icon: Wrench, label: 'Maintenance: Kitchen faucet repair', status: 'In Progress', color: '#F59E0B', time: '2 hrs ago' },
-  { icon: FileText, label: 'Lease renewal available for review', status: 'Action Needed', color: '#176FEB', time: '1 day ago' },
-  { icon: CheckCircle2, label: 'Renter insurance document uploaded', status: 'Complete', color: '#22C55E', time: '3 days ago' },
-  { icon: CreditCard, label: 'April rent payment processed', status: 'Confirmed', color: '#22C55E', time: '5 days ago' },
+  { icon: Wrench, label: 'Kitchen faucet repair scheduled for Thu, May 8', status: 'In Progress', tone: 'active' as ActivityTone, time: '2 hrs ago' },
+  { icon: FileText, label: 'Lease renewal ready for your signature', status: 'Action Needed', tone: 'accent' as ActivityTone, time: '1 day ago' },
+  { icon: CheckCircle2, label: 'Renter insurance verified (Sonnet policy)', status: 'Done', tone: 'muted' as ActivityTone, time: '3 days ago' },
+  { icon: CreditCard, label: 'April rent $1,850 processed via PAD', status: 'Confirmed', tone: 'muted' as ActivityTone, time: '5 days ago' },
 ]
 
 function DashboardPreview() {
@@ -126,7 +134,7 @@ function DashboardPreview() {
 
   return (
     <SectionWrapper id="dashboard">
-      <SectionHeader eyebrow="Tenant Dashboard" title="Everything in" highlight="one place" description="Your entire rental life — payments, maintenance, documents, and communications — accessible from a single dashboard." />
+      <SectionHeader eyebrow="Tenant Dashboard" title="Everything tenants need," highlight="on the home screen" description="Next payment due, open work orders, lease documents, and building announcements. No more 'where do I find…' emails at 9pm." />
       <div ref={ref} className="mt-12">
         {/* Browser frame */}
         <motion.div
@@ -162,11 +170,14 @@ function DashboardPreview() {
               </div>
             </div>
             <motion.span
-              className="rounded-full bg-[#22C55E]/10 px-3 py-1 text-xs font-semibold text-[#22C55E]"
+              className="inline-flex items-center gap-1.5 rounded-full bg-[#E8F2FE] px-3 py-1 text-xs font-semibold text-brand-blue"
               initial={{ opacity: 0, x: 10 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: 0.5 }}
-            >Lease Active</motion.span>
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-blue" />
+              Lease Active
+            </motion.span>
           </div>
 
           {/* Dashboard body */}
@@ -174,31 +185,70 @@ function DashboardPreview() {
             <div className="grid gap-4 md:grid-cols-3">
               {/* Payment card */}
               <motion.div
-                className="rounded-xl border border-[#E5E7EB] bg-white p-5"
+                className="flex flex-col rounded-xl border border-[#E5E7EB] bg-white p-5"
                 initial={{ opacity: 0, y: 12 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, ease, delay: 0.3 }}
               >
                 <div className="flex items-center justify-between mb-2">
                   <p className="text-xs font-semibold text-brand-graphite">Next Payment</p>
-                  <span className="text-[10px] text-brand-graphite-mid">Due May 1</span>
+                  <span className="text-[10px] text-brand-graphite-mid">Due May 1, 2026</span>
                 </div>
-                <p className="text-3xl font-bold text-brand-blue">${rent.toLocaleString()}<span className="text-sm font-normal">.00</span></p>
-                <div className="mt-3 h-1.5 w-full rounded-full bg-[#E5E7EB] overflow-hidden">
-                  <motion.div
-                    className="h-full rounded-full bg-gradient-to-r from-brand-blue to-[#60A5FA]"
-                    initial={{ width: 0 }}
-                    animate={inView ? { width: '0%' } : {}}
-                    transition={{ duration: 1, ease, delay: 0.5 }}
-                  />
+                <p className="text-3xl font-bold text-brand-blue">
+                  ${rent.toLocaleString()}
+                  <span className="text-sm font-normal text-brand-graphite-mid">.00 CAD</span>
+                </p>
+
+                {/* Method row */}
+                <div className="mt-3 flex items-center justify-between text-[10px]">
+                  <span className="inline-flex items-center gap-1 text-brand-graphite-mid">
+                    <CreditCard className="h-3 w-3" strokeWidth={2} />
+                    PAD · TD Canada Trust ••••4821
+                  </span>
+                  <span className="inline-flex items-center gap-1 font-semibold text-brand-blue">
+                    <CheckCircle2 className="h-3 w-3" strokeWidth={2.5} />
+                    Autopay on
+                  </span>
                 </div>
+
+                {/* CTA buttons */}
                 <div className="mt-4 flex gap-2">
-                  <div className="flex-1 rounded-lg bg-brand-blue py-2.5 text-center text-xs font-semibold text-white cursor-default">Pay Now</div>
-                  <div className="rounded-lg border border-[#E5E7EB] px-3 py-2.5 text-center text-xs font-medium text-brand-graphite-mid cursor-default">Auto-Pay</div>
+                  <div className="flex-1 rounded-lg bg-brand-blue py-2.5 text-center text-xs font-semibold text-white cursor-default">
+                    Pay Now
+                  </div>
+                  <div className="rounded-lg border border-[#E5E7EB] px-3 py-2.5 text-center text-xs font-medium text-brand-graphite-mid cursor-default">
+                    Manage
+                  </div>
                 </div>
-                <div className="mt-3 flex items-center justify-between">
-                  <span className="text-[10px] text-brand-graphite-mid">Payment History</span>
-                  <span className="text-[10px] text-brand-blue font-medium">View →</span>
+
+                {/* Payment history compact */}
+                <div className="mt-4 flex-1 border-t border-[#E5E7EB] pt-3">
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-brand-graphite-mid">
+                      Last 3 payments
+                    </span>
+                    <span className="text-[10px] font-medium text-brand-blue cursor-default">
+                      View all
+                    </span>
+                  </div>
+                  <ul className="space-y-1.5 text-[11px]">
+                    {[
+                      { month: 'Apr 2026', amount: '$1,850', on: true },
+                      { month: 'Mar 2026', amount: '$1,850', on: true },
+                      { month: 'Feb 2026', amount: '$1,850', on: true },
+                    ].map((p) => (
+                      <li
+                        key={p.month}
+                        className="flex items-center justify-between"
+                      >
+                        <span className="inline-flex items-center gap-1.5 text-brand-graphite-mid">
+                          <CheckCircle2 className="h-3 w-3 text-brand-blue" strokeWidth={2.5} />
+                          {p.month}
+                        </span>
+                        <span className="font-medium text-brand-graphite">{p.amount}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </motion.div>
 
@@ -209,21 +259,34 @@ function DashboardPreview() {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, ease, delay: 0.4 }}
               >
-                <p className="text-xs font-semibold text-brand-graphite mb-3">Recent Activity</p>
+                <div className="mb-3 flex items-center justify-between">
+                  <p className="text-xs font-semibold text-brand-graphite">Recent Activity</p>
+                  <span className="text-[10px] text-brand-graphite-mid">Last 7 days</span>
+                </div>
                 <div className="space-y-2">
                   {activity.map((item, i) => {
                     const Icon = item.icon
+                    const tone = toneClasses[item.tone]
                     return (
-                      <motion.div key={item.label} className="flex items-center gap-3 rounded-lg bg-[#F5F6F8] px-3 py-2.5"
-                        initial={{ opacity: 0, x: -8 }} animate={inView ? { opacity: 1, x: 0 } : {}}
+                      <motion.div
+                        key={item.label}
+                        className="flex items-center gap-3 rounded-lg border border-[#E5E7EB] bg-white px-3 py-2.5 transition-colors hover:border-brand-blue/30"
+                        initial={{ opacity: 0, x: -8 }}
+                        animate={inView ? { opacity: 1, x: 0 } : {}}
                         transition={{ duration: 0.3, ease, delay: 0.5 + i * 0.1 }}
                       >
-                        <Icon className="h-4 w-4 shrink-0" style={{ color: item.color }} />
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs text-[#555860] truncate">{item.label}</p>
-                          <p className="text-[10px] text-[#94A3B8]">{item.time}</p>
+                        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#E8F2FE]">
+                          <Icon className="h-3.5 w-3.5 text-brand-blue" strokeWidth={2} />
                         </div>
-                        <span className="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold" style={{ color: item.color, backgroundColor: `${item.color}15` }}>{item.status}</span>
+                        <div className="flex-1 min-w-0">
+                          <p className="truncate text-xs text-brand-graphite">{item.label}</p>
+                          <p className="text-[10px] text-brand-graphite-mid">{item.time}</p>
+                        </div>
+                        <span
+                          className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${tone.pill}`}
+                        >
+                          {item.status}
+                        </span>
                       </motion.div>
                     )
                   })}
@@ -233,39 +296,83 @@ function DashboardPreview() {
 
             {/* Bottom row */}
             <div className="mt-4 grid gap-4 md:grid-cols-2">
-              <motion.div className="rounded-xl border border-[#E5E7EB] bg-white p-5"
-                initial={{ opacity: 0, y: 8 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+              <motion.div
+                className="rounded-xl border border-[#E5E7EB] bg-white p-5"
+                initial={{ opacity: 0, y: 8 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, ease, delay: 0.7 }}
               >
-                <div className="flex items-center justify-between mb-3">
-                  <p className="text-xs font-semibold text-brand-graphite">Documents</p>
-                  <span className="text-[10px] text-brand-blue font-medium cursor-default">Upload</span>
+                <div className="mb-3 flex items-center justify-between">
+                  <p className="text-xs font-semibold text-brand-graphite">Document Vault</p>
+                  <span className="inline-flex items-center gap-1 text-[10px] font-medium text-brand-blue cursor-default">
+                    <Download className="h-3 w-3" strokeWidth={2} />
+                    Upload
+                  </span>
                 </div>
-                {['Lease Agreement.pdf', 'Renter Insurance.pdf', 'Move-in Checklist.pdf'].map((doc) => (
-                  <div key={doc} className="flex items-center gap-2 py-1">
-                    <div className="h-2 w-2 rounded-sm bg-red-400" />
-                    <span className="text-xs text-[#555860]">{doc}</span>
-                  </div>
-                ))}
+                <ul className="space-y-1.5">
+                  {[
+                    { name: 'Lease Agreement 2025-2026.pdf', size: '284 KB' },
+                    { name: 'Renter Insurance (Sonnet).pdf', size: '112 KB' },
+                    { name: 'Move-in Inspection Report.pdf', size: '3.2 MB' },
+                  ].map((doc) => (
+                    <li
+                      key={doc.name}
+                      className="flex items-center justify-between gap-2 rounded-md px-2 py-1.5 text-xs hover:bg-[#F5F6F8]"
+                    >
+                      <span className="flex items-center gap-2 truncate text-brand-graphite">
+                        <FileText className="h-3.5 w-3.5 shrink-0 text-brand-blue" strokeWidth={2} />
+                        <span className="truncate">{doc.name}</span>
+                      </span>
+                      <span className="shrink-0 text-[10px] text-brand-graphite-mid">
+                        {doc.size}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
 
-              <motion.div className="rounded-xl border border-[#E5E7EB] bg-white p-5"
-                initial={{ opacity: 0, y: 8 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+              <motion.div
+                className="rounded-xl border border-[#E5E7EB] bg-white p-5"
+                initial={{ opacity: 0, y: 8 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, ease, delay: 0.8 }}
               >
-                <p className="text-xs font-semibold text-brand-graphite mb-3">Lease Details</p>
-                <div className="grid grid-cols-2 gap-x-6 gap-y-2">
+                <div className="mb-3 flex items-center justify-between">
+                  <p className="text-xs font-semibold text-brand-graphite">Lease Details</p>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-[#E8F2FE] px-2 py-0.5 text-[10px] font-semibold text-brand-blue">
+                    <Sparkles className="h-2.5 w-2.5" strokeWidth={2.5} />
+                    Renewal open
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
                   {[
                     { label: 'Term', value: '12 months' },
+                    { label: 'Rent', value: '$1,850 / mo' },
                     { label: 'Start', value: 'Jun 1, 2025' },
                     { label: 'End', value: 'May 31, 2026' },
-                    { label: 'Rent', value: '$1,850/mo' },
                   ].map((d) => (
                     <div key={d.label}>
-                      <p className="text-[10px] text-[#94A3B8]">{d.label}</p>
+                      <p className="text-[10px] uppercase tracking-wider text-brand-graphite-mid">
+                        {d.label}
+                      </p>
                       <p className="text-xs font-medium text-brand-graphite">{d.value}</p>
                     </div>
                   ))}
+                </div>
+                {/* Lease progress bar */}
+                <div className="mt-3 border-t border-[#E5E7EB] pt-3">
+                  <div className="mb-1 flex items-center justify-between text-[10px] text-brand-graphite-mid">
+                    <span>Lease progress</span>
+                    <span className="font-semibold text-brand-graphite">10 / 12 months</span>
+                  </div>
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#E5E7EB]">
+                    <motion.div
+                      className="h-full rounded-full bg-brand-blue"
+                      initial={{ width: 0 }}
+                      animate={inView ? { width: '83%' } : {}}
+                      transition={{ duration: 1.1, ease, delay: 0.9 }}
+                    />
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -286,7 +393,7 @@ function TenantStats() {
 
   return (
     <SectionWrapper id="stats" dark>
-      <SectionHeader eyebrow="Your Numbers" title="Tenant stats" highlight="at a glance" description="Real-time visibility into your payments, requests, and lease status — no digging required." />
+      <SectionHeader eyebrow="Payment health" title="Autopay cuts delinquency" highlight="nearly in half" description="Industry data from NMHC, TransUnion, and major PM platforms: residents on autopay are roughly 2× less likely to pay late, and 79% of renters already prefer to pay rent online." />
       <div ref={ref} className="mt-12 grid gap-6 lg:grid-cols-12">
         {/* Left: Payment health gauge */}
         <motion.div
@@ -296,12 +403,12 @@ function TenantStats() {
         >
           <h3 className="mb-6 font-heading text-lg font-semibold text-brand-graphite">Payment Health</h3>
           <div className="flex items-center gap-8">
-            <DonutGauge value={100} size={130} sw={10} color="#22C55E" label="On-time" inView={inView} delay={0.3} />
+            <DonutGauge value={100} size={130} sw={10} color="#176FEB" label="On-time" inView={inView} delay={0.3} />
             <div className="flex-1 space-y-3">
               {[
-                { label: 'Payments made', value: '11 of 11', color: '#22C55E' },
+                { label: 'Payments made', value: '11 of 11', color: '#176FEB' },
                 { label: 'Next due', value: 'May 1', color: '#176FEB' },
-                { label: 'Late fees', value: '$0', color: '#22C55E' },
+                { label: 'Late fees', value: '$0', color: '#176FEB' },
               ].map((s, i) => (
                 <motion.div key={s.label} className="flex items-center justify-between"
                   initial={{ opacity: 0, x: 8 }} animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -318,7 +425,7 @@ function TenantStats() {
         {/* Right: Quick stat cards */}
         <div className="space-y-4 lg:col-span-7">
           {[
-            { icon: CreditCard, label: 'Total Paid (YTD)', value: '$20,350', spark: [1850, 1850, 1850, 1850, 1850, 1850, 1850, 1850, 1850, 1850, 1850], color: '#22C55E' },
+            { icon: CreditCard, label: 'Total Paid (YTD)', value: '$20,350', spark: [1850, 1850, 1850, 1850, 1850, 1850, 1850, 1850, 1850, 1850, 1850], color: '#176FEB' },
             { icon: Wrench, label: 'Maintenance Requests', value: '3 total', spark: [0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0], color: '#176FEB' },
             { icon: FileText, label: 'Documents', value: '7 files', spark: [2, 2, 3, 3, 4, 5, 5, 6, 6, 7, 7], color: '#176FEB' },
           ].map((stat, i) => (
@@ -353,111 +460,109 @@ function MobileApp() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
+  const mobileFeatures = [
+    { icon: CreditCard, title: 'Pay rent instantly', desc: 'ACH, credit card, and Interac e-Transfer. Set up autopay and never think about it again.' },
+    { icon: Camera, title: 'Photo maintenance requests', desc: 'Snap a photo, describe the issue, submit. Track progress and get notified when it is fixed.' },
+    { icon: MessageSquare, title: 'Message your team', desc: 'Direct messaging with your property manager. No personal numbers. Full conversation history.' },
+    { icon: Bell, title: 'Push notifications', desc: 'Payment reminders, maintenance updates, and lease renewals. Pushed to your phone in real time.' },
+    { icon: Download, title: 'Documents on demand', desc: 'Download your lease, receipts, and notices anytime. Everything stored securely in your vault.' },
+  ]
+
   return (
     <SectionWrapper id="mobile">
       <SectionHeader eyebrow="Mobile" title="Manage from" highlight="anywhere" description="The full tenant experience on your phone. Pay rent, request repairs, and message your property team on the go." />
-      <div ref={ref} className="mt-12 grid items-center gap-12 lg:grid-cols-2">
-        {/* Phone — slim realistic iPhone frame */}
-        <div className="flex justify-center">
-          <motion.div
-            className="relative w-[300px] rounded-[3rem] bg-gradient-to-b from-[#2C2C2E] to-[#1C1C1E] p-[10px] shadow-[0_25px_60px_rgba(0,0,0,0.3)]"
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease, delay: 0.1 }}
-          >
-            {/* Screen */}
-            <div className="overflow-hidden rounded-[2.2rem] bg-white">
-              {/* Dynamic Island */}
-              <div className="relative flex items-center justify-between px-6 pt-3 pb-1">
-                <span className="text-[11px] font-semibold text-[#0A1628]">9:41</span>
-                <div className="absolute left-1/2 top-2 -translate-x-1/2 h-[22px] w-[90px] rounded-full bg-[#0A0A0A]" />
-                <div className="flex items-center gap-1">
-                  <svg width="16" height="11" viewBox="0 0 16 11" fill="#0A1628"><rect x="0" y="7" width="3" height="4" rx="0.5"/><rect x="4" y="5" width="3" height="6" rx="0.5"/><rect x="8" y="2" width="3" height="9" rx="0.5"/><rect x="12" y="0" width="3" height="11" rx="0.5"/></svg>
-                  <svg width="16" height="11" viewBox="0 0 16 11" fill="#0A1628"><path d="M8 2C5.5 2 3.2 3 1.5 4.7L0 3.2C2.1 1.2 4.9 0 8 0s5.9 1.2 8 3.2L14.5 4.7C12.8 3 10.5 2 8 2z" opacity="0.3"/><path d="M8 5C6.3 5 4.8 5.7 3.7 6.8L2.2 5.3C3.7 3.8 5.7 3 8 3s4.3.8 5.8 2.3L12.3 6.8C11.2 5.7 9.7 5 8 5z" opacity="0.5"/><path d="M8 8c-1 0-1.9.4-2.6 1.1L4 7.7C5 6.6 6.4 6 8 6s3 .6 4 1.7l-1.4 1.4C9.9 8.4 9 8 8 8z" opacity="0.8"/><circle cx="8" cy="11" r="1.5"/></svg>
-                  <svg width="22" height="11" viewBox="0 0 22 11" fill="#0A1628"><rect x="0.5" y="0.5" width="18" height="10" rx="2" stroke="#0A1628" strokeWidth="1" fill="none"/><rect x="19" y="3" width="2.5" height="5" rx="1" opacity="0.4"/><rect x="2" y="2" width="12" height="7" rx="1"/></svg>
-                </div>
-              </div>
-
-              {/* App content */}
-              <div className="px-5 pb-6 pt-2">
-                {/* Profile header */}
-                <div className="flex items-center justify-between mb-5">
-                  <div className="flex items-center gap-2.5">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#176FEB] to-[#60A5FA] text-xs font-bold text-white shadow-sm">SM</div>
-                    <div>
-                      <p className="text-[13px] font-semibold text-[#0A1628]">Sarah Mitchell</p>
-                      <p className="text-[10px] text-[#94A3B8]">Unit 5D · Maple Ridge</p>
-                    </div>
-                  </div>
-                  <span className="rounded-full bg-[#22C55E]/12 px-2.5 py-1 text-[10px] font-bold text-[#22C55E]">Active</span>
-                </div>
-
-                {/* Payment card */}
-                <motion.div className="rounded-2xl border border-[#E5E7EB] p-4 mb-5"
-                  initial={{ opacity: 0, y: 6 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, ease, delay: 0.4 }}
-                >
-                  <p className="text-[10px] text-[#94A3B8]">Next Payment · Due May 1</p>
-                  <p className="mt-1 text-2xl font-bold text-[#0A1628]">$1,850</p>
-                  <div className="mt-3 rounded-xl bg-[#176FEB] py-2.5 text-center text-[11px] font-semibold text-white">Pay Now</div>
-                </motion.div>
-
-                {/* Activity items */}
-                <div className="space-y-0">
-                  {[
-                    { label: 'Kitchen faucet', status: 'In Progress', color: '#F59E0B' },
-                    { label: 'Lease renewal', status: 'Action', color: '#176FEB' },
-                    { label: 'Insurance', status: 'Done', color: '#22C55E' },
-                  ].map((item, i) => (
-                    <motion.div key={item.label}
-                      className="flex items-center justify-between border-b border-[#F1F5F9] py-3 last:border-0"
-                      initial={{ opacity: 0, x: -4 }} animate={inView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ duration: 0.25, ease, delay: 0.5 + i * 0.08 }}
-                    >
-                      <span className="text-[12px] text-[#2C2E33]">{item.label}</span>
-                      <span className="rounded-full px-2.5 py-0.5 text-[10px] font-semibold" style={{ color: item.color, backgroundColor: `${item.color}12` }}>{item.status}</span>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Quick actions */}
-                <div className="mt-4 flex gap-2">
-                  <div className="flex-1 rounded-xl border border-[#E5E7EB] py-2.5 text-center text-[11px] font-medium text-[#2C2E33]">Documents</div>
-                  <div className="flex-1 rounded-xl border border-[#E5E7EB] py-2.5 text-center text-[11px] font-medium text-[#2C2E33]">Lease</div>
-                </div>
-              </div>
+      <div
+        ref={ref}
+        className="mt-12 grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch lg:gap-16"
+      >
+        {/* Left: lifestyle image as anchor + tight editorial copy block */}
+        <motion.div
+          className="flex flex-col"
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease, delay: 0.1 }}
+        >
+          {/* Anchor image, landscape aspect for tight column */}
+          <div className="relative aspect-[5/3] overflow-hidden rounded-2xl">
+            <Image
+              src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?auto=format&fit=crop&w=1400&q=80"
+              alt="Tenant reviewing rent payment on smartphone at home"
+              fill
+              sizes="(max-width: 1024px) 92vw, 44vw"
+              className="object-cover"
+            />
+            <div
+              className="absolute inset-0 bg-gradient-to-tr from-[#0A1628]/50 via-transparent to-transparent"
+              aria-hidden="true"
+            />
+            {/* Floating spec badge */}
+            <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#0A1628]/70 px-3 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
+              <Smartphone className="h-3 w-3" strokeWidth={2} />
+              iOS 16+ · Android 12+ · Web
             </div>
+          </div>
 
-            {/* Home indicator */}
-            <div className="flex justify-center pt-2 pb-1">
-              <div className="h-[4px] w-[100px] rounded-full bg-white/20" />
-            </div>
-          </motion.div>
-        </div>
+          {/* Eyebrow + compact headline + desc */}
+          <p className="mt-7 text-xs font-heading font-semibold uppercase tracking-wider text-brand-blue">
+            On every device
+          </p>
+          <h3 className="mt-3 font-display text-4xl font-normal leading-[1] text-brand-graphite md:text-5xl">
+            Rent day,{' '}
+            <span className="text-brand-blue">every</span> day.
+          </h3>
+          <p className="mt-4 text-base leading-relaxed text-brand-graphite-mid">
+            Native apps with Face ID and biometric unlock. Offline drafts for
+            work orders from the basement laundry room. Push notifications that
+            actually matter. Plus a web fallback for the browser holdouts.
+          </p>
 
-        {/* Feature list */}
-        <div className="space-y-4">
-          {[
-            { icon: CreditCard, title: 'Pay rent instantly', desc: 'ACH, credit card, and Interac e-Transfer. Set up autopay and never think about it again.' },
-            { icon: Camera, title: 'Photo maintenance requests', desc: 'Snap a photo, describe the issue, submit. Track progress and get notified when it is fixed.' },
-            { icon: MessageSquare, title: 'Message your team', desc: 'Direct messaging with your property manager. No personal numbers. Full conversation history.' },
-            { icon: Bell, title: 'Push notifications', desc: 'Payment reminders, maintenance updates, lease renewals — pushed to your phone in real time.' },
-            { icon: Download, title: 'Documents on demand', desc: 'Download your lease, receipts, and notices anytime. Everything stored securely in your vault.' },
-          ].map((feat, i) => (
-            <motion.div key={feat.title}
-              className="flex items-start gap-4 rounded-xl border border-[#E5E7EB] bg-white p-5 transition-all hover:border-brand-blue/20 hover:shadow-sm"
-              initial={{ opacity: 0, x: 16 }} animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, ease, delay: 0.2 + i * 0.1 }}
-            >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-blue/10">
-                <feat.icon className="h-5 w-5 text-brand-blue" />
-              </div>
-              <div>
-                <h4 className="font-heading text-sm font-semibold text-brand-graphite">{feat.title}</h4>
-                <p className="mt-1 text-sm text-brand-graphite-mid">{feat.desc}</p>
-              </div>
-            </motion.div>
-          ))}
+          {/* Platform chips, tight inline */}
+          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+            {[
+              'Offline-capable',
+              'Biometric login',
+              'Push alerts',
+              'Dark mode',
+              'EN + FR',
+            ].map((t) => (
+              <span
+                key={t}
+                className="inline-flex items-center gap-1.5 text-sm text-brand-graphite-mid"
+              >
+                <span className="h-1 w-1 rounded-full bg-brand-blue" />
+                {t}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Right: editorial feature list, tighter rows, hairline dividers */}
+        <div className="flex flex-col divide-y divide-[#E5E7EB] border-y border-[#E5E7EB]">
+          {mobileFeatures.map((feat, i) => {
+            const Icon = feat.icon
+            return (
+              <motion.div
+                key={feat.title}
+                className="group flex flex-1 items-start gap-5 py-5"
+                initial={{ opacity: 0, x: 16 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, ease, delay: 0.2 + i * 0.08 }}
+              >
+                <Icon
+                  className="mt-0.5 h-5 w-5 shrink-0 text-brand-blue transition-transform duration-200 group-hover:scale-110"
+                  strokeWidth={1.8}
+                />
+                <div className="flex-1">
+                  <h4 className="font-heading text-base font-semibold text-brand-graphite">
+                    {feat.title}
+                  </h4>
+                  <p className="mt-1 text-sm leading-relaxed text-brand-graphite-mid">
+                    {feat.desc}
+                  </p>
+                </div>
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </SectionWrapper>
@@ -480,71 +585,199 @@ function MaintenanceFlow() {
 
   return (
     <SectionWrapper id="maintenance" dark>
-      <SectionHeader eyebrow="Maintenance" title="Request repairs" highlight="in seconds" description="Submit, track, and confirm maintenance — all from your portal. No phone calls, no chasing." />
-      <div ref={ref} className="mt-12 grid gap-8 lg:grid-cols-2">
-        {/* Pipeline visualization */}
-        <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white p-6"
-          initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+      <SectionHeader eyebrow="Maintenance" title="From leaky faucet to" highlight="resolved, end to end" description="Tenants attach up to 5 photos or a short video, pick an access window, and watch status update in real time. Submitted → Authorized → In Progress → Completed, with push updates at every stage." />
+
+      {/* Editorial banner image */}
+      <div className="relative mx-auto mt-10 aspect-[21/6] max-w-5xl overflow-hidden rounded-2xl">
+        <Image
+          src="https://images.unsplash.com/photo-1581244277943-fe4a9c777189?auto=format&fit=crop&w=2000&q=80"
+          alt="Technician repairing a kitchen faucet"
+          fill
+          sizes="(max-width: 1024px) 100vw, 1024px"
+          className="object-cover"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-[#F5F6F8] via-[#F5F6F8]/10 to-transparent"
+          aria-hidden="true"
+        />
+      </div>
+
+      <div ref={ref} className="mt-12 grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        {/* Pipeline visualization (kept as a product frame, densified with real data) */}
+        <motion.div
+          className="flex flex-col rounded-2xl border border-[#E5E7EB] bg-white p-6"
+          initial={{ opacity: 0, y: 12 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease, delay: 0.1 }}
         >
-          <h3 className="mb-4 font-heading text-base font-semibold text-brand-graphite">Request Pipeline</h3>
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="font-heading text-base font-semibold text-brand-graphite">
+              Request Pipeline
+            </h3>
+            <span className="text-[10px] uppercase tracking-wider text-brand-graphite-mid">
+              4 open · 23 this year
+            </span>
+          </div>
 
-          {/* Stage pipeline */}
-          <div className="flex gap-1 rounded-xl border border-[#E5E7EB] p-2 mb-6">
-            {['Submitted', 'Authorized', 'In Progress', 'Completed'].map((stage, i) => (
-              <div key={stage} className={`flex-1 rounded-lg py-2.5 text-center text-[10px] font-medium ${i === 2 ? 'bg-brand-blue text-white' : 'text-brand-graphite-mid'}`}>
-                {stage}
+          {/* Stage pipeline with counts */}
+          <div className="mb-5 flex gap-1 rounded-xl border border-[#E5E7EB] p-2">
+            {[
+              { stage: 'Submitted', count: 1 },
+              { stage: 'Authorized', count: 1 },
+              { stage: 'In Progress', count: 2 },
+              { stage: 'Completed', count: 19 },
+            ].map(({ stage, count }, i) => {
+              const active = i === 2
+              return (
+                <div
+                  key={stage}
+                  className={`flex flex-1 flex-col items-center gap-0.5 rounded-lg py-2 text-center transition-colors ${
+                    active
+                      ? 'bg-brand-blue text-white'
+                      : 'text-brand-graphite-mid'
+                  }`}
+                >
+                  <span className="text-[10px] font-medium">{stage}</span>
+                  <span
+                    className={`font-heading text-xs font-bold ${
+                      active ? 'text-white' : 'text-brand-graphite'
+                    }`}
+                  >
+                    {count}
+                  </span>
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Average SLA strip */}
+          <div className="mb-5 grid grid-cols-3 gap-2 rounded-xl bg-[#F5F6F8] p-3 text-center">
+            {[
+              { value: '3.8 hr', label: 'Avg. first response' },
+              { value: '1.9 day', label: 'Avg. resolution' },
+              { value: '94%', label: 'On first visit' },
+            ].map((s) => (
+              <div key={s.label}>
+                <p className="font-heading text-sm font-bold text-brand-graphite">
+                  {s.value}
+                </p>
+                <p className="text-[9px] uppercase tracking-wider text-brand-graphite-mid">
+                  {s.label}
+                </p>
               </div>
             ))}
           </div>
 
           {/* Active requests */}
-          <div className="space-y-3">
+          <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-brand-graphite-mid">
+            Your active requests
+          </p>
+          <div className="flex flex-1 flex-col gap-2.5">
             {[
-              { title: 'Kitchen faucet', priority: 'High', status: 'In Progress', time: '2 hrs ago' },
-              { title: 'Hallway light', priority: 'Low', status: 'Submitted', time: '1 day ago' },
-            ].map((item, i) => (
-              <motion.div key={item.title}
-                className="flex items-center gap-3 rounded-xl border border-[#E5E7EB] p-4 transition-colors hover:border-brand-blue/20"
-                initial={{ opacity: 0, x: -8 }} animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.4, ease, delay: 0.3 + i * 0.1 }}
-              >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-blue/10">
-                  <Wrench className="h-5 w-5 text-brand-blue" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className="font-heading text-sm font-semibold text-brand-graphite">{item.title}</span>
-                    <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${item.priority === 'High' ? 'bg-red-50 text-red-500' : 'bg-brand-off-white text-brand-graphite-mid'}`}>{item.priority}</span>
+              {
+                title: 'Kitchen faucet leak',
+                priority: 'Urgent',
+                status: 'In Progress',
+                statusTone: 'active',
+                time: '2 hrs ago',
+                detail: 'Technician: Mike R. · ETA Thu 1–3 PM',
+              },
+              {
+                title: 'Hallway light flickering',
+                priority: 'Standard',
+                status: 'Authorized',
+                statusTone: 'muted',
+                time: '1 day ago',
+                detail: 'Vendor assigned: Bright Electric Co.',
+              },
+              {
+                title: 'Dishwasher loud rattle',
+                priority: 'Standard',
+                status: 'Submitted',
+                statusTone: 'muted',
+                time: '3 days ago',
+                detail: 'Triage: appliance repair queue',
+              },
+            ].map((item, i) => {
+              const urgent = item.priority === 'Urgent'
+              const statusPill =
+                item.statusTone === 'active'
+                  ? 'bg-[#E8F2FE] text-brand-blue'
+                  : 'bg-[#F5F6F8] text-brand-graphite-mid'
+              return (
+                <motion.div
+                  key={item.title}
+                  className="flex items-start gap-3 rounded-xl border border-[#E5E7EB] p-3.5 transition-colors hover:border-brand-blue/40"
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.4, ease, delay: 0.3 + i * 0.08 }}
+                >
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#E8F2FE]">
+                    <Wrench className="h-4 w-4 text-brand-blue" strokeWidth={2} />
                   </div>
-                  <p className="mt-0.5 text-xs text-brand-graphite-mid">{item.time}</p>
-                </div>
-                <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium ${item.status === 'In Progress' ? 'bg-brand-blue/10 text-brand-blue' : 'bg-[#F59E0B]/15 text-[#F59E0B]'}`}>{item.status}</span>
-              </motion.div>
-            ))}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                      <span className="font-heading text-sm font-semibold text-brand-graphite">
+                        {item.title}
+                      </span>
+                      <span
+                        className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                          urgent
+                            ? 'bg-brand-blue text-white'
+                            : 'bg-[#F5F6F8] text-brand-graphite-mid'
+                        }`}
+                      >
+                        {item.priority}
+                      </span>
+                    </div>
+                    <p className="mt-0.5 truncate text-[11px] text-brand-graphite-mid">
+                      {item.detail}
+                    </p>
+                    <p className="mt-0.5 text-[10px] text-brand-graphite-mid">
+                      {item.time}
+                    </p>
+                  </div>
+                  <span
+                    className={`shrink-0 rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${statusPill}`}
+                  >
+                    {item.status}
+                  </span>
+                </motion.div>
+              )
+            })}
           </div>
         </motion.div>
 
-        {/* Steps */}
-        <div className="space-y-4">
-          {maintenanceSteps.map((s, i) => (
-            <motion.div key={s.step}
-              className="rounded-2xl border border-[#E5E7EB] bg-white p-6"
-              initial={{ opacity: 0, x: 16 }} animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, ease, delay: 0.2 + i * 0.12 }}
-            >
-              <div className="flex items-start gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-blue/10">
-                  <s.icon className="h-5 w-5 text-brand-blue" />
-                </div>
+        {/* Steps: editorial list, no cards */}
+        <div className="flex flex-col divide-y divide-[#E5E7EB] border-y border-[#E5E7EB]">
+          {maintenanceSteps.map((s, i) => {
+            const Icon = s.icon
+            return (
+              <motion.div
+                key={s.step}
+                className="group grid flex-1 grid-cols-[auto_1fr_auto] items-start gap-5 py-6"
+                initial={{ opacity: 0, x: 16 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, ease, delay: 0.2 + i * 0.12 }}
+              >
+                <span className="font-display text-4xl leading-none text-brand-blue md:text-5xl">
+                  {s.step}
+                </span>
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-brand-blue">Step {s.step}</span>
-                  <h4 className="mt-1 font-heading text-base font-semibold text-brand-graphite">{s.title}</h4>
-                  <p className="mt-1 text-sm text-brand-graphite-mid">{s.desc}</p>
+                  <h4 className="font-heading text-base font-semibold text-brand-graphite md:text-lg">
+                    {s.title}
+                  </h4>
+                  <p className="mt-1.5 text-sm leading-relaxed text-brand-graphite-mid">
+                    {s.desc}
+                  </p>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+                <Icon
+                  className="mt-1 h-5 w-5 text-brand-blue transition-transform duration-200 group-hover:scale-110"
+                  strokeWidth={1.8}
+                />
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </SectionWrapper>
@@ -555,13 +788,11 @@ function MaintenanceFlow() {
 /*  Section 5: Security & Trust                */
 /* ═══════════════════════════════════════════ */
 
-const trustPoints = [
-  { icon: Lock, title: 'End-to-end encryption', desc: 'AES-256 encryption on all data at rest and in transit. Your information is always protected.' },
-  { icon: Shield, title: 'No personal numbers shared', desc: 'All communications happen through the platform. Your contact info stays private.' },
-  { icon: Fingerprint, title: 'Biometric login', desc: 'Face ID and fingerprint authentication. Fast, secure access on every device.' },
-  { icon: Eye, title: 'Full audit trail', desc: 'Every payment, request, and message logged with timestamps. Verifiable records always.' },
-  { icon: FileText, title: 'Document security', desc: 'All documents encrypted, access-logged, and tamper-proof. Download anytime.' },
-  { icon: Sparkles, title: 'Reusable verification', desc: 'Verify your ID once — reuse across applications. No repeated hard credit inquiries.' },
+const complianceBadges = [
+  { label: 'SOC 2 Type II', sub: 'Audited controls' },
+  { label: 'PCI-DSS Level 1', sub: 'Tokenized payments' },
+  { label: 'PIPEDA', sub: 'Canadian residency' },
+  { label: 'AES-256', sub: 'At rest + in transit' },
 ]
 
 function SecurityTrust() {
@@ -570,21 +801,224 @@ function SecurityTrust() {
 
   return (
     <SectionWrapper id="trust">
-      <SectionHeader eyebrow="Privacy & Security" title="Built for tenant" highlight="privacy" description="Your personal information, financial data, and communications are secure by design." />
-      <div ref={ref} className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {trustPoints.map((t, i) => (
-          <motion.div key={t.title}
-            className="group rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-all hover:border-brand-blue/30 hover:shadow-sm"
-            initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, ease, delay: 0.08 + i * 0.08 }}
+      <SectionHeader
+        eyebrow="Canadian data, Canadian rules"
+        title="Privacy by"
+        highlight="design"
+        description="Data residency in Canada. AES-256 at rest and in transit. SOC 2 Type II controls. Payment details never touch Revun servers; everything is tokenized through a PCI-DSS Level 1 processor."
+      />
+
+      {/* Compliance strip */}
+      <div ref={ref} className="mx-auto mt-12 max-w-5xl">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, ease }}
+          className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[#E5E7EB] bg-[#E5E7EB] md:grid-cols-4"
+        >
+          {complianceBadges.map((b, i) => (
+            <motion.div
+              key={b.label}
+              initial={{ opacity: 0, y: 8 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, ease, delay: 0.1 + i * 0.06 }}
+              className="flex items-center gap-3 bg-white px-5 py-4"
+            >
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-blue/10">
+                <CheckCircle2 className="h-4 w-4 text-brand-blue" strokeWidth={2.5} />
+              </div>
+              <div className="min-w-0">
+                <div className="font-heading text-sm font-bold text-brand-graphite">{b.label}</div>
+                <div className="truncate text-[11px] text-brand-graphite-mid">{b.sub}</div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Bento grid */}
+      <div className="mx-auto mt-6 max-w-5xl">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-6">
+          {/* Featured: Encryption */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, ease, delay: 0.15 }}
+            className="group relative overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white p-7 md:col-span-1 lg:col-span-4"
           >
-            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/8 transition-colors group-hover:bg-brand-blue/12">
-              <t.icon className="h-5 w-5 text-brand-blue" />
+            <div aria-hidden className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-brand-blue/5 blur-2xl" />
+            <div className="relative flex items-start gap-6 md:flex-row">
+              <div className="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-brand-blue/10 md:h-24 md:w-24">
+                <span className="absolute inset-0 animate-ping rounded-2xl bg-brand-blue/10 opacity-75" style={{ animationDuration: '3s' }} />
+                <Lock className="relative h-9 w-9 text-brand-blue md:h-10 md:w-10" strokeWidth={1.8} />
+              </div>
+              <div className="flex-1">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue/10 px-2.5 py-1 text-[10px] font-heading font-bold uppercase tracking-wider text-brand-blue">
+                  <span className="h-1.5 w-1.5 rounded-full bg-brand-blue" /> Featured
+                </span>
+                <h3 className="mt-3 font-heading text-xl font-bold text-brand-graphite md:text-2xl">
+                  End-to-end encryption
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-brand-graphite-mid md:text-base">
+                  AES-256 encryption on every byte — at rest, in transit, on backups. Keys rotated automatically, managed by HSM. Nothing leaves Canada.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {['AES-256-GCM', 'TLS 1.3', 'HSM Key Rotation', 'Zero-Trust'].map((chip) => (
+                    <span key={chip} className="rounded-full bg-[#F5F6F8] px-2.5 py-1 text-[11px] font-medium text-brand-graphite">
+                      {chip}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
-            <h3 className="font-heading text-base font-semibold text-brand-graphite">{t.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-brand-graphite-mid">{t.desc}</p>
           </motion.div>
-        ))}
+
+          {/* Biometric */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, ease, delay: 0.22 }}
+            className="group relative overflow-hidden rounded-2xl border border-[#E5E7EB] bg-gradient-to-br from-brand-blue/5 to-white p-7 lg:col-span-2"
+          >
+            <div className="flex h-full flex-col">
+              <div className="relative mx-auto mb-4 flex h-14 w-14 items-center justify-center">
+                <span className="absolute inset-0 animate-ping rounded-full bg-brand-blue/20 opacity-75" style={{ animationDuration: '2.5s' }} />
+                <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-brand-blue">
+                  <Fingerprint className="h-7 w-7 text-white" strokeWidth={1.8} />
+                </span>
+              </div>
+              <h3 className="text-center font-heading text-lg font-bold text-brand-graphite">Biometric login</h3>
+              <p className="mt-2 text-center text-sm text-brand-graphite-mid">
+                Face ID and fingerprint. No passwords to forget, no SMS codes to intercept.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* No personal numbers */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, ease, delay: 0.28 }}
+            className="group rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-all hover:border-brand-blue/40 hover:shadow-sm lg:col-span-2"
+          >
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10">
+              <Shield className="h-5 w-5 text-brand-blue" strokeWidth={2} />
+            </div>
+            <h3 className="mt-4 font-heading text-base font-bold text-brand-graphite">
+              No personal numbers shared
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-brand-graphite-mid">
+              All messaging and calls route through the platform. Your phone number stays yours.
+            </p>
+          </motion.div>
+
+          {/* Full audit trail */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, ease, delay: 0.34 }}
+            className="group rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-all hover:border-brand-blue/40 hover:shadow-sm lg:col-span-2"
+          >
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10">
+              <Eye className="h-5 w-5 text-brand-blue" strokeWidth={2} />
+            </div>
+            <h3 className="mt-4 font-heading text-base font-bold text-brand-graphite">
+              Full audit trail
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-brand-graphite-mid">
+              Every payment, request, and message timestamped and immutable. Tribunal-ready.
+            </p>
+          </motion.div>
+
+          {/* Document security */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, ease, delay: 0.4 }}
+            className="group rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-all hover:border-brand-blue/40 hover:shadow-sm lg:col-span-2"
+          >
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10">
+              <FileText className="h-5 w-5 text-brand-blue" strokeWidth={2} />
+            </div>
+            <h3 className="mt-4 font-heading text-base font-bold text-brand-graphite">
+              Document security
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-brand-graphite-mid">
+              Encrypted storage, access-logged downloads, tamper-proof e-signatures.
+            </p>
+          </motion.div>
+
+          {/* Featured: Reusable verification */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, ease, delay: 0.46 }}
+            className="group relative overflow-hidden rounded-2xl border border-brand-blue/20 bg-gradient-to-br from-brand-blue/[0.04] via-white to-white p-7 lg:col-span-6"
+          >
+            <div aria-hidden className="pointer-events-none absolute -left-10 -bottom-10 h-48 w-48 rounded-full bg-brand-blue/5 blur-3xl" />
+            <div className="relative grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+              <div>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-blue/10">
+                    <Sparkles className="h-5 w-5 text-brand-blue" strokeWidth={2} />
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue/10 px-2.5 py-1 text-[10px] font-heading font-bold uppercase tracking-wider text-brand-blue">
+                    Canadian-first
+                  </span>
+                </div>
+                <h3 className="mt-4 font-heading text-xl font-bold text-brand-graphite md:text-2xl">
+                  Reusable verification, zero repeat credit hits
+                </h3>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-brand-graphite-mid md:text-base">
+                  Verify your identity once with Certn — then reuse that verified profile across every Revun-powered application. No repeated hard credit pulls. No duplicate document uploads. Your score stays intact.
+                </p>
+              </div>
+
+              {/* Verification badge mockup */}
+              <div className="relative w-full md:w-[260px]">
+                <div className="rounded-2xl border border-[#E5E7EB] bg-white p-5 shadow-[0_10px_30px_-12px_rgba(23,111,235,0.25)]">
+                  <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-3">
+                    <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-brand-graphite-mid">
+                      Verified ID
+                    </span>
+                    <span className="flex items-center gap-1 text-[10px] font-semibold text-brand-blue">
+                      <span className="relative flex size-1.5">
+                        <span className="absolute inline-flex size-1.5 animate-ping rounded-full bg-brand-blue" />
+                        <span className="relative inline-flex size-1.5 rounded-full bg-brand-blue" />
+                      </span>
+                      Active
+                    </span>
+                  </div>
+                  <div className="mt-4 flex items-center gap-3">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-blue text-sm font-heading font-bold text-white">
+                      JS
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="truncate font-heading text-sm font-bold text-brand-graphite">Jordan Smith</div>
+                      <div className="text-[11px] text-brand-graphite-mid">Verified · Mar 12, 2026</div>
+                    </div>
+                  </div>
+                  <div className="mt-4 grid grid-cols-2 gap-2 text-[11px]">
+                    {[
+                      { label: 'ID', ok: true },
+                      { label: 'Credit', ok: true },
+                      { label: 'Income', ok: true },
+                      { label: 'References', ok: true },
+                    ].map((item) => (
+                      <div key={item.label} className="flex items-center gap-1.5 rounded-md bg-brand-blue/5 px-2 py-1.5">
+                        <CheckCircle2 className="h-3 w-3 text-brand-blue" />
+                        <span className="text-brand-graphite">{item.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-4 rounded-md border border-dashed border-brand-blue/30 bg-brand-blue/5 px-2 py-1.5 text-center text-[10px] font-mono text-brand-blue">
+                    ID: RVN-CERTN-4829
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </SectionWrapper>
   )
@@ -599,37 +1033,196 @@ function HowItWorks() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   const steps = [
-    { num: '01', title: 'Receive your invite', desc: 'Your property manager sends a portal invitation. Set up your account in under 2 minutes.', icon: KeyRound },
-    { num: '02', title: 'Self-serve everything', desc: 'Pay rent, request maintenance, download documents, and message your property team.', icon: Smartphone },
-    { num: '03', title: 'Stay connected 24/7', desc: 'Access from any device. Push notifications keep you informed on payments, repairs, and renewals.', icon: Bell },
+    {
+      num: '01',
+      title: 'Receive your invite',
+      desc: 'Your property manager sends a portal invitation by email or SMS. Self-onboard in under 3 minutes. No app store download required.',
+      icon: KeyRound,
+      timeBadge: '< 3 min',
+    },
+    {
+      num: '02',
+      title: 'Set up autopay',
+      desc: 'Link a Canadian bank for Pre-Authorized Debit or save Interac e-Transfer details. Opt in to report on-time rent to build credit.',
+      icon: Smartphone,
+      timeBadge: '~ 2 min',
+    },
+    {
+      num: '03',
+      title: 'Live in your rental, not your inbox',
+      desc: 'Pay, request, e-sign, and message — all from one app. Push alerts for payments, repairs, and lease renewals. Offline drafts supported.',
+      icon: Bell,
+      timeBadge: 'Always on',
+    },
   ]
 
   return (
     <SectionWrapper id="how" dark>
-      <SectionHeader eyebrow="Getting Started" title="Three steps to" highlight="get started" description="From invite to full access in minutes." />
-      <div ref={ref} className="mt-12 grid gap-6 md:grid-cols-3">
-        {steps.map((s, i) => (
-          <motion.div key={s.num}
-            className="relative rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-all hover:border-brand-blue/30 hover:shadow-sm"
-            initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease, delay: 0.1 + i * 0.15 }}
-          >
-            {/* Step connector line */}
-            {i < 2 && <div className="absolute -right-3 top-1/2 hidden h-px w-6 bg-[#E5E7EB] md:block" />}
-            <div className="flex items-center gap-3 mb-4">
+      <SectionHeader
+        eyebrow="Getting Started"
+        title="Three steps to"
+        highlight="get started"
+        description="From invite to full access in minutes."
+      />
+
+      <div ref={ref} className="relative mx-auto mt-14 max-w-5xl">
+        {/* Desktop connector line */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-0 right-0 top-[86px] hidden h-px bg-gradient-to-r from-transparent via-brand-blue/30 to-transparent lg:block"
+        />
+
+        <div className="grid gap-6 lg:grid-cols-3 lg:gap-6">
+          {steps.map((s, i) => {
+            const Icon = s.icon
+            return (
               <motion.div
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue text-sm font-bold text-white"
-                initial={{ scale: 0 }} animate={inView ? { scale: 1 } : {}}
-                transition={{ type: 'spring', stiffness: 300, damping: 15, delay: 0.3 + i * 0.15 }}
-              >{s.num}</motion.div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-blue/10">
-                <s.icon className="h-5 w-5 text-brand-blue" />
-              </div>
-            </div>
-            <h3 className="font-heading text-base font-semibold text-brand-graphite">{s.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-brand-graphite-mid">{s.desc}</p>
-          </motion.div>
-        ))}
+                key={s.num}
+                className="group relative"
+                initial={{ opacity: 0, y: 16 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.55, ease, delay: 0.12 + i * 0.14 }}
+              >
+                {/* Step badge (sits on the connector line) */}
+                <div className="mb-6 flex items-center justify-center">
+                  <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-[#E5E7EB] bg-white shadow-[0_10px_30px_-12px_rgba(23,111,235,0.25)]">
+                    {i === 0 && inView && (
+                      <span aria-hidden className="absolute inset-0 animate-ping rounded-2xl bg-brand-blue/20 opacity-75" style={{ animationDuration: '2.5s' }} />
+                    )}
+                    <span className="relative font-display text-2xl font-normal text-brand-blue">
+                      {s.num}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Step card */}
+                <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-all group-hover:border-brand-blue/40 group-hover:shadow-sm">
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10">
+                      <Icon className="h-5 w-5 text-brand-blue" strokeWidth={2} />
+                    </div>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-brand-blue/10 px-2.5 py-1 text-[10px] font-heading font-bold uppercase tracking-wider text-brand-blue">
+                      {s.timeBadge}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 font-heading text-lg font-bold text-brand-graphite md:text-xl">
+                    {s.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-brand-graphite-mid">
+                    {s.desc}
+                  </p>
+
+                  {/* Per-step mini mockup */}
+                  <div className="mt-5 rounded-xl border border-[#E5E7EB] bg-[#FAFBFC] p-4">
+                    {i === 0 && (
+                      <div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-brand-graphite-mid">SMS · 2m ago</span>
+                          <MessageSquare className="h-3.5 w-3.5 text-brand-blue" />
+                        </div>
+                        <div className="mt-2 rounded-lg bg-white p-3 shadow-sm">
+                          <div className="text-[11px] font-semibold text-brand-graphite">Acme Properties</div>
+                          <div className="mt-1 text-[11px] leading-snug text-brand-graphite-mid">
+                            Welcome! Set up your tenant portal: <span className="font-mono text-brand-blue">revun.app/invite/A3K9</span>
+                          </div>
+                        </div>
+                        <div className="mt-3 flex items-center justify-center gap-1.5 rounded-lg bg-brand-blue py-2 text-[11px] font-semibold text-white">
+                          <KeyRound className="h-3 w-3" /> Open portal
+                        </div>
+                      </div>
+                    )}
+
+                    {i === 1 && (
+                      <div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-brand-graphite-mid">Autopay</span>
+                          <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-blue">
+                            <CheckCircle2 className="h-3 w-3" /> Linked
+                          </span>
+                        </div>
+                        <div className="mt-2 rounded-lg bg-white p-3">
+                          <div className="flex items-center gap-2">
+                            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-brand-blue/10 text-[9px] font-heading font-bold text-brand-blue">
+                              RBC
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <div className="text-[11px] font-semibold text-brand-graphite">Chequing</div>
+                              <div className="font-mono text-[10px] text-brand-graphite-mid">•••• 4829</div>
+                            </div>
+                            <CheckCircle2 className="h-4 w-4 text-brand-blue" />
+                          </div>
+                        </div>
+                        <div className="mt-3 flex items-center justify-between rounded-lg border border-dashed border-brand-blue/30 bg-brand-blue/5 px-3 py-2 text-[10px]">
+                          <span className="font-medium text-brand-graphite">Report to Equifax</span>
+                          <span className="inline-flex h-4 w-7 items-center rounded-full bg-brand-blue px-0.5">
+                            <span className="h-3 w-3 rounded-full bg-white translate-x-3" />
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
+                    {i === 2 && (
+                      <div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-brand-graphite-mid">Today</span>
+                          <Bell className="h-3.5 w-3.5 text-brand-blue" />
+                        </div>
+                        <div className="mt-2 space-y-1.5">
+                          <div className="rounded-lg bg-white p-2.5 shadow-sm">
+                            <div className="flex items-center gap-2">
+                              <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-brand-blue" />
+                              <span className="text-[11px] font-semibold text-brand-graphite">Rent confirmed</span>
+                              <span className="ml-auto text-[10px] text-brand-graphite-mid">9:00 AM</span>
+                            </div>
+                            <div className="mt-0.5 pl-5 text-[10px] text-brand-graphite-mid">$1,850.00 · Mar 1, 2026</div>
+                          </div>
+                          <div className="rounded-lg bg-white p-2.5 shadow-sm">
+                            <div className="flex items-center gap-2">
+                              <Wrench className="h-3.5 w-3.5 shrink-0 text-brand-blue" />
+                              <span className="text-[11px] font-semibold text-brand-graphite">Tech arriving</span>
+                              <span className="ml-auto text-[10px] text-brand-graphite-mid">10:24 AM</span>
+                            </div>
+                            <div className="mt-0.5 pl-5 text-[10px] text-brand-graphite-mid">Plumbing · ETA 24 min</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Arrow connector (between cards, desktop only) */}
+                {i < steps.length - 1 && (
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute right-[-14px] top-[86px] hidden h-px w-7 translate-y-[-50%] lg:block"
+                  >
+                    <ArrowRight className="absolute -right-1 -top-[9px] h-4 w-4 text-brand-blue" strokeWidth={2} />
+                  </div>
+                )}
+              </motion.div>
+            )
+          })}
+        </div>
+
+        {/* Bottom callout */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, ease, delay: 0.6 }}
+          className="mx-auto mt-10 flex max-w-2xl flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-full border border-[#E5E7EB] bg-white px-5 py-3"
+        >
+          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-brand-graphite">
+            <CheckCircle2 className="h-3.5 w-3.5 text-brand-blue" /> No app store required
+          </span>
+          <span className="h-3 w-px bg-[#E5E7EB]" />
+          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-brand-graphite">
+            <CheckCircle2 className="h-3.5 w-3.5 text-brand-blue" /> Works offline
+          </span>
+          <span className="h-3 w-px bg-[#E5E7EB]" />
+          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-brand-graphite">
+            <CheckCircle2 className="h-3.5 w-3.5 text-brand-blue" /> Canadian support hours
+          </span>
+        </motion.div>
       </div>
     </SectionWrapper>
   )
@@ -653,7 +1246,9 @@ function TenantPortalHero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-blue opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-blue" />
             </span>
-            <span className="text-sm font-medium text-brand-graphite-mid">Tenant Portal</span>
+            <span className="text-sm font-medium text-brand-graphite-mid">
+              Tenant Portal · Canadian-native
+            </span>
           </motion.div>
 
           <motion.h1
@@ -669,23 +1264,43 @@ function TenantPortalHero() {
             variants={revealItem}
             className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-brand-graphite-mid md:text-xl"
           >
-            Pay rent, submit maintenance requests, access lease documents, and communicate
-            with your property team — all from one secure place, on any device.
+            Pay rent by Interac e-Transfer or Pre-Authorized Debit, submit
+            maintenance with photos, e-sign leases, and build credit history
+            with Equifax Canada. Available on web, iOS, and Android.
           </motion.p>
 
           <motion.div variants={revealItem} className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
-              href="/signup/"
-              className="inline-flex h-14 items-center justify-center rounded-xl bg-brand-blue px-8 text-base font-semibold text-white transition-all hover:bg-brand-blue-dark shadow-cta-glow"
-            >
-              Get Started Free
-            </Link>
-            <Link
               href="/demo/"
-              className="inline-flex h-14 items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-8 text-base font-semibold text-brand-graphite transition-all hover:border-brand-blue/30 hover:shadow-sm"
+              className="inline-flex h-14 items-center justify-center rounded-xl bg-brand-blue px-8 text-base font-semibold text-white transition-all hover:bg-brand-blue-dark shadow-cta-glow"
             >
               Book a Demo
             </Link>
+            <Link
+              href="/pricing/"
+              className="inline-flex h-14 items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-8 text-base font-semibold text-brand-graphite transition-all hover:border-brand-blue/30 hover:shadow-sm"
+            >
+              See Pricing
+            </Link>
+          </motion.div>
+
+          {/* Trust strip */}
+          <motion.div
+            variants={revealItem}
+            className="mx-auto mt-10 flex max-w-3xl flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-brand-graphite-mid"
+          >
+            {[
+              'Hosted in Canada',
+              'Bilingual EN / FR',
+              'PIPEDA + Law 25 compliant',
+              'SOC 2 Type II',
+              'PCI-DSS Level 1 processor',
+            ].map((item) => (
+              <span key={item} className="inline-flex items-center gap-1.5">
+                <CheckCircle2 className="h-3.5 w-3.5 text-brand-blue" strokeWidth={2} />
+                {item}
+              </span>
+            ))}
           </motion.div>
         </RevealOnScroll>
       </div>
@@ -699,26 +1314,99 @@ function TenantPortalHero() {
 
 function PortalCTA() {
   return (
-    <SectionWrapper id="cta">
-      <div className="mx-auto max-w-3xl text-center">
+    <section id="cta" className="relative overflow-hidden bg-[#0A1628] py-20 text-white md:py-24">
+      {/* Background image */}
+      <div className="absolute inset-0" aria-hidden="true">
+        <Image
+          src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1600&q=80"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-20"
+        />
+      </div>
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-[#0A1628] via-[#0A1628]/85 to-[#0A1628]"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full blur-3xl"
+        style={{
+          background: 'radial-gradient(circle, #176FEB33 0%, transparent 70%)',
+        }}
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute -right-24 bottom-0 h-96 w-96 rounded-full blur-3xl"
+        style={{
+          background: 'radial-gradient(circle, #4A91F022 0%, transparent 70%)',
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
         <RevealOnScroll>
-          <motion.h2 variants={revealItem} className="font-heading font-extrabold text-4xl tracking-tight text-[#0A1628] md:text-5xl">
-            Your property team may already use{' '}<span className="text-brand-blue">Revun</span>
-          </motion.h2>
-          <motion.p variants={revealItem} className="mx-auto mt-5 max-w-lg text-lg text-[#555860]">
-            Ask your landlord or property manager if they use Revun. If they do, you already have access to a better rental experience.
+          <motion.p
+            variants={revealItem}
+            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs uppercase tracking-widest text-white/70"
+          >
+            <Sparkles className="h-3.5 w-3.5" strokeWidth={1.8} />
+            For property operators
           </motion.p>
-          <motion.div variants={revealItem} className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/contact/" className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-blue px-8 text-base font-semibold text-white hover:bg-brand-blue-dark">
-              Get in Touch <ArrowRight className="h-4 w-4" />
+          <motion.h2
+            variants={revealItem}
+            className="mt-6 font-display text-4xl leading-[1.05] tracking-tight md:text-6xl"
+          >
+            Give your residents the portal they already{' '}
+            <span className="text-[#4A91F0]">expect</span>
+          </motion.h2>
+          <motion.p
+            variants={revealItem}
+            className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-white/70"
+          >
+            Book a 20-minute walkthrough. We will migrate your first 50 units
+            free and have residents self-onboarding within a week.
+          </motion.p>
+
+          <motion.div
+            variants={revealItem}
+            className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/70"
+          >
+            {[
+              'Free white-glove migration',
+              'Live in under 14 days',
+              'Cancel anytime',
+            ].map((r) => (
+              <span key={r} className="inline-flex items-center gap-1.5">
+                <CheckCircle2
+                  className="h-4 w-4 flex-shrink-0 text-[#4A91F0]"
+                  strokeWidth={2}
+                />
+                {r}
+              </span>
+            ))}
+          </motion.div>
+
+          <motion.div
+            variants={revealItem}
+            className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
+          >
+            <Link
+              href="/demo/"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white shadow-[0_8px_24px_-8px_#176FEB] transition-colors duration-150 hover:bg-[#0B5AD4]"
+            >
+              Book a Demo <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link href="/tenants/" className="inline-flex h-12 items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-8 text-base font-semibold text-brand-graphite hover:border-brand-blue/30">
-              Learn More
+            <Link
+              href="/pricing/"
+              className="inline-flex h-12 items-center justify-center rounded-xl border border-white/20 bg-transparent px-8 text-base font-semibold text-white transition-colors duration-150 hover:bg-white/10"
+            >
+              See Pricing
             </Link>
           </motion.div>
         </RevealOnScroll>
       </div>
-    </SectionWrapper>
+    </section>
   )
 }
 
