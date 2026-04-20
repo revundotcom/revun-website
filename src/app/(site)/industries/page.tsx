@@ -43,6 +43,7 @@ interface Industry {
   cta: string
   stat: string
   chipLabel: string
+  image: { src: string; alt: string }
 }
 
 /* ── Industry data ──────────────────────────────────────────────────────── */
@@ -63,6 +64,10 @@ const industries: readonly Industry[] = [
     cta: 'Explore for REITs',
     stat: 'Avg. 1,200+ units · 12 regions',
     chipLabel: 'REITs',
+    image: {
+      src: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?auto=format&fit=crop&w=1200&q=85',
+      alt: 'Institutional office tower representing a multi-region REIT portfolio',
+    },
   },
   {
     slug: 'single-family-operators',
@@ -79,6 +84,10 @@ const industries: readonly Industry[] = [
     cta: 'Explore for SFR',
     stat: 'Avg. 340 scattered-site doors',
     chipLabel: 'Single-Family',
+    image: {
+      src: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=85',
+      alt: 'Single-family detached home in a suburban neighborhood',
+    },
   },
   {
     slug: 'multifamily-operators',
@@ -95,6 +104,10 @@ const industries: readonly Industry[] = [
     cta: 'Explore for Multifamily',
     stat: 'Avg. 180 units · 22 amenities',
     chipLabel: 'Multifamily',
+    image: {
+      src: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=85',
+      alt: 'Multifamily apartment building with balconies',
+    },
   },
   {
     slug: 'student-housing',
@@ -111,6 +124,10 @@ const industries: readonly Industry[] = [
     cta: 'Explore for Student Housing',
     stat: 'Per-bed leasing · seasonal cycles',
     chipLabel: 'Student',
+    image: {
+      src: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=85',
+      alt: 'University campus residence building with students walking by',
+    },
   },
   {
     slug: 'senior-living',
@@ -127,6 +144,10 @@ const industries: readonly Industry[] = [
     cta: 'Explore for Senior Living',
     stat: 'Family portals · care-coordinated',
     chipLabel: 'Senior',
+    image: {
+      src: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=85',
+      alt: 'Warm modern senior living community common room',
+    },
   },
   {
     slug: 'vacation-rentals',
@@ -143,6 +164,10 @@ const industries: readonly Industry[] = [
     cta: 'Explore for Vacation Rentals',
     stat: 'Dynamic pricing · turnover automation',
     chipLabel: 'Vacation',
+    image: {
+      src: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=85',
+      alt: 'Modern vacation rental home with an open-air view',
+    },
   },
   {
     slug: 'commercial-property',
@@ -159,6 +184,10 @@ const industries: readonly Industry[] = [
     cta: 'Explore for Commercial',
     stat: 'CAM recovery · NNN-ready',
     chipLabel: 'Commercial',
+    image: {
+      src: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85',
+      alt: 'Commercial office interior with workstations and meeting rooms',
+    },
   },
   {
     slug: 'affordable-housing',
@@ -175,6 +204,10 @@ const industries: readonly Industry[] = [
     cta: 'Explore for Affordable Housing',
     stat: 'HUD + CMHC compliance built-in',
     chipLabel: 'Affordable',
+    image: {
+      src: 'https://images.unsplash.com/photo-1543269664-56d93c1b41a6?auto=format&fit=crop&w=1200&q=85',
+      alt: 'Row of welcoming community homes representing affordable housing',
+    },
   },
   {
     slug: 'military-housing',
@@ -191,6 +224,10 @@ const industries: readonly Industry[] = [
     cta: 'Explore for Military Housing',
     stat: 'BAH-calc engine · PCS workflows',
     chipLabel: 'Military',
+    image: {
+      src: 'https://images.unsplash.com/photo-1517994112540-009c47ea476b?auto=format&fit=crop&w=1200&q=85',
+      alt: 'Orderly row of base family housing units',
+    },
   },
   {
     slug: 'mixed-use',
@@ -207,6 +244,10 @@ const industries: readonly Industry[] = [
     cta: 'Explore for Mixed-Use',
     stat: 'Unified books across use types',
     chipLabel: 'Mixed-Use',
+    image: {
+      src: 'https://images.unsplash.com/photo-1515263487990-61b07816b324?auto=format&fit=crop&w=1200&q=85',
+      alt: 'Urban mixed-use building with street-level retail and residential above',
+    },
   },
 ]
 
@@ -372,11 +413,11 @@ function FaqRow({
         onClick={() => setOpenIdx(open ? -1 : idx)}
         className="group flex w-full items-center justify-between gap-6 py-5 text-left"
       >
-        <span className="font-heading text-base font-semibold text-[#0A1628] transition-colors group-hover:text-[#176FEB] md:text-lg">
+        <span className="font-heading text-base font-semibold text-[#0A1628] transition-colors group-hover:text-[#0A1628] md:text-lg">
           {q}
         </span>
         <Plus
-          className="h-5 w-5 flex-shrink-0 text-[#176FEB] transition-transform duration-300"
+          className="h-5 w-5 flex-shrink-0 text-[#0A1628] transition-transform duration-300"
           strokeWidth={2}
           style={{ transform: open ? 'rotate(45deg)' : 'rotate(0deg)' }}
         />
@@ -409,7 +450,6 @@ function FaqRow({
    ═══════════════════════════════════════════════════════════════════════════ */
 
 export default function IndustriesPage() {
-  const [activeSlug, setActiveSlug] = useState<string>(industries[0].slug)
   const [activeTabSlug, setActiveTabSlug] = useState<string>(
     platformTabs[0].slug,
   )
@@ -419,16 +459,6 @@ export default function IndustriesPage() {
   const activeTab =
     platformTabs.find((t) => t.slug === activeTabSlug) ?? platformTabs[0]
   const activeQuote = testimonials[quoteIdx]
-
-  const handleChipClick = (slug: string) => {
-    setActiveSlug(slug)
-    if (typeof document !== 'undefined') {
-      document.getElementById(slug)?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      })
-    }
-  }
 
   return (
     <>
@@ -481,7 +511,7 @@ export default function IndustriesPage() {
             className="mt-6 text-balance font-display text-5xl leading-[0.98] tracking-tight md:text-7xl"
           >
             Property management, built for{' '}
-            <em className="not-italic text-[#4A91F0]">
+            <em className="text-white/90">
               every kind of building.
             </em>
           </motion.h1>
@@ -540,47 +570,19 @@ export default function IndustriesPage() {
         </motion.div>
       </section>
 
-      {/* ─────────── Sticky Chip Navigator ─────────── */}
-      <nav
-        aria-label="Jump to industry"
-        className="sticky top-16 z-30 border-b border-[#E5E7EB] bg-white/90 backdrop-blur-md"
-      >
-        <div className="mx-auto flex max-w-4xl items-center gap-1 overflow-x-auto px-6 py-3">
-          <span className="whitespace-nowrap border-r border-[#E5E7EB] pr-3 text-xs font-semibold uppercase tracking-widest text-[#555860]">
-            Jump to
-          </span>
-          {industries.map((ind) => {
-            const active = activeSlug === ind.slug
-            return (
-              <button
-                key={ind.slug}
-                onClick={() => handleChipClick(ind.slug)}
-                className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors duration-150 ${
-                  active
-                    ? 'bg-[#176FEB] text-white'
-                    : 'text-[#555860] hover:bg-[#E8F2FE] hover:text-[#176FEB]'
-                }`}
-              >
-                {ind.chipLabel}
-              </button>
-            )
-          })}
-        </div>
-      </nav>
-
-      {/* ─────────── Industries Editorial List ─────────── */}
+      {/* ─────────── Industries — Editorial List ─────────── */}
       <section
         id="industries-list"
         className="scroll-mt-40 bg-white py-20 md:py-24"
       >
-        <div className="mx-auto max-w-4xl px-6">
+        <div className="mx-auto max-w-5xl px-6">
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#176FEB]">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#0A1628]">
               Every property type
             </p>
             <h2 className="mt-3 font-display text-4xl leading-[1.05] tracking-tight text-[#0A1628] md:text-5xl">
               Ten playbooks,{' '}
-              <span className="text-[#176FEB]">one dashboard.</span>
+              <em className="font-normal text-[#0A1628]">one dashboard.</em>
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-[#555860]">
               Each industry has its own workflows, compliance surface, and
@@ -589,68 +591,88 @@ export default function IndustriesPage() {
             </p>
           </div>
 
-          <RevealOnScroll
-            stagger={0.06}
-            className="mt-14 border-t border-[#E5E7EB]"
-          >
-            {industries.map((ind) => {
+          <RevealOnScroll stagger={0.05} className="mt-14 divide-y divide-[#E5E7EB] border-y border-[#E5E7EB]">
+            {industries.map((ind, idx) => {
               const Icon = ind.icon
+              const num = String(idx + 1).padStart(2, '0')
               return (
-                <motion.div
+                <motion.article
                   key={ind.slug}
                   id={ind.slug}
                   variants={revealItem}
-                  className="group scroll-mt-40 grid gap-6 border-b border-[#E5E7EB] py-10 md:grid-cols-[220px_1fr] md:gap-10 md:py-12"
+                  className="group relative scroll-mt-40"
                 >
-                  {/* Left: icon + label */}
-                  <div className="flex items-start gap-4 md:flex-col md:gap-5">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#E8F2FE] text-[#176FEB] transition-colors duration-200 group-hover:bg-[#176FEB] group-hover:text-white">
-                      <Icon className="h-5 w-5" strokeWidth={1.8} />
-                    </div>
-                    <div>
-                      <h3 className="font-heading text-xl font-bold text-[#0A1628]">
-                        {ind.title}{' '}
-                        <span className="text-[#176FEB]">
-                          {ind.titleHighlight}
-                        </span>
-                      </h3>
-                      <p className="mt-2 text-[11px] uppercase tracking-widest text-[#555860]">
-                        {ind.stat}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Right: content */}
-                  <div>
-                    <p className="text-base leading-relaxed text-[#555860]">
-                      {ind.description}
-                    </p>
-                    <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
-                      {ind.highlights.map((h) => (
-                        <li
-                          key={h}
-                          className="flex items-start gap-2.5 text-sm text-[#2C2E33]"
-                        >
-                          <CheckCircle2
-                            className="mt-0.5 h-4 w-4 shrink-0 text-[#176FEB]"
-                            strokeWidth={2}
-                          />
-                          <span>{h}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <Link
-                      href="/demo/"
-                      className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-[#176FEB] transition-colors duration-150 hover:text-[#0B5AD4]"
-                    >
-                      {ind.cta}
-                      <ArrowRight
-                        className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
-                        strokeWidth={2}
+                  <Link
+                    href="/demo/"
+                    className="grid grid-cols-1 gap-6 py-8 transition-colors duration-200 hover:bg-[#F8FAFC] md:grid-cols-[260px_1fr_auto] md:items-center md:gap-10 md:px-6"
+                  >
+                    {/* Image */}
+                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-[#F5F6F8] md:w-[260px]">
+                      <Image
+                        src={ind.image.src}
+                        alt={ind.image.alt}
+                        fill
+                        sizes="(min-width: 768px) 260px, 100vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                       />
-                    </Link>
-                  </div>
-                </motion.div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex flex-col">
+                      <div className="flex items-center gap-3">
+                        <span className="font-display text-sm font-medium text-[#94A3B8]">
+                          {num}
+                        </span>
+                        <span className="h-px w-8 bg-[#E5E7EB]" />
+                        <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest text-[#0A1628]">
+                          <Icon className="h-3.5 w-3.5" strokeWidth={2} />
+                          {ind.chipLabel}
+                        </span>
+                      </div>
+
+                      <h3 className="mt-3 font-display text-2xl font-semibold leading-tight tracking-tight text-[#0A1628] md:text-[1.75rem]">
+                        {ind.title}{' '}
+                        <em className="font-normal text-[#0A1628]">{ind.titleHighlight}</em>
+                      </h3>
+
+                      <p className="mt-3 max-w-xl text-[0.95rem] leading-relaxed text-[#555860]">
+                        {ind.description}
+                      </p>
+
+                      <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+                        {ind.highlights.slice(0, 2).map((h) => (
+                          <span
+                            key={h}
+                            className="inline-flex items-center gap-1.5 text-xs text-[#2C2E33]"
+                          >
+                            <CheckCircle2
+                              className="h-3.5 w-3.5 shrink-0 text-[#0A1628]"
+                              strokeWidth={2}
+                            />
+                            {h}
+                          </span>
+                        ))}
+                      </div>
+
+                      <span className="mt-4 text-[11px] font-medium uppercase tracking-wider text-[#94A3B8]">
+                        {ind.stat}
+                      </span>
+                    </div>
+
+                    {/* CTA arrow */}
+                    <div className="hidden md:flex md:items-center md:justify-end">
+                      <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[#E5E7EB] bg-white text-[#0A1628] transition-all duration-200 group-hover:border-[#0A1628] group-hover:bg-[#0A1628] group-hover:text-white">
+                        <ArrowRight className="h-5 w-5" strokeWidth={2} />
+                      </span>
+                    </div>
+
+                    {/* Mobile CTA */}
+                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0A1628] md:hidden">
+                      {ind.cta}
+                      <ArrowRight className="h-4 w-4" strokeWidth={2} />
+                    </span>
+                  </Link>
+                </motion.article>
               )
             })}
           </RevealOnScroll>
@@ -663,7 +685,7 @@ export default function IndustriesPage() {
           className="pointer-events-none absolute -left-32 top-12 h-80 w-80 rounded-full blur-3xl"
           style={{
             background:
-              'radial-gradient(circle, #176FEB33 0%, transparent 70%)',
+              'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)',
           }}
           aria-hidden
         />
@@ -671,21 +693,21 @@ export default function IndustriesPage() {
           className="pointer-events-none absolute -right-32 bottom-12 h-96 w-96 rounded-full blur-3xl"
           style={{
             background:
-              'radial-gradient(circle, #4A91F022 0%, transparent 70%)',
+              'radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)',
           }}
           aria-hidden
         />
 
         <div className="relative z-10 mx-auto max-w-5xl px-6">
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#4A91F0]">
+            <p className="text-xs font-semibold uppercase tracking-widest text-white/80">
               Adaptive by design
             </p>
             <h2 className="mt-3 font-display text-4xl leading-[1.05] tracking-tight md:text-5xl">
               One platform that{' '}
-              <span className="text-[#4A91F0]">
+              <em className="font-normal text-white">
                 shapeshifts to your portfolio.
-              </span>
+              </em>
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-white/70">
               Same core, different surface. Pick a property type to see how the
@@ -738,7 +760,7 @@ export default function IndustriesPage() {
               >
                 <FeatureMockup
                   type={activeTab.mockup}
-                  accent="#176FEB"
+                  accent="#FFFFFF"
                   subtitle={activeTab.subtitle}
                   className="h-[520px]"
                 />
@@ -764,7 +786,7 @@ export default function IndustriesPage() {
                   className="flex items-center gap-2.5"
                 >
                   <Icon
-                    className="h-4 w-4 text-[#4A91F0]"
+                    className="h-4 w-4 text-white/80"
                     strokeWidth={1.8}
                   />
                   <span className="text-sm text-white/85">{f.label}</span>
@@ -779,12 +801,12 @@ export default function IndustriesPage() {
       <section className="bg-white py-20 md:py-24">
         <div className="mx-auto max-w-4xl px-6">
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#176FEB]">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#0A1628]">
               Canadian coverage
             </p>
             <h2 className="mt-3 font-display text-4xl leading-[1.05] tracking-tight text-[#0A1628] md:text-5xl">
               Every province.{' '}
-              <span className="text-[#176FEB]">Every territory.</span>
+              <em className="font-normal text-[#0A1628]">Every territory.</em>
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-[#555860]">
               Revun ships tribunal-ready documents, bilingual leases, and
@@ -803,7 +825,7 @@ export default function IndustriesPage() {
                 variants={revealItem}
                 className="inline-flex items-center gap-2 text-sm"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-[#176FEB]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[#0A1628]" />
                 <span className="font-heading font-semibold text-[#0A1628]">
                   {abbr}
                 </span>
@@ -825,7 +847,7 @@ export default function IndustriesPage() {
                   className="flex items-start gap-3"
                 >
                   <CheckCircle2
-                    className="mt-0.5 h-5 w-5 shrink-0 text-[#176FEB]"
+                    className="mt-0.5 h-5 w-5 shrink-0 text-[#0A1628]"
                     strokeWidth={2}
                   />
                   <span className="text-base leading-relaxed text-[#0A1628]">
@@ -838,7 +860,7 @@ export default function IndustriesPage() {
             <motion.div variants={revealItem}>
               <Link
                 href="/coverage/"
-                className="mt-8 inline-flex items-center gap-1.5 text-sm font-semibold text-[#176FEB] transition-colors duration-150 hover:text-[#0B5AD4]"
+                className="mt-8 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0A1628] transition-colors duration-150 hover:text-black"
               >
                 See detailed provincial compliance
                 <ArrowRight className="h-4 w-4" strokeWidth={2} />
@@ -852,12 +874,12 @@ export default function IndustriesPage() {
       <section className="bg-[#F5F6F8] py-20 md:py-24">
         <div className="mx-auto max-w-4xl px-6">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#176FEB]">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#0A1628]">
               In production
             </p>
             <h2 className="mt-3 font-display text-4xl leading-[1.05] tracking-tight text-[#0A1628] md:text-5xl">
               Operators across every{' '}
-              <span className="text-[#176FEB]">property type.</span>
+              <em className="font-normal text-[#0A1628]">property type.</em>
             </h2>
           </div>
 
@@ -872,7 +894,7 @@ export default function IndustriesPage() {
                 className="text-center"
               >
                 <Quote
-                  className="mx-auto h-10 w-10 text-[#176FEB]/25"
+                  className="mx-auto h-10 w-10 text-[#0A1628]/25"
                   strokeWidth={1.5}
                   aria-hidden
                 />
@@ -914,8 +936,8 @@ export default function IndustriesPage() {
                   aria-current={quoteIdx === i}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
                     quoteIdx === i
-                      ? 'w-8 bg-[#176FEB]'
-                      : 'w-1.5 bg-[#D3D5DB] hover:bg-[#176FEB]/60'
+                      ? 'w-8 bg-[#0A1628]'
+                      : 'w-1.5 bg-[#D3D5DB] hover:bg-[#0A1628]/60'
                   }`}
                 />
               ))}
@@ -928,12 +950,12 @@ export default function IndustriesPage() {
       <section className="bg-white py-20 md:py-24">
         <div className="mx-auto max-w-4xl px-6">
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#176FEB]">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#0A1628]">
               Common questions
             </p>
             <h2 className="mt-3 font-display text-4xl leading-[1.05] tracking-tight text-[#0A1628] md:text-5xl">
               Built for your exact{' '}
-              <span className="text-[#176FEB]">portfolio mix.</span>
+              <em className="font-normal text-[#0A1628]">portfolio mix.</em>
             </h2>
           </div>
 
@@ -958,7 +980,7 @@ export default function IndustriesPage() {
           className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full blur-3xl"
           style={{
             background:
-              'radial-gradient(circle, #176FEB33 0%, transparent 70%)',
+              'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)',
           }}
           aria-hidden
         />
@@ -966,7 +988,7 @@ export default function IndustriesPage() {
           className="pointer-events-none absolute -right-24 bottom-0 h-96 w-96 rounded-full blur-3xl"
           style={{
             background:
-              'radial-gradient(circle, #4A91F022 0%, transparent 70%)',
+              'radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)',
           }}
           aria-hidden
         />
@@ -988,7 +1010,7 @@ export default function IndustriesPage() {
             className="mt-6 font-display text-4xl leading-[1.05] tracking-tight md:text-6xl"
           >
             Tell us about your{' '}
-            <span className="text-[#4A91F0]">portfolio</span>
+            <em className="font-normal text-white">portfolio</em>
           </motion.h2>
 
           <motion.p
@@ -1010,7 +1032,7 @@ export default function IndustriesPage() {
             ].map((r) => (
               <span key={r} className="inline-flex items-center gap-1.5">
                 <CheckCircle2
-                  className="h-4 w-4 flex-shrink-0 text-[#4A91F0]"
+                  className="h-4 w-4 flex-shrink-0 text-white/80"
                   strokeWidth={2}
                 />
                 {r}
@@ -1024,7 +1046,7 @@ export default function IndustriesPage() {
           >
             <Link
               href="/demo/"
-              className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-7 text-base font-semibold text-white shadow-[0_8px_24px_-8px_#176FEB] transition-colors duration-150 hover:bg-[#0B5AD4]"
+              className="inline-flex h-12 items-center justify-center rounded-xl bg-white px-7 text-base font-semibold text-[#0A1628] shadow-[0_8px_24px_-8px_rgba(255,255,255,0.25)] transition-colors duration-150 hover:bg-white/90"
             >
               Book a Demo
               <ArrowRight className="ml-2 h-4 w-4" strokeWidth={2} />

@@ -68,7 +68,7 @@ export function HeroSection() {
           className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <Link
-            href="/platform/"
+            href="/features/"
             className="inline-flex h-14 items-center justify-center rounded-xl bg-brand-blue px-8 text-base font-semibold text-white shadow-cta-glow transition-all duration-200 hover:bg-brand-blue-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
           >
             See the Platform
@@ -133,7 +133,7 @@ export function HeroSection() {
         <p className="sr-only">
           Revun is the infrastructure layer for modern property operations. Leasing,
           payments, maintenance, compliance, communications, accounting, and reporting
-          all run in one system. Built natively for Canadian regulations including the
+          all run in one system. Built natively for Canadian and US regulations including the
           LTB, RTB, TAL, and RTDRS, Revun serves landlords, property managers,
           brokerages, and operators across all Canadian provinces and US states.
         </p>

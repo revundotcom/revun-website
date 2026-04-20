@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 const problems = [
   {
     title: "US tools don't understand Canada",
-    body: 'Most property operations software is built for the US market. Canadian compliance, provincial regulations, and local payment methods are afterthoughts.',
+    body: 'Most property operations software treats either Canada or the US as an afterthought. Provincial RTAs, state statutes, and local payment rails end up as bolt-ons instead of foundations.',
   },
   {
     title: 'Fragmented tools, fragmented data',

@@ -6,7 +6,7 @@ import { ResourcesPageClient } from './client'
 export const metadata: Metadata = {
   title: 'Resources | Playbooks, Templates & Market Intelligence | Revun',
   description:
-    'Software education and operational intelligence for Canadian property operators. Guides, comparison reports, compliance resources, market data, templates, and product updates.',
+    'Software education and operational intelligence for property operators across Canada and the US. Guides, comparison reports, compliance resources, market data, templates, and product updates.',
   alternates: { canonical: buildCanonicalUrl('/resources') },
   openGraph: {
     title: 'Resources | Playbooks, Templates & Market Intelligence | Revun',

@@ -5,7 +5,7 @@ import { FeaturesPageClient } from './client'
 export const metadata: Metadata = {
   title: 'Features',
   description:
-    'Explore Revun platform features: tenant screening, rent collection, maintenance management, lease management, accounting, and owner portal. Built for Canadian property managers.',
+    'Explore Revun platform features: tenant screening, rent collection, maintenance management, lease management, accounting, and owner portal. Built for property managers across Canada and the United States.',
   alternates: { canonical: buildCanonicalUrl('/features') },
   openGraph: {
     title: 'Features | Revun',

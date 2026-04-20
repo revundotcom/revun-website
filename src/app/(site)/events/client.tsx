@@ -218,7 +218,7 @@ export function EventsClient() {
           </motion.p>
           <motion.div variants={revealItem} className="mt-8 flex items-center justify-center gap-4">
             <Link
-              href="/platform/"
+              href="/features/"
               className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#0B5AD4]"
             >
               See the Platform

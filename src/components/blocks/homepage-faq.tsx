@@ -17,7 +17,7 @@ const faqs = [
   {
     question: 'Is Revun available in my province or state?',
     answer:
-      'Revun currently operates across all Canadian provinces including Ontario, British Columbia, Alberta, Quebec, Nova Scotia, and Manitoba. US expansion is underway with initial coverage in key states.',
+      'Revun operates across all 13 Canadian provinces and territories plus all 50 US states and DC, with jurisdiction-specific compliance built in from day one.',
   },
   {
     question: 'What integrations does Revun support?',

@@ -86,7 +86,7 @@ export default function RelocationRentalsPage() {
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link href="/ca/" className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white transition-colors duration-150 hover:bg-[#005CE8]">
-              Explore Canadian Cities
+              Explore Cities Across North America
             </Link>
             <Link href="/us/" className="inline-flex h-12 items-center justify-center rounded-xl border border-[#E5E7EB] px-8 text-base font-semibold text-[#0A1628] transition-colors duration-150 hover:bg-white">
               Explore US Cities

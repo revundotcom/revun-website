@@ -5,7 +5,7 @@ import { buildBreadcrumbSchema } from '@/lib/schema-builders'
 export const metadata: Metadata = {
   title: 'Compare Revun | See Why Operators Are Switching',
   description:
-    'Compare Revun against AppFolio, Buildium, DoorLoop, SingleKey, liv.rent, and more. See feature-by-feature breakdowns for Canadian property managers.',
+    'Compare Revun against AppFolio, Buildium, DoorLoop, SingleKey, liv.rent, and more. See feature-by-feature breakdowns for property managers across Canada and the US.',
   alternates: { canonical: buildCanonicalUrl('/compare') },
   openGraph: {
     title: 'Compare Property Management Software | Revun',

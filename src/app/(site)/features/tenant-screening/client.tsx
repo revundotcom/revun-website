@@ -58,7 +58,7 @@ function Hero() {
     { icon: BarChart3, label: 'Equifax partner' },
     { icon: ShieldCheck, label: 'TransUnion partner' },
     { icon: Lock, label: 'PIPEDA compliant' },
-    { icon: CheckCircle2, label: 'Canadian-built' },
+    { icon: CheckCircle2, label: 'Built for CA + US' },
   ]
   const subCards = [
     { icon: BarChart3, label: 'Credit', score: '742', status: 'Verified' },
@@ -95,7 +95,7 @@ function Hero() {
               transition={{ duration: 0.6, ease, delay: 0.25 }}
               className="mt-5 max-w-xl text-lg text-brand-graphite/70"
             >
-              Equifax + TransUnion credit, identity verification, income checks, and Canadian risk scoring. Every applicant runs through one pipeline.
+              Equifax + TransUnion credit, identity verification, income checks, and risk scoring tuned for Canada and the US. Every applicant runs through one pipeline.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -316,12 +316,12 @@ function CapabilitiesShowcase() {
       eyebrow: 'Credit',
       title: 'Two bureaus.',
       highlight: 'One unified report.',
-      body: 'Equifax Canada + TransUnion Canada with a single consent, normalized into one Canadian credit view.',
+      body: 'Equifax and TransUnion across both countries with a single consent, normalized into one credit view per applicant.',
       pill: '2 bureaus, 1 pull',
       bullets: [
         'Full trade lines, balances, and utilization',
         'Hard or soft inquiry, your call',
-        'Canadian scoring models and provincial flags',
+        'Canadian and US scoring models, provincial and state flags',
       ],
     },
     {
@@ -340,11 +340,11 @@ function CapabilitiesShowcase() {
     },
     {
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=90',
-      alt: 'Canadian rental risk dashboard',
+      alt: 'North American rental risk dashboard',
       eyebrow: 'Income & Risk',
       title: 'Bank-linked income.',
-      highlight: 'Canadian-tuned score.',
-      body: 'Flinks and Plaid connect to Canadian bank accounts for instant 60-day income proof + explainable scoring.',
+      highlight: 'CA + US-tuned score.',
+      body: 'Flinks connects Canadian bank accounts and Plaid connects US bank accounts for instant 60-day income proof plus explainable scoring.',
       pill: '60 days of bank data',
       bullets: [
         'Flinks / Plaid bank-linked income proof',
@@ -500,7 +500,7 @@ function RiskScoreCard() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const explainers = [
-    { icon: MapPin, title: 'Weighted for Canadian factors', desc: 'NOA integration, Canadian credit depth, bilingual employer verification.' },
+    { icon: MapPin, title: 'Weighted for CA + US factors', desc: 'NOA integration in Canada, 1040 income verification in the US, bilingual employer verification.' },
     { icon: Users, title: 'Roommate stacks scored together', desc: 'Combined incomes and joint risk, not just one lead applicant.' },
     { icon: Shield, title: 'Provincial compliance rules applied', desc: 'Ontario LTB history, BC RTB, and Quebec TAL lookups baked in.' },
     { icon: Fingerprint, title: 'Explainable decisions', desc: 'Every applicant sees which factor moved the score, up or down.' },
@@ -514,7 +514,7 @@ function RiskScoreCard() {
   const circumference = 2 * Math.PI * 54
   return (
     <SW id="risk-score">
-      <SH eyebrow="Risk Score" title="A score tuned for" highlight="Canadian renters." description="Provincial factors, roommate stacks, and credit depth weighted for the actual Canadian rental market." />
+      <SH eyebrow="Risk Score" title="A score tuned for" highlight="North American renters." description="Provincial and state factors, roommate stacks, and credit depth weighted for the actual rental market across Canada and the US." />
 
       {/* Hero: risk score card centered */}
       <div ref={ref} className="mx-auto mt-12 max-w-md">
@@ -602,7 +602,7 @@ function HowItWorks() {
   const steps = [
     { num: '01', icon: FileText, title: 'Send screening link', desc: 'Branded intake link — tenant fills consent and docs in minutes.' },
     { num: '02', icon: Fingerprint, title: 'Identity + credit pull', desc: 'Equifax/TransUnion and IDV run automatically within 5 minutes.' },
-    { num: '03', icon: BarChart3, title: 'Risk score + ranking', desc: "Revun's Canadian-tuned model ranks applicants side by side." },
+    { num: '03', icon: BarChart3, title: 'Risk score + ranking', desc: "Revun's CA + US-tuned model ranks applicants side by side." },
     { num: '04', icon: CheckCircle2, title: 'Approve in one click', desc: 'Decision flows straight into lease generation — no re-entry.' },
   ]
   return (
@@ -637,7 +637,7 @@ function HowItWorks() {
 function Compliance() {
   const features = [
     { icon: ShieldCheck, title: 'PIPEDA-compliant consent', body: 'Every credit pull captured with timestamped tenant consent and IP.' },
-    { icon: Lock, title: 'Canadian data residency', body: 'Applicant data stored on Canadian servers. No cross-border transfer.' },
+    { icon: Lock, title: 'CA + US data residency', body: 'Applicant data stored on Canadian or US servers by jurisdiction. No unwanted cross-border transfer.' },
     { icon: Gavel, title: 'Province-aware rule engine', body: 'Ontario, BC, Quebec, Alberta screening limits enforced automatically.' },
     { icon: FileText, title: 'Complete audit trail', body: 'Every decision, pull, and document archived with who, when, and why.' },
   ]
@@ -802,7 +802,7 @@ function Testimonials() {
   ]
   return (
     <SW id="testimonials">
-      <SH eyebrow="Proof" title="Canadian operators are already" highlight="screening faster." description="Real property managers, real numbers, from the first month of using Revun." />
+      <SH eyebrow="Proof" title="Operators are already" highlight="screening faster." description="Real property managers across Canada and the US, real numbers, from the first month of using Revun." />
       <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
         {testimonials.map((t, i) => (
           <Anim key={t.name} delay={0.1 * (i + 1)}>
@@ -874,11 +874,11 @@ function Comparison() {
   ]
 
   const rows: ComparisonRow[] = [
-    { feature: 'Canadian credit (Equifax + TransUnion)', revun: 'Both bureaus, province-scored', singlekey: 'One bureau only', transunion: 'TransUnion only, US-centric', certn: 'Not included', status: { revun: 'yes', singlekey: 'partial', transunion: 'partial', certn: 'no' } },
+    { feature: 'CA + US credit (Equifax, TransUnion, Experian)', revun: 'All bureaus, province and state-scored', singlekey: 'One bureau only', transunion: 'TransUnion only, US-centric', certn: 'Not included', status: { revun: 'yes', singlekey: 'partial', transunion: 'partial', certn: 'no' } },
     { feature: 'Identity verification', revun: 'Liveness + ID match, 90s', singlekey: 'Document upload only', transunion: 'Basic ID match', certn: 'Core feature', status: { revun: 'yes', singlekey: 'partial', transunion: 'partial', certn: 'partial' } },
     { feature: 'Income verification', revun: 'Flinks / Plaid bank-linked', singlekey: 'Paystub upload manual', transunion: 'Not included', certn: 'Not included', status: { revun: 'yes', singlekey: 'partial', transunion: 'no', certn: 'no' } },
     { feature: 'LTB / RTB eviction lookup', revun: 'Automated per province', singlekey: 'Manual reference check', transunion: 'US eviction only', certn: 'Not included', status: { revun: 'yes', singlekey: 'partial', transunion: 'partial', certn: 'no' } },
-    { feature: 'Risk scoring model', revun: 'Canadian-tuned, roommate-stack aware', singlekey: 'Generic score', transunion: 'US SmartMove score', certn: 'Not included', status: { revun: 'yes', singlekey: 'partial', transunion: 'partial', certn: 'no' } },
+    { feature: 'Risk scoring model', revun: 'CA + US-tuned, roommate-stack aware', singlekey: 'Generic score', transunion: 'US SmartMove score', certn: 'Not included', status: { revun: 'yes', singlekey: 'partial', transunion: 'partial', certn: 'no' } },
     { feature: 'Flows into leasing / payments', revun: 'One click to lease + payment', singlekey: 'Export PDF, re-enter data', transunion: 'Export only', certn: 'Export only', status: { revun: 'yes', singlekey: 'no', transunion: 'no', certn: 'no' } },
     { feature: 'Compliance audit trail', revun: 'Full consent + decision log', singlekey: 'Report only, no decision log', transunion: 'Report only', certn: 'Verification record only', status: { revun: 'yes', singlekey: 'partial', transunion: 'partial', certn: 'partial' } },
     { feature: 'Pricing model', revun: 'Included in plan, no per-pull fees', singlekey: '$20-35 per report', transunion: '$30-40 per check', certn: '$1.50 per check + no screening', status: { revun: 'yes', singlekey: 'no', transunion: 'no', certn: 'no' } },
@@ -966,7 +966,7 @@ function Comparison() {
 const TENANT_SCREENING_FAQS = [
   { q: 'How long does a screening take from application to decision?', a: 'Credit + ID + income typically complete in under 5 minutes. Background and eviction checks add 1-3 hours depending on provincial registries.' },
   { q: 'Which credit bureaus does Revun pull from?', a: 'Both Equifax Canada and TransUnion Canada. You choose one or both per property. Reports include full trade lines, payment history, and soft-inquiry impact.' },
-  { q: 'Is identity verification PIPEDA-compliant?', a: 'Yes. Revun captures consent with timestamp and IP before any pull. Liveness and ID match use a SOC 2 certified IDV partner with Canadian data residency.' },
+  { q: 'Is identity verification PIPEDA-compliant?', a: 'Yes. Revun captures consent with timestamp and IP before any pull. Liveness and ID match use a SOC 2 certified IDV partner with Canadian and US data residency.' },
   { q: 'Can I screen without credit pull (pre-screen only)?', a: 'Yes. Run identity + income + eviction lookups first, then escalate to a soft or hard credit pull only on shortlisted applicants.' },
   { q: 'Does screening flow into lease generation?', a: 'Directly. Approved applicants move from screening into lease templates with their verified info pre-filled. No re-entry, no lost documents.' },
   { q: 'What happens if an applicant disputes a screening decision?', a: 'Revun stores the full consent record, decision log, and bureau response per applicant. You can produce a tribunal-ready audit trail in under a minute.' },
@@ -1040,7 +1040,7 @@ function CTASection() {
 
         <motion.p variants={revealItem} className="mt-8 text-xs text-white/50">
           Questions?{' '}
-          <Link href="/contact/" className="text-brand-blue transition-colors hover:text-white">Talk to our Canadian team →</Link>
+          <Link href="/contact/" className="text-brand-blue transition-colors hover:text-white">Talk to our team →</Link>
         </motion.p>
       </RevealOnScroll>
     </section>
@@ -1051,11 +1051,11 @@ function CTASection() {
 
 function FeaturesGrid() {
   const FEATURES = [
-    { icon: BarChart3, title: 'Dual Bureau Credit', description: 'Equifax + TransUnion in one pull. Full Canadian credit report, scores, and trade lines.' },
+    { icon: BarChart3, title: 'Dual Bureau Credit', description: 'Equifax + TransUnion in one pull. Full credit report, scores, and trade lines, across Canada and the US.' },
     { icon: Fingerprint, title: 'Liveness ID Verification', description: 'Government ID scan plus liveness check. Fraud rings fail before they reach your inbox.' },
     { icon: Wallet, title: 'Bank-Linked Income', description: 'Flinks and Plaid connect instantly. 60 days of deposit data with consent.' },
     { icon: ShieldCheck, title: 'Eviction & Background', description: 'LTB/RTB provincial lookups, criminal records, and reference automation.' },
-    { icon: Gauge, title: 'Canadian Risk Score', description: 'Tuned for the Canadian rental market, with roommate-stack and province-aware scoring.' },
+    { icon: Gauge, title: 'CA + US Risk Score', description: 'Tuned for the North American rental market, with roommate-stack, province and state-aware scoring.' },
     { icon: Users2, title: 'Side-by-Side Ranking', description: 'Weighted comparison across credit, income, history, and references — one dashboard.' },
   ]
   return (

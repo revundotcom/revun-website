@@ -5,7 +5,6 @@ const navigation = {
   product: {
     title: 'Product',
     links: [
-      { label: 'Platform Overview', href: '/platform/' },
       { label: 'Features', href: '/features/' },
       { label: 'Pricing', href: '/pricing/' },
       { label: 'Integrations', href: '/integrations/' },
@@ -32,7 +31,6 @@ const navigation = {
       { label: 'Resources', href: '/resources/' },
       { label: 'How It Works', href: '/how-revun-works/' },
       { label: 'Why Revun', href: '/why-revun/' },
-      { label: 'Download', href: '/download/' },
       { label: 'Events', href: '/events/' },
     ],
   },

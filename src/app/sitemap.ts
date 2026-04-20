@@ -22,7 +22,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     // ─── Core ───────────────────────────────────────────────────────
     { url: url('/'), lastModified: d, changeFrequency: 'weekly', priority: 1.0 },
-    { url: url('/platform/'), lastModified: d, changeFrequency: 'weekly', priority: 0.9 },
     { url: url('/pricing/'), lastModified: d, changeFrequency: 'weekly', priority: 0.9 },
     { url: url('/about/'), lastModified: d, changeFrequency: 'monthly', priority: 0.7 },
     { url: url('/contact/'), lastModified: d, changeFrequency: 'monthly', priority: 0.7 },
@@ -32,7 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url('/what-is-revun/'), lastModified: d, changeFrequency: 'monthly', priority: 0.8 },
     { url: url('/powered-by-revun/'), lastModified: d, changeFrequency: 'monthly', priority: 0.8 },
     { url: url('/how-revun-works/'), lastModified: d, changeFrequency: 'monthly', priority: 0.8 },
-    { url: url('/download/'), lastModified: d, changeFrequency: 'monthly', priority: 0.7 },
 
     // ─── Solutions ──────────────────────────────────────────────────
     { url: url('/solutions/'), lastModified: d, changeFrequency: 'weekly', priority: 0.9 },

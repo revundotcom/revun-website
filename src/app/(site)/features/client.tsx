@@ -171,8 +171,8 @@ const PLATFORM_PILLARS = [
 const DIFFERENTIATORS = [
   {
     icon: Globe,
-    title: 'Canadian-First',
-    description: 'Built for Canadian provinces and their unique tenancy laws from day one.',
+    title: 'North American-First',
+    description: 'Built for Canadian provinces and US states with their unique tenancy laws from day one.',
   },
   {
     icon: Lock,
@@ -279,7 +279,7 @@ function HeroSection() {
             className="mx-auto mt-5 max-w-2xl text-base text-[#555860] sm:text-lg"
           >
             Six core modules that replace fragmented tools with one connected platform.
-            Built for Canadian property managers who want to grow, not just manage.
+            Built for property managers across Canada and the US who want to grow, not just manage.
           </motion.p>
           <motion.div variants={revealItem} className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
@@ -612,7 +612,7 @@ function DifferentiatorsSection() {
 /* ═══════════════════════════════════════════ */
 
 const COMPARISON_ROWS = [
-  { feature: 'Canadian compliance (LTB, RTB, TAL)', revun: true, others: false },
+  { feature: 'CA + US compliance (LTB, RTB, TAL, DHCR, DRE, TREC)', revun: true, others: false },
   { feature: 'Built-in communications (phone, video, chat)', revun: true, others: false },
   { feature: 'Interac e-Transfer support', revun: true, others: false },
   { feature: 'AI maintenance triage', revun: true, others: false },

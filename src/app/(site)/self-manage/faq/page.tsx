@@ -41,7 +41,7 @@ const faqCategories: FAQCategory[] = [
       {
         question: 'Is Revun available in my province or state?',
         answer:
-          'Revun is available across all Canadian provinces including Ontario, British Columbia, Alberta, Quebec, Nova Scotia, Manitoba, Saskatchewan, New Brunswick, Prince Edward Island, and Newfoundland and Labrador. US expansion is underway with initial coverage in key states.',
+          'Revun is available across all 13 Canadian provinces and territories and all 50 US states and DC, with jurisdiction-specific compliance built in.',
       },
       {
         question: 'Do I need to download an app?',
@@ -211,7 +211,7 @@ const faqCategories: FAQCategory[] = [
       {
         question: 'Is my data secure?',
         answer:
-          'Yes. Revun uses bank-level encryption for all data in transit and at rest. We comply with PIPEDA and applicable provincial privacy laws. Your data is stored in Canadian data centres.',
+          'Yes. Revun uses bank-level encryption for all data in transit and at rest. We comply with PIPEDA, CCPA, and applicable provincial and state privacy laws. Data is stored in Canadian and US data centres by jurisdiction.',
       },
     ],
   },

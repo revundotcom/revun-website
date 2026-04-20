@@ -45,7 +45,7 @@ export function Testimonials() {
             Testimonials
           </motion.p>
           <motion.h2 variants={revealItemBlur} className="mt-3 font-heading text-3xl md:text-4xl font-bold text-brand-graphite">
-            Trusted by property managers across <span className="text-keyword">Canada</span>
+            Trusted by property managers across <span className="text-keyword">Canada and the US</span>
           </motion.h2>
         </RevealOnScroll>
 

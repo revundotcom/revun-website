@@ -131,8 +131,8 @@ export default function WhatIsRevunPage() {
                   icon: Layers,
                 },
                 {
-                  title: 'Canadian-Native',
-                  description: 'Built from the ground up for Canadian compliance, provincial regulations, Interac payments, and local market requirements.',
+                  title: 'CA + US Native',
+                  description: 'Built from the ground up for Canadian and US compliance, provincial and state regulations, Interac and ACH payments, and local market requirements.',
                   icon: Shield,
                 },
                 {
@@ -337,7 +337,7 @@ export default function WhatIsRevunPage() {
 
             <div className="mt-10 text-center">
               <Link
-                href="/platform/"
+                href="/features/"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-[#176FEB] transition-colors hover:text-[#1259c1]"
               >
                 Explore the full platform

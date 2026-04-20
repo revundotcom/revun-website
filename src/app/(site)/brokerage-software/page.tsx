@@ -9,7 +9,7 @@ import type { CategoryPageData } from '@/components/blocks/category-seo-page'
 export const metadata: Metadata = {
   title: 'Brokerage Software for Real Estate Transaction Management | Revun',
   description:
-    'Client communication, showing coordination, offer submission, document automation, signatures, and compliance — one system for your entire brokerage. Built for Canadian real estate.',
+    'Client communication, showing coordination, offer submission, document automation, signatures, and compliance — one system for your entire brokerage. Built for real estate brokerages across Canada and the US.',
   alternates: { canonical: buildCanonicalUrl('/brokerage-software') },
   openGraph: {
     title: 'Brokerage Software for Real Estate Transaction Management | Revun',
@@ -104,7 +104,7 @@ const pageData: CategoryPageData = {
         'No more exporting contacts from your CRM into a separate transaction tool. Client data flows directly into offers, documents, and compliance records.',
     },
     {
-      title: 'Canadian compliance built in',
+      title: 'CA + US compliance built in',
       description:
         'FINTRAC identification requirements, RECO forms, and provincial contract templates are enforced during the transaction, not checked after close.',
     },
@@ -127,7 +127,7 @@ export default function BrokerageSoftwarePage() {
   const serviceJsonLd = buildServiceSchema({
     name: 'Revun Brokerage Software',
     description:
-      'Real estate brokerage software covering CRM, document automation, offer management, showing coordination, client communications, and compliance for Canadian brokerages.',
+      'Real estate brokerage software covering CRM, document automation, offer management, showing coordination, client communications, and compliance for brokerages across Canada and the US.',
     serviceType: 'Real Estate Brokerage Software',
     url: buildCanonicalUrl('/brokerage-software'),
   })

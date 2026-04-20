@@ -6,7 +6,7 @@ import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 
 const trustStats = [
   { icon: Building2, value: 'Built for', label: 'operators managing 1 – 10,000+ units' },
-  { icon: MapPin,    value: '10 / 10',   label: 'Canadian provinces supported' },
+  { icon: MapPin,    value: '63 / 63',   label: 'Provinces + US states supported' },
   { icon: Clock,     value: '99.9%',     label: 'platform uptime, last 12 months' },
   { icon: Zap,       value: '40+',       label: 'native integrations live' },
 ]

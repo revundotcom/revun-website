@@ -480,7 +480,7 @@ function IdentityCredit() {
 function RentalProtection() {
   return (
     <SW id="protect">
-      <SH step="07" eyebrow="Protect" title="Safeguard your" highlight="rental income" description="Optional coverage that activates at signing and runs for the lease term. Guaranteed rent, damage protection, and legal support, backed by Canadian underwriters." />
+      <SH step="07" eyebrow="Protect" title="Safeguard your" highlight="rental income" description="Optional coverage that activates at signing and runs for the lease term. Guaranteed rent, damage protection, and legal support, backed by Canadian and US underwriters." />
       <div className="mx-auto mt-12 max-w-3xl">
         <Anim className="mb-10 rounded-xl border border-brand-blue/20 bg-brand-blue/5 px-6 py-5">
           <p className="text-xs font-medium uppercase tracking-wider text-brand-blue">With Rental Guarantee Protection</p>

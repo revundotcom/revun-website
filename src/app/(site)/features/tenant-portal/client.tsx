@@ -791,7 +791,7 @@ function MaintenanceFlow() {
 const complianceBadges = [
   { label: 'SOC 2 Type II', sub: 'Audited controls' },
   { label: 'PCI-DSS Level 1', sub: 'Tokenized payments' },
-  { label: 'PIPEDA', sub: 'Canadian residency' },
+  { label: 'PIPEDA + CCPA', sub: 'CA + US residency' },
   { label: 'AES-256', sub: 'At rest + in transit' },
 ]
 
@@ -802,7 +802,7 @@ function SecurityTrust() {
   return (
     <SectionWrapper id="trust">
       <SectionHeader
-        eyebrow="Canadian data, Canadian rules"
+        eyebrow="North American data, local rules"
         title="Privacy by"
         highlight="design"
         description="Data residency in Canada. AES-256 at rest and in transit. SOC 2 Type II controls. Payment details never touch Revun servers; everything is tokenized through a PCI-DSS Level 1 processor."
@@ -963,7 +963,7 @@ function SecurityTrust() {
                     <Sparkles className="h-5 w-5 text-brand-blue" strokeWidth={2} />
                   </div>
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue/10 px-2.5 py-1 text-[10px] font-heading font-bold uppercase tracking-wider text-brand-blue">
-                    Canadian-first
+                    North American-first
                   </span>
                 </div>
                 <h3 className="mt-4 font-heading text-xl font-bold text-brand-graphite md:text-2xl">
@@ -1043,7 +1043,7 @@ function HowItWorks() {
     {
       num: '02',
       title: 'Set up autopay',
-      desc: 'Link a Canadian bank for Pre-Authorized Debit or save Interac e-Transfer details. Opt in to report on-time rent to build credit.',
+      desc: 'Link a Canadian bank for PAD or Interac e-Transfer, or a US bank for ACH. Opt in to report on-time rent to build credit.',
       icon: Smartphone,
       timeBadge: '~ 2 min',
     },
@@ -1220,7 +1220,7 @@ function HowItWorks() {
           </span>
           <span className="h-3 w-px bg-[#E5E7EB]" />
           <span className="inline-flex items-center gap-1.5 text-xs font-medium text-brand-graphite">
-            <CheckCircle2 className="h-3.5 w-3.5 text-brand-blue" /> Canadian support hours
+            <CheckCircle2 className="h-3.5 w-3.5 text-brand-blue" /> North American support hours
           </span>
         </motion.div>
       </div>
@@ -1247,7 +1247,7 @@ function TenantPortalHero() {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-blue" />
             </span>
             <span className="text-sm font-medium text-brand-graphite-mid">
-              Tenant Portal · Canadian-native
+              Tenant Portal · CA + US native
             </span>
           </motion.div>
 

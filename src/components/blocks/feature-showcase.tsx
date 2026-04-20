@@ -36,40 +36,40 @@ const features: Feature[] = [
     title: 'Unified Operations',
     tag: 'One system of record',
     description:
-      'Leasing, payments, maintenance, and communications run on one ledger. No more toggling between disconnected tools to piece together a tenant, a unit, or a dollar.',
+      'Leasing, payments, maintenance, and communications run on one ledger across Canada and the US. No more toggling between disconnected tools to piece together a tenant, a unit, or a dollar.',
     icon: Workflow,
     image:
       'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=85',
     imageAlt: 'Modern office workspace with unified team operations',
     metric: { value: '5 → 1', label: 'tools replaced' },
-    href: '/platform/',
+    href: '/features/',
     accent: '#176FEB',
   },
   {
     title: 'Compliance Engine',
     tag: 'Rules enforced automatically',
     description:
-      'Provincial and state rules change quarterly. Revun enforces them automatically: notices, forms, deadlines, and audit trails generated on every action, not after.',
+      'Provincial RTAs and state statutes change quarterly. Revun enforces them automatically: LTB, RTB, TAL, DHCR, DRE notices, forms, deadlines, and audit trails generated on every action, not after.',
     icon: ShieldCheck,
     image:
       'https://images.unsplash.com/photo-1589994965851-a8f479c573a9?auto=format&fit=crop&w=1200&q=85',
-    imageAlt: 'Legal and compliance documents on a desk, provincial regulatory compliance',
-    metric: { value: '10 / 10', label: 'provinces monitored' },
+    imageAlt: 'Legal and compliance documents on a desk, provincial and state regulatory compliance',
+    metric: { value: '63 / 63', label: 'provinces + states monitored' },
     href: '/features/compliance/',
-    accent: '#0B5AD4',
+    accent: '#176FEB',
   },
   {
     title: 'Payments Infrastructure',
     tag: 'Every dollar reconciled',
     description:
-      'Rent collection, owner disbursements, vendor payouts, and trust accounting run through one ledger: auto-reconciled, audit-ready, and on schedule every time.',
+      'Rent collection, owner disbursements, vendor payouts, and trust accounting run through one ledger: PAD, Interac, ACH, and cards, auto-reconciled, audit-ready, and on schedule every time.',
     icon: Wallet,
     image:
       'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=85',
     imageAlt: 'Financial reports and transactions, payments infrastructure',
     metric: { value: '97.8%', label: 'on-time collection' },
     href: '/features/rent-collection/',
-    accent: '#4A91F0',
+    accent: '#176FEB',
   },
   {
     title: 'Communications Layer',
@@ -88,14 +88,14 @@ const features: Feature[] = [
     title: 'Rent Protection',
     tag: 'Revenue, guaranteed',
     description:
-      'One missed payment cascades into owner distrust and cash-flow pressure. Built-in rent coverage protects your revenue and shields owner confidence.',
+      'One missed payment cascades into owner distrust and cash-flow pressure. Built-in rent coverage, backed by Canadian and US underwriters, protects your revenue and shields owner confidence.',
     icon: Umbrella,
     image:
       'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=85',
     imageAlt: 'Protected rental home, rent protection and coverage',
     metric: { value: 'Up to $60K', label: 'rent coverage' },
     href: '/features/',
-    accent: '#0B5AD4',
+    accent: '#176FEB',
   },
   {
     title: 'AI Operations',
@@ -108,79 +108,73 @@ const features: Feature[] = [
     imageAlt: 'AI automation and intelligent workflow, operations on autopilot',
     metric: { value: '4 / 4', label: 'workflows automated' },
     href: '/features/ai-automation/',
-    accent: '#4A91F0',
+    accent: '#176FEB',
   },
 ]
 
-/* -- Feature card - clean, editorial, image-led ------------------------- */
+/* -- Feature row - editorial list, no cards, hairline-divided -------------- */
 
-function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
+function FeatureRow({ feature, index }: { feature: Feature; index: number }) {
   const Icon = feature.icon
+  const stepNum = String(index + 1).padStart(2, '0')
   return (
     <motion.div
       variants={revealItem}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+      className="group grid grid-cols-1 gap-6 py-8 md:grid-cols-[220px_1fr_200px] md:items-center md:gap-10 md:py-10 lg:grid-cols-[260px_1fr_220px]"
     >
-      {/* Image header */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden">
+      {/* Thumbnail image (rounded, no card chrome) */}
+      <Link
+        href={feature.href}
+        aria-label={`Explore ${feature.title}`}
+        className="relative block aspect-[4/3] w-full overflow-hidden rounded-xl"
+      >
         <Image
           src={feature.image}
           alt={feature.imageAlt}
           fill
           className="object-cover transition-transform duration-[600ms] group-hover:scale-[1.04]"
-          sizes="(max-width: 768px) 100vw, 33vw"
+          sizes="(max-width: 768px) 100vw, 260px"
         />
         <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(180deg, transparent 45%, ${feature.accent}80 100%)`,
-          }}
+          className="absolute inset-0 bg-gradient-to-t from-[#0A1628]/45 via-transparent to-transparent"
           aria-hidden="true"
         />
+        <span className="absolute left-3 top-3 flex h-8 min-w-8 items-center justify-center rounded-md bg-white/95 px-2 font-heading text-[11px] font-semibold tabular-nums text-[#0A1628] shadow-sm backdrop-blur">
+          {stepNum}
+        </span>
+        <span className="absolute bottom-3 left-3 inline-flex h-8 w-8 items-center justify-center rounded-md bg-brand-blue text-white shadow-[0_6px_16px_-6px_rgba(23,111,235,0.55)]">
+          <Icon className="h-4 w-4" strokeWidth={2.2} aria-hidden="true" />
+        </span>
+      </Link>
 
-        {/* Floating icon + tag */}
-        <div className="absolute left-4 top-4 flex items-center gap-2">
-          <span
-            className="flex h-10 w-10 items-center justify-center rounded-xl shadow-lg"
-            style={{ backgroundColor: feature.accent }}
-          >
-            <Icon className="h-5 w-5 text-white" />
-          </span>
-          <span className="rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold text-[#0A1628] shadow-sm backdrop-blur">
-            {String(index + 1).padStart(2, '0')} &nbsp;·&nbsp; {feature.tag}
-          </span>
-        </div>
-
-        {/* Floating metric pill (bottom-right) */}
-        <div className="absolute bottom-4 right-4 flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 shadow-sm backdrop-blur">
-          <span
-            className="font-heading text-sm font-bold"
-            style={{ color: feature.accent }}
-          >
-            {feature.metric.value}
-          </span>
-          <span className="text-[10px] font-medium text-[#555860]">
-            {feature.metric.label}
-          </span>
-        </div>
-      </div>
-
-      {/* Text */}
-      <div className="flex flex-1 flex-col p-6">
-        <h3 className="font-heading text-lg font-semibold leading-snug text-[#0A1628]">
+      {/* Content */}
+      <div>
+        <p className="font-heading text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-blue">
+          {feature.tag}
+        </p>
+        <h3 className="mt-2 font-display text-2xl font-normal leading-tight text-[#0A1628] md:text-[28px]">
           {feature.title}
         </h3>
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-graphite-mid">
+        <p className="mt-3 text-[14px] leading-relaxed text-brand-graphite-mid md:max-w-[540px]">
           {feature.description}
         </p>
         <Link
           href={feature.href}
-          className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold transition-colors"
-          style={{ color: feature.accent }}
+          className="mt-4 inline-flex items-center gap-1.5 font-heading text-sm font-semibold text-brand-blue transition-colors hover:text-brand-blue-dark"
         >
           Explore {feature.title.toLowerCase()}
           <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
         </Link>
+      </div>
+
+      {/* Stat block */}
+      <div className="flex items-baseline gap-3 md:flex-col md:items-end md:gap-1 md:text-right">
+        <span className="font-display text-3xl font-normal leading-none tabular-nums text-brand-blue md:text-[40px]">
+          {feature.metric.value}
+        </span>
+        <span className="font-heading text-[10px] font-medium uppercase tracking-[0.14em] text-brand-graphite-mid">
+          {feature.metric.label}
+        </span>
       </div>
     </motion.div>
   )
@@ -224,13 +218,13 @@ export function FeatureShowcase() {
           </motion.p>
         </RevealOnScroll>
 
-        {/* 6-feature grid */}
+        {/* Editorial feature list — hairline dividers, no cards */}
         <RevealOnScroll
-          className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-          stagger={0.08}
+          className="mt-14 flex flex-col divide-y divide-[#E5E7EB] border-y border-[#E5E7EB]"
+          stagger={0.06}
         >
           {features.map((f, i) => (
-            <FeatureCard key={f.title} feature={f} index={i} />
+            <FeatureRow key={f.title} feature={f} index={i} />
           ))}
         </RevealOnScroll>
       </div>

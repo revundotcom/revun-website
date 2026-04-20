@@ -4,14 +4,14 @@ import { buildBreadcrumbSchema } from '@/lib/schema-builders'
 import { TenantScreeningClient } from './client'
 
 export const metadata: Metadata = {
-  title: 'Tenant Screening — Credit, Identity, Income & Canadian Risk Scoring | Revun',
+  title: 'Tenant Screening: Credit, Identity, Income and CA + US Risk Scoring | Revun',
   description:
-    'Equifax and TransUnion credit pulls, liveness ID verification, bank-linked income, LTB/RTB eviction lookups, and a Canadian-tuned risk score — all in one PIPEDA-compliant pipeline.',
+    'Equifax and TransUnion credit pulls, liveness ID verification, bank-linked income, LTB/RTB and state-court eviction lookups, and a CA + US-tuned risk score, all in one PIPEDA and CCPA-compliant pipeline.',
   alternates: { canonical: buildCanonicalUrl('/features/tenant-screening') },
   openGraph: {
     title: 'Tenant Screening | Revun',
     description:
-      'Canadian tenant screening with Equifax + TransUnion credit, liveness ID, bank-linked income, provincial eviction lookups, and a risk score tuned for the Canadian rental market.',
+      'Tenant screening across Canada and the US with Equifax + TransUnion credit, liveness ID, bank-linked income, provincial and state eviction lookups, and a risk score tuned for the North American rental market.',
     url: buildCanonicalUrl('/features/tenant-screening'),
   },
 }

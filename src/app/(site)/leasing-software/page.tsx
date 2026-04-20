@@ -104,7 +104,7 @@ const pageData: CategoryPageData = {
         'Revun does not just handle applications or just handle signing. It runs the full pipeline from first inquiry to move-in day without a single handoff to another tool.',
     },
     {
-      title: 'Built for Canadian compliance',
+      title: 'Built for CA + US compliance',
       description:
         'Ontario Standard Lease, Alberta RTAR, BC RTB forms, and provincial notice requirements are built into every lease template by default.',
     },
@@ -127,7 +127,7 @@ export default function LeasingSoftwarePage() {
   const serviceJsonLd = buildServiceSchema({
     name: 'Revun Leasing Software',
     description:
-      'Automated leasing lifecycle software covering applications, screening, offers, lease generation, e-signatures, and tenant onboarding for Canadian property operators.',
+      'Automated leasing lifecycle software covering applications, screening, offers, lease generation, e-signatures, and tenant onboarding for property operators across Canada and the US.',
     serviceType: 'Leasing Software',
     url: buildCanonicalUrl('/leasing-software'),
   })

@@ -253,7 +253,7 @@ function StatBar() {
     { icon: FileText, value: '7 document types', label: 'Stored and shareable in one vault' },
     { icon: Lock, value: 'AES-256 encryption', label: 'At rest and in transit' },
     { icon: Sparkles, value: 'Reusable across applications', label: 'Upload once, share many times' },
-    { icon: Flag, value: 'PIPEDA and FINTRAC aligned', label: 'Canadian compliance built in' },
+    { icon: Flag, value: 'PIPEDA, FINTRAC, CCPA aligned', label: 'CA + US compliance built in' },
   ]
   return (
     <section id="stat-bar" className="border-y border-[#E5E7EB] bg-brand-off-white py-12">
@@ -362,7 +362,7 @@ function DigitalSafe() {
             { icon: Fingerprint, label: 'Biometric Access', value: 'Enabled', description: 'Face ID and fingerprint authentication' },
             { icon: Eye, label: 'Access Logging', value: 'Full Audit', description: 'Every view, download, and share is logged' },
             { icon: BadgeCheck, label: 'Revocable Sharing', value: 'One-Tap', description: 'Revoke access to any document instantly, anytime' },
-            { icon: Flag, label: 'Canadian Data Residency', value: 'Toronto + Montreal', description: 'Stored on Canadian infrastructure, PIPEDA aligned' },
+            { icon: Flag, label: 'Data Residency', value: 'Toronto, Montreal, Virginia', description: 'Stored on Canadian and US infrastructure, PIPEDA and state privacy aligned' },
           ].map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -1276,7 +1276,7 @@ function Testimonials() {
     <SectionWrapper id="testimonials" dark>
       <SectionHeader
         eyebrow="Loved by operators"
-        title="Canadian property pros"
+        title="Property pros across North America"
         highlight="already trust the vault."
         description="Real stories from teams using Revun to run cleaner, faster, audit-ready leasing pipelines."
       />
@@ -1309,7 +1309,7 @@ function TrustStrip() {
           Compliance and Security
         </motion.p>
         <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal md:text-4xl text-brand-graphite">
-          Held to the standards Canadian{' '}
+          Held to the standards North American{' '}
           <span className="text-keyword">operators expect.</span>
         </motion.h2>
       </RevealOnScroll>

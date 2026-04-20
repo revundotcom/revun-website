@@ -31,7 +31,7 @@ export function CTASection() {
             className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <Link
-              href="/platform/"
+              href="/features/"
               className="inline-flex h-14 items-center justify-center rounded-lg bg-[#176FEB] px-8 text-base font-semibold text-white transition-colors hover:bg-[#1260D6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#176FEB] focus-visible:ring-offset-2"
             >
               See the Platform

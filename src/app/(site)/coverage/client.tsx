@@ -357,7 +357,7 @@ export function CoveragePageClient() {
                 transition={{ duration: 0.5, ease }}
               >
                 <span className="h-2 w-2 rounded-full bg-[#22C55E] animate-pulse" />
-                <span className="text-xs font-medium text-[#555860]">All 10 Canadian provinces live</span>
+                <span className="text-xs font-medium text-[#555860]">All 13 provinces and 50 US states live</span>
               </motion.div>
 
               <motion.h1

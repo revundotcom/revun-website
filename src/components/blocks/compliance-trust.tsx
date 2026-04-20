@@ -73,7 +73,7 @@ const provinces = [
 const trustSignals = [
   { label: 'Bank-Grade Encryption', icon: EncryptionIcon },
   { label: 'SOC 2 Type II', icon: SOC2Icon },
-  { label: 'Canadian Data Residency', icon: DataResidencyIcon },
+  { label: 'CA + US Data Residency', icon: DataResidencyIcon },
   { label: '99.9% Uptime SLA', icon: UptimeIcon },
   { label: 'PIPEDA Compliant', icon: PIPEDAIcon },
 ]
@@ -96,13 +96,13 @@ export function ComplianceTrust() {
             variants={revealItem}
             className="mt-3 font-display text-4xl font-bold tracking-tight text-brand-navy md:text-5xl"
           >
-            Built for <span className="text-keyword">Canadian</span> regulations
+            Built for <span className="text-keyword">North American</span> regulations
           </motion.h2>
           <motion.p
             variants={revealItem}
             className="mt-4 text-base leading-relaxed text-slate-600"
           >
-            Revun natively supports provincial tenancy legislation across Canada.
+            Revun natively supports provincial and state tenancy legislation across Canada and the United States.
             No workarounds, no manual overrides.
           </motion.p>
         </RevealOnScroll>

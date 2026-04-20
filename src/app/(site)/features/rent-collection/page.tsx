@@ -6,7 +6,7 @@ import { RentCollectionClient } from './client'
 export const metadata: Metadata = {
   title: 'Automated Rent Collection — PAD, Interac, Credit & Debit | Revun',
   description:
-    'Automated rent collection for Canadian landlords and property managers. Pre-Authorized Debit, Interac e-Transfer, credit and debit cards — with auto-reminders, split payments, late fees, and real-time accounting reconciliation.',
+    'Automated rent collection for landlords and property managers across Canada and the US. Pre-Authorized Debit, Interac e-Transfer, ACH, credit and debit cards, with auto-reminders, split payments, late fees, and real-time accounting reconciliation.',
   alternates: { canonical: buildCanonicalUrl('/features/rent-collection') },
   openGraph: {
     title: 'Rent Collection | Revun',

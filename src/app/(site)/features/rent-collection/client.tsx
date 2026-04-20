@@ -275,7 +275,7 @@ function StatsBar() {
     { value: '98.2%', label: 'On-time collection rate' },
     { value: '< 2 hrs', label: 'Reconciled to books' },
     { value: '$0', label: 'Per-transaction PAD fee' },
-    { value: '10 / 10', label: 'Canadian provinces' },
+    { value: '63 / 63', label: 'Provinces + US states' },
   ]
   return (
     <section className="border-y border-[#E5E7EB] bg-white py-10">
@@ -908,7 +908,7 @@ function Testimonials() {
     <SectionWrapper id="testimonials" dark>
       <SectionHeader
         eyebrow="Proof"
-        title="Canadian operators"
+        title="North American operators"
         highlight="collect more, chase less."
         description="Real property managers, real numbers — from the first 90 days on Revun."
       />
@@ -959,7 +959,7 @@ function Testimonials() {
 /* ═══════════════════════════════════════════ */
 
 const RENT_COLLECTION_FAQS = [
-  { q: 'Which payment methods does Revun support for Canadian rent?', a: 'Pre-Authorized Debit (PAD), Interac e-Transfer with auto-deposit, all major credit cards (Visa, Mastercard, Amex), and Visa/Mastercard debit. Every method reconciles to the same ledger.' },
+  { q: 'Which payment methods does Revun support?', a: 'In Canada: Pre-Authorized Debit (PAD), Interac e-Transfer with auto-deposit, all major credit cards (Visa, Mastercard, Amex), and Visa/Mastercard debit. In the US: ACH, credit and debit cards. Every method reconciles to the same ledger.' },
   { q: 'How fast do funds land in my account?', a: 'PAD clears in 1-2 business days, Interac e-Transfer same-day, and card payments are instant. Funds post to your bank on your chosen payout schedule — daily, weekly, or monthly.' },
   { q: 'Who pays the processing fee?', a: 'You choose per property. PAD is always free. For cards, you can absorb the fee, pass it to the tenant as a convenience fee, or let tenants opt in to pay it themselves for rewards points.' },
   { q: 'Does Revun enforce province-specific late-fee rules?', a: 'Yes. Late fees follow Ontario RTA, BC RTB, Quebec TAL, Alberta RTDRS, and every other provincial cap automatically. No manual checking required.' },
@@ -1042,7 +1042,7 @@ function FinalCTA() {
         </motion.div>
         <motion.p variants={revealItem} className="mt-8 text-xs text-white/50">
           Questions?{' '}
-          <Link href="/contact/" className="text-[#60A5FA] transition-colors hover:text-white">Talk to our Canadian team →</Link>
+          <Link href="/contact/" className="text-[#60A5FA] transition-colors hover:text-white">Talk to our team →</Link>
         </motion.p>
       </RevealOnScroll>
     </section>

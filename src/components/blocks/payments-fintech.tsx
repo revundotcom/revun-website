@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 import {
   Users,
@@ -25,35 +26,71 @@ const outboundMethods = ['Direct Deposit', 'Wire Transfer', 'ACH']
 const flowSteps = [
   {
     step: '01',
+    direction: 'Inflow',
     icon: Wallet,
     title: 'Rent Collection',
     description:
-      'Automated collection via PAD, credit card, and Interac, with reminders, receipts, and a full ledger of who paid and who did not.',
+      'Automated collection via PAD, Interac, credit card, and ACH, with reminders, receipts, and a full ledger of who paid and who did not.',
+    methods: ['PAD', 'Interac', 'Cards', 'ACH'],
+    status: 'Auto-reconciled daily',
     stat: { value: '$1.2M+', label: 'collected monthly' },
+    process: [
+      'Tenant receives reminder the day rent is due',
+      'Payment captured via PAD, Interac, card, or ACH',
+      'Receipt issued and posted to the ledger',
+      'Reconciled to the lease and unit automatically',
+    ],
   },
   {
     step: '02',
+    direction: 'Outflow',
     icon: Send,
     title: 'Owner Disbursements',
     description:
       'Detailed statements and direct deposit to any Canadian or US bank account, on schedule, every time, with full transparency.',
+    methods: ['Direct deposit', 'Wire', 'EFT'],
+    status: 'Zero late payouts',
     stat: { value: '99.8%', label: 'on-time payout rate' },
+    process: [
+      'Rent and fees settle into the trust account',
+      'Management fees, expenses, and holdbacks calculated',
+      'Net payout scheduled for the next disbursement run',
+      'Direct deposit sent with a full statement',
+    ],
   },
   {
     step: '03',
+    direction: 'Outflow',
     icon: Receipt,
     title: 'Vendor Payments',
     description:
       'Invoice matching, approval workflows, and spend visibility across your portfolio. Vendors stop chasing you, jobs stop stalling.',
+    methods: ['Same-day ACH', 'EFT', 'Batch'],
+    status: 'Approval workflows built in',
     stat: { value: '2.4×', label: 'faster invoice settlement' },
+    process: [
+      'Invoice submitted against an active work order',
+      'Line items matched and routed for approval',
+      'Once approved, batched for the next payment run',
+      'Paid via same-day ACH or EFT with a full audit trail',
+    ],
   },
   {
     step: '04',
+    direction: 'Live',
     icon: BarChart3,
     title: 'Financial Reporting',
     description:
-      'Real-time P&L, cash flow, and tax-ready reports: export to QuickBooks, Xero, or CSV in one click.',
+      'Real-time P&L, cash flow, and tax-ready reports (T5, NR4, 1099). Export to QuickBooks, Xero, or CSV in one click.',
+    methods: ['QuickBooks', 'Xero', 'CSV', 'PDF'],
+    status: 'Real-time, always audit-ready',
     stat: { value: '1-click', label: 'to audit-ready books' },
+    process: [
+      'Every transaction tagged with unit, owner, and category',
+      'P&L, cash flow, and tax-ready reports generated live',
+      'Variance flags surface anomalies in real time',
+      'One-click export to QuickBooks, Xero, CSV, or PDF',
+    ],
   },
 ]
 
@@ -226,6 +263,195 @@ function PaymentsHub() {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   Operations Console — 4 tabs, each renders the flow as a process diagram
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+type FlowStep = typeof flowSteps[number]
+
+function ProcessDiagram({ flow }: { flow: FlowStep }) {
+  return (
+    <div className="relative h-full overflow-hidden rounded-xl border border-[#E5E7EB] bg-white p-7 md:p-9">
+      <div
+        className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-brand-blue/[0.05] blur-3xl"
+        aria-hidden="true"
+      />
+
+      {/* Direction chip */}
+      <div className="relative">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-[#E5E7EB] bg-white px-2.5 py-1 font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-graphite-mid">
+          <span className="h-1 w-1 rounded-full bg-brand-blue" aria-hidden="true" />
+          Flow {flow.step} · {flow.direction}
+        </span>
+      </div>
+
+      {/* Stat hero */}
+      <div className="relative mt-6">
+        <p className="font-heading text-[10px] font-semibold uppercase tracking-[0.18em] text-brand-graphite-mid">
+          Result
+        </p>
+        <p className="mt-2 font-display text-[52px] font-normal leading-[0.92] tabular-nums text-brand-blue md:text-[64px]">
+          {flow.stat.value}
+        </p>
+        <p className="mt-2 font-heading text-[11px] font-medium uppercase tracking-[0.14em] text-brand-graphite-mid">
+          {flow.stat.label}
+        </p>
+      </div>
+
+      {/* Process rail */}
+      <div className="relative mt-10 border-t border-[#F1F3F5] pt-6">
+        <p className="mb-5 font-heading text-[10px] font-semibold uppercase tracking-[0.18em] text-brand-graphite-mid">
+          How it runs
+        </p>
+        <div
+          className="pointer-events-none absolute left-[11px] top-[4.2rem] bottom-2 w-px bg-gradient-to-b from-brand-blue/40 via-[#E5E7EB] to-transparent"
+          aria-hidden="true"
+        />
+        <ol className="space-y-4">
+          {flow.process.map((s, i) => (
+            <li key={i} className="relative flex items-start gap-4">
+              <span className="relative z-10 mt-0.5 flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-white font-heading text-[10px] font-semibold tabular-nums text-brand-blue ring-1 ring-brand-blue/40">
+                {i + 1}
+              </span>
+              <p className="pt-0.5 font-heading text-[13.5px] leading-relaxed text-[#0A1628]">
+                {s}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  )
+}
+
+function FlowsConsole() {
+  const [active, setActive] = useState(0)
+  const current = flowSteps[active]
+  const Icon = current.icon
+
+  return (
+    <div>
+      {/* Tab strip */}
+      <div
+        role="tablist"
+        aria-label="Revun flow views"
+        className="grid grid-cols-2 gap-2 sm:grid-cols-4"
+      >
+        {flowSteps.map((s, i) => {
+          const isActive = i === active
+          return (
+            <button
+              key={s.step}
+              role="tab"
+              type="button"
+              aria-selected={isActive}
+              onClick={() => setActive(i)}
+              className={`group relative flex items-center gap-3 rounded-xl border px-3 py-3 text-left transition-all duration-200 md:px-4 ${
+                isActive
+                  ? 'border-brand-blue bg-white shadow-[0_8px_24px_-12px_rgba(23,111,235,0.35)]'
+                  : 'border-[#E5E7EB] bg-white/60 hover:border-brand-blue/40 hover:bg-white'
+              }`}
+            >
+              <span
+                className={`font-display text-lg leading-none tabular-nums transition-colors duration-200 md:text-2xl ${
+                  isActive ? 'text-brand-blue' : 'text-[#B0B6BD] group-hover:text-brand-blue/70'
+                }`}
+              >
+                {s.step}
+              </span>
+              <span className="min-w-0">
+                <span
+                  className={`block font-heading text-[9px] font-semibold uppercase tracking-[0.14em] ${
+                    isActive ? 'text-brand-blue' : 'text-brand-graphite-mid'
+                  }`}
+                >
+                  {s.direction}
+                </span>
+                <span
+                  className={`block truncate font-heading text-[13px] font-semibold ${
+                    isActive ? 'text-[#0A1628]' : 'text-[#555860]'
+                  }`}
+                >
+                  {s.title}
+                </span>
+              </span>
+              {isActive && (
+                <span
+                  className="absolute inset-x-0 -bottom-px hidden h-[2px] bg-brand-blue sm:block"
+                  aria-hidden="true"
+                />
+              )}
+            </button>
+          )
+        })}
+      </div>
+
+      {/* Panel — two balanced content cells, no outer chrome */}
+      <div className="mt-6 grid gap-4 md:grid-cols-[1fr_340px] md:gap-5">
+        {/* Visual */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`v-${active}`}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="h-full"
+          >
+            <ProcessDiagram flow={current} />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Content */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`c-${active}`}
+            initial={{ opacity: 0, x: 12 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -12 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1], delay: 0.04 }}
+            className="flex h-full flex-col rounded-xl border border-[#E5E7EB] bg-white p-6 md:p-7"
+          >
+            <div>
+              <div className="flex items-center gap-2.5">
+                <Icon className="h-5 w-5 shrink-0 text-brand-blue" strokeWidth={2} aria-hidden="true" />
+                <h4 className="font-display text-2xl font-normal leading-tight text-[#0A1628]">
+                  {current.title}
+                </h4>
+              </div>
+              <p className="mt-3 text-[13.5px] leading-relaxed text-brand-graphite-mid">
+                {current.description}
+              </p>
+
+              <div className="mt-5">
+                <p className="font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-graphite-mid">
+                  Methods
+                </p>
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {current.methods.map((m) => (
+                    <span
+                      key={m}
+                      className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-white px-2 py-0.5 font-heading text-[10px] font-semibold uppercase tracking-[0.08em] text-[#3A4148]"
+                    >
+                      {m}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Footer — proof line anchored to the bottom of the panel */}
+            <div className="mt-auto flex items-center gap-1.5 border-t border-[#F1F3F5] pt-5 font-heading text-[11px] font-medium text-brand-graphite-mid">
+              <CheckCircle2 className="h-3.5 w-3.5 text-brand-blue" strokeWidth={2.2} aria-hidden="true" />
+              {current.status}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </div>
+  )
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    Section
    ═══════════════════════════════════════════════════════════════════════════ */
 
@@ -310,71 +536,25 @@ export function PaymentsFintech() {
           </div>
         </RevealOnScroll>
 
-        {/* ══ Editorial flow timeline (4 steps, connected, no cards) ══ */}
-        <RevealOnScroll className="relative mt-24" stagger={0.1}>
-          <motion.div variants={revealItem} className="mb-10 text-center">
-            <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.18em] text-brand-graphite-mid">
-              What happens inside Revun
+        {/* ══ Operations Console — tabbed, each tab renders a live mini-UI ══ */}
+        <RevealOnScroll className="relative mt-24" stagger={0.08}>
+          <motion.div variants={revealItem} className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.18em] text-brand-graphite-mid">
+                What happens inside Revun
+              </p>
+              <h3 className="mt-2 font-display text-3xl font-normal leading-[1.1] text-[#0A1628] md:text-[40px]">
+                Four flows. One connected system.
+              </h3>
+            </div>
+            <p className="text-[12px] text-brand-graphite-mid md:max-w-[280px] md:text-right">
+              Tap a flow to see the live view. Every row you see below runs on the same ledger.
             </p>
-            <h3 className="mt-2 font-display text-2xl font-normal text-[#0A1628] md:text-3xl">
-              Four flows. One connected system.
-            </h3>
           </motion.div>
 
-          <div className="relative grid gap-y-10 gap-x-6 lg:grid-cols-4">
-            {/* Connector beam - runs through the vertical midpoint of the 48px icons */}
-            <div
-              className="pointer-events-none absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-transparent via-border to-transparent lg:block"
-              aria-hidden="true"
-            />
-
-            {flowSteps.map((s) => (
-              <motion.div
-                key={s.step}
-                variants={revealItem}
-                className="group relative flex flex-col"
-              >
-                {/* Icon tile with step-number badge */}
-                <div className="relative w-12">
-                  <div className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-brand-blue text-white shadow-[0_8px_20px_-8px_rgba(23,111,235,0.5)] transition-transform duration-300 group-hover:scale-105">
-                    <s.icon className="h-5 w-5" strokeWidth={2} />
-                  </div>
-                  {/* Step number badge */}
-                  <span
-                    className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-brand-blue text-[9px] font-heading font-semibold text-white ring-2 ring-white"
-                    aria-hidden="true"
-                  >
-                    {s.step}
-                  </span>
-                  {/* Hover glow */}
-                  <div
-                    className="absolute -inset-2 -z-10 rounded-2xl bg-brand-blue/10 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-100"
-                    aria-hidden="true"
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="mt-5">
-                  <h4 className="font-heading text-[15px] font-semibold text-[#0A1628]">
-                    {s.title}
-                  </h4>
-                  <p className="mt-2 text-[13px] leading-relaxed text-brand-graphite-mid">
-                    {s.description}
-                  </p>
-
-                  {/* Inline stat chip */}
-                  <div className="mt-4 inline-flex items-baseline gap-2 rounded-lg border border-border bg-white px-3 py-1.5">
-                    <span className="font-display text-base font-normal text-brand-blue">
-                      {s.stat.value}
-                    </span>
-                    <span className="text-[10px] text-brand-graphite-mid">
-                      {s.stat.label}
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div variants={revealItem}>
+            <FlowsConsole />
+          </motion.div>
         </RevealOnScroll>
       </div>
     </section>

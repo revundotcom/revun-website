@@ -33,7 +33,7 @@ const audiences = [
     href: '/solutions/self-managing-owners/',
     color: '#176FEB',
     image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80',
-    imageAlt: 'Canadian rental home exterior, self-managing owner running rentals on Revun',
+    imageAlt: 'Rental home exterior, self-managing owner running rentals on Revun across Canada and the US',
   },
   {
     id: 'managers',
@@ -46,7 +46,7 @@ const audiences = [
       'Portfolio-wide analytics & reporting dashboard',
       'White-label owner portals with live financials',
       'Team management with role-based permissions',
-      'Automated compliance across all provinces',
+      'Automated compliance across all provinces and states',
       'Vendor management & invoice reconciliation',
     ],
     stats: [

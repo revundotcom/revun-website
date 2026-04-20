@@ -7,12 +7,12 @@ import type { CategoryPageData } from '@/components/blocks/category-seo-page'
 /* ── Metadata ────────────────────────────────────────────────────────────── */
 
 export const metadata: Metadata = {
-  title: 'Property Management Software for Canadian Operators | Revun',
+  title: 'Property Management Software for Canada and US Operators | Revun',
   description:
     'Revun replaces disconnected property management tools with one infrastructure layer for leasing, maintenance, communications, payments, compliance, and reporting. Built for Canada.',
   alternates: { canonical: buildCanonicalUrl('/property-management-software') },
   openGraph: {
-    title: 'Property Management Software for Canadian Operators | Revun',
+    title: 'Property Management Software for Canada and US Operators | Revun',
     description:
       'Revun replaces disconnected property management tools with one infrastructure layer for leasing, maintenance, communications, payments, compliance, and reporting.',
     url: buildCanonicalUrl('/property-management-software'),
@@ -33,7 +33,7 @@ const pageData: CategoryPageData = {
     'Revun replaces disconnected property management tools with one infrastructure layer for leasing, maintenance, communications, payments, compliance, and reporting.',
   painPointsHeading: 'Why existing PM software fails operators',
   painPointsBody:
-    'Most property operations platforms were built for a US market in 2012. They bolt on features instead of building them in. The result is fragmented data, manual workarounds, and zero Canadian compliance.',
+    'Most property operations platforms were built for a US market in 2012. They bolt on features instead of building them in. The result is fragmented data, manual workarounds, and zero Canadian or US compliance.',
   painPoints: [
     {
       title: 'Fragmented systems',
@@ -43,7 +43,7 @@ const pageData: CategoryPageData = {
     {
       title: 'US-first, Canada-never',
       description:
-        'Provincial lease forms, N-series notices, and Canadian banking rails are afterthoughts — or missing entirely.',
+        'Provincial lease forms, N-series notices, state statutes, ACH, and Canadian banking rails are afterthoughts, or missing entirely.',
     },
     {
       title: 'No communication layer',
@@ -86,7 +86,7 @@ const pageData: CategoryPageData = {
     {
       title: 'Compliance Automation',
       description:
-        'Province-specific notice templates, automated deadline tracking, and audit-ready logs on every action. Built for Canadian law.',
+        'Province and state-specific notice templates, automated deadline tracking, and audit-ready logs on every action. Built for Canadian and US law.',
       iconName: 'CheckCircle2',
     },
     {
@@ -104,9 +104,9 @@ const pageData: CategoryPageData = {
         'Every feature is built into the core platform. No third-party integrations required for essential operations like payments, screening, or communications.',
     },
     {
-      title: 'Canadian-native from day one',
+      title: 'CA + US-native from day one',
       description:
-        'Provincial lease forms, N-series notices, Canadian banking rails, and bilingual support are not add-ons. They are the foundation.',
+        'Provincial lease forms, N-series notices, state statutes, Canadian and US banking rails, and bilingual support are not add-ons. They are the foundation.',
     },
     {
       title: 'One system replaces your entire stack',
@@ -127,7 +127,7 @@ export default function PropertyManagementSoftwarePage() {
   const serviceJsonLd = buildServiceSchema({
     name: 'Revun Property Management Software',
     description:
-      'All-in-one property management software covering leasing, maintenance, communications, payments, compliance, and reporting for Canadian property operators.',
+      'All-in-one property management software covering leasing, maintenance, communications, payments, compliance, and reporting for property operators across Canada and the US.',
     serviceType: 'Property Management Software',
     url: buildCanonicalUrl('/property-management-software'),
   })

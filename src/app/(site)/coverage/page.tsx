@@ -6,7 +6,7 @@ import { CoveragePageClient } from './client'
 export const metadata: Metadata = {
   title: 'Coverage',
   description:
-    'Revun operates across all 10 Canadian provinces with built-in provincial compliance. Expanding coverage across the United States.',
+    'Revun operates across all 13 Canadian provinces and territories plus all 50 US states and DC, with jurisdiction-specific compliance built in.',
   alternates: { canonical: buildCanonicalUrl('/coverage') },
   openGraph: {
     title: 'Coverage | Revun',

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 const bulletPoints = [
   'See the owner, tenant, team, and operator experience live',
   'Walk through your exact workflow, from lead to lease to maintenance to payment',
-  'Review Canadian compliance, payments, communication, and reporting in one system',
+  'Review CA + US compliance, payments, communication, and reporting in one system',
   'Get a recommended rollout path for your company',
 ] as const
 

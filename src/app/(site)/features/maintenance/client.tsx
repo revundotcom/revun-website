@@ -136,7 +136,7 @@ function ScopeOfWork() {
               <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-3">
                 <div>
                   <p className="text-[10px] font-semibold uppercase tracking-widest text-white/80">Priced from real data</p>
-                  <p className="mt-0.5 font-heading text-base font-semibold text-white">12,400+ Canadian jobs</p>
+                  <p className="mt-0.5 font-heading text-base font-semibold text-white">12,400+ jobs across North America</p>
                 </div>
                 <span className="rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-semibold text-brand-graphite">GTA · Avg $148</span>
               </div>
@@ -154,7 +154,7 @@ function ScopeOfWork() {
               {[
                 { icon: Bot, title: 'AI-classified trade', sub: 'Plumbing / Electrical / HVAC auto-detected' },
                 { icon: MapPin, title: 'Comparable jobs nearby', sub: 'Median of last 90 days in your area' },
-                { icon: ShieldCheck, title: 'HST shown separately', sub: 'Transparent Canadian pricing' },
+                { icon: ShieldCheck, title: 'HST / sales tax shown separately', sub: 'Transparent pricing in CAD and USD' },
               ].map((it) => (
                 <li key={it.title} className="flex items-start gap-3">
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-blue/10">
@@ -365,7 +365,7 @@ function AIAnalysis() {
             <Bot className="h-4 w-4 text-brand-blue" />
             <p className="text-xs font-heading font-semibold uppercase tracking-wider text-brand-blue">What the AI catches</p>
           </div>
-          <h4 className="mt-3 font-heading text-lg font-semibold text-brand-graphite">Built on Canadian property data</h4>
+          <h4 className="mt-3 font-heading text-lg font-semibold text-brand-graphite">Built on North American property data</h4>
           <p className="mt-2 text-sm leading-relaxed text-brand-graphite-mid">
             Every request is classified by trade, urgency, and safety risk so the right technician lands on site without a phone call.
           </p>
@@ -1399,7 +1399,7 @@ function Testimonials() {
   ]
   return (
     <SW id="testimonials">
-      <SH eyebrow="Proof" title="Canadian operators are dispatching" highlight="60% faster." description="Real property managers, real numbers, from the first quarter of using Revun Maintenance." />
+      <SH eyebrow="Proof" title="Operators are dispatching" highlight="60% faster." description="Real property managers, real numbers, from the first quarter of using Revun Maintenance." />
       <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
         {testimonials.map((t, i) => (
           <Anim key={t.name} delay={0.1 * (i + 1)}>
@@ -1467,7 +1467,7 @@ function Comparison() {
     { feature: 'Owner approval workflow', revun: 'Threshold-based auto-approvals', pmeld: 'Manual approve per request', jobber: 'Not applicable', svctitan: 'Not applicable', status: { revun: 'yes', pmeld: 'partial', jobber: 'no', svctitan: 'no' } },
     { feature: 'Before/after photo archive', revun: 'Required per job, audit-ready', pmeld: 'Optional upload', jobber: 'Optional upload', svctitan: 'Optional upload', status: { revun: 'yes', pmeld: 'partial', jobber: 'partial', svctitan: 'partial' } },
     { feature: 'Flows into accounting + invoicing', revun: 'Direct to Revun ledger + QBO/Xero', pmeld: 'Export CSV only', jobber: 'Jobber invoicing only', svctitan: 'ST invoicing only', status: { revun: 'yes', pmeld: 'no', jobber: 'partial', svctitan: 'partial' } },
-    { feature: 'Canadian compliance (PIPEDA, province-aware)', revun: 'Native', pmeld: 'US-centric', jobber: 'US-centric', svctitan: 'US-centric', status: { revun: 'yes', pmeld: 'no', jobber: 'no', svctitan: 'no' } },
+    { feature: 'CA + US compliance (PIPEDA, state privacy laws, province/state-aware)', revun: 'Native', pmeld: 'US-only', jobber: 'US-only', svctitan: 'US-only', status: { revun: 'yes', pmeld: 'no', jobber: 'no', svctitan: 'no' } },
   ]
   const StatusIcon = ({ status }: { status: CmpStatus }) => {
     if (status === 'yes') return <Check className="h-4 w-4 shrink-0 text-[#176FEB]" strokeWidth={3} />
@@ -1522,11 +1522,11 @@ function Comparison() {
 
 const MAINTENANCE_FAQS = [
   { q: "Do I have to use Revun's vendor network?", a: "No. Bring your own vendors and techs, or mix with Revun's vetted network. You control the dispatch rules per property." },
-  { q: 'How does the AI triage work exactly?', a: 'Every submitted request is classified by trade, urgency, and estimated scope. The model is trained on Canadian property maintenance data and flags safety-critical issues for immediate dispatch.' },
+  { q: 'How does the AI triage work exactly?', a: 'Every submitted request is classified by trade, urgency, and estimated scope. The model is trained on Canadian and US property maintenance data and flags safety-critical issues for immediate dispatch.' },
   { q: 'What if a technician skips the before/after photos?', a: "Work orders can't be closed without them. The tech app blocks submission until the required media is captured and tenant sign-off is collected." },
   { q: "Can I set approval thresholds so owners don't see every $40 job?", a: 'Yes. Set auto-approve limits per property (e.g., under $250) with routing rules for bigger spends. Owners get weekly digests on everything auto-approved.' },
   { q: 'Does this work for commercial properties?', a: 'Yes. Revun supports residential, commercial, and mixed-use with configurable compliance rules, trade specializations, and SLA tiers per property.' },
-  { q: 'How fast is dispatch, really?', a: 'Median time from request submission to technician accepting is 18 minutes for non-emergency, under 4 minutes for emergency, across all Revun Canadian customers in Q1 2026.' },
+  { q: 'How fast is dispatch, really?', a: 'Median time from request submission to technician accepting is 18 minutes for non-emergency, under 4 minutes for emergency, across all Revun customers in Canada and the US in Q1 2026.' },
   { q: 'Can I export historical work orders?', a: 'Yes. Every work order, photo, invoice, and tenant rating is exportable as PDF, CSV, or JSON. Your data is yours.' },
   { q: 'What happens if Revun goes down during an emergency?', a: 'Work order intake has a failover SMS gateway: tenants text a number and the request lands in Revun when the service restores. Emergency contacts for every property are also stored offline in the tech app.' },
 ] as const

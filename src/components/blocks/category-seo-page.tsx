@@ -119,7 +119,7 @@ export function CategorySEOPage({ data }: { data: CategoryPageData }) {
             className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <Link
-              href="/platform/"
+              href="/features/"
               className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white transition-colors duration-150 hover:bg-[#005CE8]"
             >
               See the Platform

@@ -112,7 +112,7 @@ function HeroSection() {
           className="mt-8 flex flex-wrap items-center justify-center gap-4"
         >
           <Link
-            href="/platform/"
+            href="/features/"
             className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-8 font-heading text-sm font-semibold text-white transition-colors hover:bg-[#1260d1]"
           >
             See the Platform <ArrowRight className="ml-2 size-4" />
@@ -1029,7 +1029,7 @@ const COMMS_FEATURES = [
   { icon: Phone, title: 'Built-in Voice Calls', description: 'Call contacts directly from the app with caller ID, property context, and one-tap dialling.' },
   { icon: Video, title: 'Video Conferencing', description: 'Group video calls with screen sharing, recording, and automatic transcription.' },
   { icon: FileText, title: 'Auto-Transcription', description: 'Every call and voice note transcribed automatically. Search by keyword anytime.' },
-  { icon: Shield, title: 'Secure and Compliant', description: 'End-to-end encrypted messages and calls. Data stored on Canadian servers.' },
+  { icon: Shield, title: 'Secure and Compliant', description: 'End-to-end encrypted messages and calls. Data stored on Canadian and US servers, by jurisdiction.' },
   { icon: Bookmark, title: 'Saved Recordings', description: 'Recordings, summaries, and transcripts saved permanently for audit and review.' },
 ]
 
@@ -1089,7 +1089,7 @@ function CTASection() {
         </motion.p>
         <motion.div variants={revealItem} className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Link
-            href="/platform/"
+            href="/features/"
             className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-8 font-heading text-sm font-semibold text-white transition-colors hover:bg-[#1260d1]"
           >
             See the Platform <ArrowRight className="ml-2 size-4" />

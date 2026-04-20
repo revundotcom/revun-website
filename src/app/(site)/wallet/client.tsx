@@ -1018,7 +1018,7 @@ function WalletHero() {
   ]
   const stats = [
     { value: '$2.4B', label: 'Processed annually' },
-    { value: '10', label: 'Canadian provinces' },
+    { value: '63', label: 'Provinces + US states' },
     { value: '< 2s', label: 'Interac transfers' },
     { value: '100%', label: 'PIPEDA compliant' },
   ]
@@ -1155,7 +1155,7 @@ function WalletProblemSection() {
           Most rental money moves on <span className="text-[#176FEB]">scattered rails.</span>
         </h2>
         <p className="mt-4 max-w-2xl text-lg text-[#555860]">
-          Banks, inboxes, spreadsheets, accountants — each holds a piece of the story. Revun wallet pulls every cent onto one Canadian ledger, reconciled in real time.
+          Banks, inboxes, spreadsheets, accountants, each holds a piece of the story. Revun wallet pulls every cent onto one unified ledger across Canada and the US, reconciled in real time.
         </p>
       </motion.div>
 
@@ -1275,7 +1275,7 @@ function WalletTestimonials() {
   ]
   return (
     <SectionWrapper id="testimonials">
-      <SectionHeader eyebrow="Proof" title="Canadian operators are moving" highlight="money in seconds." description="Real property managers, real numbers — from Q1 2026 Revun Wallet customers." />
+      <SectionHeader eyebrow="Proof" title="Operators are moving" highlight="money in seconds." description="Real property managers across Canada and the US, real numbers, from Q1 2026 Revun Wallet customers." />
       <div ref={ref} className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
         {testimonials.map((t, i) => (
           <motion.div key={t.name} initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 * (i + 1), ease }}>
@@ -1341,7 +1341,7 @@ function WalletComparison() {
     { key: 'feature', label: 'Feature' },
     { key: 'revun', label: 'Revun', highlight: true },
     { key: 'stripe', label: 'Stripe / Square' },
-    { key: 'bank', label: 'Canadian Bank Tools' },
+    { key: 'bank', label: 'Bank Tools (CA + US)' },
     { key: 'rentmoola', label: 'RentMoola / e-Transfer' },
   ]
   const rows: WalletComparisonRow[] = [
@@ -1352,7 +1352,7 @@ function WalletComparison() {
     { feature: 'T5 / NR4 generation', revun: 'Auto-generated per owner', stripe: '1099 only (US)', bank: 'Manual tax paperwork', rentmoola: 'Not included', status: { revun: 'yes', stripe: 'no', bank: 'no', rentmoola: 'no' } },
     { feature: 'Receipt archive per transaction', revun: 'PDF + email, permanent', stripe: 'Generic receipt', bank: 'Statement only', rentmoola: 'Basic receipt', status: { revun: 'yes', stripe: 'partial', bank: 'partial', rentmoola: 'partial' } },
     { feature: 'Vendor / maintenance payouts', revun: '48h payout on completion', stripe: 'Generic payouts', bank: 'Manual transfer per vendor', rentmoola: 'Not included', status: { revun: 'yes', stripe: 'partial', bank: 'no', rentmoola: 'no' } },
-    { feature: 'Canadian compliance (FINTRAC, PIPEDA)', revun: 'Native, province-aware', stripe: 'US-first', bank: 'Yes, but not property-aware', rentmoola: 'Partial', status: { revun: 'yes', stripe: 'no', bank: 'partial', rentmoola: 'partial' } },
+    { feature: 'CA + US compliance (FINTRAC, PIPEDA, state laws)', revun: 'Native, province and state-aware', stripe: 'US-first', bank: 'Yes, but not property-aware', rentmoola: 'Partial', status: { revun: 'yes', stripe: 'no', bank: 'partial', rentmoola: 'partial' } },
   ]
   const StatusIcon = ({ status }: { status: WalletStatus }) => {
     if (status === 'yes') return <Check className="h-4 w-4 shrink-0 text-[#176FEB]" strokeWidth={3} />
@@ -1408,13 +1408,13 @@ function WalletComparison() {
 /* ================================================================== */
 
 const WALLET_FAQS = [
-  { q: 'Does Revun Wallet work with my existing Canadian bank?', a: 'Yes. Revun connects to every Canadian chartered bank (RBC, TD, BMO, Scotia, CIBC, National Bank, credit unions) for PAD, Interac e-Transfer, and EFT. Your funds settle directly into your bank.' },
+  { q: 'Does Revun Wallet work with my existing bank?', a: 'Yes. In Canada: every chartered bank (RBC, TD, BMO, Scotia, CIBC, National Bank, credit unions) for PAD, Interac e-Transfer, and EFT. In the US: every major bank for ACH and Same-Day ACH. Your funds settle directly into your bank.' },
   { q: 'How fast do transfers settle?', a: 'Interac e-Transfer settles in seconds. Pre-Authorized Debit (PAD) settles overnight (1-2 business days). Cards settle in 2-3 business days. Payouts to vendors arrive within 48h of work completion.' },
   { q: 'Is this trust-account compliant?', a: "Yes. Revun Wallet supports segregated trust accounts for property management companies, with real-time balance tracking per property and auto-generated trust reports for each province's regulatory body." },
   { q: 'Can I report rent to Equifax for tenants building credit?', a: 'Yes. We partner with the Landlord Credit Bureau (LCB) to report on-time rent payments to Equifax Canada. Tenants opt in, and every on-time PAD payment is reported automatically.' },
   { q: 'How does owner disbursement work?', a: "After rent is received and reconciled, Revun automatically calculates management fees, subtracts expenses, and schedules disbursements to each owner's bank. You approve the batch; Revun handles the rest." },
-  { q: 'What about taxes — T5s, NR4s?', a: 'Revun auto-generates T5 slips for Canadian owner distributions and NR4 for non-resident owners. Exported as CSV or PDF, pre-filled with CRA-formatted data for you or your accountant.' },
-  { q: 'Is my payment data safe?', a: 'Yes. Revun is PCI-DSS Level 1 certified and FINTRAC-registered. Card details are tokenized — raw card numbers never touch Revun servers. All data is encrypted at rest with AES-256 and stored on Canadian servers.' },
+  { q: 'What about taxes — T5s, NR4s?', a: 'Revun auto-generates T5 slips for Canadian owner distributions, NR4 for non-resident owners, and 1099-MISC for US owners. Exported as CSV or PDF, pre-filled with CRA or IRS-formatted data for you or your accountant.' },
+  { q: 'Is my payment data safe?', a: 'Yes. Revun is PCI-DSS Level 1 certified, FINTRAC-registered, and compliant with US state payment laws. Card details are tokenized, raw card numbers never touch Revun servers. All data is encrypted at rest with AES-256 and stored on Canadian and US servers by jurisdiction.' },
   { q: 'Can I export all transaction data?', a: 'Yes. Every payment, receipt, disbursement, and fee is exportable as CSV, PDF, or via API. Your data is yours — you can migrate to any system at any time.' },
 ] as const
 

@@ -134,8 +134,6 @@ const RESOURCES_ITEMS: NavChild[] = [
   { label: 'Resources', description: 'Articles, guides, and insights', href: '/resources/' },
   { label: 'How It Works', description: 'See the platform in action', href: '/how-revun-works/' },
   { label: 'Why Revun', description: 'What makes Revun different', href: '/why-revun/' },
-  { label: 'Mobile App', description: 'Run your portfolio from anywhere', href: '/download/' },
-  { label: 'Desktop Platform', description: 'The full OS for your team', href: '/platform/' },
 ]
 
 export const NAV_ITEMS: NavItem[] = [
@@ -392,7 +390,6 @@ const DARK_HERO_PAGES = [
   '/compare/',
   '/integrations/',
   '/industries/',
-  '/download/',
   '/how-revun-works/',
   '/what-is-revun/',
   '/furnished-rentals/',

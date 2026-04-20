@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Tenants | Pay Rent, Build Credit, Live Better | Revun',
     description:
-      'One app for every part of renting — payments, maintenance, messaging, documents, and credit reporting for tenants across Canada and the US.',
+      'One app for every part of renting: payments, maintenance, messaging, documents, and credit reporting for tenants across Canada and the US.',
     url: buildCanonicalUrl('/tenants'),
   },
 }
@@ -209,7 +209,7 @@ const coreFeatures = [
   {
     icon: CreditCard,
     title: 'Pay rent',
-    description: 'ACH, Interac, PAD, or card — with autopay and digital receipts.',
+    description: 'ACH, Interac, PAD, or card, with autopay and digital receipts.',
   },
   {
     icon: TrendingUp,
@@ -224,7 +224,7 @@ const coreFeatures = [
   {
     icon: FileText,
     title: 'Keep records',
-    description: 'Lease, inspections, receipts — archived for 7 years.',
+    description: 'Lease, inspections, receipts, archived for 7 years.',
   },
   {
     icon: MessageSquare,
@@ -245,27 +245,35 @@ const steps = [
     description:
       'Search apartments across Canada and the US with verified photos, clear pricing, amenities, and application requirements. Filter by move-in date, pet policy, and roommate preferences.',
     icon: Search,
+    time: 'Avg 8 min',
+    proof: 'Every listing is landlord-verified, no bait-and-switch pricing',
   },
   {
     step: '02',
     title: 'Apply in one flow',
     description:
-      'Submit a single application across multiple units. Upload ID, income proof, and references once — reuse for every application. Track screening status in real time.',
+      'Submit a single application across multiple units. Upload ID, income proof, and references once, reuse for every application. Track screening status in real time.',
     icon: ClipboardCheck,
+    time: 'Under 12 min',
+    proof: 'One profile, unlimited applications, full transparency on status',
   },
   {
     step: '03',
-    title: 'Sign & move in',
+    title: 'Sign and move in',
     description:
       'Review your lease in the portal, sign digitally with legally-binding e-signatures, complete your move-in checklist with photos, and receive your tenant portal access the moment keys change hands.',
     icon: Home,
+    time: 'Same day',
+    proof: 'Lease, keys, portal access, and move-in photos logged in one session',
   },
   {
     step: '04',
-    title: 'Live, and let Revun handle the rest',
+    title: 'Live, let Revun handle the rest',
     description:
-      'Pay rent on autopilot, submit maintenance with photos, stay in the loop with property updates, and build credit with every on-time payment — all from the same portal.',
+      'Pay rent on autopilot, submit maintenance with photos, stay in the loop with property updates, and build credit with every on-time payment, all from the same portal.',
     icon: Heart,
+    time: 'Ongoing',
+    proof: 'Rent, repairs, receipts, and credit, quietly working in the background',
   },
 ]
 
@@ -278,7 +286,7 @@ const testimonials = [
     rating: 5,
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&h=160&q=80',
     quote:
-      'My lease, the move-in photos from April 3rd, and every receipt since — all in one tab. I pulled my whole rent history in 30 seconds for my mortgage pre-approval. My broker actually thanked me for how clean the paperwork was.',
+      'My lease, the move-in photos from April 3rd, and every receipt since, all in one tab. I pulled my whole rent history in 30 seconds for my mortgage pre-approval. My broker actually thanked me for how clean the paperwork was.',
   },
   {
     name: 'James K.',
@@ -306,42 +314,42 @@ const faqs = [
   {
     question: 'Is Revun really free for tenants?',
     answer:
-      'Yes. Revun charges zero tenant fees. There are no platform fees on rent payments, no fees for using the portal, no fees for maintenance requests, no fees for document storage, and no fees for any feature ever. Revun is paid for entirely by property managers — not by you. The only cost you might encounter is a standard card processing fee if you choose to pay by credit card, and that fee goes to the card network, not Revun. Bank transfer, Interac e-Transfer, and PAD are always free.',
+      'Yes. Revun charges zero tenant fees. There are no platform fees on rent payments, no fees for using the portal, no fees for maintenance requests, no fees for document storage, and no fees for any feature ever. Revun is paid for entirely by property managers, not by you. The only cost you might encounter is a standard card processing fee if you choose to pay by credit card, and that fee goes to the card network, not Revun. Bank transfer, Interac e-Transfer, and PAD are always free.',
   },
   {
     question: 'How does rent reporting actually build my credit?',
     answer:
-      'When your property manager enables Revun, every on-time rent payment you make is automatically reported to Equifax and TransUnion — the same credit bureaus that determine your score for mortgages, auto loans, and credit cards. Each reported payment is treated similarly to a revolving credit account, so consistent on-time payments build a positive payment history. On average, Revun tenants see their credit score increase by 40+ points within six months of joining, though results vary based on your starting profile. Rent reporting is opt-out, never opt-in — you can disable it anytime from your portal settings.',
+      'When your property manager enables Revun, every on-time rent payment you make is automatically reported to Equifax and TransUnion, the same credit bureaus that determine your score for mortgages, auto loans, and credit cards. Each reported payment is treated similarly to a revolving credit account, so consistent on-time payments build a positive payment history. On average, Revun tenants see their credit score increase by 40+ points within six months of joining, though results vary based on your starting profile. Rent reporting is opt-out, never opt-in, and you can disable it anytime from your portal settings.',
   },
   {
     question: 'What payment methods are supported?',
     answer:
-      'Revun supports ACH bank transfer, Interac e-Transfer (Canada only), Pre-Authorized Debit (PAD), Visa, Mastercard, American Express, and major debit networks including Interac Debit. You can enable autopay to charge your preferred method on a schedule — monthly, bi-weekly, or custom dates for split-month rent. If you use multiple methods (for example, part of rent on autopay from a bank account and the rest on a credit card for rewards), Revun handles that too with the split-payment feature.',
+      'Revun supports ACH bank transfer, Interac e-Transfer (Canada only), Pre-Authorized Debit (PAD), Visa, Mastercard, American Express, and major debit networks including Interac Debit. You can enable autopay to charge your preferred method on a schedule: monthly, bi-weekly, or custom dates for split-month rent. If you use multiple methods (for example, part of rent on autopay from a bank account and the rest on a credit card for rewards), Revun handles that too with the split-payment feature.',
   },
   {
     question: 'How is my personal information protected?',
     answer:
-      'All financial transactions are processed through PCI DSS Level 1 providers — the highest tier of payment security. Your card numbers and bank details are never stored on Revun servers; they\u2019re tokenized by our processor. Messages between you and your property team are encrypted in transit with TLS 1.3 and at rest with AES-256. Revun operates under PIPEDA (Canada) and state-level privacy laws (US), and we never sell, rent, or share tenant data with advertisers, data brokers, or any third party for marketing purposes.',
+      'All financial transactions are processed through PCI DSS Level 1 providers, the highest tier of payment security. Your card numbers and bank details are never stored on Revun servers; they\u2019re tokenized by our processor. Messages between you and your property team are encrypted in transit with TLS 1.3 and at rest with AES-256. Revun operates under PIPEDA (Canada) and state-level privacy laws (US), and we never sell, rent, or share tenant data with advertisers, data brokers, or any third party for marketing purposes.',
   },
   {
     question: 'Can I access my lease and receipts after I move out?',
     answer:
-      'Yes. Your document vault remains accessible for at least seven years after your tenancy ends — long enough to cover tax filing, dispute resolution, and future rental applications. You can download lease copies, signed addendums, move-in checklists, inspection reports, every rent receipt, and your full payment history at any time. Most tenants find this invaluable when applying to a new rental and needing proof of rent history.',
+      'Yes. Your document vault remains accessible for at least seven years after your tenancy ends. That is long enough to cover tax filing, dispute resolution, and future rental applications. You can download lease copies, signed addendums, move-in checklists, inspection reports, every rent receipt, and your full payment history at any time. Most tenants find this invaluable when applying to a new rental and needing proof of rent history.',
   },
   {
     question: 'My landlord isn\u2019t using Revun yet. Can I still sign up?',
     answer:
-      'Revun is activated by property managers, not tenants directly — this is how we guarantee security and keep the platform free for you. You can recommend Revun to your landlord in about 60 seconds using our recommendation form, which sends them a custom onboarding link. Most landlords onboard within a week of receiving a tenant recommendation because tenant demand is the #1 reason property managers switch to Revun.',
+      'Revun is activated by property managers, not tenants directly. This is how we guarantee security and keep the platform free for you. You can recommend Revun to your landlord in about 60 seconds using our recommendation form, which sends them a custom onboarding link. Most landlords onboard within a week of receiving a tenant recommendation because tenant demand is the #1 reason property managers switch to Revun.',
   },
   {
     question: 'Does Revun work equally in Canada and the United States?',
     answer:
-      'Yes. Revun is built specifically for North American renters. Canadian tenants get province-specific compliance (Ontario LTB forms, BC RTB rules, Quebec TAL requirements, Alberta RTDRS workflows, and more), Interac e-Transfer support, and PAD payments. US tenants get state-specific lease templates, ACH and card support, and all major US credit bureau reporting. You can even rent across the border — moving from Toronto to Austin? Your rent history follows you.',
+      'Yes. Revun is built specifically for North American renters. Canadian tenants get province-specific compliance (Ontario LTB forms, BC RTB rules, Quebec TAL requirements, Alberta RTDRS workflows, and more), Interac e-Transfer support, and PAD payments. US tenants get state-specific lease templates, ACH and card support, and all major US credit bureau reporting. You can even rent across the border. Moving from Toronto to Austin? Your rent history follows you.',
   },
   {
     question: 'Do I need to download a mobile app?',
     answer:
-      'No. The full tenant portal runs in any modern browser — Chrome, Safari, Firefox, or Edge on desktop, tablet, or mobile. We also offer native iOS and Android apps for push notifications on payment reminders, maintenance updates, and new messages. Most tenants use both: desktop for reviewing leases and documents, mobile for payments and maintenance on the go.',
+      'No. The full tenant portal runs in any modern browser: Chrome, Safari, Firefox, or Edge on desktop, tablet, or mobile. We also offer native iOS and Android apps for push notifications on payment reminders, maintenance updates, and new messages. Most tenants use both: desktop for reviewing leases and documents, mobile for payments and maintenance on the go.',
   },
 ]
 
@@ -349,7 +357,7 @@ function AppStoreBadges({ className }: { className?: string }) {
   return (
     <div className={`flex items-center gap-3 ${className ?? ''}`}>
       <Link
-        href="/download/"
+        href="/features/tenant-portal/"
         className="inline-flex items-center gap-2.5 rounded-xl bg-[#0A1628] px-4 py-2.5 text-white transition-transform hover:scale-[1.02]"
         aria-label="Download on the App Store"
       >
@@ -360,7 +368,7 @@ function AppStoreBadges({ className }: { className?: string }) {
         </span>
       </Link>
       <Link
-        href="/download/"
+        href="/features/tenant-portal/"
         className="inline-flex items-center gap-2.5 rounded-xl bg-[#0A1628] px-4 py-2.5 text-white transition-transform hover:scale-[1.02]"
         aria-label="Get it on Google Play"
       >
@@ -395,7 +403,7 @@ export default function TenantsPage() {
         dangerouslySetInnerHTML={{
           __html: sanitizeJsonLd(
             buildWebPageSchema({
-              name: 'Tenants — Your Complete Rental Portal',
+              name: 'Tenants: Your Complete Rental Portal',
               description:
                 'One secure portal for renters across Canada and the US: pay rent, request maintenance, build credit, and manage documents.',
               url: 'https://revun.com/tenants/',
@@ -431,7 +439,7 @@ export default function TenantsPage() {
             <RevealOnScroll>
               <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#176FEB]/20 bg-white/80 px-3 py-1.5 text-xs font-medium text-[#176FEB] backdrop-blur-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#176FEB]" />
-                For Renters · 🇨🇦 Canada · 🇺🇸 United States
+                Built for Canada and the United States
               </div>
 
               <h1 className="font-display text-4xl font-normal leading-[1.02] tracking-tight text-[#0A1628] text-balance md:text-5xl lg:text-6xl">
@@ -439,13 +447,38 @@ export default function TenantsPage() {
                 <span className="relative inline-block">
                   <span className="relative z-10 italic text-[#176FEB]">redesigned</span>
                   <span className="absolute inset-x-0 bottom-1 h-3 bg-[#176FEB]/15 -z-0" aria-hidden="true" />
-                </span>
-                .
+                </span>.
               </h1>
 
+              {/* Rotating audiences accent */}
+              <div className="mt-5 flex items-center gap-3">
+                <span className="font-heading text-[11px] font-semibold uppercase tracking-[0.18em] text-[#94A3B8]">
+                  Built for
+                </span>
+                <RotatingBadge phrases={ROTATING_AUDIENCES} />
+              </div>
+
               <p className="mt-5 max-w-xl text-base leading-relaxed text-[#475569] md:text-lg">
-                One portal for everything tenants need — pay rent, build credit, request maintenance, and manage your lease from one place.
+                Pay rent, build credit, track maintenance, and manage your entire lease from a single portal. No email chains, no lost receipts, no platform fees for tenants.
               </p>
+
+              {/* Inline stat strip */}
+              <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 font-heading text-[11px] text-[#64748B]">
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="font-display text-base text-[#0A1628]">200K+</span>
+                  <span className="uppercase tracking-[0.12em]">renters</span>
+                </span>
+                <span className="h-3 w-px bg-[#E5E7EB]" aria-hidden="true" />
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="font-display text-base text-[#0A1628]">$2.4B</span>
+                  <span className="uppercase tracking-[0.12em]">processed</span>
+                </span>
+                <span className="h-3 w-px bg-[#E5E7EB]" aria-hidden="true" />
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="font-display text-base text-[#0A1628]">$0</span>
+                  <span className="uppercase tracking-[0.12em]">tenant fees</span>
+                </span>
+              </div>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
@@ -512,23 +545,23 @@ export default function TenantsPage() {
       </section>
 
       {/* ═════ Proof Strip ═════ */}
-      <section className="border-y border-[#E5E7EB] bg-white py-10">
+      <section className="border-y border-[#E5E7EB] bg-white py-12">
         <div className="mx-auto max-w-7xl px-6">
           <RevealOnScroll stagger={0.08}>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-y-8 sm:grid-cols-2 sm:divide-x sm:divide-[#E5E7EB] lg:grid-cols-4">
               {proofPoints.map((p) => (
                 <div
                   key={p.label}
-                  className="flex flex-col items-start gap-1 rounded-xl border border-[#E5E7EB] bg-white/80 px-5 py-4"
+                  className="flex flex-col items-start gap-1.5 sm:px-8 sm:first:pl-0 lg:first:pl-0"
                 >
-                  <div className="flex items-baseline gap-1 font-display text-2xl font-bold tabular-nums text-[#0A1628] md:text-3xl">
+                  <span className="font-heading text-[10px] font-semibold uppercase tracking-[0.16em] text-[#176FEB]">
+                    {p.label}
+                  </span>
+                  <div className="flex items-baseline gap-1 font-display text-[34px] font-normal leading-none tabular-nums text-[#0A1628] md:text-[40px]">
                     {p.value}
                     <span className="text-[#176FEB]">{p.suffix}</span>
                   </div>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[#176FEB]">
-                    {p.label}
-                  </span>
-                  <span className="text-[11px] text-[#64748B]">{p.caption}</span>
+                  <span className="text-[12px] text-[#64748B]">{p.caption}</span>
                 </div>
               ))}
             </div>
@@ -632,7 +665,7 @@ export default function TenantsPage() {
                   <span className="italic text-[#176FEB]">however you want</span>.
                 </h2>
                 <p className="mt-5 text-[#475569]">
-                  Revun supports every way North Americans move money. Pay once or schedule autopay. Split rent between a bank account and a rewards card. Switch methods any month. Receipts are digital, instant, and archived forever — so you have proof the moment your landlord asks.
+                  Revun supports every way North Americans move money. Pay once or schedule autopay. Split rent between a bank account and a rewards card. Switch methods any month. Receipts are digital, instant, and archived forever, so you have proof the moment your landlord asks.
                 </p>
 
                 <ul className="mt-7 space-y-3.5">
@@ -730,14 +763,14 @@ export default function TenantsPage() {
                 <p className="mt-5 text-[#475569]">
                   Revun reports every on-time rent payment to{' '}
                   <span className="font-semibold text-[#0A1628]">Equifax</span> and{' '}
-                  <span className="font-semibold text-[#0A1628]">TransUnion</span> — the same bureaus that decide your mortgage, auto loan, and credit card rates. Reporting starts the month your property manager activates Revun, and you can backdate up to 24 months of verified rent history.
+                  <span className="font-semibold text-[#0A1628]">TransUnion</span>, the same bureaus that decide your mortgage, auto loan, and credit card rates. Reporting starts the month your property manager activates Revun, and you can backdate up to 24 months of verified rent history.
                 </p>
 
                 <ul className="mt-7 space-y-3.5">
-                  <FeatureBullet icon={Zap} label="Automatic reporting — zero extra steps for tenants" />
+                  <FeatureBullet icon={Zap} label="Automatic reporting, zero extra steps for tenants" />
                   <FeatureBullet icon={Calendar} label="Up to 24 months of backdated rent history" />
                   <FeatureBullet icon={MapPin} label="Works in both Canada and the United States" />
-                  <FeatureBullet icon={ShieldCheck} label="Optional negative reporting — you stay in control" />
+                  <FeatureBullet icon={ShieldCheck} label="Optional negative reporting, you stay in control" />
                 </ul>
 
                 <div className="mt-8 inline-flex items-center gap-2 rounded-xl bg-[#F9FAFB] px-4 py-3 text-sm text-[#475569]">
@@ -767,7 +800,7 @@ export default function TenantsPage() {
                   <span className="italic text-[#176FEB]">It gets fixed.</span>
                 </h2>
                 <p className="mt-5 text-[#475569]">
-                  No more late-night texts to your landlord hoping someone follows up. Open the app, snap a photo, add a one-line description, and your property manager gets a structured ticket with everything they need. You see the whole thing happen in real time — triage, assignment, ETA, and completion notes.
+                  No more late-night texts to your landlord hoping someone follows up. Open the app, snap a photo, add a one-line description, and your property manager gets a structured ticket with everything they need. You see the whole thing happen in real time: triage, assignment, ETA, and completion notes.
                 </p>
 
                 <ul className="mt-7 space-y-3.5">
@@ -859,7 +892,7 @@ export default function TenantsPage() {
                     {[
                       { name: 'Lease Agreement', tag: 'Active', color: 'text-[#047857]' },
                       { name: 'Move-in Inspection', tag: 'Signed', color: 'text-[#176FEB]' },
-                      { name: 'Receipt — Apr 2025', tag: 'Latest', color: 'text-[#64748B]' },
+                      { name: 'Receipt · Apr 2025', tag: 'Latest', color: 'text-[#64748B]' },
                     ].map((d) => (
                       <div key={d.name} className="flex items-center justify-between">
                         <span className="flex items-center gap-1.5 text-[11px] font-medium text-[#0A1628]">
@@ -903,7 +936,7 @@ export default function TenantsPage() {
                   </p>
                   <p className="mt-1.5 text-sm text-[#475569]">
                     Documents stay accessible for{' '}
-                    <span className="font-semibold text-[#0A1628]">7 years</span> after your tenancy ends — long enough to cover tax filing, dispute resolution, and future rental applications.
+                    <span className="font-semibold text-[#0A1628]">7 years</span> after your tenancy ends. Long enough to cover tax filing, dispute resolution, and future rental applications.
                   </p>
                 </div>
               </div>
@@ -912,44 +945,76 @@ export default function TenantsPage() {
         </div>
       </Section>
 
-      {/* ═════ Process — 4 steps ═════ */}
+      {/* ═════ Process — editorial rail, no cards ═════ */}
       <Section background="off">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-6xl px-6">
           <RevealOnScroll>
             <SectionHeader
               eyebrow="How it works"
-              title="From search to settled — in"
+              title="From search to settled, in"
               highlight="four steps"
-              description="Revun guides you through every moment of the rental experience, from the first listing view to the last lease renewal."
+              description="Every part of the rental lifecycle handled from one portal. No email chains, no lost paperwork, no guessing where you stand."
             />
           </RevealOnScroll>
 
-          <RevealOnScroll stagger={0.12}>
+          <RevealOnScroll stagger={0.08}>
             <div className="relative">
+              {/* Continuous vertical rail threading through circle badges, desktop only */}
               <div
-                className="absolute left-0 right-0 top-[4.75rem] hidden h-[2px] bg-gradient-to-r from-transparent via-[#176FEB]/30 to-transparent lg:block"
+                className="pointer-events-none absolute left-[27px] top-0 bottom-0 hidden w-px bg-gradient-to-b from-transparent via-[#E5E7EB] to-transparent md:block"
                 aria-hidden="true"
               />
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+
+              <div className="flex flex-col divide-y divide-[#E5E7EB] border-y border-[#E5E7EB]">
                 {steps.map((s) => {
                   const Icon = s.icon
                   return (
                     <div
                       key={s.step}
-                      className="relative rounded-3xl border border-[#E5E7EB] bg-white p-7 transition-all duration-300 hover:border-[#176FEB]/30 hover:shadow-card-hover"
+                      className="group relative grid grid-cols-1 gap-5 py-9 md:grid-cols-[140px_1fr_220px] md:items-start md:gap-10 md:py-12"
                     >
-                      <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#176FEB]">
-                        Step {s.step}
-                      </span>
-                      <div className="relative mt-3 mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#E8F2FE] text-[#176FEB]">
-                        <Icon className="h-6 w-6" />
+                      {/* Left — circle badge + step label */}
+                      <div className="flex items-center gap-4 md:flex-col md:items-start md:gap-4">
+                        <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white ring-1 ring-[#E5E7EB] shadow-[0_0_0_4px_#F5F6F8] transition-all duration-300 group-hover:ring-[#176FEB]">
+                          <span className="font-display text-xl font-normal tabular-nums text-[#0A1628] transition-colors duration-300 group-hover:text-[#176FEB]">
+                            {s.step}
+                          </span>
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-[#E5E7EB] bg-white px-2.5 py-1 font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-[#64748B]">
+                          <Clock className="h-3 w-3 text-[#176FEB]" aria-hidden="true" />
+                          {s.time}
+                        </span>
                       </div>
-                      <h3 className="font-heading text-lg font-semibold text-[#0A1628]">
-                        {s.title}
-                      </h3>
-                      <p className="mt-2.5 text-sm leading-relaxed text-[#475569]">
-                        {s.description}
-                      </p>
+
+                      {/* Middle — icon + title + description + proof */}
+                      <div className="md:pt-2">
+                        <div className="flex items-center gap-2.5">
+                          <Icon className="h-[18px] w-[18px] shrink-0 text-[#176FEB]" strokeWidth={2} aria-hidden="true" />
+                          <h3 className="font-display text-xl font-normal text-[#0A1628] md:text-[26px]">
+                            {s.title}
+                          </h3>
+                        </div>
+                        <p className="mt-3 text-[14px] leading-relaxed text-[#475569] md:max-w-[540px]">
+                          {s.description}
+                        </p>
+                        <div className="mt-4 flex items-start gap-1.5 font-heading text-[11.5px] font-medium leading-relaxed text-[#475569]">
+                          <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#176FEB]" strokeWidth={2.2} aria-hidden="true" />
+                          <span>{s.proof}</span>
+                        </div>
+                      </div>
+
+                      {/* Right — what Revun handles, inline data strip */}
+                      <div className="flex flex-col gap-1 border-l-0 border-t border-[#F1F3F5] pt-5 md:border-l md:border-t-0 md:pl-7 md:pt-2">
+                        <span className="font-heading text-[10px] font-semibold uppercase tracking-[0.16em] text-[#176FEB]">
+                          Handled by Revun
+                        </span>
+                        <p className="mt-1.5 font-heading text-[13px] leading-relaxed text-[#0A1628]">
+                          {s.step === '01' && 'Verified photos, unit availability, rent-regulation zone, and application requirements pulled automatically.'}
+                          {s.step === '02' && 'ID verification, credit pull, income proof via Flinks or Plaid, reference checks, screening decision.'}
+                          {s.step === '03' && 'Lease templates per province or state, e-signature, move-in inspection, deposit handling, portal provisioning.'}
+                          {s.step === '04' && 'Autopay, reminders, receipts, maintenance routing, document archive, credit reporting, renewal prompts.'}
+                        </p>
+                      </div>
                     </div>
                   )
                 })}
@@ -959,9 +1024,161 @@ export default function TenantsPage() {
         </div>
       </Section>
 
-      {/* ═════ Testimonials ═════ */}
+      {/* ═════ Your first 30 days — magazine 2-col spread ═════ */}
       <Section background="white">
         <div className="mx-auto max-w-7xl px-6">
+          <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+            {/* Left — portrait photograph with floating day markers */}
+            <RevealOnScroll>
+              <div className="relative">
+                <div
+                  className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-[#176FEB]/15 via-[#4A91F0]/8 to-transparent blur-3xl"
+                  aria-hidden="true"
+                />
+
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl shadow-[0_25px_60px_-25px_rgba(10,22,40,0.25)]">
+                  <Image
+                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85"
+                    alt="Freshly moved-in apartment with natural light"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-[#0A1628]/50 via-transparent to-transparent"
+                    aria-hidden="true"
+                  />
+
+                  {/* Caption inside image */}
+                  <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between text-white">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 font-heading text-[10px] font-semibold uppercase tracking-[0.14em] backdrop-blur-md">
+                      <Calendar className="h-3 w-3" />
+                      Day 0 to Day 30
+                    </span>
+                    <span className="font-heading text-[10px] text-white/80">Move-in to milestone</span>
+                  </div>
+                </div>
+
+                {/* Floating marker — Day 1 (top-left) */}
+                <div className="absolute -top-3 -left-3 hidden rounded-2xl border border-[#E5E7EB] bg-white px-3 py-2.5 shadow-[0_12px_30px_-12px_rgba(10,22,40,0.2)] md:block">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#176FEB] text-white">
+                      <Camera className="h-4 w-4" />
+                    </span>
+                    <div>
+                      <p className="font-heading text-[9px] font-semibold uppercase tracking-[0.14em] text-[#94A3B8]">
+                        Day 1
+                      </p>
+                      <p className="font-heading text-[12px] font-semibold text-[#0A1628]">
+                        Move-in photos logged
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating marker — Day 15 (mid-right) */}
+                <div className="absolute top-1/2 -right-4 hidden -translate-y-1/2 rounded-2xl border border-[#E5E7EB] bg-white px-3 py-2.5 shadow-[0_12px_30px_-12px_rgba(10,22,40,0.2)] md:block">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#176FEB] text-white">
+                      <CreditCard className="h-4 w-4" />
+                    </span>
+                    <div>
+                      <p className="font-heading text-[9px] font-semibold uppercase tracking-[0.14em] text-[#94A3B8]">
+                        Day 15
+                      </p>
+                      <p className="font-heading text-[12px] font-semibold text-[#0A1628]">
+                        Autopay on, $0 fees
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating marker — Day 30 (bottom-left) */}
+                <div className="absolute -bottom-4 -left-3 hidden rounded-2xl border border-[#E5E7EB] bg-white px-3 py-2.5 shadow-[0_12px_30px_-12px_rgba(10,22,40,0.2)] md:block">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#176FEB] text-white">
+                      <TrendingUp className="h-4 w-4" />
+                    </span>
+                    <div>
+                      <p className="font-heading text-[9px] font-semibold uppercase tracking-[0.14em] text-[#94A3B8]">
+                        Day 30
+                      </p>
+                      <p className="font-heading text-[12px] font-semibold text-[#0A1628]">
+                        Credit reported, +4 pts
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </RevealOnScroll>
+
+            {/* Right — editorial narrative with inline day callouts */}
+            <RevealOnScroll>
+              <div>
+                <span className="inline-flex items-center gap-2 rounded-full bg-[#E8F2FE] px-3 py-1 font-heading text-[11px] font-semibold uppercase tracking-[0.14em] text-[#176FEB]">
+                  <Calendar className="h-3.5 w-3.5" />
+                  Your first 30 days
+                </span>
+
+                <h2 className="mt-5 font-display text-3xl font-normal leading-[1.05] text-[#0A1628] text-balance md:text-5xl lg:text-[56px]">
+                  Moving in to settled in,{' '}
+                  <span className="italic text-[#176FEB]">without the chaos</span>.
+                </h2>
+
+                <p className="mt-5 text-[15px] leading-relaxed text-[#475569] md:text-[17px]">
+                  Keys change hands on the first day. Your credit score moves on the thirtieth. Everything between happens quietly, on the same portal, without a single email thread.
+                </p>
+
+                {/* Inline day callouts — running editorial text, not a list */}
+                <dl className="mt-10 space-y-5 border-t border-[#E5E7EB] pt-8">
+                  {[
+                    { day: '00', title: 'Keys and portal access, together.', body: 'Lease, deposit, utilities, and emergency contacts arrive in one sequence. Two minutes to activate.' },
+                    { day: '03', title: 'First request routed in seconds.', body: 'A photo, one line, an auto-category. Tech name and ETA confirmed before the knock. Under six hours on average.' },
+                    { day: '07', title: 'The paperwork quietly files itself.', body: 'Addendums, pet docs, parking, move-in inspection, all signed and archived against the lease.' },
+                    { day: '30', title: 'Credit bureaus hear about you.', body: 'Your first reported on-time payment goes to Equifax and TransUnion. Plus four points on average, opt-out anytime.' },
+                  ].map((m) => (
+                    <div key={m.day} className="grid grid-cols-[56px_1fr] items-baseline gap-4">
+                      <dt className="font-display text-2xl font-normal leading-none tabular-nums text-[#176FEB]">
+                        {m.day}
+                      </dt>
+                      <dd>
+                        <p className="font-heading text-[14.5px] font-semibold text-[#0A1628]">
+                          {m.title}
+                        </p>
+                        <p className="mt-1.5 text-[13.5px] leading-relaxed text-[#475569]">
+                          {m.body}
+                        </p>
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+
+                {/* Footer stat strip, no chrome */}
+                <div className="mt-10 flex flex-wrap items-baseline gap-x-6 gap-y-3 border-t border-[#E5E7EB] pt-6 font-heading text-[11px] uppercase tracking-[0.14em] text-[#64748B]">
+                  <span className="inline-flex items-baseline gap-1.5">
+                    <span className="font-display text-base normal-case tracking-normal text-[#0A1628]">6</span>
+                    milestones
+                  </span>
+                  <span className="h-3 w-px bg-[#E5E7EB]" aria-hidden="true" />
+                  <span className="inline-flex items-baseline gap-1.5">
+                    <span className="font-display text-base normal-case tracking-normal text-[#0A1628]">$0</span>
+                    setup cost
+                  </span>
+                  <span className="h-3 w-px bg-[#E5E7EB]" aria-hidden="true" />
+                  <span className="inline-flex items-baseline gap-1.5">
+                    <span className="font-display text-base normal-case tracking-normal text-[#0A1628]">30d</span>
+                    to first credit bump
+                  </span>
+                </div>
+              </div>
+            </RevealOnScroll>
+          </div>
+        </div>
+      </Section>
+
+      {/* ═════ Testimonials — editorial quote stack ═════ */}
+      <Section background="white">
+        <div className="mx-auto max-w-5xl px-6">
           <RevealOnScroll>
             <SectionHeader
               eyebrow="Tenant voices"
@@ -972,41 +1189,41 @@ export default function TenantsPage() {
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.1}>
-            <div className="grid gap-5 md:grid-cols-3">
+            <div className="flex flex-col divide-y divide-[#E5E7EB] border-y border-[#E5E7EB]">
               {testimonials.map((t) => (
-                <div
+                <figure
                   key={t.name}
-                  className="relative overflow-hidden rounded-3xl border border-[#E5E7EB] bg-white p-7 transition-all duration-300 hover:border-[#176FEB]/30 hover:shadow-card-hover"
+                  className="grid grid-cols-1 gap-6 py-10 md:grid-cols-[160px_1fr] md:gap-10 md:py-12"
                 >
-                  <Quote className="absolute -top-2 -right-2 h-24 w-24 text-[#176FEB]/[0.06]" aria-hidden="true" />
-                  <div className="relative">
-                    <div className="flex items-center gap-1">
-                      {Array.from({ length: t.rating }).map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-[#F59E0B] text-[#F59E0B]" />
-                      ))}
+                  {/* Left — avatar + identity */}
+                  <div className="flex items-start gap-4 md:flex-col md:items-start md:gap-4">
+                    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-1 ring-[#E5E7EB] md:h-16 md:w-16">
+                      <Image src={t.avatar} alt={t.name} fill sizes="64px" className="object-cover" />
                     </div>
-
-                    <p className="mt-4 text-[15px] leading-relaxed text-[#0A1628]">
-                      &ldquo;{t.quote}&rdquo;
-                    </p>
-
-                    <div className="mt-6 flex items-center gap-3 border-t border-[#E5E7EB] pt-5">
-                      <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full">
-                        <Image src={t.avatar} alt={t.name} fill sizes="44px" className="object-cover" />
-                      </div>
-                      <div>
-                        <p className="font-heading text-sm font-semibold text-[#0A1628]">{t.name}</p>
-                        <p className="flex items-center gap-1 text-xs text-[#64748B]">
-                          <MapPin className="h-3 w-3" />
-                          {t.location} · {t.since}
-                        </p>
-                        <p className="mt-0.5 text-[11px] text-[#94A3B8]">
-                          Managed by {t.managedBy}
-                        </p>
+                    <div className="min-w-0">
+                      <p className="font-heading text-sm font-semibold text-[#0A1628]">{t.name}</p>
+                      <p className="mt-0.5 flex items-center gap-1 text-[11px] text-[#64748B]">
+                        <MapPin className="h-3 w-3" aria-hidden="true" />
+                        {t.location}
+                      </p>
+                      <p className="mt-0.5 text-[11px] text-[#94A3B8]">{t.since}</p>
+                      <p className="mt-2 text-[11px] text-[#94A3B8]">Managed by {t.managedBy}</p>
+                      <div className="mt-3 flex items-center gap-0.5">
+                        {Array.from({ length: t.rating }).map((_, i) => (
+                          <Star key={i} className="h-3.5 w-3.5 fill-[#F59E0B] text-[#F59E0B]" aria-hidden="true" />
+                        ))}
                       </div>
                     </div>
                   </div>
-                </div>
+
+                  {/* Right — quote */}
+                  <div>
+                    <Quote className="h-6 w-6 text-[#176FEB]/30" aria-hidden="true" />
+                    <blockquote className="mt-3 font-display text-[20px] font-normal leading-[1.45] text-[#0A1628] md:text-[22px]">
+                      {t.quote}
+                    </blockquote>
+                  </div>
+                </figure>
               ))}
             </div>
           </RevealOnScroll>
@@ -1040,11 +1257,11 @@ export default function TenantsPage() {
                     <span className="italic text-[#176FEB]">get along with</span>.
                   </h2>
                   <p className="mt-4 text-[#475569]">
-                    Before you sign a lease together, know if you&rsquo;re compatible. Our short quiz covers sleep schedule, cleanliness, guests, noise tolerance, and pets. Match with verified profiles — never anonymous posts — and split rent automatically from day one.
+                    Before you sign a lease together, know if you&rsquo;re compatible. Our short quiz covers sleep schedule, cleanliness, guests, noise tolerance, and pets. Match with verified profiles, never anonymous posts, and split rent automatically from day one.
                   </p>
                   <ul className="mt-6 space-y-3">
                     <FeatureBullet icon={Users} label="Compatibility match on habits, schedule, and lifestyle" />
-                    <FeatureBullet icon={BadgeCheck} label="Verified profiles with ID confirmation — no catfishing" />
+                    <FeatureBullet icon={BadgeCheck} label="Verified profiles with ID confirmation, no catfishing" />
                     <FeatureBullet icon={CreditCard} label="Automatic rent splitting from the first payment" />
                   </ul>
                   <Link
@@ -1061,61 +1278,297 @@ export default function TenantsPage() {
         </div>
       </Section>
 
-      {/* ═════ Privacy wall ═════ */}
+      {/* ═════ Fee breakdown — editorial comparison with savings hero ═════ */}
       <Section background="white">
         <div className="mx-auto max-w-6xl px-6">
           <RevealOnScroll>
             <SectionHeader
-              eyebrow="Privacy & Security"
+              eyebrow="What it costs you"
+              title="Pay rent, pay"
+              highlight="nothing to pay rent"
+              description="Most rent-payment platforms tax tenants for the privilege. Revun does not. Side-by-side on a $2,000 monthly rent, across a full year of tenancy."
+            />
+          </RevealOnScroll>
+
+          {/* Savings hero — giant number, visual bar, inline context */}
+          <RevealOnScroll>
+            <div className="mb-10 overflow-hidden rounded-3xl bg-gradient-to-br from-[#176FEB] to-[#0B5AD4] p-8 text-white md:p-10">
+              <div className="grid gap-8 md:grid-cols-[1.2fr_1fr] md:items-end">
+                <div>
+                  <p className="font-heading text-[11px] font-semibold uppercase tracking-[0.18em] text-white/75">
+                    Average renter saves
+                  </p>
+                  <div className="mt-3 flex items-baseline gap-2">
+                    <span className="font-display text-[72px] font-normal leading-none tabular-nums md:text-[96px]">
+                      <CountUp value={244} prefix="$" />
+                    </span>
+                    <span className="font-heading text-base font-semibold text-white/80">
+                      per year
+                    </span>
+                  </div>
+                  <p className="mt-3 max-w-md text-[14px] leading-relaxed text-white/85">
+                    That is the median tenant saving, versus switching between a rent portal, a credit-reporting app, and a document storage service. On Revun, every line below is zero.
+                  </p>
+                </div>
+
+                {/* Visual bar comparison */}
+                <div className="relative rounded-2xl bg-white/10 p-5 backdrop-blur-sm">
+                  <p className="font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-white/75">
+                    Annual tenant cost, by provider
+                  </p>
+                  <div className="mt-4 space-y-3">
+                    {[
+                      { name: 'Rent portal A', amount: '$244', width: '100%', muted: true },
+                      { name: 'Rent portal B', amount: '$192', width: '78%', muted: true },
+                      { name: 'Rent portal C', amount: '$156', width: '64%', muted: true },
+                      { name: 'Revun', amount: '$0', width: '2%', muted: false },
+                    ].map((b) => (
+                      <div key={b.name}>
+                        <div className="flex items-baseline justify-between">
+                          <span className="font-heading text-[11px] font-medium text-white/85">
+                            {b.name}
+                          </span>
+                          <span className={`font-display text-sm tabular-nums ${b.muted ? 'text-white/75' : 'text-white'}`}>
+                            {b.amount}
+                          </span>
+                        </div>
+                        <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-white/15">
+                          <div
+                            className={`h-full rounded-full ${b.muted ? 'bg-white/50' : 'bg-white'}`}
+                            style={{ width: b.width }}
+                            aria-hidden="true"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </RevealOnScroll>
+
+          <RevealOnScroll>
+            <div className="overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white">
+              <div className="grid grid-cols-[1.4fr_1fr_1fr] gap-4 border-b border-[#E5E7EB] bg-[#F8F9FA] px-5 py-3.5 md:px-7">
+                <span className="font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-[#64748B]">
+                  Tenant cost
+                </span>
+                <span className="text-right font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-[#64748B]">
+                  Typical portal
+                </span>
+                <span className="text-right font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-[#176FEB]">
+                  Revun
+                </span>
+              </div>
+
+              <div className="divide-y divide-[#F1F3F5]">
+                {[
+                  { label: 'ACH bank transfer', typical: '$3.00 / txn', revun: '$0' },
+                  { label: 'Interac e-Transfer', typical: '$1.50 to $5.00', revun: '$0' },
+                  { label: 'Pre-Authorized Debit (PAD)', typical: 'Setup fee + per txn', revun: '$0' },
+                  { label: 'Credit or debit card', typical: '2.9% + $0.30 platform', revun: '0% platform fee' },
+                  { label: 'Autopay subscription', typical: '$1.95 / month', revun: '$0' },
+                  { label: 'Digital receipt copy', typical: '$0.50 each', revun: '$0' },
+                  { label: 'Document vault access', typical: '$5 to $10 / month', revun: '$0' },
+                  { label: 'Maintenance requests', typical: '$0 to $1.95', revun: '$0' },
+                  { label: 'Credit rent reporting', typical: '$6.95 / month', revun: '$0' },
+                ].map((row) => (
+                  <div
+                    key={row.label}
+                    className="grid grid-cols-[1.4fr_1fr_1fr] gap-4 px-5 py-3.5 md:px-7"
+                  >
+                    <span className="font-heading text-[13px] text-[#0A1628]">{row.label}</span>
+                    <span className="text-right font-heading text-[13px] text-[#64748B] line-through decoration-[#CBD5E1]">
+                      {row.typical}
+                    </span>
+                    <span className="text-right font-heading text-[13px] font-semibold text-[#176FEB]">
+                      {row.revun}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-[1.4fr_1fr_1fr] gap-4 border-t border-[#E5E7EB] bg-[#0A1628] px-5 py-5 text-white md:px-7">
+                <span className="font-heading text-[12px] font-semibold">
+                  Typical annual tenant cost
+                </span>
+                <span className="text-right font-display text-[20px] font-normal tabular-nums text-white/70 line-through decoration-white/30">
+                  $244+
+                </span>
+                <span className="text-right font-display text-[24px] font-normal tabular-nums text-[#4A91F0]">
+                  $0
+                </span>
+              </div>
+            </div>
+          </RevealOnScroll>
+
+          <RevealOnScroll>
+            <p className="mt-5 text-center text-[12px] text-[#64748B]">
+              Card-network processing (around 2.9%) is charged by Visa, Mastercard, or AMEX directly, never by Revun. Every bank rail (PAD, Interac, ACH) is free to tenants forever.
+            </p>
+          </RevealOnScroll>
+        </div>
+      </Section>
+
+      {/* ═════ Integration partners — editorial strip with visual marks ═════ */}
+      <Section background="off">
+        <div className="mx-auto max-w-6xl px-6">
+          <RevealOnScroll>
+            <SectionHeader
+              eyebrow="Powered by trusted infrastructure"
+              title="Connected to the systems"
+              highlight="you already use"
+              description="Revun does not try to replace your bank, your credit bureau, or your payment network. It connects to the ones tenants and landlords already trust."
+            />
+          </RevealOnScroll>
+
+          <RevealOnScroll stagger={0.06}>
+            <div className="flex flex-col divide-y divide-[#E5E7EB] border-y border-[#E5E7EB]">
+              {[
+                { category: 'Credit reporting', icon: TrendingUp, count: 4, partners: ['Equifax Canada', 'Equifax US', 'TransUnion Canada', 'TransUnion US'] },
+                { category: 'Payment networks', icon: CreditCard, count: 6, partners: ['Interac e-Transfer', 'ACH Network', 'Visa', 'Mastercard', 'American Express', 'Interac Debit'] },
+                { category: 'Canadian banking', icon: MapPin, count: 7, partners: ['RBC', 'TD', 'BMO', 'Scotiabank', 'CIBC', 'National Bank', 'Desjardins'] },
+                { category: 'US banking', icon: MapPin, count: 6, partners: ['Chase', 'Bank of America', 'Wells Fargo', 'Citi', 'US Bank', 'Capital One'] },
+                { category: 'Identity and income', icon: BadgeCheck, count: 3, partners: ['Flinks', 'Plaid', 'Persona'] },
+                { category: 'Accounting exports', icon: FileText, count: 5, partners: ['QuickBooks', 'Xero', 'Sage', 'CSV', 'PDF'] },
+              ].map((group) => {
+                const GroupIcon = group.icon
+                return (
+                  <div
+                    key={group.category}
+                    className="group grid grid-cols-1 gap-5 py-7 md:grid-cols-[auto_200px_1fr] md:items-center md:gap-8 md:py-8"
+                  >
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#E8F2FE] text-[#176FEB] transition-all duration-300 group-hover:bg-[#176FEB] group-hover:text-white">
+                      <GroupIcon className="h-[18px] w-[18px]" strokeWidth={2} aria-hidden="true" />
+                    </span>
+                    <div>
+                      <span className="font-heading text-[11px] font-semibold uppercase tracking-[0.16em] text-[#176FEB]">
+                        {group.category}
+                      </span>
+                      <p className="mt-1 font-heading text-[11px] font-medium text-[#94A3B8]">
+                        {group.count} partners
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {group.partners.map((p) => (
+                        <span
+                          key={p}
+                          className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-white px-2.5 py-1 font-heading text-[11.5px] font-medium text-[#0A1628] transition-colors duration-200 hover:border-[#176FEB]/40 hover:text-[#176FEB]"
+                        >
+                          {p}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </RevealOnScroll>
+
+          {/* Bottom stat strip */}
+          <RevealOnScroll>
+            <div className="mt-10 grid grid-cols-2 gap-4 rounded-2xl border border-[#E5E7EB] bg-white px-6 py-5 md:grid-cols-4">
+              {[
+                { value: '31+', label: 'Integration partners' },
+                { value: '13', label: 'Canadian provinces' },
+                { value: '50', label: 'US states and DC' },
+                { value: 'Zero', label: 'Tenant setup fees' },
+              ].map((s, i) => (
+                <div
+                  key={s.label}
+                  className={`flex flex-col ${i > 0 ? 'md:border-l md:border-[#E5E7EB] md:pl-5' : ''}`}
+                >
+                  <span className="font-display text-2xl font-normal tabular-nums text-[#176FEB]">
+                    {s.value}
+                  </span>
+                  <span className="mt-0.5 font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-[#64748B]">
+                    {s.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </RevealOnScroll>
+        </div>
+      </Section>
+
+      {/* ═════ Privacy wall — editorial list ═════ */}
+      <Section background="white">
+        <div className="mx-auto max-w-5xl px-6">
+          <RevealOnScroll>
+            <SectionHeader
+              eyebrow="Privacy and Security"
               title="Built around your"
               highlight="protection"
-              description="Three guarantees that sit underneath every feature — so the things you never want to worry about stay invisible."
+              description="Three guarantees that sit underneath every feature, so the things you never want to worry about stay invisible."
             />
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.1}>
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className="flex flex-col divide-y divide-[#E5E7EB] border-y border-[#E5E7EB]">
               {[
                 {
                   title: 'PCI DSS Level 1 payments',
                   description:
-                    'Every transaction uses bank-grade encryption. Card numbers and bank details are tokenized — they never touch Revun servers.',
+                    'Every transaction uses bank-grade encryption. Card numbers and bank details are tokenized, they never touch Revun servers.',
                   icon: Lock,
                   meta: 'Validated quarterly',
+                  spec: 'AES-256 at rest · TLS 1.3 in transit · Tokenized via Stripe',
                 },
                 {
                   title: 'Encrypted messaging',
                   description:
-                    'TLS 1.3 in transit, AES-256 at rest. Every message between you and your property team is verifiable and time-stamped.',
+                    'Every message between you and your property team is time-stamped, verifiable, and stored on Canadian and US infrastructure by jurisdiction.',
                   icon: ShieldCheck,
                   meta: 'Independent audit available',
+                  spec: 'End-to-end TLS 1.3 · Signed with SHA-256 · 7-year retention',
                 },
                 {
                   title: 'Privacy-law compliant',
                   description:
-                    'PIPEDA in Canada, state-level privacy laws in the US. Revun never sells, rents, or shares tenant data with advertisers.',
+                    'PIPEDA in Canada, CCPA and state-level privacy laws in the US. Revun never sells, rents, or shares tenant data with advertisers or data brokers.',
                   icon: BadgeCheck,
                   meta: 'SOC 2 Type II in progress',
+                  spec: 'PIPEDA · CCPA · Quebec Law 25 · Opt-out controls in the portal',
                 },
               ].map((t) => {
                 const Icon = t.icon
                 return (
                   <div
                     key={t.title}
-                    className="group relative overflow-hidden rounded-3xl border border-[#E5E7EB] bg-white p-8 transition-all duration-300 hover:border-[#176FEB]/30 hover:shadow-card-hover"
+                    className="group grid grid-cols-1 gap-5 py-9 md:grid-cols-[auto_1fr_200px] md:items-start md:gap-10 md:py-12"
                   >
-                    <div
-                      className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#176FEB] via-[#4A91F0] to-[#176FEB] scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"
-                      aria-hidden="true"
-                    />
-                    <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#E8F2FE] text-[#176FEB] transition-transform duration-300 group-hover:scale-110">
-                      <Icon className="h-6 w-6" />
+                    {/* Icon tile */}
+                    <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#E8F2FE] text-[#176FEB] transition-transform duration-300 group-hover:scale-105">
+                      <Icon className="h-5 w-5" strokeWidth={2} />
                     </span>
-                    <h3 className="mt-5 font-heading text-lg font-semibold text-[#0A1628]">{t.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[#475569]">{t.description}</p>
-                    <p className="mt-4 text-[10px] font-semibold uppercase tracking-wider text-[#176FEB]">
-                      {t.meta}
-                    </p>
+
+                    {/* Title + description + spec line */}
+                    <div className="md:pt-1">
+                      <h3 className="font-display text-xl font-normal text-[#0A1628] md:text-[26px]">
+                        {t.title}
+                      </h3>
+                      <p className="mt-3 text-[14px] leading-relaxed text-[#475569] md:max-w-[540px]">
+                        {t.description}
+                      </p>
+                      <p className="mt-4 font-heading text-[11px] font-medium text-[#94A3B8]">
+                        <span className="uppercase tracking-[0.14em]">Spec</span>
+                        <span className="mx-2 text-[#E5E7EB]">/</span>
+                        {t.spec}
+                      </p>
+                    </div>
+
+                    {/* Meta line right */}
+                    <div className="flex items-start gap-1.5 border-l-0 border-t border-[#F1F3F5] pt-5 md:border-l md:border-t-0 md:pl-7 md:pt-1">
+                      <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#176FEB]" strokeWidth={2.2} aria-hidden="true" />
+                      <div>
+                        <span className="font-heading text-[10px] font-semibold uppercase tracking-[0.16em] text-[#176FEB]">
+                          Certification
+                        </span>
+                        <p className="mt-1 font-heading text-[12.5px] font-medium text-[#0A1628]">
+                          {t.meta}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 )
               })}
@@ -1175,7 +1628,7 @@ export default function TenantsPage() {
                   Your landlord uses Revun.
                 </h3>
                 <p className="mt-3 text-[#475569]">
-                  Check your email or SMS for a setup link. No app install required — your portal opens in any browser in under two minutes.
+                  Check your email or SMS for a setup link. No app install required. Your portal opens in any browser in under two minutes.
                 </p>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   <Link
@@ -1199,7 +1652,7 @@ export default function TenantsPage() {
                   Help your landlord find a better way.
                 </h3>
                 <p className="relative mt-3 text-white/85">
-                  Send a one-minute recommendation. We&rsquo;ll share how Revun saves property managers hours every week — and gives you the portal you actually want.
+                  Send a one-minute recommendation. We&rsquo;ll share how Revun saves property managers hours every week, and gives you the portal you actually want.
                 </p>
                 <Link
                   href="/contact/"

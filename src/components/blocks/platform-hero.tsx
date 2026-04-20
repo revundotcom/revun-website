@@ -44,7 +44,7 @@ export function PlatformHero() {
           className="mt-6 max-w-2xl text-lg text-[#555860] sm:text-xl"
         >
           Manage properties, tenants, maintenance, and financials from a single
-          dashboard built for Canadian property managers.
+          dashboard built for North American property managers.
         </motion.p>
       </motion.div>
     </section>

@@ -485,7 +485,7 @@ function DetectSection() {
             {
               icon: MapPin,
               title: 'Address parsing',
-              desc: 'Canadian postal-code resolution pins every property to a province, municipality, and rent regulation zone.',
+              desc: 'Postal-code resolution across Canada and the US pins every property to a province or state, municipality, and rent regulation zone.',
             },
             {
               icon: Scale,
@@ -977,7 +977,7 @@ function AuditSection() {
             {
               icon: ShieldCheck,
               title: 'Quebec Law 25 data residency',
-              desc: 'Canadian hosting with breach reporting workflows aligned to Law 25 timelines.',
+              desc: 'Canadian and US hosting with breach reporting workflows aligned to Law 25 and state breach-notification timelines.',
             },
             {
               icon: Scale,
@@ -1681,8 +1681,8 @@ interface Faq {
 
 const faqs: readonly Faq[] = [
   {
-    q: 'Which Canadian jurisdictions does Revun cover?',
-    a: 'All 10 provinces and 3 territories. Ontario (LTB), British Columbia (RTB), Quebec (TAL), Alberta (RTDRS), Manitoba (RTB), Saskatchewan (ORT), Nova Scotia (RTP), New Brunswick (RTT), Newfoundland and Labrador (RTO), Prince Edward Island (IRAC), and the three territorial Rental Officer regimes.',
+    q: 'Which jurisdictions does Revun cover across Canada and the US?',
+    a: 'All 10 Canadian provinces and 3 territories, plus all 50 US states and DC. Ontario (LTB), British Columbia (RTB), Quebec (TAL), Alberta (RTDRS), Manitoba (RTB), Saskatchewan (ORT), Nova Scotia (RTP), New Brunswick (RTT), Newfoundland and Labrador (RTO), Prince Edward Island (IRAC), and the three territorial Rental Officer regimes. US coverage spans every state statute and agency, including DRE, TREC, DHCR, DBPR, OREA, IDFPR, LARA, HUD, FHFA, CFPB, and state real estate commissions.',
   },
   {
     q: 'Does Revun auto-update when the annual rent-increase guideline changes?',
@@ -1828,7 +1828,7 @@ function ComplianceCTA() {
           className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs uppercase tracking-widest text-white/70"
         >
           <Sparkles className="h-3.5 w-3.5" strokeWidth={1.8} />
-          Compliance infrastructure for Canadian rentals
+          Compliance infrastructure for Canadian and US rentals
         </motion.p>
         <motion.h2
           variants={revealItem}
@@ -1942,8 +1942,8 @@ export function ComplianceClient() {
       <ComplianceCTA />
 
       <p className="sr-only">
-        Revun Compliance orchestrates Canadian rental regulation across all 10 provinces and 3
-        territories. Supported tribunals include the Ontario Landlord and Tenant Board (LTB),
+        Revun Compliance orchestrates rental regulation across all 13 Canadian provinces and
+        territories and all 50 US states and DC. Supported tribunals include the Ontario Landlord and Tenant Board (LTB),
         British Columbia Residential Tenancy Branch (RTB), Quebec Tribunal administratif du
         logement (TAL), Alberta RTDRS, Manitoba RTB, Saskatchewan ORT, Nova Scotia RTP, New
         Brunswick RTT, Newfoundland and Labrador RTO, Prince Edward Island IRAC, and the Rental
@@ -1957,7 +1957,7 @@ export function ComplianceClient() {
         1.7 percent for 2025 and 1.8 percent for 2026, Prince Edward Island 3.0 percent for
         2025 and 2.0 percent for 2026, Nova Scotia 5.0 percent, and New Brunswick 3.0 percent
         are tracked and synced within 48 hours of publication. Document storage is
-        PIPEDA-aligned with Canadian data residency, AES-256 encryption at rest and in
+        PIPEDA and US state privacy law aligned, with Canadian and US data residency, AES-256 encryption at rest and in
         transit, hash-chained audit logs, and Quebec Law 25 breach reporting workflows.
         Tribunal-ready export packets bundle lease, notices, service receipts, communications,
         and audit log for LTB, RTB, TAL, and RTDRS hearings. Coverage varies by plan.

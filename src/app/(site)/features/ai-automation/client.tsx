@@ -1021,7 +1021,7 @@ const testimonials = [
 function Testimonials() {
   return (
     <SW id="testimonials" dark>
-      <SH eyebrow="Proof" title="Canadian operators run" highlight="leaner with AI." description="Real numbers from PMs in the first 90 days on Revun." />
+      <SH eyebrow="Proof" title="Operators run" highlight="leaner with AI." description="Real numbers from PMs across Canada and the US in the first 90 days on Revun." />
       <div className="mt-12 grid gap-6 md:grid-cols-3">
         {testimonials.map((t, i) => (
           <motion.div
