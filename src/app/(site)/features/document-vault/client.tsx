@@ -42,8 +42,8 @@ const ease = [0.22, 1, 0.36, 1] as const
 
 function SectionWrapper({ children, id, dark }: { children: React.ReactNode; id: string; dark?: boolean }) {
   return (
-    <section id={id} className={`py-16 md:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
-      <div className="mx-auto max-w-6xl px-6">{children}</div>
+    <section id={id} className={`py-12 md:py-20 lg:py-28 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">{children}</div>
     </section>
   )
 }
@@ -56,7 +56,7 @@ function SectionHeader({ eyebrow, title, highlight, description }: {
       <motion.p variants={revealItem} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">
         {eyebrow}
       </motion.p>
-      <motion.h2 variants={revealItem} className="mt-3 font-display text-4xl font-normal md:text-5xl text-brand-graphite">
+      <motion.h2 variants={revealItem} className="mt-3 font-display text-2xl font-normal md:text-4xl lg:text-5xl text-brand-graphite">
         {title} <span className="text-keyword">{highlight}</span>
       </motion.h2>
       <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-lg text-brand-graphite/70">
@@ -94,11 +94,11 @@ function DocumentVaultHero() {
   ]
 
   return (
-    <section className="relative overflow-hidden bg-white pb-16 pt-24 md:pt-32">
+    <section className="relative overflow-hidden bg-white pb-12 pt-24 md:pb-16 md:pt-32">
       <div className="absolute inset-0 bg-grid bg-grid-mask opacity-40" aria-hidden="true" />
       <div className="absolute top-0 right-[-200px] h-[500px] w-[500px] rounded-full bg-brand-blue/[0.04] blur-[120px]" aria-hidden="true" />
 
-      <div ref={ref} className="relative z-10 mx-auto max-w-6xl px-6">
+      <div ref={ref} className="relative z-10 mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
           {/* Left: copy */}
           <RevealOnScroll>
@@ -108,14 +108,14 @@ function DocumentVaultHero() {
             </motion.div>
             <motion.h1
               variants={revealItem}
-              className="font-display text-5xl font-normal leading-[1.1] tracking-tight text-brand-graphite md:text-6xl"
+              className="font-display text-3xl font-normal leading-[1.1] tracking-tight text-brand-graphite md:text-5xl lg:text-6xl"
             >
               Your secure{' '}
               <span className="text-brand-blue">digital safe</span> for every rental document
             </motion.h1>
             <motion.p
               variants={revealItem}
-              className="mt-6 max-w-xl text-lg leading-relaxed text-brand-graphite-mid"
+              className="mt-6 max-w-xl text-base leading-relaxed text-brand-graphite-mid md:text-lg"
             >
               All your rental documents in one encrypted vault. Upload once, verify once, reuse everywhere. From government IDs to credit reports, Revun keeps every file safe, signed, and tenant-portable.
             </motion.p>
@@ -256,8 +256,8 @@ function StatBar() {
     { icon: Flag, value: 'PIPEDA, FINTRAC, CCPA aligned', label: 'CA + US compliance built in' },
   ]
   return (
-    <section id="stat-bar" className="border-y border-[#E5E7EB] bg-brand-off-white py-12">
-      <div ref={ref} className="mx-auto max-w-6xl px-6">
+    <section id="stat-bar" className="border-y border-[#E5E7EB] bg-brand-off-white py-10 md:py-12">
+      <div ref={ref} className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((s, i) => (
             <StatTile key={s.value} {...s} delay={0.1 + i * 0.08} inView={inView} />
@@ -1439,14 +1439,14 @@ function VaultCTA() {
         <RevealOnScroll>
           <motion.h2
             variants={revealItem}
-            className="font-heading font-extrabold text-4xl tracking-tight text-[#0A1628] md:text-5xl"
+            className="font-heading font-extrabold text-3xl tracking-tight text-[#0A1628] md:text-4xl lg:text-5xl"
           >
             Stop uploading the same documents{' '}
             <span className="text-brand-blue">over and over</span>
           </motion.h2>
           <motion.p
             variants={revealItem}
-            className="mx-auto mt-5 max-w-lg text-lg text-[#555860]"
+            className="mx-auto mt-5 max-w-lg text-base text-[#555860] md:text-lg"
           >
             Upload once, verify once, reuse across every rental application. Your documents, your control, one secure vault.
           </motion.p>

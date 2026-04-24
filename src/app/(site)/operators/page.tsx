@@ -148,12 +148,12 @@ export default function OperatorsPage() {
 
       {/* ── Hero ── */}
       <section className="bg-[#F5F6F8]">
-        <div className="mx-auto max-w-4xl px-6 pt-24 pb-16 text-center">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8 pt-24 pb-16 text-center">
           <RevealOnScroll>
             <p className="mb-4 text-sm font-medium uppercase tracking-widest text-[#176FEB]">
               Operator Experience
             </p>
-            <h1 className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-[#0A1628] sm:text-5xl lg:text-6xl">
+            <h1 className="font-display font-extrabold text-3xl leading-[1.1] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl">
               The operating system your{' '}
               <span className="text-[#176FEB]">team actually uses</span>
             </h1>
@@ -165,8 +165,8 @@ export default function OperatorsPage() {
       </section>
 
       {/* ── Every role, one system ── */}
-      <section className="bg-white py-12">
-        <div className="mx-auto max-w-5xl px-6">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Role-Based Experience
@@ -206,8 +206,8 @@ export default function OperatorsPage() {
       </section>
 
       {/* ── Feature Grid ── */}
-      <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-5xl px-6">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Operational Tools
@@ -247,8 +247,8 @@ export default function OperatorsPage() {
       </section>
 
       {/* ── Built for teams that execute ── */}
-      <section className="bg-white py-12">
-        <div className="mx-auto max-w-5xl px-6">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Accountability
@@ -289,10 +289,10 @@ export default function OperatorsPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-3xl px-6 text-center">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center">
           <RevealOnScroll>
-            <h2 className="font-heading font-extrabold text-4xl tracking-tight text-[#0A1628] md:text-5xl">
+            <h2 className="font-heading font-extrabold text-3xl tracking-tight text-[#0A1628] md:text-5xl">
               Deploy Revun across your{' '}
               <span className="text-[#176FEB]">team</span>
             </h2>

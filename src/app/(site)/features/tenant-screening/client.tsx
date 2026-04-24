@@ -29,10 +29,10 @@ function SH({ eyebrow, title, highlight, description }: { eyebrow: string; title
   return (
     <RevealOnScroll className="mx-auto max-w-2xl text-center">
       <motion.p variants={revealItem} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">{eyebrow}</motion.p>
-      <motion.h2 variants={revealItem} className="mt-3 font-display text-4xl font-normal md:text-5xl text-brand-graphite">
+      <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal md:text-4xl lg:text-5xl text-brand-graphite">
         {title} <span className="text-keyword">{highlight}</span>
       </motion.h2>
-      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-lg text-brand-graphite/70">{description}</motion.p>
+      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-base md:text-lg text-brand-graphite/70">{description}</motion.p>
     </RevealOnScroll>
   )
 }
@@ -85,7 +85,7 @@ function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, ease, delay: 0.15 }}
-              className="mt-4 font-display text-5xl font-normal leading-tight md:text-6xl text-brand-graphite"
+              className="mt-4 font-display text-4xl font-normal leading-tight sm:text-5xl md:text-6xl text-brand-graphite"
             >
               Screen tenants in minutes. <span className="text-keyword">Trust the result for years.</span>
             </motion.h1>
@@ -93,7 +93,7 @@ function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, ease, delay: 0.25 }}
-              className="mt-5 max-w-xl text-lg text-brand-graphite/70"
+              className="mt-5 max-w-xl text-base md:text-lg text-brand-graphite/70"
             >
               Equifax + TransUnion credit, identity verification, income checks, and risk scoring tuned for Canada and the US. Every applicant runs through one pipeline.
             </motion.p>
@@ -356,7 +356,7 @@ function CapabilitiesShowcase() {
   return (
     <SW id="capabilities">
       <SH eyebrow="Capabilities" title="Every signal," highlight="one pipeline." description="Credit, identity, and income. Each a first-class feature, not a bolt-on." />
-      <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {showcases.map((block, i) => (
           <Anim key={block.eyebrow} delay={0.1 + i * 0.08} y={16}>
             <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white transition-all hover:border-brand-blue/40 hover:shadow-lg">
@@ -608,7 +608,7 @@ function HowItWorks() {
   return (
     <SW id="how-it-works" dark>
       <SH eyebrow="How it works" title="From application to approval" highlight="in days, not weeks." description="One branded intake link, every signal verified automatically, decision in your dashboard." />
-      <div ref={ref} className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div ref={ref} className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {steps.map((s, i) => (
           <motion.div
             key={s.num}
@@ -646,7 +646,7 @@ function Compliance() {
       <SH eyebrow="Compliance" title="Screening that stands up to" highlight="PIPEDA and provincial law." description="Credit pulls with explicit consent, province-aware rules, and audit trails that make tribunal defense trivial." />
 
       {/* 4-up feature strip across the top */}
-      <div className="mx-auto mt-14 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto mt-14 grid grid-cols-1 max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {features.map((f, i) => {
           const Icon = f.icon
           return (
@@ -1010,7 +1010,7 @@ function FAQ() {
 
 function CTASection() {
   return (
-    <section id="cta" className="relative overflow-hidden bg-[#0A1628] px-6 py-24 sm:py-32">
+    <section id="cta" className="relative overflow-hidden bg-[#0A1628] px-4 py-16 sm:px-6 md:px-8 md:py-24 lg:py-28">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0"
         style={{ background: 'radial-gradient(ellipse 60% 55% at 50% 40%, rgba(23,111,235,0.28), rgba(23,111,235,0.08), transparent 75%)' }} />
       <RevealOnScroll className="relative mx-auto max-w-3xl text-center">
@@ -1020,11 +1020,11 @@ function CTASection() {
           </span>
         </motion.div>
 
-        <motion.h2 variants={revealItem} className="mt-6 font-display text-4xl font-normal tracking-tight text-white sm:text-5xl lg:text-6xl">
+        <motion.h2 variants={revealItem} className="mt-6 font-display text-3xl font-normal tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
           Screen with confidence. <span className="text-brand-blue">Lease with speed.</span>
         </motion.h2>
 
-        <motion.p variants={revealItem} className="mx-auto mt-6 max-w-xl text-base text-white/70 sm:text-lg">
+        <motion.p variants={revealItem} className="mx-auto mt-6 max-w-xl text-sm text-white/70 md:text-base lg:text-lg">
           Try Revun screening free for 14 days. No credit card, no sales gate.
         </motion.p>
 

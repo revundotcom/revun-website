@@ -121,12 +121,12 @@ export default function PoweredByRevunPage() {
 
       {/* ── Hero ── */}
       <section className="bg-[#F5F6F8]">
-        <div className="mx-auto max-w-4xl px-6 pt-24 pb-16 text-center">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8 pt-16 md:pt-24 pb-12 md:pb-16 text-center">
           <RevealOnScroll>
             <p className="mb-4 text-sm font-medium uppercase tracking-widest text-[#176FEB]">
               Operator Ecosystem
             </p>
-            <h1 className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-[#0A1628] sm:text-5xl lg:text-6xl">
+            <h1 className="font-display font-extrabold text-3xl leading-[1.1] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl">
               Powered by{' '}
               <span className="text-[#176FEB]">Revun</span>
             </h1>
@@ -139,7 +139,7 @@ export default function PoweredByRevunPage() {
 
       {/* ── What It Means ── */}
       <section className="bg-white py-12">
-        <div className="mx-auto max-w-4xl px-6">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               The Concept
@@ -197,7 +197,7 @@ export default function PoweredByRevunPage() {
 
       {/* ── How Operators Use Revun ── */}
       <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-5xl px-6">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Operator Types
@@ -241,7 +241,7 @@ export default function PoweredByRevunPage() {
 
       {/* ── What This Means for End Users ── */}
       <section className="bg-white py-12">
-        <div className="mx-auto max-w-5xl px-6">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               For End Users
@@ -280,7 +280,7 @@ export default function PoweredByRevunPage() {
 
       {/* ── Support Routing ── */}
       <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-4xl px-6">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="text-center">
             <div className="mx-auto max-w-xl">
               <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#E8F2FE]">
@@ -308,9 +308,9 @@ export default function PoweredByRevunPage() {
 
       {/* ── CTA: For Operators ── */}
       <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-3xl px-6 text-center">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center">
           <RevealOnScroll>
-            <h2 className="font-heading font-extrabold text-4xl tracking-tight text-[#0A1628] md:text-5xl">
+            <h2 className="font-heading font-extrabold text-3xl tracking-tight text-[#0A1628] md:text-4xl lg:text-5xl">
               Become a <span className="text-[#176FEB]">Powered by Revun</span> operator
             </h2>
             <p className="mx-auto mt-5 max-w-lg text-lg text-[#555860]">
@@ -319,14 +319,14 @@ export default function PoweredByRevunPage() {
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
                 href="/demo/"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white transition-colors hover:bg-[#1259c1]"
+                className="inline-flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white transition-colors hover:bg-[#1259c1]"
               >
                 Book a Demo
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/how-revun-works/"
-                className="inline-flex h-12 items-center justify-center rounded-xl border border-[#E5E7EB] px-8 text-base font-semibold text-[#0A1628] transition-colors hover:bg-white"
+                className="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-xl border border-[#E5E7EB] px-8 text-base font-semibold text-[#0A1628] transition-colors hover:bg-white"
               >
                 See How It Works
               </Link>

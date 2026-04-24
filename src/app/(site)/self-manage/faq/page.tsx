@@ -277,7 +277,7 @@ export default function SelfManageFAQPage() {
       {/* ── Hero ──────────────────────────────────────────────────── */}
       <section className="bg-white">
         <motion.div
-          className="mx-auto max-w-3xl px-6 pt-28 pb-16 text-center"
+          className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 pt-28 pb-16 text-center"
           variants={heroStagger}
           initial="hidden"
           animate="visible"
@@ -290,7 +290,7 @@ export default function SelfManageFAQPage() {
           </motion.p>
           <motion.h1
             variants={fadeUp}
-            className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-foreground md:text-5xl"
+            className="font-display font-extrabold text-3xl leading-[1.1] tracking-tight text-foreground md:text-5xl lg:text-6xl"
           >
             Everything you need to{' '}
             <span className="text-brand-blue">know</span>
@@ -307,7 +307,7 @@ export default function SelfManageFAQPage() {
 
       {/* ── Quick nav ─────────────────────────────────────────────── */}
       <section className="bg-brand-off-white py-8">
-        <div className="mx-auto max-w-4xl px-6">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <motion.div variants={revealItem} className="flex flex-wrap justify-center gap-2">
               {faqCategories.map((cat) => (
@@ -335,7 +335,7 @@ export default function SelfManageFAQPage() {
               : 'bg-brand-off-white'
           }`}
         >
-          <div className="mx-auto max-w-3xl px-6">
+          <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8">
             <RevealOnScroll className="text-center mb-12">
               <motion.h2
                 variants={revealItem}
@@ -383,7 +383,7 @@ export default function SelfManageFAQPage() {
 
       {/* ── Bottom CTA ────────────────────────────────────────────── */}
       <section className="bg-white py-12">
-        <RevealOnScroll className="mx-auto max-w-2xl px-6 text-center">
+        <RevealOnScroll className="mx-auto max-w-2xl px-4 md:px-6 lg:px-8 text-center">
           <motion.h2
             variants={revealItem}
             className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl"

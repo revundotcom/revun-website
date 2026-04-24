@@ -34,12 +34,12 @@ const faqs = [
 export function HomepageFaq() {
   return (
     <section className="bg-brand-off-white py-12 md:py-16">
-      <div className="mx-auto max-w-3xl px-6">
-        <div className="text-center mb-12">
+      <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8">
+        <div className="text-center mb-10 md:mb-12">
           <p className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">
             FAQ
           </p>
-          <h2 className="mt-3 font-heading text-3xl md:text-4xl font-bold text-brand-graphite">
+          <h2 className="mt-3 font-heading text-2xl md:text-4xl font-bold text-brand-graphite">
             Frequently asked <span className="text-keyword">questions</span>
           </h2>
         </div>
@@ -50,7 +50,7 @@ export function HomepageFaq() {
               key={faq.question}
               className="group rounded-xl border border-[#E5E7EB] bg-white transition-all duration-200 hover:shadow-card-hover"
             >
-              <summary className="flex cursor-pointer items-center justify-between px-6 py-5 list-none [&::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer items-center justify-between px-4 md:px-6 py-5 list-none [&::-webkit-details-marker]:hidden">
                 <span className="font-heading font-semibold text-brand-graphite text-[15px] pr-4">
                   {faq.question}
                 </span>
@@ -66,7 +66,7 @@ export function HomepageFaq() {
                   <line x1="4" y1="10" x2="16" y2="10" />
                 </svg>
               </summary>
-              <div className="px-6 pb-5 -mt-1">
+              <div className="px-4 md:px-6 pb-5 -mt-1">
                 <p className="text-[#555860] text-sm leading-relaxed">
                   {faq.answer}
                 </p>

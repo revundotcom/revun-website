@@ -34,8 +34,8 @@ const ease = [0.22, 1, 0.36, 1] as const
 
 function SectionWrapper({ children, id, dark }: { children: React.ReactNode; id: string; dark?: boolean }) {
   return (
-    <section id={id} className={`py-16 md:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
-      <div className="mx-auto max-w-6xl px-6">{children}</div>
+    <section id={id} className={`py-12 md:py-20 lg:py-28 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">{children}</div>
     </section>
   )
 }
@@ -48,10 +48,10 @@ function SectionHeader({ eyebrow, title, highlight, description }: {
       <motion.p variants={revealItem} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">
         {eyebrow}
       </motion.p>
-      <motion.h2 variants={revealItem} className="mt-3 font-display text-4xl font-normal md:text-5xl text-brand-graphite">
+      <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal md:text-4xl lg:text-5xl text-brand-graphite">
         {title} <span className="text-keyword">{highlight}</span>
       </motion.h2>
-      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-lg text-brand-graphite/70">
+      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-base md:text-lg text-brand-graphite/70">
         {description}
       </motion.p>
     </RevealOnScroll>
@@ -402,9 +402,9 @@ function TenantStats() {
           transition={{ duration: 0.6, ease, delay: 0.1 }}
         >
           <h3 className="mb-6 font-heading text-lg font-semibold text-brand-graphite">Payment Health</h3>
-          <div className="flex items-center gap-8">
+          <div className="flex flex-col items-center gap-6 sm:flex-row sm:gap-8">
             <DonutGauge value={100} size={130} sw={10} color="#176FEB" label="On-time" inView={inView} delay={0.3} />
-            <div className="flex-1 space-y-3">
+            <div className="w-full flex-1 space-y-3">
               {[
                 { label: 'Payments made', value: '11 of 11', color: '#176FEB' },
                 { label: 'Next due', value: 'May 1', color: '#176FEB' },
@@ -1239,7 +1239,7 @@ function TenantPortalHero() {
       <div className="absolute top-[10%] left-1/2 -translate-x-1/2 h-[600px] w-[800px] rounded-full bg-[#176FEB]/[0.06] blur-[140px]" aria-hidden="true" />
       <div className="absolute top-[-5%] right-[-10%] h-[500px] w-[500px] rounded-full bg-[#4A91F0]/[0.05] blur-[120px]" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6 pt-24 pb-20 text-center">
+      <div className="relative z-10 mx-auto max-w-5xl px-4 md:px-6 lg:px-8 pt-20 md:pt-24 pb-16 md:pb-20 text-center">
         <RevealOnScroll>
           <motion.div variants={revealItem} className="mb-8 inline-flex items-center gap-3 rounded-full border border-[#E5E7EB] bg-white px-4 py-1.5 shadow-sm">
             <span className="relative flex h-2 w-2">
@@ -1253,7 +1253,7 @@ function TenantPortalHero() {
 
           <motion.h1
             variants={revealItem}
-            className="font-display text-5xl font-normal leading-[1.1] tracking-tight text-[#0A1628] md:text-7xl lg:text-[5.5rem]"
+            className="font-display text-3xl font-normal leading-[1.1] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl xl:text-[5.5rem]"
           >
             Your entire rental life,
             <br className="hidden md:block" />
@@ -1262,7 +1262,7 @@ function TenantPortalHero() {
 
           <motion.p
             variants={revealItem}
-            className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-brand-graphite-mid md:text-xl"
+            className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand-graphite-mid md:text-lg lg:text-xl"
           >
             Pay rent by Interac e-Transfer or Pre-Authorized Debit, submit
             maintenance with photos, e-sign leases, and build credit history
@@ -1314,7 +1314,7 @@ function TenantPortalHero() {
 
 function PortalCTA() {
   return (
-    <section id="cta" className="relative overflow-hidden bg-[#0A1628] py-20 text-white md:py-24">
+    <section id="cta" className="relative overflow-hidden bg-[#0A1628] py-16 text-white md:py-20 lg:py-24">
       {/* Background image */}
       <div className="absolute inset-0" aria-hidden="true">
         <Image
@@ -1344,7 +1344,7 @@ function PortalCTA() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
+      <div className="relative z-10 mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center">
         <RevealOnScroll>
           <motion.p
             variants={revealItem}
@@ -1355,14 +1355,14 @@ function PortalCTA() {
           </motion.p>
           <motion.h2
             variants={revealItem}
-            className="mt-6 font-display text-4xl leading-[1.05] tracking-tight md:text-6xl"
+            className="mt-6 font-display text-3xl leading-[1.05] tracking-tight md:text-5xl lg:text-6xl"
           >
             Give your residents the portal they already{' '}
             <span className="text-[#4A91F0]">expect</span>
           </motion.h2>
           <motion.p
             variants={revealItem}
-            className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-white/70"
+            className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-white/70 md:text-lg"
           >
             Book a 20-minute walkthrough. We will migrate your first 50 units
             free and have residents self-onboarding within a week.

@@ -257,7 +257,7 @@ export default function HelpPage() {
       {/* ── Hero with search ──────────────────────────────────────── */}
       <section className="relative overflow-hidden border-b border-[#E5E7EB] bg-[#F5F6F8]">
         <motion.div
-          className="relative z-10 mx-auto max-w-4xl px-6 pt-24 pb-20 text-center"
+          className="relative z-10 mx-auto max-w-4xl px-4 md:px-6 lg:px-8 pt-16 md:pt-24 pb-12 md:pb-20 text-center"
           variants={heroStagger}
           initial="hidden"
           animate="visible"
@@ -271,7 +271,7 @@ export default function HelpPage() {
           </motion.div>
           <motion.h1
             variants={fadeUp}
-            className="font-display text-balance text-4xl font-extrabold leading-[1.08] tracking-tight text-[#0A1628] sm:text-5xl md:text-6xl"
+            className="font-display text-balance text-3xl font-extrabold leading-[1.08] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl"
           >
             How can we{' '}
             <span className="text-[#176FEB]">help you today?</span>
@@ -338,8 +338,8 @@ export default function HelpPage() {
       </section>
 
       {/* ── Popular / Featured articles grid ─────────────────────── */}
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="bg-white py-12 md:py-20">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <motion.div variants={revealItem}>
               <h2 className="font-display text-3xl font-bold tracking-tight text-[#0A1628] sm:text-4xl">
@@ -396,8 +396,8 @@ export default function HelpPage() {
       </section>
 
       {/* ── Browse by category ────────────────────────────────────── */}
-      <section className="bg-[#F5F6F8] py-20">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="bg-[#F5F6F8] py-12 md:py-20">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 max-w-2xl">
             <motion.h2
               variants={revealItem}
@@ -450,8 +450,8 @@ export default function HelpPage() {
       </section>
 
       {/* ── By audience ───────────────────────────────────────────── */}
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="bg-white py-12 md:py-20">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 max-w-2xl">
             <motion.h2
               variants={revealItem}
@@ -491,8 +491,8 @@ export default function HelpPage() {
       </section>
 
       {/* ── Video tutorials ───────────────────────────────────────── */}
-      <section className="bg-[#F5F6F8] py-20">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="bg-[#F5F6F8] py-12 md:py-20">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <motion.div variants={revealItem}>
               <h2 className="font-display text-3xl font-bold tracking-tight text-[#0A1628] sm:text-4xl">
@@ -554,8 +554,8 @@ export default function HelpPage() {
       </section>
 
       {/* ── Still need help? ──────────────────────────────────────── */}
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="bg-white py-12 md:py-20">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 max-w-2xl text-center sm:text-left">
             <motion.h2
               variants={revealItem}
@@ -605,8 +605,8 @@ export default function HelpPage() {
       </section>
 
       {/* ── Community / Resources rail ────────────────────────────── */}
-      <section className="border-t border-[#E5E7EB] bg-[#F5F6F8] py-20">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="border-t border-[#E5E7EB] bg-[#F5F6F8] py-12 md:py-20">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <motion.div variants={revealItem}>
               <h2 className="font-display text-3xl font-bold tracking-tight text-[#0A1628] sm:text-4xl">

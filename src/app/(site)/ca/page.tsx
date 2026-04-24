@@ -136,13 +136,13 @@ export default function CanadaPage() {
         }}
       />
       {/* Hero */}
-      <section className="bg-[#F5F6F8] py-12 sm:py-12">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+      <section className="bg-[#F5F6F8] py-12 md:py-16 lg:py-20">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-brand-blue">
               Canadian Coverage
             </p>
-            <h1 className="font-display font-extrabold text-4xl text-[#0A1628] sm:text-5xl lg:text-6xl">
+            <h1 className="font-display font-extrabold text-3xl text-[#0A1628] md:text-5xl lg:text-6xl">
               Property Management{' '}
               <span className="text-brand-blue">Across</span> Canada
             </h1>
@@ -171,8 +171,8 @@ export default function CanadaPage() {
       </section>
 
       {/* Why Canada */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-4xl px-4 text-center md:px-6 lg:px-8">
           <RevealOnScroll>
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-blue">
               Canadian-First
@@ -188,7 +188,7 @@ export default function CanadaPage() {
             </p>
           </RevealOnScroll>
 
-          <RevealOnScroll className="mt-12 grid gap-6 sm:grid-cols-3">
+          <RevealOnScroll className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6">
             {[
               { stat: '10', label: 'Provinces covered' },
               { stat: '65+', label: 'Cities supported' },
@@ -204,8 +204,8 @@ export default function CanadaPage() {
       </section>
 
       {/* Province Cards */}
-      <section id="provinces" className="bg-brand-off-white py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+      <section id="provinces" className="bg-brand-off-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="mb-8 text-center">
               <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-blue">
@@ -218,12 +218,12 @@ export default function CanadaPage() {
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.08}>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8">
               {provinces.map((province) => (
                 <Link
                   key={province.slug}
                   href={`/ca/${province.slug}/`}
-                  className="group flex flex-col justify-between rounded-2xl border border-border bg-white p-7 transition-colors duration-150 hover:border-brand-blue"
+                  className="group flex flex-col justify-between rounded-2xl border border-border bg-white p-5 transition-colors duration-150 hover:border-brand-blue md:p-7"
                 >
                   <div>
                     <div className="mb-4 flex items-start justify-between gap-3">
@@ -264,15 +264,15 @@ export default function CanadaPage() {
       </section>
 
       {/* Feature strip */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <h2 className="mb-8 text-center font-heading text-3xl font-bold tracking-tight text-brand-graphite md:text-4xl">
               Everything Canadian landlords <span className="text-brand-blue">need</span>
             </h2>
           </RevealOnScroll>
           <RevealOnScroll stagger={0.07}>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-8">
               {[
                 {
                   title: 'Interac e-Transfer',
@@ -304,10 +304,10 @@ export default function CanadaPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-[#F5F6F8] py-12 md:py-16">
-        <div className="mx-auto max-w-3xl px-6 text-center">
+      <section className="bg-[#F5F6F8] py-12 md:py-16 lg:py-20">
+        <div className="mx-auto max-w-3xl px-4 text-center md:px-6 lg:px-8">
           <RevealOnScroll>
-            <h2 className="font-heading font-extrabold text-4xl tracking-tight text-[#0A1628] md:text-5xl">
+            <h2 className="font-heading font-extrabold text-3xl tracking-tight text-[#0A1628] md:text-5xl">
               Ready to go Canadian-first?
             </h2>
             <p className="mx-auto mt-5 max-w-lg text-lg text-[#555860]">

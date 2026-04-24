@@ -166,7 +166,7 @@ export default function SelfManageGetStartedPage() {
       {/* ── Hero ──────────────────────────────────────────────────── */}
       <section className="bg-white">
         <motion.div
-          className="mx-auto max-w-3xl px-6 pt-28 pb-16 text-center"
+          className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 pt-28 pb-16 text-center"
           variants={heroStagger}
           initial="hidden"
           animate="visible"
@@ -179,7 +179,7 @@ export default function SelfManageGetStartedPage() {
           </motion.p>
           <motion.h1
             variants={fadeUp}
-            className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-foreground md:text-5xl"
+            className="font-display font-extrabold text-3xl leading-[1.1] tracking-tight text-foreground md:text-5xl lg:text-6xl"
           >
             Up and running in{' '}
             <span className="text-brand-blue">{totalTime}</span>
@@ -212,7 +212,7 @@ export default function SelfManageGetStartedPage() {
 
       {/* ── Step-by-step timeline ─────────────────────────────────── */}
       <section className="bg-brand-off-white py-12">
-        <div className="mx-auto max-w-3xl px-6">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="text-center mb-16">
             <motion.p
               variants={revealItem}
@@ -286,7 +286,7 @@ export default function SelfManageGetStartedPage() {
 
       {/* ── What You Need Checklist ───────────────────────────────── */}
       <section className="bg-white py-12">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="text-center">
             <motion.p
               variants={revealItem}
@@ -344,7 +344,7 @@ export default function SelfManageGetStartedPage() {
 
       {/* ── Bottom CTA ────────────────────────────────────────────── */}
       <section className="bg-brand-off-white py-12">
-        <RevealOnScroll className="mx-auto max-w-2xl px-6 text-center">
+        <RevealOnScroll className="mx-auto max-w-2xl px-4 md:px-6 lg:px-8 text-center">
           <motion.h2
             variants={revealItem}
             className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl"

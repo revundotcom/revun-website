@@ -85,12 +85,12 @@ export default function USPage() {
       />
       {/* Hero */}
       <section className="bg-[#F5F6F8]">
-        <div className="mx-auto max-w-6xl px-6 py-16 text-center sm:py-16 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-12 text-center md:px-6 md:py-16 lg:px-8 lg:py-20">
           <RevealOnScroll>
             <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-brand-blue">
               United States
             </p>
-            <h1 className="font-display font-extrabold text-4xl text-[#0A1628] sm:text-5xl lg:text-6xl">
+            <h1 className="font-display font-extrabold text-3xl text-[#0A1628] md:text-5xl lg:text-6xl">
               Property Management Across the{' '}
               <span className="text-brand-blue">United States</span>
             </h1>
@@ -103,8 +103,8 @@ export default function USPage() {
       </section>
 
       {/* Why US */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-4xl px-4 text-center md:px-6 lg:px-8">
           <RevealOnScroll>
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-blue">
               Multi-State Ready
@@ -123,8 +123,8 @@ export default function USPage() {
       </section>
 
       {/* State Cards */}
-      <section className="bg-brand-off-white py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+      <section className="bg-brand-off-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="mb-8 text-center">
               <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-blue">
@@ -137,13 +137,13 @@ export default function USPage() {
           </RevealOnScroll>
 
           <RevealOnScroll>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8">
               {states.map((state, i) => (
                 <Link
                   key={state.slug}
                   href={`/us/${state.slug}/`}
                   style={{ animationDelay: `${i * 60}ms` }}
-                  className="group flex flex-col justify-between rounded-2xl border border-border bg-white p-7 transition-colors duration-100 hover:border-brand-blue"
+                  className="group flex flex-col justify-between rounded-2xl border border-border bg-white p-5 transition-colors duration-100 hover:border-brand-blue md:p-7"
                 >
                   <div>
                     <div className="mb-4 flex items-center gap-3">
@@ -181,10 +181,10 @@ export default function USPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-[#F5F6F8] py-12 md:py-12">
-        <div className="mx-auto max-w-3xl px-6 text-center">
+      <section className="bg-[#F5F6F8] py-12 md:py-16 lg:py-20">
+        <div className="mx-auto max-w-3xl px-4 text-center md:px-6 lg:px-8">
           <RevealOnScroll>
-            <h2 className="font-heading font-extrabold text-4xl tracking-tight text-[#0A1628] md:text-5xl">
+            <h2 className="font-heading font-extrabold text-3xl tracking-tight text-[#0A1628] md:text-5xl">
               Manage properties across{' '}
               <span className="text-[#555860]">state lines</span>
             </h2>

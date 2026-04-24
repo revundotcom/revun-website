@@ -89,12 +89,12 @@ export default function PricingPage() {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[#F5F6F8] pt-32 pb-16 md:pt-40 md:pb-20">
+      <section className="relative overflow-hidden bg-[#F5F6F8] pt-24 pb-12 md:pt-32 md:pb-16 lg:pt-40 lg:pb-20">
         {/* Decorative dot grid */}
         <div className="absolute inset-0 bg-dot-grid opacity-40" aria-hidden="true" />
 
-        <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="animate-fade-up font-display font-extrabold text-4xl text-[#0A1628] md:text-5xl lg:text-6xl">
+        <div className="relative mx-auto max-w-4xl px-4 text-center md:px-6 lg:px-8">
+          <h1 className="animate-fade-up font-display font-extrabold text-3xl text-[#0A1628] md:text-5xl lg:text-6xl">
             Pricing built to replace your{' '}
             <span className="text-[#176FEB]">entire stack</span>
           </h1>

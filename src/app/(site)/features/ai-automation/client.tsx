@@ -17,8 +17,8 @@ const ease = [0.22, 1, 0.36, 1] as const
 
 function SW({ children, id, dark }: { children: React.ReactNode; id: string; dark?: boolean }) {
   return (
-    <section id={id} className={`py-16 md:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
-      <div className="mx-auto max-w-6xl px-6">{children}</div>
+    <section id={id} className={`py-12 md:py-20 lg:py-28 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">{children}</div>
     </section>
   )
 }
@@ -27,10 +27,10 @@ function SH({ eyebrow, title, highlight, description }: { eyebrow: string; title
   return (
     <RevealOnScroll className="mx-auto max-w-2xl text-center">
       <motion.p variants={revealItem} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">{eyebrow}</motion.p>
-      <motion.h2 variants={revealItem} className="mt-3 font-display text-4xl font-normal md:text-5xl text-brand-graphite">
+      <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal md:text-4xl lg:text-5xl text-brand-graphite">
         {title} <span className="text-keyword">{highlight}</span>
       </motion.h2>
-      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-lg text-brand-graphite/70">{description}</motion.p>
+      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-base md:text-lg text-brand-graphite/70">{description}</motion.p>
     </RevealOnScroll>
   )
 }
@@ -67,7 +67,7 @@ function Hero() {
       <div className="absolute top-0 right-[-200px] h-[500px] w-[500px] rounded-full bg-[#176FEB]/[0.08] blur-[120px]" aria-hidden="true" />
       <div className="absolute bottom-[-100px] left-[-150px] h-[400px] w-[400px] rounded-full bg-[#60A5FA]/[0.06] blur-[100px]" aria-hidden="true" />
 
-      <div ref={ref} className="relative mx-auto max-w-6xl px-6">
+      <div ref={ref} className="relative mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
           {/* Left: copy */}
           <div>
@@ -80,7 +80,7 @@ function Hero() {
             </motion.div>
 
             <motion.h1
-              className="mt-6 font-display text-5xl font-normal leading-[1.05] tracking-tight text-[#0A1628] md:text-6xl lg:text-7xl"
+              className="mt-6 font-display text-3xl font-normal leading-[1.05] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl xl:text-7xl"
               initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.1 }}
             >
               AI that runs your operations,{' '}
@@ -88,7 +88,7 @@ function Hero() {
             </motion.h1>
 
             <motion.p
-              className="mt-6 max-w-xl text-lg leading-relaxed text-[#555860] md:text-xl"
+              className="mt-6 max-w-xl text-base leading-relaxed text-[#555860] md:text-lg lg:text-xl"
               initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.2 }}
             >
               Workflow intelligence that classifies, routes, schedules, and notifies automatically — turning reactive work into predictable execution.
@@ -199,7 +199,7 @@ function Hero() {
 
             {/* Floating badge */}
             <motion.div
-              className="absolute -bottom-5 -left-5 flex items-center gap-2 rounded-2xl border border-[#E5E7EB] bg-white px-4 py-3 shadow-xl md:-left-8"
+              className="hidden md:flex absolute -bottom-5 -left-5 items-center gap-2 rounded-2xl border border-[#E5E7EB] bg-white px-4 py-3 shadow-xl md:-left-8"
               initial={{ opacity: 0, y: 16, scale: 0.9 }}
               animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
               transition={{ duration: 0.5, ease, delay: 1.5 }}
@@ -230,11 +230,11 @@ function StatsBar() {
   ]
   return (
     <section className="border-y border-[#E5E7EB] bg-white py-10">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
           {stats.map((s) => (
             <div key={s.label} className="text-center">
-              <p className="font-display text-3xl font-bold text-[#0A1628] md:text-4xl">{s.value}</p>
+              <p className="font-display text-2xl font-bold text-[#0A1628] md:text-3xl lg:text-4xl">{s.value}</p>
               <p className="mt-2 text-xs font-medium uppercase tracking-wider text-[#555860]">{s.label}</p>
             </div>
           ))}
@@ -383,7 +383,7 @@ function SmartTriageEngine() {
               return (
                 <motion.div
                   key={r.text}
-                  className="flex items-center gap-4 px-6 py-4"
+                  className="flex items-center gap-3 px-4 py-4 md:gap-4 md:px-6"
                   initial={{ opacity: 0, x: -12 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.35, ease, delay: 0.15 + i * 0.1 }}
                 >
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F5F6F8]">
@@ -630,7 +630,7 @@ function AutomatedFollowUps() {
         {/* Stats + feature cards */}
         <div className="space-y-4">
           {/* Stats row */}
-          <Anim className="grid grid-cols-3 gap-3" delay={0.15}>
+          <Anim className="grid grid-cols-1 gap-3 sm:grid-cols-3" delay={0.15}>
             {stats.map((s) => (
               <div key={s.label} className="rounded-2xl border border-[#E5E7EB] bg-white p-4 text-center">
                 <p className="text-2xl font-bold text-[#176FEB]">{s.value}</p>
@@ -1112,17 +1112,17 @@ function FAQ() {
 
 function CTASection() {
   return (
-    <section id="cta" className="relative overflow-hidden bg-[#0A1628] px-6 py-24 text-white md:py-28">
+    <section id="cta" className="relative overflow-hidden bg-[#0A1628] px-4 py-16 text-white md:px-6 md:py-20 lg:px-8 lg:py-28">
       <div className="absolute top-0 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-[#176FEB]/25 blur-[120px]" aria-hidden="true" />
       <RevealOnScroll className="relative mx-auto max-w-3xl text-center" stagger={0.12}>
         <motion.span variants={revealItem} className="inline-flex items-center rounded-full border border-[#176FEB]/30 bg-[#176FEB]/10 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-[#60A5FA]">
           Ready when you are
         </motion.span>
-        <motion.h2 variants={revealItem} className="mt-6 font-display text-4xl font-normal tracking-tight md:text-5xl lg:text-6xl">
+        <motion.h2 variants={revealItem} className="mt-6 font-display text-3xl font-normal tracking-tight md:text-4xl lg:text-5xl xl:text-6xl">
           Turn reactive operations into{' '}
           <span className="text-[#60A5FA]">predictable execution.</span>
         </motion.h2>
-        <motion.p variants={revealItem} className="mx-auto mt-6 max-w-xl text-lg text-white/70">
+        <motion.p variants={revealItem} className="mx-auto mt-6 max-w-xl text-base text-white/70 md:text-lg">
           Let AI handle classification, routing, scheduling, and follow-ups — so you can focus on growth, not firefighting.
         </motion.p>
         <motion.div variants={revealItem} className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">

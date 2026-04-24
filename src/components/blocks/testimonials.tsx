@@ -39,22 +39,22 @@ function StarRating() {
 export function Testimonials() {
   return (
     <section className="bg-white py-12 md:py-16">
-      <div className="mx-auto max-w-6xl px-6">
-        <RevealOnScroll className="text-center mb-16">
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+        <RevealOnScroll className="text-center mb-12 md:mb-16">
           <motion.p variants={revealItemBlur} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">
             Testimonials
           </motion.p>
-          <motion.h2 variants={revealItemBlur} className="mt-3 font-heading text-3xl md:text-4xl font-bold text-brand-graphite">
+          <motion.h2 variants={revealItemBlur} className="mt-3 font-heading text-2xl md:text-4xl font-bold text-brand-graphite">
             Trusted by property managers across <span className="text-keyword">Canada and the US</span>
           </motion.h2>
         </RevealOnScroll>
 
-        <RevealOnScroll className="grid gap-8 md:grid-cols-3" stagger={0.15}>
+        <RevealOnScroll className="grid grid-cols-1 gap-4 md:gap-6 lg:gap-8 md:grid-cols-3" stagger={0.15}>
           {testimonials.map((t) => (
             <motion.div
               key={t.name}
               variants={revealItemBlur}
-              className="group relative rounded-xl border border-[#E5E7EB] bg-white p-8 transition-all duration-300 hover:border-[#176FEB]/20 hover:shadow-card-hover"
+              className="group relative rounded-xl border border-[#E5E7EB] bg-white p-6 md:p-8 transition-all duration-300 hover:border-[#176FEB]/20 hover:shadow-card-hover"
             >
               <div className="absolute inset-x-0 top-0 h-[2px] bg-[#176FEB] opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-t-xl" aria-hidden="true" />
               <StarRating />

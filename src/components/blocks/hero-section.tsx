@@ -17,7 +17,7 @@ export function HeroSection() {
       <div className="absolute bottom-[-10%] left-[-5%] h-[400px] w-[400px] rounded-full bg-[#0B5AD4]/[0.06] blur-[100px]" aria-hidden="true" />
 
       <motion.div
-        className="relative z-10 mx-auto max-w-5xl px-6 pt-24 pb-20 text-center"
+        className="relative z-10 mx-auto max-w-5xl px-4 md:px-6 lg:px-8 pt-20 md:pt-24 pb-16 md:pb-20 text-center"
         variants={stagger}
         initial="hidden"
         animate="visible"
@@ -45,7 +45,7 @@ export function HeroSection() {
         {/* H1 - use font-display for the serif impact */}
         <motion.h1
           variants={fadeUp}
-          className="font-display text-4xl font-normal leading-[1.1] tracking-tight text-[#0A1628] text-balance md:text-6xl lg:text-[4.5rem]"
+          className="font-display text-3xl font-normal leading-[1.1] tracking-tight text-[#0A1628] text-balance sm:text-4xl md:text-6xl lg:text-[4.5rem]"
         >
           Run your entire property business
           <br className="hidden md:block" />
@@ -55,7 +55,7 @@ export function HeroSection() {
         {/* Subtitle */}
         <motion.p
           variants={fadeUp}
-          className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-brand-graphite-mid md:text-xl"
+          className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand-graphite-mid md:text-xl"
         >
           Revun replaces the disconnected software stack behind your property
           business with one infrastructure layer built for Canada, the United
@@ -69,13 +69,13 @@ export function HeroSection() {
         >
           <Link
             href="/features/"
-            className="inline-flex h-14 items-center justify-center rounded-xl bg-brand-blue px-8 text-base font-semibold text-white shadow-cta-glow transition-all duration-200 hover:bg-brand-blue-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
+            className="inline-flex h-14 w-full sm:w-auto items-center justify-center rounded-xl bg-brand-blue px-8 text-base font-semibold text-white shadow-cta-glow transition-all duration-200 hover:bg-brand-blue-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
           >
             See the Platform
           </Link>
           <Link
             href="/demo/"
-            className="inline-flex h-14 items-center justify-center rounded-xl border border-border bg-white px-8 text-base font-semibold text-brand-graphite transition-all duration-200 hover:border-brand-blue/30 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
+            className="inline-flex h-14 w-full sm:w-auto items-center justify-center rounded-xl border border-border bg-white px-8 text-base font-semibold text-brand-graphite transition-all duration-200 hover:border-brand-blue/30 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
           >
             Book a Live Demo
           </Link>

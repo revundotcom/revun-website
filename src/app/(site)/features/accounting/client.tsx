@@ -16,8 +16,8 @@ const fadeUp = (delay = 0.1) => ({ initial: { opacity: 0, y: 14 }, transition: {
 
 function SW({ children, id, dark }: { children: React.ReactNode; id: string; dark?: boolean }) {
   return (
-    <section id={id} className={`py-16 md:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
-      <div className="mx-auto max-w-6xl px-6">{children}</div>
+    <section id={id} className={`py-12 md:py-20 lg:py-28 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">{children}</div>
     </section>
   )
 }
@@ -26,10 +26,10 @@ function SH({ eyebrow, title, highlight, desc }: { eyebrow: string; title: strin
   return (
     <RevealOnScroll className="mx-auto max-w-2xl text-center">
       <motion.p variants={revealItem} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">{eyebrow}</motion.p>
-      <motion.h2 variants={revealItem} className="mt-3 font-display text-4xl font-normal md:text-5xl text-brand-graphite">
+      <motion.h2 variants={revealItem} className="mt-3 font-display text-2xl font-normal md:text-4xl lg:text-5xl text-brand-graphite">
         {title} <span className="text-keyword">{highlight}</span>
       </motion.h2>
-      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-lg text-brand-graphite/70">{desc}</motion.p>
+      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-base text-brand-graphite/70 md:text-lg">{desc}</motion.p>
     </RevealOnScroll>
   )
 }
@@ -51,18 +51,18 @@ function A({ children, className, delay = 0.1, x }: { children: React.ReactNode;
 
 function AccountingHero() {
   return (
-    <section className="relative overflow-hidden bg-white pb-12 pt-28 md:pt-36">
+    <section className="relative overflow-hidden bg-white pb-10 pt-24 md:pb-12 md:pt-36">
       <div className="absolute inset-0 bg-grid bg-grid-mask opacity-40" aria-hidden="true" />
       <div className="absolute top-0 right-[-200px] h-[500px] w-[500px] rounded-full bg-brand-blue/[0.04] blur-[120px]" aria-hidden="true" />
-      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
+      <div className="relative z-10 mx-auto max-w-4xl px-4 text-center md:px-6 lg:px-8">
         <RevealOnScroll>
           <motion.div variants={revealItem} className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-4 py-1.5 shadow-sm">
             <Calculator className="h-4 w-4 text-brand-blue" /><span className="text-sm font-medium text-brand-graphite-mid">Accounting & Reporting</span>
           </motion.div>
-          <motion.h1 variants={revealItem} className="font-display text-5xl font-normal leading-[1.1] tracking-tight text-brand-graphite md:text-7xl">
+          <motion.h1 variants={revealItem} className="font-display text-3xl font-normal leading-[1.1] tracking-tight text-brand-graphite md:text-5xl lg:text-6xl">
             The financial{' '}<span className="text-brand-blue">infrastructure</span>{' '}for property operations
           </motion.h1>
-          <motion.p variants={revealItem} className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-brand-graphite-mid md:text-xl">
+          <motion.p variants={revealItem} className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand-graphite-mid md:text-lg lg:text-xl">
             Real-time dashboards, automated reconciliation, trust accounting, owner disbursements, tax reporting, and QuickBooks/Xero sync — all in one system.
           </motion.p>
           <motion.div variants={revealItem} className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -513,13 +513,13 @@ function MultiEntityReporting() {
 
 function AccountingCTA() {
   return (
-    <section className="bg-[#F5F6F8] py-20">
-      <div className="mx-auto max-w-3xl px-6 text-center">
+    <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+      <div className="mx-auto max-w-3xl px-4 text-center md:px-6 lg:px-8">
         <RevealOnScroll>
-          <motion.h2 variants={revealItem} className="font-display text-4xl font-normal text-brand-graphite md:text-5xl">
+          <motion.h2 variants={revealItem} className="font-display text-3xl font-normal text-brand-graphite md:text-4xl lg:text-5xl">
             Replace your entire{' '}<span className="text-brand-blue">accounting stack</span>
           </motion.h2>
-          <motion.p variants={revealItem} className="mx-auto mt-4 max-w-lg text-lg text-brand-graphite-mid">
+          <motion.p variants={revealItem} className="mx-auto mt-4 max-w-lg text-base text-brand-graphite-mid md:text-lg">
             Revenue tracking, expense management, trust accounting, disbursements, tax reporting, and integrations — all built into Revun.
           </motion.p>
           <motion.div variants={revealItem} className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">

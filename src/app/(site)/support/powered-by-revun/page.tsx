@@ -161,7 +161,7 @@ export default function PoweredByRevunSupportPage() {
       {/* ── Hero ──────────────────────────────────────────────────── */}
       <section className="bg-[#F5F6F8]">
         <motion.div
-          className="mx-auto max-w-3xl px-6 pt-24 pb-16 text-center"
+          className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 pt-16 md:pt-24 pb-12 md:pb-16 text-center"
           variants={heroStagger}
           initial="hidden"
           animate="visible"
@@ -174,7 +174,7 @@ export default function PoweredByRevunSupportPage() {
           </motion.p>
           <motion.h1
             variants={fadeUp}
-            className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-[#0A1628] sm:text-5xl"
+            className="font-display font-extrabold text-3xl leading-[1.1] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl"
           >
             Your provider uses{' '}
             <span className="text-[#176FEB]">Revun</span>
@@ -190,11 +190,11 @@ export default function PoweredByRevunSupportPage() {
 
       {/* ── Important Notice ──────────────────────────────────────── */}
       <section className="bg-white py-12">
-        <div className="mx-auto max-w-4xl px-6">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <motion.div
               variants={revealItem}
-              className="rounded-2xl border border-[#176FEB]/20 bg-[#E8F2FE] p-8"
+              className="rounded-2xl border border-[#176FEB]/20 bg-[#E8F2FE] p-6 md:p-8"
             >
               <div className="flex items-start gap-4">
                 <AlertCircle className="mt-0.5 h-6 w-6 shrink-0 text-[#176FEB]" />
@@ -214,7 +214,7 @@ export default function PoweredByRevunSupportPage() {
 
       {/* ── How to Find Your Operator ─────────────────────────────── */}
       <section className="bg-white py-12">
-        <div className="mx-auto max-w-4xl px-6">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <motion.p
               variants={revealItem}
@@ -279,7 +279,7 @@ export default function PoweredByRevunSupportPage() {
 
       {/* ── Responsibility Split ──────────────────────────────────── */}
       <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-5xl px-6">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <motion.p
               variants={revealItem}
@@ -361,7 +361,7 @@ export default function PoweredByRevunSupportPage() {
 
       {/* ── Operator Types ────────────────────────────────────────── */}
       <section className="bg-white py-12">
-        <div className="mx-auto max-w-4xl px-6">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <motion.p
               variants={revealItem}
@@ -411,7 +411,7 @@ export default function PoweredByRevunSupportPage() {
 
       {/* ── FAQ ───────────────────────────────────────────────────── */}
       <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-2xl px-6">
+        <div className="mx-auto max-w-2xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="text-center">
             <motion.p
               variants={revealItem}
@@ -442,11 +442,11 @@ export default function PoweredByRevunSupportPage() {
 
       {/* ── CTA ───────────────────────────────────────────────────── */}
       <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-3xl px-6 text-center">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center">
           <RevealOnScroll>
             <motion.h2
               variants={revealItem}
-              className="font-heading font-extrabold text-4xl tracking-tight text-[#0A1628] md:text-5xl"
+              className="font-heading font-extrabold text-3xl tracking-tight text-[#0A1628] md:text-4xl lg:text-5xl"
             >
               Need <span className="text-[#176FEB]">technical</span> support?
             </motion.h2>

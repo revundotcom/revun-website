@@ -138,12 +138,12 @@ export function SolutionDetailClient({
   return (
     <>
       {/* ────────────────────── HERO (split, with audience imagery) ────────────────────── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#F8FAFF] via-white to-[#F5F6F8] pt-20 pb-16 md:pt-24 md:pb-20">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#F8FAFF] via-white to-[#F5F6F8] pt-16 pb-12 md:pt-24 md:pb-20">
         <div className="absolute inset-0 bg-dot-grid opacity-30" aria-hidden="true" />
         <div className="absolute right-[-12rem] top-[-4rem] h-[28rem] w-[28rem] rounded-full bg-[#176FEB]/[0.08] blur-[130px]" aria-hidden="true" />
 
-        <div className="relative mx-auto max-w-7xl px-6">
-          <div className={`grid items-center gap-12 ${visuals ? 'lg:grid-cols-[1.05fr_0.95fr]' : 'lg:grid-cols-1'}`}>
+        <div className="relative mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
+          <div className={`grid items-center gap-8 md:gap-12 ${visuals ? 'lg:grid-cols-[1.05fr_0.95fr]' : 'lg:grid-cols-1'}`}>
             <motion.div
               className={visuals ? '' : 'mx-auto max-w-3xl text-center'}
               variants={heroStagger}
@@ -160,7 +160,7 @@ export function SolutionDetailClient({
 
               <motion.h1
                 variants={fadeUp}
-                className="font-display text-4xl font-normal leading-[1.05] tracking-tight text-[#0A1628] sm:text-5xl md:text-6xl"
+                className="font-display text-3xl font-normal leading-[1.05] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl"
               >
                 {renderTitle(data.title)}
               </motion.h1>
@@ -240,7 +240,7 @@ export function SolutionDetailClient({
 
       {/* ────────────────────── PROBLEM ────────────────────── */}
       <section className="bg-white py-12">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
             <div>
               <motion.p
@@ -284,7 +284,7 @@ export function SolutionDetailClient({
 
       {/* ────────────────────── FEATURES ────────────────────── */}
       <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <motion.p
               variants={revealItem}
@@ -331,7 +331,7 @@ export function SolutionDetailClient({
       {/* ────────────────────── TESTIMONIAL (audience-specific) ────────────────────── */}
       {visuals && (
         <section className="bg-white py-16 md:py-20">
-          <div className="mx-auto max-w-4xl px-6">
+          <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
             <RevealOnScroll>
               <motion.div
                 variants={revealItem}
@@ -382,7 +382,7 @@ export function SolutionDetailClient({
 
       {/* ────────────────────── HOW IT WORKS ────────────────────── */}
       <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-5xl px-6">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <motion.p
               variants={revealItem}
@@ -435,7 +435,7 @@ export function SolutionDetailClient({
       {/* ────────────────────── REPLACES (categorized integration cards) ────────────────────── */}
       {(visuals?.integrations?.length ?? data.replaces.length) > 0 && (
         <section className="bg-white py-12">
-          <div className="mx-auto max-w-5xl px-6">
+          <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
             <RevealOnScroll className="text-center">
               <motion.p
                 variants={revealItem}
@@ -512,7 +512,7 @@ export function SolutionDetailClient({
 
       {/* ────────────────────── PRICING PREVIEW ────────────────────── */}
       <section className="bg-white py-12">
-        <RevealOnScroll className="mx-auto max-w-2xl px-6 text-center">
+        <RevealOnScroll className="mx-auto max-w-2xl px-4 md:px-6 lg:px-8 text-center">
           <motion.p
             variants={revealItem}
             className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]"
@@ -546,7 +546,7 @@ export function SolutionDetailClient({
       {/* ────────────────────── RELATED SOLUTIONS ────────────────────── */}
       {data.relatedSolutions.length > 0 && (
         <section className="bg-white py-12">
-          <div className="mx-auto max-w-6xl px-6">
+          <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
             <RevealOnScroll className="mb-8 text-center">
               <motion.p
                 variants={revealItem}
@@ -605,7 +605,7 @@ export function SolutionDetailClient({
           <div className="absolute right-[15%] bottom-[20%] h-[350px] w-[350px] rounded-full bg-[radial-gradient(circle,rgba(23,111,235,0.1)_0%,transparent_70%)] blur-3xl" />
         </div>
 
-        <RevealOnScroll className="relative z-10 mx-auto max-w-2xl px-6 text-center">
+        <RevealOnScroll className="relative z-10 mx-auto max-w-2xl px-4 md:px-6 lg:px-8 text-center">
           <motion.h2
             variants={revealItem}
             className="font-heading font-extrabold text-3xl leading-tight tracking-tight text-[#0A1628] sm:text-4xl md:text-5xl"

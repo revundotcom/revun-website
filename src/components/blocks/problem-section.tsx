@@ -190,7 +190,7 @@ function ChaosSlideshow() {
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              <p className="font-display text-3xl font-normal leading-[1.05] text-white md:text-5xl lg:text-6xl">
+              <p className="font-display text-2xl font-normal leading-[1.05] text-white md:text-5xl lg:text-6xl">
                 {s.headline[0]}
                 <br />
                 <span className="text-white/80">{s.headline[1]}</span>
@@ -588,17 +588,17 @@ function PainChapters() {
                 Chapter {String(active + 1).padStart(2, '0')} of 04, {chapter.tag}
               </p>
               <h4
-                className="mt-5 font-display text-4xl font-normal text-[#0A1628] md:text-[56px]"
+                className="mt-5 font-display text-3xl font-normal text-[#0A1628] md:text-[56px]"
                 style={{ lineHeight: 1.05, letterSpacing: '-0.01em' }}
               >
                 {chapter.title}.
               </h4>
-              <p className="mt-6 max-w-xl text-[18px] leading-relaxed text-brand-graphite-mid">
+              <p className="mt-6 max-w-xl text-base md:text-[18px] leading-relaxed text-brand-graphite-mid">
                 {chapter.description}
               </p>
 
               <div className="mt-8 flex items-end gap-5 border-t border-border pt-6">
-                <span className="font-display text-5xl font-normal leading-none text-brand-blue md:text-6xl">
+                <span className="font-display text-4xl font-normal leading-none text-brand-blue md:text-6xl">
                   {chapter.stat}
                 </span>
                 <span className="pb-1 text-xs font-heading font-semibold uppercase tracking-[0.18em] text-brand-graphite-mid">
@@ -668,7 +668,7 @@ export default function ProblemSection() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
             variants={revealItem}
@@ -678,14 +678,14 @@ export default function ProblemSection() {
           </motion.p>
           <motion.h2
             variants={revealItem}
-            className="mt-3 font-display text-4xl font-normal text-[#0A1628] md:text-5xl"
+            className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-5xl"
           >
             Property businesses break under{' '}
             <span className="text-keyword">disconnected systems</span>
           </motion.h2>
           <motion.p
             variants={revealItem}
-            className="mx-auto mt-4 max-w-xl text-lg text-brand-graphite-mid"
+            className="mx-auto mt-4 max-w-xl text-base md:text-lg text-brand-graphite-mid"
           >
             Most operators run their business on a patchwork of tools that were
             never designed to work together. The result is wasted hours,

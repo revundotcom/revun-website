@@ -186,13 +186,13 @@ function FeatureRow({ feature, index }: { feature: Feature; index: number }) {
 
 export function FeatureShowcase() {
   return (
-    <section className="relative overflow-hidden bg-brand-off-white py-20 md:py-28">
+    <section className="relative overflow-hidden bg-brand-off-white py-12 md:py-20 lg:py-28">
       <div
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[800px] rounded-full bg-[#176FEB]/[0.02] blur-[120px]"
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         {/* Header */}
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
@@ -203,14 +203,14 @@ export function FeatureShowcase() {
           </motion.p>
           <motion.h2
             variants={revealItem}
-            className="mt-3 font-display text-4xl font-normal leading-[1.1] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl"
+            className="mt-3 font-display text-3xl font-normal leading-[1.1] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl"
           >
             Disconnected tools cost you{' '}
             <span className="text-keyword">speed, control, and revenue</span>
           </motion.h2>
           <motion.p
             variants={revealItem}
-            className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-brand-graphite-mid"
+            className="mx-auto mt-5 max-w-2xl text-base md:text-lg leading-relaxed text-brand-graphite-mid"
           >
             Every gap between your systems is a missed payment, a compliance failure,
             or a tenant you lose. Revun unifies it all into one infrastructure layer,

@@ -90,12 +90,12 @@ export default function WhatIsRevunPage() {
 
       {/* ── Hero ── */}
       <section className="bg-[#F5F6F8]">
-        <div className="mx-auto max-w-4xl px-6 pt-24 pb-16 text-center">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8 pt-20 pb-12 md:pt-24 md:pb-16 text-center">
           <RevealOnScroll>
             <p className="mb-4 text-sm font-medium uppercase tracking-widest text-[#176FEB]">
               Brand Overview
             </p>
-            <h1 className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-[#0A1628] sm:text-5xl lg:text-6xl">
+            <h1 className="font-display font-extrabold text-3xl leading-[1.1] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl">
               Why Revun{' '}
               <span className="text-[#176FEB]">exists</span>
             </h1>
@@ -107,13 +107,13 @@ export default function WhatIsRevunPage() {
       </section>
 
       {/* ── What Revun Is ── */}
-      <section className="bg-white py-12">
-        <div className="mx-auto max-w-5xl px-6">
+      <section className="bg-white py-12 md:py-20">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               The Platform
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] md:text-4xl">
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-[#2C2E33] sm:text-3xl md:text-4xl">
               An operating system for{' '}
               <span className="text-[#176FEB]">property management</span>
             </h2>
@@ -123,7 +123,7 @@ export default function WhatIsRevunPage() {
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.08}>
-            <div className="grid gap-5 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
               {[
                 {
                   title: 'Single Source of Truth',
@@ -145,7 +145,7 @@ export default function WhatIsRevunPage() {
                 return (
                   <div
                     key={item.title}
-                    className="rounded-2xl border border-[#D3D5DB] bg-white p-8 transition hover:border-[#176FEB]/40"
+                    className="rounded-2xl border border-[#D3D5DB] bg-white p-6 sm:p-8 transition hover:border-[#176FEB]/40"
                   >
                     <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#E8F2FE]">
                       <Icon className="h-6 w-6 text-[#176FEB]" />
@@ -165,26 +165,26 @@ export default function WhatIsRevunPage() {
       </section>
 
       {/* ── Who It's For ── */}
-      <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="bg-[#F5F6F8] py-12 md:py-20">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Who It Serves
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] md:text-4xl">
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-[#2C2E33] sm:text-3xl md:text-4xl">
               Built for every{' '}
               <span className="text-[#176FEB]">role</span> in property management
             </h2>
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.06}>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
               {audiences.map((aud) => {
                 const Icon = aud.icon
                 return (
                   <div
                     key={aud.title}
-                    className="rounded-2xl border border-[#D3D5DB] bg-white p-8"
+                    className="rounded-2xl border border-[#D3D5DB] bg-white p-6 sm:p-8"
                   >
                     <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#E8F2FE]">
                       <Icon className="h-6 w-6 text-[#176FEB]" />
@@ -204,21 +204,21 @@ export default function WhatIsRevunPage() {
       </section>
 
       {/* ── How It Works (Two Paths) ── */}
-      <section className="bg-white py-12">
-        <div className="mx-auto max-w-5xl px-6">
+      <section className="bg-white py-12 md:py-20">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Two Paths
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] md:text-4xl">
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-[#2C2E33] sm:text-3xl md:text-4xl">
               How <span className="text-[#176FEB]">Revun</span> works
             </h2>
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.12}>
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
               {/* B2B Path */}
-              <div className="rounded-2xl border border-[#D3D5DB] bg-[#F5F6F8] p-8 text-[#0A1628]">
+              <div className="rounded-2xl border border-[#D3D5DB] bg-[#F5F6F8] p-6 sm:p-8 text-[#0A1628]">
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#176FEB]/10">
                   <Building2 className="h-6 w-6 text-[#176FEB]" strokeWidth={1.8} />
                 </div>
@@ -246,7 +246,7 @@ export default function WhatIsRevunPage() {
               </div>
 
               {/* B2C Path */}
-              <div className="rounded-2xl border border-[#D3D5DB] bg-white p-8">
+              <div className="rounded-2xl border border-[#D3D5DB] bg-white p-6 sm:p-8">
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#E8F2FE]">
                   <User className="h-6 w-6 text-[#176FEB]" strokeWidth={1.8} />
                 </div>
@@ -278,13 +278,13 @@ export default function WhatIsRevunPage() {
       </section>
 
       {/* ── Powered by Revun Concept ── */}
-      <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-4xl px-6">
+      <section className="bg-[#F5F6F8] py-12 md:py-20">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Powered by Revun
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] md:text-4xl">
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-[#2C2E33] sm:text-3xl md:text-4xl">
               The <span className="text-[#176FEB]">ecosystem</span> behind the brand
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-[#555860]">
@@ -304,25 +304,25 @@ export default function WhatIsRevunPage() {
       </section>
 
       {/* ── Key Capabilities ── */}
-      <section className="bg-white py-12">
-        <div className="mx-auto max-w-5xl px-6">
+      <section className="bg-white py-12 md:py-20">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Capabilities
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] md:text-4xl">
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-[#2C2E33] sm:text-3xl md:text-4xl">
               Everything in <span className="text-[#176FEB]">one platform</span>
             </h2>
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.06}>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
               {capabilities.map((cap) => {
                 const Icon = cap.icon
                 return (
                   <div
                     key={cap.title}
-                    className="flex items-center gap-4 rounded-2xl border border-[#D3D5DB] bg-white p-6 transition hover:border-[#176FEB]/40"
+                    className="flex items-center gap-4 rounded-2xl border border-[#D3D5DB] bg-white p-5 sm:p-6 transition hover:border-[#176FEB]/40"
                   >
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#E8F2FE]">
                       <Icon className="h-5 w-5 text-[#176FEB]" />
@@ -349,10 +349,10 @@ export default function WhatIsRevunPage() {
       </section>
 
       {/* ── CTA Cluster ── */}
-      <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-3xl px-6 text-center">
+      <section className="bg-[#F5F6F8] py-12 md:py-20">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center">
           <RevealOnScroll>
-            <h2 className="font-heading font-extrabold text-4xl tracking-tight text-[#0A1628] md:text-5xl">
+            <h2 className="font-heading font-extrabold text-3xl tracking-tight text-[#0A1628] sm:text-4xl md:text-5xl">
               Ready to explore{' '}
               <span className="text-[#176FEB]">Revun?</span>
             </h2>

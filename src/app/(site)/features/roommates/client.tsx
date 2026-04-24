@@ -64,8 +64,8 @@ function Avatar({ src, alt, size = 48, ring = false }: { src: string; alt: strin
 
 function SectionWrapper({ children, id, dark }: { children: React.ReactNode; id: string; dark?: boolean }) {
   return (
-    <section id={id} className={`py-16 md:py-24 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
-      <div className="mx-auto max-w-6xl px-6">{children}</div>
+    <section id={id} className={`py-12 md:py-20 lg:py-28 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">{children}</div>
     </section>
   )
 }
@@ -78,10 +78,10 @@ function SectionHeader({ eyebrow, title, highlight, description }: {
       <motion.p variants={revealItem} className="text-sm font-heading font-semibold uppercase tracking-wider text-[#176FEB]">
         {eyebrow}
       </motion.p>
-      <motion.h2 variants={revealItem} className="mt-3 font-display text-4xl font-normal md:text-5xl text-[#0A1628]">
+      <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal md:text-4xl lg:text-5xl text-[#0A1628]">
         {title} <span className="text-[#176FEB]">{highlight}</span>
       </motion.h2>
-      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-lg text-[#555860]">
+      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-base md:text-lg text-[#555860]">
         {description}
       </motion.p>
     </RevealOnScroll>
@@ -94,12 +94,12 @@ function SectionHeader({ eyebrow, title, highlight, description }: {
 
 function RoommatesHero() {
   return (
-    <section className="relative overflow-hidden bg-white pb-16 pt-28 md:pt-36">
+    <section className="relative overflow-hidden bg-white pb-12 pt-24 md:pb-16 md:pt-36">
       <div className="absolute inset-0 bg-grid bg-grid-mask opacity-40" aria-hidden="true" />
       <div className="absolute top-0 right-[-200px] h-[600px] w-[600px] rounded-full bg-[#176FEB]/[0.06] blur-[140px]" aria-hidden="true" />
       <div className="absolute bottom-0 left-[-200px] h-[500px] w-[500px] rounded-full bg-[#60A5FA]/[0.04] blur-[120px]" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
           {/* Left: copy */}
           <RevealOnScroll>
@@ -112,14 +112,14 @@ function RoommatesHero() {
             </motion.div>
             <motion.h1
               variants={revealItem}
-              className="mt-6 font-display text-5xl font-normal leading-[1.05] tracking-tight text-[#0A1628] md:text-6xl lg:text-7xl"
+              className="mt-6 font-display text-3xl font-normal leading-[1.05] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl xl:text-7xl"
             >
               Find your perfect{' '}
               <span className="text-[#176FEB]">roommate.</span>
             </motion.h1>
             <motion.p
               variants={revealItem}
-              className="mt-6 max-w-xl text-lg leading-relaxed text-[#555860] md:text-xl"
+              className="mt-6 max-w-xl text-base leading-relaxed text-[#555860] md:text-lg lg:text-xl"
             >
               Swipe through verified profiles, match on lifestyle, and chat in one tap — all inside the Revun tenant app.
             </motion.p>
@@ -235,7 +235,7 @@ function HeroDeckPreview() {
 
       {/* Floating match notification */}
       <motion.div
-        className="absolute -left-4 bottom-8 z-40 flex items-center gap-3 rounded-2xl border border-[#E5E7EB] bg-white px-4 py-3 shadow-xl md:-left-8"
+        className="hidden md:flex absolute -left-4 bottom-8 z-40 items-center gap-3 rounded-2xl border border-[#E5E7EB] bg-white px-4 py-3 shadow-xl md:-left-8"
         initial={{ opacity: 0, y: 20, scale: 0.9 }}
         animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
         transition={{ duration: 0.5, ease, delay: 1.2 }}
@@ -1130,7 +1130,7 @@ function MatchMoment() {
 
           <p className="text-sm font-semibold uppercase tracking-wider text-[#555860]">You found a</p>
           <motion.h3
-            className="mt-2 font-display text-6xl font-bold text-[#176FEB] md:text-7xl"
+            className="mt-2 font-display text-5xl font-bold text-[#176FEB] md:text-6xl lg:text-7xl"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={inView ? { scale: 1, opacity: 1 } : {}}
             transition={{ duration: 0.6, ease, delay: 0.3, type: 'spring', stiffness: 150 }}
@@ -1277,18 +1277,18 @@ function MatchMoment() {
 
 function FinalCTA() {
   return (
-    <section className="relative overflow-hidden bg-[#0A1628] py-20 text-white md:py-24">
+    <section className="relative overflow-hidden bg-[#0A1628] py-16 text-white md:py-20 lg:py-24">
       <div className="absolute top-0 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-[#176FEB]/20 blur-[120px]" aria-hidden="true" />
-      <div className="relative mx-auto max-w-3xl px-6 text-center">
+      <div className="relative mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center">
         <RevealOnScroll>
           <motion.p variants={revealItem} className="font-heading text-sm font-semibold uppercase tracking-wider text-[#60A5FA]">
             Ready when you are
           </motion.p>
-          <motion.h2 variants={revealItem} className="mt-3 font-display text-4xl font-normal md:text-5xl">
+          <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal md:text-4xl lg:text-5xl">
             Your next roommate is already{' '}
             <span className="text-[#60A5FA]">on Revun.</span>
           </motion.h2>
-          <motion.p variants={revealItem} className="mx-auto mt-5 max-w-xl text-lg text-white/70">
+          <motion.p variants={revealItem} className="mx-auto mt-5 max-w-xl text-base text-white/70 md:text-lg">
             Create your free profile in under 2 minutes. Start swiping today.
           </motion.p>
           <motion.div variants={revealItem} className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">

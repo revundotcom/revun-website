@@ -248,12 +248,12 @@ export default function WhyRevunPage() {
 
       {/* -- Hero -- */}
       <section className="relative overflow-hidden bg-[#F5F6F8]">
-        <div className="mx-auto max-w-5xl px-6 pt-24 pb-16 text-center">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8 pt-20 pb-12 md:pt-24 md:pb-16 text-center">
           <RevealOnScroll stagger={0.08}>
             <p className="mb-4 text-sm font-medium uppercase tracking-widest text-[#176FEB]">
               Why Revun
             </p>
-            <h1 className="font-display font-extrabold text-4xl leading-[1.08] tracking-tight text-[#0A1628] sm:text-5xl lg:text-6xl">
+            <h1 className="font-display font-extrabold text-3xl leading-[1.08] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl">
               The property OS built for{' '}
               <span className="text-[#176FEB]">modern operators</span>,
               <br className="hidden md:block" /> not 1990s landlords.
@@ -297,13 +297,13 @@ export default function WhyRevunPage() {
       </section>
 
       {/* -- Why we built Revun -- */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[1.1fr_1fr] lg:items-start">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto grid max-w-6xl gap-8 md:gap-12 px-4 md:px-6 lg:px-8 lg:grid-cols-[1.1fr_1fr] lg:items-start">
           <RevealOnScroll>
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Why we built Revun
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#0A1628] md:text-4xl">
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-[#0A1628] sm:text-3xl md:text-4xl">
               Property software has been broken in the same way for 30 years.
             </h2>
             <p className="mt-5 text-base leading-relaxed text-[#475569]">
@@ -343,26 +343,26 @@ export default function WhyRevunPage() {
       </section>
 
       {/* -- The Revun difference — 4 pillars -- */}
-      <section className="bg-[#F5F6F8] py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <RevealOnScroll className="mb-12 text-center">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+          <RevealOnScroll className="mb-10 md:mb-12 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               The Revun difference
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#0A1628] md:text-4xl">
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-[#0A1628] sm:text-3xl md:text-4xl">
               Four things{' '}
               <span className="text-[#176FEB]">no legacy platform</span> does well.
             </h2>
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.08}>
-            <div className="grid gap-5 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
               {pillars.map((p, i) => {
                 const Icon = p.icon
                 return (
                   <div
                     key={p.title}
-                    className="rounded-2xl border border-[#E5E7EB] bg-white p-8 transition hover:border-[#176FEB]/40"
+                    className="rounded-2xl border border-[#E5E7EB] bg-white p-6 sm:p-8 transition hover:border-[#176FEB]/40"
                   >
                     <div className="flex items-start gap-5">
                       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#E8F2FE]">
@@ -389,13 +389,13 @@ export default function WhyRevunPage() {
       </section>
 
       {/* -- Comparison matrix -- */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-5xl px-6">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Revun vs legacy PM software
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#0A1628] md:text-4xl">
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-[#0A1628] sm:text-3xl md:text-4xl">
               The feature gap, in one table.
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-[#475569]">
@@ -404,41 +404,43 @@ export default function WhyRevunPage() {
           </RevealOnScroll>
 
           <RevealOnScroll>
-            <div className="overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white">
-              <div className="grid grid-cols-[1.4fr_1fr_1fr] border-b border-[#E5E7EB] bg-[#F5F6F8] text-xs font-semibold uppercase tracking-wider text-[#475569]">
-                <div className="px-4 py-4 sm:px-6">Capability</div>
-                <div className="border-l border-[#E5E7EB] px-4 py-4 text-center text-[#176FEB] sm:px-6">Revun</div>
-                <div className="border-l border-[#E5E7EB] px-4 py-4 text-center sm:px-6">Legacy PM software</div>
-              </div>
-
-              {comparisonRows.map((row, idx) => (
-                <div
-                  key={row.label}
-                  className={`grid grid-cols-[1.4fr_1fr_1fr] text-sm ${
-                    idx !== comparisonRows.length - 1 ? 'border-b border-[#E5E7EB]' : ''
-                  }`}
-                >
-                  <div className="px-4 py-4 font-medium text-[#0A1628] sm:px-6">
-                    {row.label}
-                  </div>
-                  <div className="flex items-center justify-center gap-2 border-l border-[#E5E7EB] px-4 py-4 sm:px-6">
-                    {row.revun.yes ? (
-                      <CheckCircle2 className="h-5 w-5 shrink-0 text-[#047857]" />
-                    ) : (
-                      <XCircle className="h-5 w-5 shrink-0 text-[#DC2626]" />
-                    )}
-                    <span className="text-[#0A1628]">{row.revun.value}</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-2 border-l border-[#E5E7EB] px-4 py-4 text-[#475569] sm:px-6">
-                    {row.legacy.yes ? (
-                      <CheckCircle2 className="h-5 w-5 shrink-0 text-[#047857]" />
-                    ) : (
-                      <XCircle className="h-5 w-5 shrink-0 text-[#DC2626]" />
-                    )}
-                    <span>{row.legacy.value}</span>
-                  </div>
+            <div className="overflow-x-auto rounded-2xl border border-[#E5E7EB] bg-white">
+              <div className="min-w-[640px]">
+                <div className="grid grid-cols-[1.4fr_1fr_1fr] border-b border-[#E5E7EB] bg-[#F5F6F8] text-xs font-semibold uppercase tracking-wider text-[#475569]">
+                  <div className="px-4 py-4 sm:px-6">Capability</div>
+                  <div className="border-l border-[#E5E7EB] px-4 py-4 text-center text-[#176FEB] sm:px-6">Revun</div>
+                  <div className="border-l border-[#E5E7EB] px-4 py-4 text-center sm:px-6">Legacy PM software</div>
                 </div>
-              ))}
+
+                {comparisonRows.map((row, idx) => (
+                  <div
+                    key={row.label}
+                    className={`grid grid-cols-[1.4fr_1fr_1fr] text-sm ${
+                      idx !== comparisonRows.length - 1 ? 'border-b border-[#E5E7EB]' : ''
+                    }`}
+                  >
+                    <div className="px-4 py-4 font-medium text-[#0A1628] sm:px-6">
+                      {row.label}
+                    </div>
+                    <div className="flex items-center justify-center gap-2 border-l border-[#E5E7EB] px-4 py-4 sm:px-6">
+                      {row.revun.yes ? (
+                        <CheckCircle2 className="h-5 w-5 shrink-0 text-[#047857]" />
+                      ) : (
+                        <XCircle className="h-5 w-5 shrink-0 text-[#DC2626]" />
+                      )}
+                      <span className="text-[#0A1628]">{row.revun.value}</span>
+                    </div>
+                    <div className="flex items-center justify-center gap-2 border-l border-[#E5E7EB] px-4 py-4 text-[#475569] sm:px-6">
+                      {row.legacy.yes ? (
+                        <CheckCircle2 className="h-5 w-5 shrink-0 text-[#047857]" />
+                      ) : (
+                        <XCircle className="h-5 w-5 shrink-0 text-[#DC2626]" />
+                      )}
+                      <span>{row.legacy.value}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="mt-8 text-center">
@@ -455,23 +457,23 @@ export default function WhyRevunPage() {
       </section>
 
       {/* -- Testimonials -- */}
-      <section className="bg-[#F5F6F8] py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <RevealOnScroll className="mb-12 text-center">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+          <RevealOnScroll className="mb-10 md:mb-12 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Real outcomes
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#0A1628] md:text-4xl">
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-[#0A1628] sm:text-3xl md:text-4xl">
               What operators actually say after switching.
             </h2>
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.1}>
-            <div className="grid gap-5 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
               {testimonials.map((t) => (
                 <figure
                   key={t.name}
-                  className="flex h-full flex-col rounded-2xl border border-[#E5E7EB] bg-white p-7"
+                  className="flex h-full flex-col rounded-2xl border border-[#E5E7EB] bg-white p-6 sm:p-7"
                 >
                   <blockquote className="flex-1 text-[0.95rem] leading-relaxed text-[#0A1628]">
                     &ldquo;{t.quote}&rdquo;
@@ -500,26 +502,26 @@ export default function WhyRevunPage() {
       </section>
 
       {/* -- Who switches to Revun -- */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <RevealOnScroll className="mb-12 text-center">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+          <RevealOnScroll className="mb-10 md:mb-12 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Who switches to Revun
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#0A1628] md:text-4xl">
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-[#0A1628] sm:text-3xl md:text-4xl">
               Four profiles, one <span className="text-[#176FEB]">platform</span>.
             </h2>
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.08}>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-4">
               {audiences.map((a) => {
                 const Icon = a.icon
                 return (
                   <Link
                     key={a.slug}
                     href={`/solutions/${a.slug}/`}
-                    className="group flex h-full flex-col rounded-2xl border border-[#E5E7EB] bg-[#F5F6F8] p-7 transition hover:border-[#176FEB]/40 hover:bg-white"
+                    className="group flex h-full flex-col rounded-2xl border border-[#E5E7EB] bg-[#F5F6F8] p-6 sm:p-7 transition hover:border-[#176FEB]/40 hover:bg-white"
                   >
                     <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[#E8F2FE]">
                       <Icon className="h-5 w-5 text-[#176FEB]" />
@@ -543,26 +545,26 @@ export default function WhyRevunPage() {
       </section>
 
       {/* -- Stat row -- */}
-      <section className="bg-[#F5F6F8] py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <RevealOnScroll className="mb-12 text-center">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+          <RevealOnScroll className="mb-10 md:mb-12 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               The numbers
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#0A1628] md:text-4xl">
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-[#0A1628] sm:text-3xl md:text-4xl">
               What switching to Revun actually moves.
             </h2>
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.1}>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-4 md:gap-5 lg:grid-cols-4">
               {metrics.map((m) => (
                 <div
                   key={m.label}
-                  className="rounded-2xl border border-[#E5E7EB] bg-white p-7 text-center"
+                  className="rounded-2xl border border-[#E5E7EB] bg-white p-5 sm:p-7 text-center"
                 >
                   <div
-                    className={`font-display text-4xl font-extrabold tracking-tight md:text-5xl ${
+                    className={`font-display text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl ${
                       m.tone === 'green' ? 'text-[#047857]' : 'text-[#176FEB]'
                     }`}
                   >
@@ -577,13 +579,13 @@ export default function WhyRevunPage() {
       </section>
 
       {/* -- FAQ -- */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-3xl px-6">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Questions operators ask first
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#0A1628] md:text-4xl">
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-[#0A1628] sm:text-3xl md:text-4xl">
               Frequently asked <span className="text-[#176FEB]">questions</span>
             </h2>
           </RevealOnScroll>
@@ -592,11 +594,11 @@ export default function WhyRevunPage() {
             <div className="divide-y divide-[#E5E7EB] rounded-2xl border border-[#E5E7EB] bg-white">
               {faqs.map((f) => (
                 <details key={f.q} className="group">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-base font-semibold text-[#0A1628] [&::-webkit-details-marker]:hidden">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 sm:px-6 sm:py-5 text-sm sm:text-base font-semibold text-[#0A1628] [&::-webkit-details-marker]:hidden">
                     <span>{f.q}</span>
                     <ChevronDown className="h-5 w-5 shrink-0 text-[#475569] transition-transform group-open:rotate-180" />
                   </summary>
-                  <div className="px-6 pb-5 text-sm leading-relaxed text-[#475569]">
+                  <div className="px-4 pb-5 sm:px-6 text-sm leading-relaxed text-[#475569]">
                     {f.a}
                   </div>
                 </details>
@@ -607,10 +609,10 @@ export default function WhyRevunPage() {
       </section>
 
       {/* -- Final CTA (dark bookend) -- */}
-      <section className="bg-[#0A1628] py-20">
-        <div className="mx-auto max-w-4xl px-6 text-center">
+      <section className="bg-[#0A1628] py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8 text-center">
           <RevealOnScroll>
-            <h2 className="font-display font-extrabold text-4xl tracking-tight text-white md:text-5xl">
+            <h2 className="font-display font-extrabold text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">
               Run your portfolio on the{' '}
               <span className="text-[#5FA3F7]">modern stack</span>.
             </h2>

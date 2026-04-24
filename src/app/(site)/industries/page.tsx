@@ -225,8 +225,8 @@ const industries: readonly Industry[] = [
     stat: 'BAH-calc engine · PCS workflows',
     chipLabel: 'Military',
     image: {
-      src: 'https://images.unsplash.com/photo-1517994112540-009c47ea476b?auto=format&fit=crop&w=1200&q=85',
-      alt: 'Orderly row of base family housing units',
+      src: 'https://images.unsplash.com/photo-1773427640897-98400b5fe05f?auto=format&fit=crop&w=1200&q=85',
+      alt: 'Brick military family housing duplex with manicured lawn',
     },
   },
   {
@@ -463,7 +463,7 @@ export default function IndustriesPage() {
   return (
     <>
       {/* ─────────── Hero ─────────── */}
-      <section className="relative overflow-hidden bg-[#0A1628] pb-20 pt-28 text-white md:pb-24 md:pt-32">
+      <section className="relative overflow-hidden bg-[#0A1628] pb-12 pt-24 text-white md:pb-20 md:pt-28 lg:pb-24 lg:pt-32">
         <div className="absolute inset-0" aria-hidden>
           <Image
             src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=2000&q=80"
@@ -493,7 +493,7 @@ export default function IndustriesPage() {
         />
 
         <motion.div
-          className="relative z-10 mx-auto max-w-4xl px-6 text-center"
+          className="relative z-10 mx-auto max-w-4xl px-4 md:px-6 lg:px-8 text-center"
           variants={heroStagger}
           initial="hidden"
           animate="visible"
@@ -508,7 +508,7 @@ export default function IndustriesPage() {
 
           <motion.h1
             variants={fadeUp}
-            className="mt-6 text-balance font-display text-5xl leading-[0.98] tracking-tight md:text-7xl"
+            className="mt-6 text-balance font-display text-3xl leading-[0.98] tracking-tight md:text-5xl lg:text-6xl"
           >
             Property management, built for{' '}
             <em className="text-white/90">
@@ -527,7 +527,7 @@ export default function IndustriesPage() {
 
           <motion.div
             variants={fadeUp}
-            className="mx-auto mt-12 grid max-w-xl grid-cols-3 divide-x divide-white/10"
+            className="mx-auto mt-10 grid max-w-xl grid-cols-3 gap-2 divide-x divide-white/10 md:mt-12"
           >
             {[
               { value: 10, label: 'Property types' },
@@ -573,9 +573,9 @@ export default function IndustriesPage() {
       {/* ─────────── Industries — Editorial List ─────────── */}
       <section
         id="industries-list"
-        className="scroll-mt-40 bg-white py-20 md:py-24"
+        className="scroll-mt-40 bg-white py-12 md:py-20 lg:py-24"
       >
-        <div className="mx-auto max-w-5xl px-6">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-widest text-[#0A1628]">
               Every property type
@@ -680,7 +680,7 @@ export default function IndustriesPage() {
       </section>
 
       {/* ─────────── Shapeshifter Platform Demo ─────────── */}
-      <section className="relative overflow-hidden bg-[#0A1628] py-20 text-white md:py-28">
+      <section className="relative overflow-hidden bg-[#0A1628] py-12 text-white md:py-20 lg:py-28">
         <div
           className="pointer-events-none absolute -left-32 top-12 h-80 w-80 rounded-full blur-3xl"
           style={{
@@ -698,7 +698,7 @@ export default function IndustriesPage() {
           aria-hidden
         />
 
-        <div className="relative z-10 mx-auto max-w-5xl px-6">
+        <div className="relative z-10 mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-widest text-white/80">
               Adaptive by design
@@ -798,8 +798,8 @@ export default function IndustriesPage() {
       </section>
 
       {/* ─────────── Coverage (minimal, no tiles) ─────────── */}
-      <section className="bg-white py-20 md:py-24">
-        <div className="mx-auto max-w-4xl px-6">
+      <section className="bg-white py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-widest text-[#0A1628]">
               Canadian coverage
@@ -871,8 +871,8 @@ export default function IndustriesPage() {
       </section>
 
       {/* ─────────── Single Pull-Quote Testimonial ─────────── */}
-      <section className="bg-[#F5F6F8] py-20 md:py-24">
-        <div className="mx-auto max-w-4xl px-6">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <div className="text-center">
             <p className="text-xs font-semibold uppercase tracking-widest text-[#0A1628]">
               In production
@@ -947,8 +947,8 @@ export default function IndustriesPage() {
       </section>
 
       {/* ─────────── FAQ ─────────── */}
-      <section className="bg-white py-20 md:py-24">
-        <div className="mx-auto max-w-4xl px-6">
+      <section className="bg-white py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-widest text-[#0A1628]">
               Common questions
@@ -975,7 +975,7 @@ export default function IndustriesPage() {
       </section>
 
       {/* ─────────── Final CTA ─────────── */}
-      <section className="relative overflow-hidden bg-[#0A1628] py-20 text-white md:py-28">
+      <section className="relative overflow-hidden bg-[#0A1628] py-12 text-white md:py-20 lg:py-28">
         <div
           className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full blur-3xl"
           style={{
@@ -995,7 +995,7 @@ export default function IndustriesPage() {
 
         <RevealOnScroll
           stagger={0.1}
-          className="relative z-10 mx-auto max-w-3xl px-6 text-center"
+          className="relative z-10 mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center"
         >
           <motion.p
             variants={revealItem}

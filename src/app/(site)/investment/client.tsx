@@ -1,10 +1,9 @@
 'use client'
 
-import { useRef, useState, useEffect, useId } from 'react'
+import { useRef, useState, useId } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { DeviceFrame } from '@/components/ui/device-frame'
 import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 import {
   Building2,
@@ -14,7 +13,6 @@ import {
   MapPin,
   DollarSign,
   TrendingUp,
-  TrendingDown,
   Shield,
   Wrench,
   ShoppingCart,
@@ -27,13 +25,9 @@ import {
   ChevronRight,
   Pencil,
   Image as ImageIcon,
-  Zap,
   Star,
-  CircleDot,
-  BarChart3,
   Users,
   Layers,
-  Settings,
   Key,
   Thermometer,
   Sparkles,
@@ -47,8 +41,8 @@ const ease = [0.22, 1, 0.36, 1] as const
 
 function SectionWrapper({ children, id, dark }: { children: React.ReactNode; id: string; dark?: boolean }) {
   return (
-    <section id={id} className={`py-16 md:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
-      <div className="mx-auto max-w-6xl px-6">{children}</div>
+    <section id={id} className={`py-12 md:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">{children}</div>
     </section>
   )
 }
@@ -61,7 +55,7 @@ function SectionHeader({ eyebrow, title, highlight, description, dark }: {
       <motion.p variants={revealItem} className={`text-sm font-heading font-semibold uppercase tracking-wider ${dark ? 'text-brand-blue-light' : 'text-brand-blue'}`}>
         {eyebrow}
       </motion.p>
-      <motion.h2 variants={revealItem} className={`mt-3 font-display text-4xl font-normal md:text-5xl ${dark ? 'text-[#0A1628]' : 'text-brand-graphite'}`}>
+      <motion.h2 variants={revealItem} className={`mt-3 font-display text-3xl font-normal md:text-4xl lg:text-5xl ${dark ? 'text-[#0A1628]' : 'text-brand-graphite'}`}>
         {title} <span className={dark ? 'text-brand-blue-light' : 'text-keyword'}>{highlight}</span>
       </motion.h2>
       <motion.p variants={revealItem} className={`mx-auto mt-4 max-w-xl text-lg ${dark ? 'text-[#555860]' : 'text-brand-graphite/70'}`}>
@@ -153,25 +147,6 @@ function InvestmentGlance() {
         highlight="At A Glance"
         description="See all your properties in one place. Track occupancy, activity, and performance across your entire portfolio."
       />
-      {/* Figma screenshot proof */}
-      <motion.div
-        className="mt-10 flex justify-center"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.7, ease }}
-      >
-        <DeviceFrame device="iphone" label="Portfolio Overview">
-          <Image
-            src="/screenshots/investment/portfolio-overview.png"
-            alt="Revun investment portfolio overview showing 95% occupancy across 80 properties"
-            width={390}
-            height={844}
-            className="w-full"
-            quality={90}
-          />
-        </DeviceFrame>
-      </motion.div>
 
       <div ref={ref} className="mt-14 grid gap-6 lg:grid-cols-12">
         {/* Main dashboard card */}
@@ -294,7 +269,7 @@ function ScheduledTours() {
         highlight="Tours"
         description="View upcoming showings, who is attending, and when each tour is happening. All organized by date."
       />
-      <div ref={ref} className="mt-14 grid items-center gap-10 lg:grid-cols-[1fr_auto]">
+      <div ref={ref} className="mt-14">
         <motion.div
           className="rounded-2xl border border-[#E5E7EB] bg-white"
           initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -356,25 +331,6 @@ function ScheduledTours() {
             </button>
           </div>
         </motion.div>
-
-        {/* Figma screenshot */}
-        <motion.div
-          className="hidden lg:flex justify-center"
-          initial={{ opacity: 0, x: 20 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.7, ease, delay: 0.3 }}
-        >
-          <DeviceFrame device="iphone" label="Scheduled Tours">
-            <Image
-              src="/screenshots/investment/scheduled-tours.png"
-              alt="Revun scheduled tours screen showing agent cards with dates and locations"
-              width={390}
-              height={844}
-              className="w-full"
-              quality={90}
-            />
-          </DeviceFrame>
-        </motion.div>
       </div>
     </SectionWrapper>
   )
@@ -407,26 +363,7 @@ function OffersApprovals() {
         highlight="Approvals"
         description="Review new offers, see their status, and respond before they expire. Stay on top of every opportunity."
       />
-      <div ref={ref} className="mt-14 grid items-center gap-10 lg:grid-cols-[auto_1fr]">
-        {/* Figma screenshot - left side */}
-        <motion.div
-          className="hidden lg:flex justify-center"
-          initial={{ opacity: 0, x: -20 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.7, ease, delay: 0.2 }}
-        >
-          <DeviceFrame device="iphone" label="Offers & Approvals">
-            <Image
-              src="/screenshots/investment/offers-approvals.png"
-              alt="Revun offers and approvals screen with pending offers and expiry timers"
-              width={390}
-              height={844}
-              className="w-full"
-              quality={90}
-            />
-          </DeviceFrame>
-        </motion.div>
-
+      <div ref={ref} className="mt-14">
         <motion.div
           className="rounded-2xl border border-[#E5E7EB] bg-white"
           initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -620,26 +557,6 @@ function MaintenanceOverview() {
           ))}
         </div>
       </div>
-
-      {/* Figma screenshot proof */}
-      <motion.div
-        className="mt-10 flex justify-center"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.7, ease }}
-      >
-        <DeviceFrame device="iphone" label="Maintenance Overview">
-          <Image
-            src="/screenshots/investment/maintenance-overview.png"
-            alt="Revun maintenance overview showing 30 requests with priority levels"
-            width={390}
-            height={844}
-            className="w-full"
-            quality={90}
-          />
-        </DeviceFrame>
-      </motion.div>
     </SectionWrapper>
   )
 }
@@ -779,26 +696,6 @@ function FinancialOverview() {
           </motion.div>
         </div>
       </div>
-
-      {/* Figma screenshot proof */}
-      <motion.div
-        className="mt-10 flex justify-center"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.7, ease }}
-      >
-        <DeviceFrame device="iphone" label="Financial Overview">
-          <Image
-            src="/screenshots/investment/financial-overview.png"
-            alt="Revun financial overview showing net income $200,900 with bar chart"
-            width={390}
-            height={844}
-            className="w-full"
-            quality={90}
-          />
-        </DeviceFrame>
-      </motion.div>
     </SectionWrapper>
   )
 }
@@ -825,7 +722,7 @@ function RentGuarantee() {
         highlight="Your Rent"
         description="Protect your rental income with coverage for missed rent and property damage. Never miss a payment again."
       />
-      <div ref={ref} className="mt-14 grid items-center gap-10 lg:grid-cols-[1fr_auto_1fr]">
+      <div ref={ref} className="mt-14 grid items-start gap-10 lg:grid-cols-2">
         {/* Left: Feature list */}
         <div className="space-y-4">
           <motion.div
@@ -872,25 +769,6 @@ function RentGuarantee() {
             </Link>
           </motion.div>
         </div>
-
-        {/* Center: Figma screenshot */}
-        <motion.div
-          className="hidden lg:flex justify-center"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={inView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.7, ease, delay: 0.3 }}
-        >
-          <DeviceFrame device="iphone" label="Rent Guarantee">
-            <Image
-              src="/screenshots/investment/rent-guarantee.png"
-              alt="Revun rent guarantee screen showing coverage details and $60K protection"
-              width={390}
-              height={844}
-              className="w-full"
-              quality={90}
-            />
-          </DeviceFrame>
-        </motion.div>
 
         {/* Right: Visual card */}
         <motion.div
@@ -1043,14 +921,22 @@ function EditUnit() {
           initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease, delay: 0.1 }}
         >
-          {/* Image placeholder */}
-          <div className="relative h-52 bg-gradient-to-br from-brand-blue/10 to-brand-off-white">
-            <div className="absolute inset-0 bg-grid opacity-[0.04]" />
+          {/* Unit hero image */}
+          <div className="relative h-56 overflow-hidden bg-[#F5F6F8]">
+            <Image
+              src="/screenshots/app/property-detail.png"
+              alt="Property unit hero photograph"
+              fill
+              sizes="(max-width: 1024px) 100vw, 560px"
+              className="object-cover object-top"
+              quality={90}
+            />
+            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
             <div className="absolute bottom-3 left-4 flex gap-2">
-              <span className="flex items-center gap-1 rounded-full bg-black/50 px-2.5 py-1 text-[10px] font-medium text-white backdrop-blur-sm">
+              <span className="flex items-center gap-1 rounded-full bg-black/55 px-2.5 py-1 text-[10px] font-medium text-white backdrop-blur-sm">
                 <ImageIcon className="h-3 w-3" /> 14
               </span>
-              <span className="flex items-center gap-1 rounded-full bg-black/50 px-2.5 py-1 text-[10px] font-medium text-white backdrop-blur-sm">
+              <span className="flex items-center gap-1 rounded-full bg-black/55 px-2.5 py-1 text-[10px] font-medium text-white backdrop-blur-sm">
                 <Layers className="h-3 w-3" /> 01
               </span>
             </div>
@@ -1101,11 +987,11 @@ function EditUnit() {
 
 function InvestmentHero() {
   return (
-    <section className="relative overflow-hidden bg-white pb-12 pt-28 md:pt-36">
+    <section className="relative overflow-hidden bg-white pb-12 pt-16 md:pt-28 lg:pt-36">
       <div className="absolute inset-0 bg-grid bg-grid-mask opacity-40" aria-hidden="true" />
       <div className="absolute top-0 right-[-200px] h-[500px] w-[500px] rounded-full bg-brand-blue/[0.04] blur-[120px]" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
+      <div className="relative z-10 mx-auto max-w-4xl px-4 md:px-6 lg:px-8 text-center">
         <RevealOnScroll>
           <motion.div variants={revealItem} className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-4 py-1.5 shadow-sm">
             <Sparkles className="h-4 w-4 text-brand-blue" />
@@ -1113,7 +999,7 @@ function InvestmentHero() {
           </motion.div>
           <motion.h1
             variants={revealItem}
-            className="font-display text-5xl font-normal leading-[1.1] tracking-tight text-brand-graphite md:text-7xl"
+            className="font-display text-3xl font-normal leading-[1.1] tracking-tight text-brand-graphite md:text-5xl lg:text-7xl"
           >
             Your entire portfolio,{' '}
             <span className="text-brand-blue">one dashboard</span>
@@ -1128,13 +1014,13 @@ function InvestmentHero() {
           <motion.div variants={revealItem} className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
               href="/pricing/"
-              className="inline-flex h-14 items-center justify-center rounded-xl bg-brand-blue px-8 text-base font-semibold text-white transition-all hover:bg-brand-blue-dark"
+              className="inline-flex h-14 w-full sm:w-auto items-center justify-center rounded-xl bg-brand-blue px-8 text-base font-semibold text-white transition-all hover:bg-brand-blue-dark"
             >
               See the Platform
             </Link>
             <Link
               href="/demo/"
-              className="inline-flex h-14 items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-8 text-base font-semibold text-brand-graphite transition-all hover:border-brand-blue/30 hover:shadow-sm"
+              className="inline-flex h-14 w-full sm:w-auto items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-8 text-base font-semibold text-brand-graphite transition-all hover:border-brand-blue/30 hover:shadow-sm"
             >
               Book a Live Demo
             </Link>

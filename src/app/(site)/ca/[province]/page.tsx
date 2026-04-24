@@ -643,12 +643,12 @@ export default async function ProvincePage({ params }: Props) {
       />
       {/* ── Hero ── */}
       <section className="bg-[#F5F6F8]">
-        <div className="mx-auto max-w-6xl px-6 py-16 sm:py-16 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16 lg:px-8 lg:py-20">
           <div className="mx-auto max-w-3xl text-center">
             <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-brand-blue">
               Canada / {data.name}
             </p>
-            <h1 className="font-display font-extrabold text-4xl text-[#0A1628] sm:text-5xl lg:text-6xl">
+            <h1 className="font-display font-extrabold text-3xl text-[#0A1628] md:text-5xl lg:text-6xl">
               Property Management in{' '}
               <span className="text-brand-blue">{data.name}</span>
             </h1>
@@ -675,8 +675,8 @@ export default async function ProvincePage({ params }: Props) {
       </section>
 
       {/* ── Regulation Summary ── */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-blue">
               Regulatory Framework
@@ -690,11 +690,11 @@ export default async function ProvincePage({ params }: Props) {
           </RevealOnScroll>
 
           <RevealOnScroll className="mt-10">
-            <div className="rounded-2xl border border-border bg-brand-off-white p-8">
+            <div className="rounded-2xl border border-border bg-brand-off-white p-5 md:p-8">
               <p className="mb-5 text-sm font-semibold uppercase tracking-widest text-brand-blue">
                 Key Rules at a Glance
               </p>
-              <ul className="grid gap-3 sm:grid-cols-2">
+              <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {data.regulation.highlights.map((item) => (
                   <li key={item} className="flex items-start gap-3">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue" />
@@ -708,8 +708,8 @@ export default async function ProvincePage({ params }: Props) {
       </section>
 
       {/* ── Value Props ── */}
-      <section className="bg-brand-off-white py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+      <section className="bg-brand-off-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="mb-8 text-center">
               <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-blue">
@@ -723,13 +723,13 @@ export default async function ProvincePage({ params }: Props) {
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.1}>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-8">
               {data.valueProps.map((prop) => {
                 const Icon = prop.icon
                 return (
                   <div
                     key={prop.title}
-                    className="flex flex-col rounded-2xl border border-border bg-white p-7"
+                    className="flex flex-col rounded-2xl border border-border bg-white p-5 md:p-7"
                   >
                     <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-brand-blue/10">
                       <Icon className="h-5 w-5 text-brand-blue" />
@@ -749,8 +749,8 @@ export default async function ProvincePage({ params }: Props) {
       </section>
 
       {/* ── Cities Grid ── */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="mb-10 text-center">
               <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-blue">
@@ -764,7 +764,7 @@ export default async function ProvincePage({ params }: Props) {
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.07}>
-            <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {data.cities.map((city) => (
                 <div
                   key={city.slug}
@@ -782,10 +782,10 @@ export default async function ProvincePage({ params }: Props) {
       </section>
 
       {/* ── CTA ── */}
-      <section className="bg-[#F5F6F8] py-12 md:py-12">
-        <div className="mx-auto max-w-3xl px-6 text-center">
+      <section className="bg-[#F5F6F8] py-12 md:py-16 lg:py-20">
+        <div className="mx-auto max-w-3xl px-4 text-center md:px-6 lg:px-8">
           <RevealOnScroll>
-            <h2 className="font-heading font-extrabold text-4xl tracking-tight text-[#0A1628] md:text-5xl">
+            <h2 className="font-heading font-extrabold text-3xl tracking-tight text-[#0A1628] md:text-5xl">
               Ready to manage {data.name} properties the right way?
             </h2>
             <p className="mx-auto mt-5 max-w-lg text-lg text-[#555860]">

@@ -51,7 +51,7 @@ function StepHandoff({ currentId }: { currentId: StepId }) {
   if (!next) return null
   return (
     <div className="bg-white">
-      <div className="mx-auto flex max-w-6xl items-center justify-center gap-4 px-6 py-8">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-3 px-4 py-6 md:gap-4 md:px-6 md:py-8 lg:px-8">
         <span className="h-px max-w-[120px] flex-1 bg-[#E5E7EB]" />
         <a
           href={`#${next.id}`}
@@ -86,9 +86,9 @@ function SW({
   return (
     <section
       id={id}
-      className={`scroll-mt-20 py-16 md:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}
+      className={`scroll-mt-20 py-12 md:py-20 lg:py-28 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}
     >
-      <div className="mx-auto max-w-6xl px-6">{children}</div>
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">{children}</div>
     </section>
   )
 }
@@ -123,7 +123,7 @@ function SH({
       </motion.div>
       <motion.h2
         variants={revealItem}
-        className="text-balance font-display text-4xl font-normal text-brand-graphite md:text-5xl"
+        className="text-balance font-display text-2xl font-normal text-brand-graphite md:text-4xl lg:text-5xl"
       >
         {title} <span className="text-keyword">{highlight}</span>
       </motion.h2>
@@ -329,7 +329,7 @@ const provinces: readonly Province[] = [
 
 function ComplianceHero() {
   return (
-    <section className="relative overflow-hidden bg-white pb-12 pt-28 md:pt-36">
+    <section className="relative overflow-hidden bg-white pb-10 pt-24 md:pb-12 md:pt-36">
       {/* Subtle courthouse backdrop image */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <Image
@@ -350,7 +350,7 @@ function ComplianceHero() {
         className="absolute right-[-200px] top-0 h-[500px] w-[500px] rounded-full bg-brand-blue/[0.04] blur-[120px]"
         aria-hidden="true"
       />
-      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
+      <div className="relative z-10 mx-auto max-w-4xl px-4 text-center md:px-6 lg:px-8">
         <RevealOnScroll>
           <motion.div
             variants={revealItem}
@@ -361,14 +361,14 @@ function ComplianceHero() {
           </motion.div>
           <motion.h1
             variants={revealItem}
-            className="text-balance font-display text-5xl font-normal leading-[1.1] tracking-tight text-brand-graphite md:text-7xl"
+            className="text-balance font-display text-3xl font-normal leading-[1.1] tracking-tight text-brand-graphite md:text-5xl lg:text-6xl"
           >
             North American compliance,{' '}
             <span className="text-brand-blue">built for every jurisdiction</span>
           </motion.h1>
           <motion.p
             variants={revealItem}
-            className="mx-auto mt-6 max-w-2xl text-balance text-lg leading-relaxed text-brand-graphite-mid md:text-xl"
+            className="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-brand-graphite-mid md:text-lg lg:text-xl"
           >
             Detect the jurisdiction, generate the right lease, serve the right notice, and hit
             every deadline. LTB, RTB, TAL, RTDRS across Canada, plus DHCR, DRE, TREC, DBPR
@@ -1570,7 +1570,7 @@ function CoverageSection() {
             </div>
 
             {/* Header row (desktop). Fixed widths prevent the Saskatchewan/ORT collision. */}
-            <div className="hidden grid-cols-[200px_minmax(0,1.3fr)_minmax(0,1.4fr)_110px_70px] gap-4 border-b border-[#E5E7EB] pb-3 text-[10px] font-semibold uppercase tracking-widest text-brand-graphite-mid md:grid">
+            <div className="hidden grid-cols-[180px_minmax(0,1.3fr)_minmax(0,1.4fr)_110px_70px] gap-4 border-b border-[#E5E7EB] pb-3 text-[10px] font-semibold uppercase tracking-widest text-brand-graphite-mid lg:grid">
               <span>Jurisdiction</span>
               <span>{isCanada ? 'Tribunal' : 'Agency'}</span>
               <span>Key forms</span>
@@ -1585,10 +1585,10 @@ function CoverageSection() {
                   initial={{ opacity: 0, x: -6 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, ease, delay: 0.1 + i * 0.04 }}
-                  className="group grid grid-cols-1 gap-2 border-b border-[#E5E7EB] py-4 transition-colors hover:bg-white/60 md:grid-cols-[200px_minmax(0,1.3fr)_minmax(0,1.4fr)_110px_70px] md:items-center md:gap-4"
+                  className="group grid grid-cols-1 gap-2 border-b border-[#E5E7EB] py-4 transition-colors hover:bg-white/60 lg:grid-cols-[180px_minmax(0,1.3fr)_minmax(0,1.4fr)_110px_70px] lg:items-center lg:gap-4"
                 >
                   {/* Jurisdiction chip + name (widened column) */}
-                  <div className="flex items-center gap-2 md:min-w-0">
+                  <div className="flex items-center gap-2 lg:min-w-0">
                     <span className="inline-flex h-7 w-9 shrink-0 items-center justify-center rounded-md bg-[#E8F2FE] font-heading text-[11px] font-bold text-brand-blue">
                       {p.abbr}
                     </span>
@@ -1598,8 +1598,8 @@ function CoverageSection() {
                   </div>
 
                   {/* Tribunal / Agency */}
-                  <div className="md:min-w-0">
-                    <span className="text-[10px] font-semibold uppercase tracking-widest text-brand-graphite-mid md:hidden">
+                  <div className="lg:min-w-0">
+                    <span className="text-[10px] font-semibold uppercase tracking-widest text-brand-graphite-mid lg:hidden">
                       {isCanada ? 'Tribunal · ' : 'Agency · '}
                     </span>
                     <span className="text-xs font-medium text-brand-graphite">
@@ -1609,8 +1609,8 @@ function CoverageSection() {
                   </div>
 
                   {/* Key forms */}
-                  <div className="md:min-w-0">
-                    <span className="text-[10px] font-semibold uppercase tracking-widest text-brand-graphite-mid md:hidden">
+                  <div className="lg:min-w-0">
+                    <span className="text-[10px] font-semibold uppercase tracking-widest text-brand-graphite-mid lg:hidden">
                       Forms ·{' '}
                     </span>
                     <span className="text-xs text-brand-graphite">{p.keyForms}</span>
@@ -1618,7 +1618,7 @@ function CoverageSection() {
 
                   {/* Rent cap 2026 */}
                   <div>
-                    <span className="text-[10px] font-semibold uppercase tracking-widest text-brand-graphite-mid md:hidden">
+                    <span className="text-[10px] font-semibold uppercase tracking-widest text-brand-graphite-mid lg:hidden">
                       Rent cap 2026 ·{' '}
                     </span>
                     <span className="inline-flex items-center rounded-full bg-[#E8F2FE] px-2 py-0.5 text-[11px] font-semibold tabular-nums text-brand-blue">
@@ -1627,8 +1627,8 @@ function CoverageSection() {
                   </div>
 
                   {/* Rule count */}
-                  <div className="md:text-right">
-                    <span className="text-[10px] font-semibold uppercase tracking-widest text-brand-graphite-mid md:hidden">
+                  <div className="lg:text-right">
+                    <span className="text-[10px] font-semibold uppercase tracking-widest text-brand-graphite-mid lg:hidden">
                       Rules ·{' '}
                     </span>
                     <span className="text-xs font-medium tabular-nums text-brand-graphite">
@@ -1766,8 +1766,8 @@ function FaqRow({
 function ComplianceFaq() {
   const [openFaq, setOpenFaq] = useState<number>(0)
   return (
-    <section className="bg-white py-16 md:py-20">
-      <div className="mx-auto max-w-4xl px-6">
+    <section className="bg-white py-12 md:py-20 lg:py-28">
+      <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
             variants={revealItem}
@@ -1777,7 +1777,7 @@ function ComplianceFaq() {
           </motion.p>
           <motion.h2
             variants={revealItem}
-            className="mt-3 text-balance font-display text-4xl font-normal text-brand-graphite md:text-5xl"
+            className="mt-3 text-balance font-display text-2xl font-normal text-brand-graphite md:text-4xl lg:text-5xl"
           >
             Compliance,{' '}
             <span className="text-keyword">answered plainly</span>
@@ -1804,7 +1804,7 @@ function ComplianceFaq() {
 
 function ComplianceCTA() {
   return (
-    <section className="relative overflow-hidden bg-[#0A1628] py-20 text-white md:py-24">
+    <section className="relative overflow-hidden bg-[#0A1628] py-12 text-white md:py-20 lg:py-28">
       <div
         className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full blur-3xl"
         style={{
@@ -1821,7 +1821,7 @@ function ComplianceCTA() {
       />
       <RevealOnScroll
         stagger={0.1}
-        className="relative z-10 mx-auto max-w-3xl px-6 text-center"
+        className="relative z-10 mx-auto max-w-3xl px-4 text-center md:px-6 lg:px-8"
       >
         <motion.p
           variants={revealItem}
@@ -1832,14 +1832,14 @@ function ComplianceCTA() {
         </motion.p>
         <motion.h2
           variants={revealItem}
-          className="mt-6 text-balance font-display text-4xl font-normal leading-[1.05] tracking-tight md:text-6xl"
+          className="mt-6 text-balance font-display text-3xl font-normal leading-[1.05] tracking-tight md:text-5xl lg:text-6xl"
         >
           Stop reading gazettes.{' '}
           <span className="text-[#4A91F0]">Start signing leases.</span>
         </motion.h2>
         <motion.p
           variants={revealItem}
-          className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/70"
+          className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/70 md:text-lg"
         >
           Book a walkthrough. We will map your portfolio to its provinces and show you exactly
           which rules, forms, and deadlines activate on day one.
@@ -1890,8 +1890,8 @@ function RelatedFeatures() {
     { href: '/features/communications/', label: 'Communications', desc: 'Encrypted, audit-logged tenant and owner messaging.' },
   ]
   return (
-    <section className="bg-white py-16">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="bg-white py-12 md:py-16">
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         <p className="text-[11px] font-semibold uppercase tracking-widest text-brand-graphite-mid">
           Pairs well with
         </p>

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <article className="mx-auto max-w-3xl px-6 pt-24 pb-16">
+    <article className="mx-auto max-w-prose px-4 md:px-6 lg:px-8 pt-20 pb-12 md:pt-24 md:pb-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -48,11 +48,11 @@ export default function PrivacyPolicyPage() {
       />
 
       <RevealOnScroll>
-        <header className="mb-12">
+        <header className="mb-10 md:mb-12">
           <p className="mb-3 text-sm font-medium uppercase tracking-widest text-brand-blue">
             Legal
           </p>
-          <h1 className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-foreground md:text-5xl">
+          <h1 className="font-display font-extrabold text-3xl leading-[1.1] tracking-tight text-foreground md:text-5xl lg:text-6xl">
             Privacy Policy
           </h1>
           <p className="mt-4 text-sm text-muted-foreground">
@@ -61,7 +61,7 @@ export default function PrivacyPolicyPage() {
         </header>
       </RevealOnScroll>
 
-      <div className="prose prose-slate max-w-none [&_h2]:font-heading [&_h2]:text-xl [&_h2]:font-bold [&_h2]:tracking-tight [&_h2]:text-foreground [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:text-[0.938rem] [&_p]:leading-relaxed [&_p]:text-muted-foreground [&_ul]:text-[0.938rem] [&_ul]:leading-relaxed [&_ul]:text-muted-foreground [&_li]:text-muted-foreground [&_a]:text-brand-blue [&_a]:no-underline hover:[&_a]:underline">
+      <div className="prose prose-slate max-w-none [&_h2]:font-heading [&_h2]:text-lg sm:[&_h2]:text-xl [&_h2]:font-bold [&_h2]:tracking-tight [&_h2]:text-foreground [&_h2]:mt-8 sm:[&_h2]:mt-10 [&_h2]:mb-4 [&_p]:text-[0.938rem] [&_p]:leading-relaxed [&_p]:text-muted-foreground [&_ul]:text-[0.938rem] [&_ul]:leading-relaxed [&_ul]:text-muted-foreground [&_li]:text-muted-foreground [&_a]:text-brand-blue [&_a]:no-underline hover:[&_a]:underline [&_a]:break-words">
         <p>
           Revun Inc. (&quot;Revun,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform, website, and related services (collectively, the &quot;Services&quot;).
         </p>

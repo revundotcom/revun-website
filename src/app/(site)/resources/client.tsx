@@ -558,7 +558,7 @@ export function ResourcesPageClient() {
       {/* ── Hero ───────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden border-b border-[#E5E7EB] bg-[#F5F6F8]">
         <motion.div
-          className="relative z-10 mx-auto max-w-6xl px-6 pt-20 pb-12 lg:px-8"
+          className="relative z-10 mx-auto max-w-6xl px-4 pt-16 pb-10 md:px-6 md:pt-20 md:pb-12 lg:px-8"
           variants={heroStagger}
           initial="hidden"
           animate="visible"
@@ -572,7 +572,7 @@ export function ResourcesPageClient() {
             </motion.p>
             <motion.h1
               variants={fadeUp}
-              className="font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-balance text-[#0A1628] sm:text-5xl lg:text-6xl"
+              className="font-display text-3xl font-extrabold leading-[1.1] tracking-tight text-balance text-[#0A1628] md:text-5xl lg:text-6xl"
             >
               Software education and operational intelligence for{' '}
               <span className="text-brand-blue">property operators</span>
@@ -616,7 +616,7 @@ export function ResourcesPageClient() {
           animate="visible"
           aria-label="Resource categories"
         >
-          <div className="mx-auto flex max-w-6xl items-center gap-2 overflow-x-auto px-6 py-3 lg:px-8">
+          <div className="mx-auto flex max-w-6xl items-center gap-2 overflow-x-auto px-4 py-3 md:px-6 lg:px-8">
             {sections.map((s) => (
               <a
                 key={s.id}
@@ -633,7 +633,7 @@ export function ResourcesPageClient() {
 
       {/* ── Featured Article Spotlight ─────────────────────────────── */}
       <section className="bg-white py-14 md:py-16">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-6 flex items-end justify-between gap-4">
             <div>
               <motion.p
@@ -717,7 +717,7 @@ export function ResourcesPageClient() {
               : 'scroll-mt-20 bg-white py-16 md:py-20'
           }
         >
-          <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
             {/* Editorial section header */}
             <RevealOnScroll className="mb-10 flex flex-col gap-6 border-b border-[#E5E7EB] pb-8 md:flex-row md:items-end md:justify-between">
               <div className="max-w-2xl">
@@ -848,7 +848,7 @@ export function ResourcesPageClient() {
 
       {/* ── Newsletter CTA ─────────────────────────────────────────── */}
       <section className="border-y border-[#E5E7EB] bg-[#F5F6F8] py-16 md:py-20">
-        <div className="mx-auto max-w-3xl px-6 text-center">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center">
           <RevealOnScroll>
             <motion.p
               variants={revealItem}
@@ -899,7 +899,7 @@ export function ResourcesPageClient() {
 
       {/* ── Cross-link CTA ─────────────────────────────────────────── */}
       <section className="bg-white py-16 md:py-20">
-        <RevealOnScroll className="mx-auto max-w-3xl px-6 text-center">
+        <RevealOnScroll className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center">
           <motion.h2
             variants={revealItem}
             className="font-display text-3xl font-bold tracking-tight text-balance text-[#0A1628] sm:text-4xl"

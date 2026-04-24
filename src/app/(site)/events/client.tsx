@@ -203,29 +203,29 @@ export function EventsClient() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-[#F5F6F8] py-16 md:py-20 overflow-hidden">
+      <section className="relative bg-[#F5F6F8] py-12 md:py-20 overflow-hidden">
         {/* Ambient blob */}
         <div className="absolute top-[-100px] left-[-150px] h-[400px] w-[400px] rounded-full bg-[#176FEB]/[0.04] blur-[100px]" aria-hidden="true" />
-        <RevealOnScroll className="mx-auto max-w-4xl px-6 text-center relative z-10">
+        <RevealOnScroll className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8 text-center relative z-10">
           <motion.p variants={revealItem} className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
             Events & Tours
           </motion.p>
-          <motion.h1 variants={revealItem} className="mt-3 font-display text-4xl font-normal text-[#0A1628] md:text-5xl">
+          <motion.h1 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-5xl lg:text-6xl">
             Schedule, navigate, and <span className="text-[#176FEB]">tour</span> with confidence
           </motion.h1>
           <motion.p variants={revealItem} className="mx-auto mt-4 max-w-2xl text-lg text-[#555860]">
             Book property tours, get directions, verify agents with secure PINs, and rate your experience. All with built-in safety tools.
           </motion.p>
-          <motion.div variants={revealItem} className="mt-8 flex items-center justify-center gap-4">
+          <motion.div variants={revealItem} className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/features/"
-              className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#0B5AD4]"
+              className="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-xl bg-[#176FEB] px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#0B5AD4]"
             >
               See the Platform
             </Link>
             <Link
               href="/demo/"
-              className="inline-flex h-12 items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-6 text-sm font-semibold text-[#2C2E33] transition-colors duration-200 hover:border-[#176FEB]/30"
+              className="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-6 text-sm font-semibold text-[#2C2E33] transition-colors duration-200 hover:border-[#176FEB]/30"
             >
               Book a Live Demo
             </Link>
@@ -234,9 +234,9 @@ export function EventsClient() {
       </section>
 
       {/* Feature sections — alternating layout with real screenshots */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <RevealOnScroll className="text-center mb-16">
+      <section className="bg-white py-12 md:py-20">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+          <RevealOnScroll className="text-center mb-12 md:mb-16">
             <motion.h2 variants={revealItem} className="font-heading text-2xl font-bold text-[#0A1628] md:text-3xl">
               How it works
             </motion.h2>
@@ -295,13 +295,13 @@ export function EventsClient() {
       </section>
 
       {/* Tour Discovery — alternating layout */}
-      <section className="bg-[#F5F6F8] py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <RevealOnScroll className="text-center mb-16">
+      <section className="bg-[#F5F6F8] py-12 md:py-20">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+          <RevealOnScroll className="text-center mb-12 md:mb-16">
             <motion.p variants={revealItem} className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
               Tour Discovery
             </motion.p>
-            <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-4xl">
+            <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-4xl lg:text-5xl">
               Find your next home with <span className="text-[#176FEB] font-semibold">intelligent tours</span>
             </motion.h2>
             <motion.p variants={revealItem} className="mx-auto mt-4 max-w-2xl text-lg text-[#555860]">
@@ -362,13 +362,13 @@ export function EventsClient() {
       </section>
 
       {/* Desktop / Webapp events dashboard */}
-      <section className="bg-[#F5F6F8] py-16 md:py-20 overflow-hidden">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 overflow-hidden">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="text-center mb-12">
             <motion.p variants={revealItem} className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
               Desktop &amp; Web
             </motion.p>
-            <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-4xl">
+            <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-4xl lg:text-5xl">
               Full event management on the <span className="text-[#176FEB] font-semibold">web</span>
             </motion.h2>
             <motion.p variants={revealItem} className="mx-auto mt-4 max-w-2xl text-lg text-[#555860]">
@@ -519,8 +519,8 @@ export function EventsClient() {
       </section>
 
       {/* Upcoming events preview */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-4xl px-6">
+      <section className="bg-white py-12 md:py-20">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <div className="mb-8 flex items-center justify-between">
             <div>
               <h2 className="font-heading text-2xl font-bold text-[#0A1628]">My Events</h2>
@@ -612,15 +612,15 @@ export function EventsClient() {
       </section>
 
       {/* Tour safety section */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
+      <section className="bg-white py-12 md:py-20">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+          <div className="grid items-center gap-8 md:gap-12 lg:grid-cols-2">
             {/* Left: info */}
             <RevealOnScroll>
               <motion.p variants={revealItem} className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
                 Safety First
               </motion.p>
-              <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-4xl">
+              <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-4xl lg:text-5xl">
                 Safety tools, <span className="text-[#176FEB]">built in</span>
               </motion.h2>
               <motion.p variants={revealItem} className="mt-4 text-lg text-[#555860]">
@@ -658,13 +658,13 @@ export function EventsClient() {
       </section>
 
       {/* Desktop Tours Discovery webapp mockup */}
-      <section className="bg-[#F5F6F8] py-16 md:py-20 overflow-hidden">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 overflow-hidden">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="text-center mb-12">
             <motion.p variants={revealItem} className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
               Desktop &amp; Web
             </motion.p>
-            <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-4xl">
+            <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-4xl lg:text-5xl">
               Tour discovery on the <span className="text-[#176FEB] font-semibold">web</span>
             </motion.h2>
             <motion.p variants={revealItem} className="mx-auto mt-4 max-w-2xl text-lg text-[#555860]">
@@ -904,8 +904,8 @@ export function EventsClient() {
       </section>
 
       {/* Agent rating preview */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-4xl px-6">
+      <section className="bg-white py-12 md:py-20">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="text-center mb-10">
             <motion.h2 variants={revealItem} className="font-heading text-2xl font-bold text-[#0A1628] md:text-3xl">
               Rate your experience
@@ -973,24 +973,24 @@ export function EventsClient() {
       </section>
 
       {/* CTA */}
-      <section className="bg-[#F5F6F8] py-16 md:py-20">
-        <div className="mx-auto max-w-3xl px-6 text-center">
+      <section className="bg-[#F5F6F8] py-12 md:py-20">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center">
           <h2 className="font-heading text-2xl font-bold text-[#0A1628] md:text-3xl">
             Ready to schedule your first tour?
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-base text-[#555860]">
             Start your free trial today. No credit card required.
           </p>
-          <div className="mt-8 flex items-center justify-center gap-4">
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/pricing/"
-              className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#1260D6]"
+              className="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-xl bg-[#176FEB] px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#1260D6]"
             >
               Start Free Trial
             </Link>
             <Link
               href="/contact/"
-              className="inline-flex h-12 items-center gap-2 rounded-xl border border-[#E5E7EB] px-6 text-sm font-semibold text-[#0A1628] transition-colors duration-200 hover:bg-[#EAECF0]"
+              className="inline-flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] px-6 text-sm font-semibold text-[#0A1628] transition-colors duration-200 hover:bg-[#EAECF0]"
             >
               Contact Sales <ArrowRight className="h-4 w-4" />
             </Link>

@@ -39,7 +39,7 @@ function WorkflowMap() {
   const inView = useInView(ref, { once: true, margin: '-80px 0px' })
 
   return (
-    <div ref={ref} className="relative mx-auto w-full max-w-[700px]">
+    <div ref={ref} className="relative mx-auto hidden w-full max-w-[700px] lg:block">
       <svg viewBox={`0 0 ${SIZE} ${SIZE}`} className="w-full h-auto" aria-label="Revun ecosystem workflow map">
         <defs>
           <linearGradient id="orbit-grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -114,21 +114,63 @@ export default function EcosystemMap() {
     <section id="ecosystem" className="relative overflow-hidden bg-white py-12 md:py-16 scroll-mt-24">
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[700px] w-[700px] rounded-full bg-[#176FEB]/[0.03] blur-[120px]" aria-hidden />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p variants={revealItem} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">
             Ecosystem
           </motion.p>
-          <motion.h2 variants={revealItem} className="mt-3 font-display text-4xl font-normal text-[#0A1628] md:text-5xl">
+          <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-5xl">
             One platform. Every <span className="text-keyword">workflow.</span>
           </motion.h2>
-          <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-lg text-brand-graphite-mid">
+          <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-base md:text-lg text-brand-graphite-mid">
             See how every part of your property operation connects through Revun.
           </motion.p>
         </RevealOnScroll>
 
-        <div className="mt-16">
+        <div className="mt-10 md:mt-16">
           <WorkflowMap />
+
+          {/* Mobile + tablet fallback: clean grid with same 9 modules around a Revun hub */}
+          <div className="mx-auto w-full max-w-xl lg:hidden">
+            <div className="relative mb-8 flex items-center justify-center">
+              <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-[#E5E7EB] to-transparent" aria-hidden="true" />
+              <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#176FEB] to-[#0B5AD4] shadow-[0_0_30px_rgba(23,111,235,0.3)]">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-gradient-to-br from-[#176FEB] to-[#0B5AD4]">
+                  <span className="font-heading text-sm font-bold tracking-wide text-white">Revun</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3">
+              {nodes.map((n, i) => {
+                const Icon = n.icon
+                return (
+                  <motion.div
+                    key={n.label}
+                    initial={{ opacity: 0, y: 8 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ duration: 0.35, delay: i * 0.04 }}
+                  >
+                    <Link
+                      href={n.href}
+                      className="group flex items-center gap-2 rounded-xl border border-[#E5E7EB] bg-white px-3 py-2.5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-[#176FEB]/30 hover:shadow-md"
+                    >
+                      <span
+                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
+                        style={{ backgroundColor: `${n.color}15` }}
+                      >
+                        <Icon className="h-4 w-4" style={{ color: n.color }} />
+                      </span>
+                      <span className="font-heading text-[12px] font-semibold leading-tight text-[#0A1628] group-hover:text-[#176FEB]">
+                        {n.label}
+                      </span>
+                    </Link>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </section>

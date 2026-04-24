@@ -385,7 +385,7 @@ function CoreModulesSection() {
           </motion.p>
         </RevealOnScroll>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {CORE_MODULES.map((mod, i) => (
             <ModuleCard key={mod.slug} mod={mod} index={i} />
           ))}
@@ -520,7 +520,7 @@ function PlatformPillarsSection() {
           </motion.p>
         </RevealOnScroll>
 
-        <RevealOnScroll className="mt-12 grid gap-6 lg:grid-cols-3" stagger={0.08}>
+        <RevealOnScroll className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
           {PLATFORM_PILLARS.map((pillar) => {
             const Icon = pillar.icon
             return (
@@ -580,7 +580,7 @@ function DifferentiatorsSection() {
         </RevealOnScroll>
 
         <RevealOnScroll
-          className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
           stagger={0.06}
         >
           {DIFFERENTIATORS.map((d) => {
@@ -642,14 +642,14 @@ function ComparisonSection() {
         </RevealOnScroll>
 
         <motion.div
-          className="mt-10 overflow-hidden rounded-2xl border border-[#E5E7EB] shadow-editorial"
+          className="mt-10 overflow-x-auto rounded-2xl border border-[#E5E7EB] shadow-editorial"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.6, ease }}
         >
           {/* Header */}
-          <div className="grid grid-cols-[1fr_100px_100px] gap-4 border-b border-[#E5E7EB] bg-[#F5F6F8] px-6 py-4 sm:grid-cols-[1fr_120px_120px]">
+          <div className="grid grid-cols-[1fr_100px_100px] gap-4 border-b border-[#E5E7EB] bg-[#F5F6F8] px-6 py-4 min-w-[500px] sm:grid-cols-[1fr_120px_120px]">
             <span className="text-sm font-semibold text-[#0A1628]">Feature</span>
             <span className="text-center font-heading text-sm font-bold text-[#176FEB]">
               Revun
@@ -661,7 +661,7 @@ function ComparisonSection() {
           {COMPARISON_ROWS.map((row, i) => (
             <div
               key={row.feature}
-              className={`grid grid-cols-[1fr_100px_100px] items-center gap-4 px-6 py-3.5 sm:grid-cols-[1fr_120px_120px] ${
+              className={`grid grid-cols-[1fr_100px_100px] items-center gap-4 px-6 py-3.5 min-w-[500px] sm:grid-cols-[1fr_120px_120px] ${
                 i < COMPARISON_ROWS.length - 1 ? 'border-b border-[#E5E7EB]' : ''
               }`}
             >

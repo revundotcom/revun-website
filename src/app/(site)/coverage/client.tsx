@@ -338,7 +338,7 @@ export function CoveragePageClient() {
   return (
     <>
       {/* ────────────────────── HERO ────────────────────── */}
-      <section className="relative overflow-hidden bg-[#F5F6F8] pb-20 pt-32 md:pt-40">
+      <section className="relative overflow-hidden bg-[#F5F6F8] pb-12 pt-24 md:pb-20 md:pt-32 lg:pt-40">
         {/* Ambient blobs */}
         <div className="absolute -right-40 top-10 h-[500px] w-[500px] rounded-full bg-[#176FEB]/[0.04] blur-[120px]" aria-hidden="true" />
         <div className="absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-[#4A91F0]/[0.03] blur-[100px]" aria-hidden="true" />
@@ -346,8 +346,8 @@ export function CoveragePageClient() {
         {/* Grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(23,111,235,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(23,111,235,0.03)_1px,transparent_1px)] bg-[size:48px_48px]" aria-hidden="true" />
 
-        <div ref={heroRef} className="relative mx-auto max-w-6xl px-6">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
+        <div ref={heroRef} className="relative mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+          <div className="grid grid-cols-1 items-center gap-8 md:gap-12 lg:grid-cols-2">
             {/* Left: text */}
             <div>
               <motion.div
@@ -361,7 +361,7 @@ export function CoveragePageClient() {
               </motion.div>
 
               <motion.h1
-                className="font-display text-4xl font-normal text-[#0A1628] md:text-5xl lg:text-6xl"
+                className="font-display text-3xl font-normal text-[#0A1628] md:text-5xl lg:text-6xl"
                 initial={{ opacity: 0, y: 16 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.1, ease }}
@@ -381,7 +381,7 @@ export function CoveragePageClient() {
 
               {/* Stats row */}
               <motion.div
-                className="mt-10 grid grid-cols-3 gap-6"
+                className="mt-10 grid grid-cols-3 gap-4 md:gap-6"
                 initial={{ opacity: 0, y: 16 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.3, ease }}
@@ -392,7 +392,7 @@ export function CoveragePageClient() {
                   { value: 6, suffix: '', label: 'Regulatory Boards' },
                 ].map((stat, i) => (
                   <div key={stat.label}>
-                    <p className="font-heading text-3xl font-bold text-[#0A1628] md:text-4xl">
+                    <p className="font-heading text-2xl font-bold text-[#0A1628] md:text-3xl lg:text-4xl">
                       <AnimatedNumber target={stat.value} suffix={stat.suffix} inView={heroInView} delay={0.5 + i * 0.15} />
                     </p>
                     <p className="mt-1 text-sm text-[#555860]">{stat.label}</p>
@@ -435,13 +435,13 @@ export function CoveragePageClient() {
       </section>
 
       {/* ────────────────────── COVERAGE TABS ────────────────────── */}
-      <section ref={mapRef} className="bg-white py-16 md:py-20 lg:py-20">
-        <div className="mx-auto max-w-6xl px-6">
+      <section ref={mapRef} className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mx-auto max-w-2xl text-center" stagger={0.1}>
             <motion.p variants={revealItem} className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
               Where We Operate
             </motion.p>
-            <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-4xl lg:text-5xl">
+            <motion.h2 variants={revealItem} className="mt-3 font-display text-2xl font-normal text-[#0A1628] md:text-4xl lg:text-5xl">
               <span className="text-[#176FEB]">Canada</span> first. North America next.
             </motion.h2>
           </RevealOnScroll>
@@ -487,7 +487,7 @@ export function CoveragePageClient() {
                 transition={{ duration: 0.3, ease }}
                 className="mt-10"
               >
-                <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
                   {canadianProvinces.map((prov, i) => (
                     <motion.div
                       key={prov.abbr}
@@ -531,7 +531,7 @@ export function CoveragePageClient() {
                 transition={{ duration: 0.3, ease }}
                 className="mt-10"
               >
-                <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
                   {usStates.map((state, i) => (
                     <motion.div
                       key={state.abbr}
@@ -577,13 +577,13 @@ export function CoveragePageClient() {
       </section>
 
       {/* ────────────────────── WHY COMPLIANCE MATTERS ────────────────────── */}
-      <section className="bg-[#F5F6F8] py-16 md:py-20 lg:py-20">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mx-auto max-w-2xl text-center" stagger={0.1}>
             <motion.p variants={revealItem} className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
               Why It Matters
             </motion.p>
-            <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-4xl lg:text-5xl">
+            <motion.h2 variants={revealItem} className="mt-3 font-display text-2xl font-normal text-[#0A1628] md:text-4xl lg:text-5xl">
               Compliance is not a <span className="text-[#176FEB]">feature</span>. It is the foundation.
             </motion.h2>
             <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-base text-[#555860]">
@@ -591,7 +591,7 @@ export function CoveragePageClient() {
             </motion.p>
           </RevealOnScroll>
 
-          <RevealOnScroll className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
+          <RevealOnScroll className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-8" stagger={0.08}>
             {whyCompliance.map((item) => {
               const Icon = item.icon
               return (
@@ -613,13 +613,13 @@ export function CoveragePageClient() {
       </section>
 
       {/* ────────────────────── PROVINCIAL COMPLIANCE DETAIL ────────────────────── */}
-      <section className="bg-white py-16 md:py-20 lg:py-20">
-        <div ref={complianceRef} className="mx-auto max-w-6xl px-6">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div ref={complianceRef} className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-12" stagger={0.1}>
             <motion.p variants={revealItem} className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
               Compliance by Province
             </motion.p>
-            <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-4xl">
+            <motion.h2 variants={revealItem} className="mt-3 font-display text-2xl font-normal text-[#0A1628] md:text-4xl">
               Every province, every <span className="text-[#176FEB]">regulation</span>
             </motion.h2>
             <motion.p variants={revealItem} className="mt-3 max-w-2xl text-base text-[#555860]">
@@ -627,7 +627,7 @@ export function CoveragePageClient() {
             </motion.p>
           </RevealOnScroll>
 
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8">
             {complianceDetails.map((item, i) => (
               <ProvinceCard key={item.province} item={item} index={i} inView={complianceInView} />
             ))}
@@ -645,14 +645,14 @@ export function CoveragePageClient() {
       </section>
 
       {/* ────────────────────── CTA ────────────────────── */}
-      <section className="relative overflow-hidden bg-[#F5F6F8] py-16 lg:py-20">
+      <section className="relative overflow-hidden bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
         <div className="absolute -right-20 top-0 h-[400px] w-[400px] rounded-full bg-[#176FEB]/[0.04] blur-[120px]" aria-hidden="true" />
         <div className="absolute -left-20 bottom-0 h-[300px] w-[300px] rounded-full bg-[#4A91F0]/[0.03] blur-[100px]" aria-hidden="true" />
 
-        <RevealOnScroll className="relative mx-auto max-w-3xl px-6 text-center" stagger={0.1}>
+        <RevealOnScroll className="relative mx-auto max-w-3xl px-4 text-center md:px-6 lg:px-8" stagger={0.1}>
           <motion.h2
             variants={revealItem}
-            className="font-display text-3xl font-normal text-[#0A1628] md:text-4xl lg:text-5xl"
+            className="font-display text-2xl font-normal text-[#0A1628] md:text-4xl lg:text-5xl"
           >
             Operating in a province or state{' '}
             <span className="text-[#4A91F0]">not listed</span>?

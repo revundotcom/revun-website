@@ -457,7 +457,7 @@ function FlowsConsole() {
 
 export function PaymentsFintech() {
   return (
-    <section className="relative overflow-hidden bg-brand-off-white py-20 md:py-28">
+    <section className="relative overflow-hidden bg-brand-off-white py-12 md:py-20 lg:py-28">
       {/* Background effects */}
       <div className="absolute inset-0 bg-grid bg-grid-mask opacity-[0.03]" aria-hidden="true" />
       <div
@@ -465,7 +465,7 @@ export function PaymentsFintech() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         {/* Header */}
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
@@ -476,14 +476,14 @@ export function PaymentsFintech() {
           </motion.p>
           <motion.h2
             variants={revealItem}
-            className="mt-3 font-display text-4xl font-normal leading-[1.1] text-[#0A1628] md:text-5xl"
+            className="mt-3 font-display text-3xl font-normal leading-[1.1] text-[#0A1628] md:text-5xl"
           >
             Every dollar flows through{' '}
             <span className="text-keyword">one infrastructure layer</span>
           </motion.h2>
           <motion.p
             variants={revealItem}
-            className="mx-auto mt-4 max-w-xl text-lg text-brand-graphite-mid"
+            className="mx-auto mt-4 max-w-xl text-base md:text-lg text-brand-graphite-mid"
           >
             Rent comes in. Owners get paid. Vendors get paid. Reports reconcile
             themselves. No more e-transfer chases, no more spreadsheet patches, no
@@ -543,7 +543,7 @@ export function PaymentsFintech() {
               <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.18em] text-brand-graphite-mid">
                 What happens inside Revun
               </p>
-              <h3 className="mt-2 font-display text-3xl font-normal leading-[1.1] text-[#0A1628] md:text-[40px]">
+              <h3 className="mt-2 font-display text-2xl font-normal leading-[1.1] text-[#0A1628] md:text-[40px]">
                 Four flows. One connected system.
               </h3>
             </div>

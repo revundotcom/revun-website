@@ -18,8 +18,8 @@ const ease = [0.22, 1, 0.36, 1] as const
 
 function SW({ children, id, dark }: { children: React.ReactNode; id: string; dark?: boolean }) {
   return (
-    <section id={id} className={`py-14 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
-      <div className="mx-auto max-w-7xl px-6">{children}</div>
+    <section id={id} className={`py-12 md:py-20 lg:py-28 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
+      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">{children}</div>
     </section>
   )
 }
@@ -28,10 +28,10 @@ function SH({ eyebrow, title, highlight, description }: { eyebrow: string; title
   return (
     <RevealOnScroll className="mx-auto max-w-2xl text-center">
       <motion.p variants={revealItem} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">{eyebrow}</motion.p>
-      <motion.h2 variants={revealItem} className="mt-3 font-display text-4xl font-normal md:text-5xl text-brand-graphite">
+      <motion.h2 variants={revealItem} className="mt-3 font-display text-2xl font-normal md:text-4xl lg:text-5xl text-brand-graphite">
         {title} <span className="text-keyword">{highlight}</span>
       </motion.h2>
-      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-lg text-brand-graphite/70">{description}</motion.p>
+      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-base text-brand-graphite/70 md:text-lg">{description}</motion.p>
     </RevealOnScroll>
   )
 }
@@ -86,23 +86,23 @@ function BrowserChrome({ url, children, className = '' }: { url: string; childre
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-white pt-32 pb-16 md:pt-40 md:pb-20">
+    <section className="relative overflow-hidden bg-white pt-24 pb-12 md:pt-40 md:pb-20">
       <div className="absolute inset-0 bg-[linear-gradient(rgba(23,111,235,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(23,111,235,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" aria-hidden="true" />
-      <div className="relative mx-auto max-w-4xl px-6 text-center">
+      <div className="relative mx-auto max-w-4xl px-4 text-center md:px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease }}
           className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#E8F2FE]">
           <LayoutDashboard className="h-8 w-8 text-[#176FEB]" />
         </motion.div>
         <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease, delay: 0.1 }}
-          className="font-display text-4xl font-normal text-[#0A1628] md:text-6xl">
+          className="font-display text-3xl font-normal text-[#0A1628] md:text-5xl lg:text-6xl">
           The command centre for<br /><span className="text-keyword">property operations</span>
         </motion.h1>
         <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease, delay: 0.2 }}
-          className="mx-auto mt-5 max-w-2xl text-lg text-[#555860]">
+          className="mx-auto mt-5 max-w-2xl text-base text-[#555860] md:text-lg">
           Real-time dashboards that give every team member the exact view they need. Occupancy, revenue, maintenance, leasing, and compliance — all in one place.
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease, delay: 0.3 }}
-          className="mt-8 flex items-center justify-center gap-4">
+          className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
           <Link href="/pricing/" className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#0B5AD4]">
             Start Free Trial
           </Link>
@@ -156,8 +156,8 @@ function OperationsDashboard() {
     <SW id="operations-dashboard" dark>
       <SH eyebrow="Command Centre" title="Your complete" highlight="operations dashboard" description="Everything your team needs to manage properties, tenants, and vendors — all in one unified view." />
       <div ref={ref} className="mt-12">
-        <Anim className="mx-auto max-w-6xl" delay={0.15}>
-          <BrowserChrome url="app.revun.com/dashboard">
+        <Anim className="mx-auto max-w-6xl overflow-x-auto" delay={0.15}>
+          <BrowserChrome url="app.revun.com/dashboard" className="min-w-[900px] lg:min-w-0">
             <div className="flex min-h-[520px]">
               {/* Sidebar */}
               <div className="w-52 shrink-0 border-r border-[#E5E7EB] bg-white flex flex-col">
@@ -597,9 +597,9 @@ function PropertyDrillDown() {
   return (
     <SW id="property-drilldown" dark>
       <SH eyebrow="Drill Down" title="From portfolio to" highlight="unit-level detail" description="Click any property to see unit-level occupancy, lease status, and payment history. Full transparency at every level." />
-      <div ref={ref} className="mx-auto mt-12 max-w-3xl">
+      <div ref={ref} className="mx-auto mt-12 max-w-3xl overflow-x-auto">
         <Anim delay={0.15}>
-          <BrowserChrome url="app.revun.com/properties/220-king-st-w">
+          <BrowserChrome url="app.revun.com/properties/220-king-st-w" className="min-w-[560px] md:min-w-0">
             <div className="p-5">
               {/* Breadcrumb */}
               <div className="flex items-center gap-1.5 text-[11px] text-[#555860] mb-4">
@@ -1014,17 +1014,17 @@ function CustomReports() {
 
 function CTASection() {
   return (
-    <section id="cta" className="bg-[#F5F6F8] py-16 md:py-20">
-      <div className="mx-auto max-w-3xl px-6 text-center">
+    <section id="cta" className="bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+      <div className="mx-auto max-w-3xl px-4 text-center md:px-6 lg:px-8">
         <RevealOnScroll stagger={0.12}>
           <motion.p variants={revealItem} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">Get Started</motion.p>
-          <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal md:text-4xl text-brand-graphite">
+          <motion.h2 variants={revealItem} className="mt-3 font-display text-2xl font-normal md:text-4xl lg:text-5xl text-brand-graphite">
             Full operational visibility<br /><span className="text-keyword">from day one</span>
           </motion.h2>
           <motion.p variants={revealItem} className="mx-auto mt-4 max-w-lg text-base text-[#555860]">
             Start your free trial today. No credit card required. See your entire portfolio in one unified dashboard within minutes.
           </motion.p>
-          <motion.div variants={revealItem} className="mt-8 flex items-center justify-center gap-4">
+          <motion.div variants={revealItem} className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
             <Link href="/pricing/" className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#1260D6]">
               Start Free Trial
             </Link>

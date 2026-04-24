@@ -71,14 +71,14 @@ export default function FurnishedRentalsPage() {
           <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
           <div className="absolute -left-[10%] top-[30%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(23,111,235,0.08)_0%,transparent_70%)] blur-3xl" />
         </div>
-        <div className="relative z-10 mx-auto max-w-4xl px-6 pt-24 pb-16 text-center lg:pt-32 lg:pb-24">
+        <div className="relative z-10 mx-auto max-w-4xl px-4 pt-20 pb-12 text-center md:px-6 md:pt-24 md:pb-16 lg:px-8 lg:pt-32 lg:pb-24">
           <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#176FEB]/20 text-[#176FEB]">
             <Sofa className="h-7 w-7" strokeWidth={1.8} />
           </div>
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-4 py-1.5 text-sm font-medium text-[#555860] backdrop-blur-sm">
             Furnished Rentals
           </p>
-          <h1 className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-[#0A1628] sm:text-5xl md:text-6xl">
+          <h1 className="font-display font-extrabold text-3xl leading-[1.1] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl">
             Furnished Rental Management, Centralized
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#555860]">
@@ -96,19 +96,19 @@ export default function FurnishedRentalsPage() {
       </section>
 
       {/* For Operators */}
-      <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">For operators</p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] sm:text-4xl">
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-[#2C2E33] md:text-3xl lg:text-4xl">
               Tools built for <span className="text-[#176FEB]">furnished</span> properties
             </h2>
           </RevealOnScroll>
-          <RevealOnScroll stagger={0.08} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealOnScroll stagger={0.08} className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8">
             {operatorFeatures.map((f) => {
               const Icon = f.icon
               return (
-                <div key={f.title} className="rounded-2xl border border-[#D3D5DB] bg-white p-7 transition-colors duration-150 hover:border-[#176FEB]/40">
+                <div key={f.title} className="rounded-2xl border border-[#D3D5DB] bg-white p-5 transition-colors duration-150 hover:border-[#176FEB]/40 md:p-7">
                   <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-[#E8F2FE] text-[#176FEB]">
                     <Icon className="h-5 w-5" strokeWidth={1.8} />
                   </div>
@@ -122,12 +122,12 @@ export default function FurnishedRentalsPage() {
       </section>
 
       {/* For Tenants */}
-      <section className="bg-white py-12">
-        <div className="mx-auto max-w-4xl px-6">
-          <RevealOnScroll className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
+          <RevealOnScroll className="grid grid-cols-1 items-center gap-8 md:gap-12 lg:grid-cols-2 lg:gap-20">
             <div>
               <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">For tenants</p>
-              <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] sm:text-4xl">
+              <h2 className="font-heading text-2xl font-bold tracking-tight text-[#2C2E33] md:text-3xl lg:text-4xl">
                 Move in ready, <span className="text-[#176FEB]">stress free</span>
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-[#555860]">
@@ -149,9 +149,9 @@ export default function FurnishedRentalsPage() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-3xl px-6">
-          <h2 className="mb-8 text-center font-heading text-3xl font-bold tracking-tight text-[#2C2E33] sm:text-4xl">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8">
+          <h2 className="mb-8 text-center font-heading text-2xl font-bold tracking-tight text-[#2C2E33] md:text-3xl lg:text-4xl">
             Frequently Asked <span className="text-[#176FEB]">Questions</span>
           </h2>
           <div className="space-y-4">
@@ -169,12 +169,12 @@ export default function FurnishedRentalsPage() {
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-[#F5F6F8] py-12">
+      <section className="relative overflow-hidden bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
         <div className="absolute inset-0" aria-hidden="true">
           <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
         </div>
-        <div className="relative z-10 mx-auto max-w-2xl px-6 text-center">
-          <h2 className="font-heading font-extrabold text-3xl leading-tight tracking-tight text-[#0A1628] sm:text-4xl">
+        <div className="relative z-10 mx-auto max-w-2xl px-4 text-center md:px-6 lg:px-8">
+          <h2 className="font-heading font-extrabold text-2xl leading-tight tracking-tight text-[#0A1628] md:text-3xl lg:text-4xl">
             Manage furnished properties the right way
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-[#555860]">

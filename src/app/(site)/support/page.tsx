@@ -106,7 +106,7 @@ export default function SupportPage() {
       {/* ── Hero ──────────────────────────────────────────────────── */}
       <section className="bg-[#F5F6F8]">
         <motion.div
-          className="mx-auto max-w-3xl px-6 pt-24 pb-16 text-center"
+          className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 pt-16 md:pt-24 pb-12 md:pb-16 text-center"
           variants={heroStagger}
           initial="hidden"
           animate="visible"
@@ -119,7 +119,7 @@ export default function SupportPage() {
           </motion.p>
           <motion.h1
             variants={fadeUp}
-            className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-[#0A1628] sm:text-5xl"
+            className="font-display font-extrabold text-3xl leading-[1.1] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl"
           >
             How can we{' '}
             <span className="text-[#176FEB]">help?</span>
@@ -135,7 +135,7 @@ export default function SupportPage() {
 
       {/* ── Two-path cards ────────────────────────────────────────── */}
       <section className="bg-white py-12">
-        <div className="mx-auto max-w-4xl px-6">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll
             stagger={0.15}
             className="grid gap-6 md:grid-cols-2"
@@ -197,7 +197,7 @@ export default function SupportPage() {
 
       {/* ── FAQ ───────────────────────────────────────────────────── */}
       <section className="bg-white py-12">
-        <div className="mx-auto max-w-2xl px-6">
+        <div className="mx-auto max-w-2xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="text-center">
             <motion.p
               variants={revealItem}

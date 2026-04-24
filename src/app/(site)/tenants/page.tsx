@@ -434,7 +434,7 @@ export default function TenantsPage() {
         <div className="absolute left-[-8rem] top-[6rem] h-[28rem] w-[28rem] rounded-full bg-[#176FEB]/8 blur-[120px]" aria-hidden="true" />
         <div className="absolute right-[-10rem] top-[-4rem] h-[32rem] w-[32rem] rounded-full bg-[#4A91F0]/8 blur-[140px]" aria-hidden="true" />
 
-        <div className="relative mx-auto max-w-7xl px-6">
+        <div className="relative mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-[1fr_1fr]">
             <RevealOnScroll>
               <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#176FEB]/20 bg-white/80 px-3 py-1.5 text-xs font-medium text-[#176FEB] backdrop-blur-sm">
@@ -442,7 +442,7 @@ export default function TenantsPage() {
                 Built for Canada and the United States
               </div>
 
-              <h1 className="font-display text-4xl font-normal leading-[1.02] tracking-tight text-[#0A1628] text-balance md:text-5xl lg:text-6xl">
+              <h1 className="font-display text-3xl font-normal leading-[1.02] tracking-tight text-[#0A1628] text-balance md:text-5xl lg:text-6xl">
                 Renting, finally{' '}
                 <span className="relative inline-block">
                   <span className="relative z-10 italic text-[#176FEB]">redesigned</span>
@@ -546,7 +546,7 @@ export default function TenantsPage() {
 
       {/* ═════ Proof Strip ═════ */}
       <section className="border-y border-[#E5E7EB] bg-white py-12">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll stagger={0.08}>
             <div className="grid gap-y-8 sm:grid-cols-2 sm:divide-x sm:divide-[#E5E7EB] lg:grid-cols-4">
               {proofPoints.map((p) => (
@@ -571,7 +571,7 @@ export default function TenantsPage() {
 
       {/* ═════ Feature overview — 6 quick features ═════ */}
       <Section background="off">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <SectionHeader
               eyebrow="Everything you need"
@@ -618,7 +618,7 @@ export default function TenantsPage() {
 
       {/* ═════ Pay rent — photo + text ═════ */}
       <Section background="white">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <RevealOnScroll>
               <div className="relative">
@@ -691,7 +691,7 @@ export default function TenantsPage() {
 
       {/* ═════ Build credit ═════ */}
       <Section background="white">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <RevealOnScroll>
               <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#176FEB] to-[#0B5AD4] p-8 text-white md:p-10">
@@ -788,7 +788,7 @@ export default function TenantsPage() {
 
       {/* ═════ Maintenance — photo + text ═════ */}
       <Section background="off">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <RevealOnScroll>
               <div>
@@ -869,7 +869,7 @@ export default function TenantsPage() {
 
       {/* ═════ Documents — photo + text ═════ */}
       <Section background="white">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <RevealOnScroll>
               <div className="relative">
@@ -947,7 +947,7 @@ export default function TenantsPage() {
 
       {/* ═════ Process — editorial rail, no cards ═════ */}
       <Section background="off">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <SectionHeader
               eyebrow="How it works"
@@ -1026,7 +1026,7 @@ export default function TenantsPage() {
 
       {/* ═════ Your first 30 days — magazine 2-col spread ═════ */}
       <Section background="white">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
             {/* Left — portrait photograph with floating day markers */}
             <RevealOnScroll>
@@ -1178,7 +1178,7 @@ export default function TenantsPage() {
 
       {/* ═════ Testimonials — editorial quote stack ═════ */}
       <Section background="white">
-        <div className="mx-auto max-w-5xl px-6">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <SectionHeader
               eyebrow="Tenant voices"
@@ -1232,7 +1232,7 @@ export default function TenantsPage() {
 
       {/* ═════ Roommates spotlight ═════ */}
       <Section background="off">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <div className="rounded-[2.5rem] border border-[#E5E7EB] bg-white p-6 shadow-sm md:p-8">
             <div className="grid items-center gap-6 md:grid-cols-2 md:gap-10">
               <RevealOnScroll>
@@ -1280,7 +1280,7 @@ export default function TenantsPage() {
 
       {/* ═════ Fee breakdown — editorial comparison with savings hero ═════ */}
       <Section background="white">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <SectionHeader
               eyebrow="What it costs you"
@@ -1348,7 +1348,8 @@ export default function TenantsPage() {
           </RevealOnScroll>
 
           <RevealOnScroll>
-            <div className="overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white">
+            <div className="overflow-x-auto overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white">
+              <div className="min-w-[560px]">
               <div className="grid grid-cols-[1.4fr_1fr_1fr] gap-4 border-b border-[#E5E7EB] bg-[#F8F9FA] px-5 py-3.5 md:px-7">
                 <span className="font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-[#64748B]">
                   Tenant cost
@@ -1399,6 +1400,7 @@ export default function TenantsPage() {
                   $0
                 </span>
               </div>
+              </div>
             </div>
           </RevealOnScroll>
 
@@ -1412,7 +1414,7 @@ export default function TenantsPage() {
 
       {/* ═════ Integration partners — editorial strip with visual marks ═════ */}
       <Section background="off">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <SectionHeader
               eyebrow="Powered by trusted infrastructure"
@@ -1493,7 +1495,7 @@ export default function TenantsPage() {
 
       {/* ═════ Privacy wall — editorial list ═════ */}
       <Section background="white">
-        <div className="mx-auto max-w-5xl px-6">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <SectionHeader
               eyebrow="Privacy and Security"
@@ -1579,7 +1581,7 @@ export default function TenantsPage() {
 
       {/* ═════ FAQ ═════ */}
       <Section background="off">
-        <div className="mx-auto max-w-3xl px-6">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <SectionHeader
               eyebrow="FAQ"
@@ -1608,7 +1610,7 @@ export default function TenantsPage() {
 
       {/* ═════ Dual-path CTA ═════ */}
       <Section background="white">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <SectionHeader
               eyebrow="Get started"

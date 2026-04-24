@@ -57,10 +57,10 @@ function SectionHeader({ eyebrow, title, highlight, description }: {
       <motion.p variants={revealItem} className="text-sm font-heading font-semibold uppercase tracking-wider text-[#176FEB]">
         {eyebrow}
       </motion.p>
-      <motion.h2 variants={revealItem} className="mt-3 font-display text-4xl font-normal md:text-5xl text-[#0A1628]">
+      <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal md:text-4xl lg:text-5xl text-[#0A1628]">
         {title} <span className="text-[#176FEB]">{highlight}</span>
       </motion.h2>
-      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-lg text-[#555860]">
+      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-base md:text-lg text-[#555860]">
         {description}
       </motion.p>
     </RevealOnScroll>
@@ -97,7 +97,7 @@ function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, ease, delay: 0.1 }}
-              className="mt-6 font-display text-5xl font-normal leading-[1.05] tracking-tight text-[#0A1628] md:text-6xl lg:text-7xl"
+              className="mt-6 font-display text-4xl font-normal leading-[1.05] tracking-tight text-[#0A1628] sm:text-5xl md:text-6xl lg:text-7xl"
             >
               Rent collected{' '}
               <span className="text-[#176FEB]">on autopilot.</span>
@@ -106,7 +106,7 @@ function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, ease, delay: 0.2 }}
-              className="mt-6 max-w-xl text-lg leading-relaxed text-[#555860] md:text-xl"
+              className="mt-6 max-w-xl text-base leading-relaxed text-[#555860] md:text-lg lg:text-xl"
             >
               Pre-Authorized Debit, Interac e-Transfer, credit and debit — with auto-reminders, split payments, late fees, and one-click accounting reconciliation.
             </motion.p>
@@ -118,13 +118,13 @@ function Hero() {
             >
               <Link
                 href="/pricing/"
-                className="inline-flex h-14 items-center justify-center rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white shadow-[0_8px_24px_-8px_rgba(23,111,235,0.5)] transition-all hover:bg-[#1260d1] hover:shadow-[0_12px_28px_-8px_rgba(23,111,235,0.6)]"
+                className="inline-flex h-14 w-full sm:w-auto items-center justify-center rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white shadow-[0_8px_24px_-8px_rgba(23,111,235,0.5)] transition-all hover:bg-[#1260d1] hover:shadow-[0_12px_28px_-8px_rgba(23,111,235,0.6)]"
               >
                 Start Free Trial <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
               <Link
                 href="/demo/"
-                className="inline-flex h-14 items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-8 text-base font-semibold text-[#0A1628] transition-all hover:border-[#176FEB]/30 hover:text-[#176FEB] hover:shadow-sm"
+                className="inline-flex h-14 w-full sm:w-auto items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-8 text-base font-semibold text-[#0A1628] transition-all hover:border-[#176FEB]/30 hover:text-[#176FEB] hover:shadow-sm"
               >
                 Book a Demo
               </Link>
@@ -252,7 +252,7 @@ function HeroPaymentCard({ inView }: { inView: boolean }) {
         initial={{ opacity: 0, y: 20, x: 20, scale: 0.9 }}
         animate={inView ? { opacity: 1, y: 0, x: 0, scale: 1 } : {}}
         transition={{ duration: 0.5, ease, delay: 1.2 }}
-        className="absolute -bottom-6 -left-4 flex items-center gap-3 rounded-2xl border border-[#E5E7EB] bg-white px-4 py-3 shadow-xl md:-left-8"
+        className="absolute -bottom-6 -left-4 hidden md:flex items-center gap-3 rounded-2xl border border-[#E5E7EB] bg-white px-4 py-3 shadow-xl md:-left-8"
       >
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#176FEB]/10">
           <Bell className="h-4 w-4 text-[#176FEB]" />
@@ -350,7 +350,7 @@ function PaymentMethods() {
         highlight="one reconciled ledger."
         description="Let every tenant pay the way they want — Revun normalizes all four into one clean rent roll."
       />
-      <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
         {paymentMethods.map((m, i) => (
           <motion.div
             key={m.name}
@@ -442,7 +442,7 @@ function AutoCollectionFlow() {
         highlight="Forget rent day."
         description="Revun runs the whole cycle — from friendly reminder to late-fee enforcement — without you lifting a finger."
       />
-      <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
         {flowSteps.map((s, i) => (
           <motion.div
             key={s.title}
@@ -663,7 +663,7 @@ function SmartFeatures() {
         highlight="rent collection needs."
         description="From reminders to hardship plans — Revun handles the edge cases that usually live in spreadsheets and email threads."
       />
-      <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {smartFeatures.map((f, i) => (
           <motion.div
             key={f.title}
@@ -912,7 +912,7 @@ function Testimonials() {
         highlight="collect more, chase less."
         description="Real property managers, real numbers — from the first 90 days on Revun."
       />
-      <div className="mt-12 grid gap-6 md:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
         {testimonials.map((t, i) => (
           <motion.div
             key={t.name}
@@ -1012,13 +1012,13 @@ function FAQ() {
 
 function FinalCTA() {
   return (
-    <section className="relative overflow-hidden bg-[#0A1628] px-6 py-24 text-white md:py-28">
+    <section className="relative overflow-hidden bg-[#0A1628] px-4 py-16 text-white sm:px-6 md:px-8 md:py-24 lg:py-28">
       <div className="absolute top-0 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-[#176FEB]/25 blur-[120px]" aria-hidden="true" />
       <RevealOnScroll className="relative mx-auto max-w-3xl text-center">
         <motion.span variants={revealItem} className="inline-flex items-center rounded-full border border-[#176FEB]/30 bg-[#176FEB]/10 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-[#60A5FA]">
           Start collecting smarter
         </motion.span>
-        <motion.h2 variants={revealItem} className="mt-6 font-display text-4xl font-normal tracking-tight md:text-5xl lg:text-6xl">
+        <motion.h2 variants={revealItem} className="mt-6 font-display text-3xl font-normal tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
           Rent in the bank.{' '}
           <span className="text-[#60A5FA]">Your time back.</span>
         </motion.h2>

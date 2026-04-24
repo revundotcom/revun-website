@@ -155,16 +155,16 @@ export default function AccountingPage() {
 
       {/* ── Hero ── */}
       <section className="bg-[#F5F6F8]">
-        <div className="mx-auto max-w-4xl px-6 pt-24 pb-16 text-center">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8 pt-16 pb-12 md:pt-24 md:pb-16 text-center">
           <RevealOnScroll>
             <p className="mb-4 text-sm font-medium uppercase tracking-widest text-[#176FEB]">
               Financial Operations
             </p>
-            <h1 className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-[#0A1628] sm:text-5xl lg:text-6xl">
+            <h1 className="font-display font-extrabold text-3xl leading-[1.15] tracking-tight text-[#0A1628] md:text-5xl md:leading-[1.1] lg:text-6xl">
               The financial infrastructure for{' '}
               <span className="text-[#176FEB]">property operations</span>
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#555860]">
+            <p className="mx-auto mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-[#555860]">
               Rent collection, owner disbursements, vendor payouts, trust accounting, statements, reporting, and compliance — all in one financial operating layer.
             </p>
           </RevealOnScroll>
@@ -172,22 +172,22 @@ export default function AccountingPage() {
       </section>
 
       {/* ── Money Flow ── */}
-      <section className="bg-white py-12">
-        <div className="mx-auto max-w-5xl px-6">
-          <RevealOnScroll className="mb-10 text-center">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
+          <RevealOnScroll className="mb-8 md:mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               How Money Moves
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] md:text-4xl">
+            <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-[#2C2E33]">
               The <span className="text-[#176FEB]">money flow</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-[#555860]">
+            <p className="mx-auto mt-4 max-w-xl text-sm md:text-base text-[#555860]">
               From rent collection to disbursements — every dollar tracked, reconciled, and accounted for automatically.
             </p>
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.1}>
-            <div className="grid gap-4 md:grid-cols-5">
+            <div className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
               {moneyFlowSteps.map((s, i) => {
                 const Icon = s.icon
                 return (
@@ -205,7 +205,7 @@ export default function AccountingPage() {
                       {s.description}
                     </p>
                     {i < moneyFlowSteps.length - 1 && (
-                      <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 translate-x-1/2 md:block">
+                      <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 translate-x-1/2 lg:block">
                         <ArrowRight className="h-4 w-4 text-[#176FEB]/40" />
                       </div>
                     )}
@@ -218,28 +218,28 @@ export default function AccountingPage() {
       </section>
 
       {/* ── Feature Grid ── */}
-      <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-5xl px-6">
-          <RevealOnScroll className="mb-10 text-center">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
+          <RevealOnScroll className="mb-8 md:mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Financial Modules
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] md:text-4xl">
+            <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-[#2C2E33]">
               Every financial <span className="text-[#176FEB]">operation</span>, one system
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-[#555860]">
+            <p className="mx-auto mt-4 max-w-xl text-sm md:text-base text-[#555860]">
               Six financial modules that cover the full property accounting workflow. Connected, compliant, and audit-ready.
             </p>
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.08}>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 md:gap-6 lg:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {features.map((f) => {
                 const Icon = f.icon
                 return (
                   <div
                     key={f.title}
-                    className="rounded-2xl border border-[#D3D5DB] bg-white p-8 transition hover:border-[#176FEB]/40"
+                    className="rounded-2xl border border-[#D3D5DB] bg-white p-6 md:p-8 transition hover:border-[#176FEB]/40"
                   >
                     <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#E8F2FE]">
                       <Icon className="h-6 w-6 text-[#176FEB]" />
@@ -259,28 +259,28 @@ export default function AccountingPage() {
       </section>
 
       {/* ── Replace your financial stack ── */}
-      <section className="bg-white py-12">
-        <div className="mx-auto max-w-5xl px-6">
-          <RevealOnScroll className="mb-10 text-center">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
+          <RevealOnScroll className="mb-8 md:mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Consolidate
             </p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] md:text-4xl">
+            <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-[#2C2E33]">
               Replace your <span className="text-[#176FEB]">financial stack</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-[#555860]">
+            <p className="mx-auto mt-4 max-w-xl text-sm md:text-base text-[#555860]">
               Stop juggling spreadsheets, separate payment tools, and manual reconciliation. Revun replaces the fragmented financial workflow with one connected system.
             </p>
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.1}>
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-4 md:gap-6 lg:gap-8 grid-cols-1 md:grid-cols-2">
               {replacements.map((r) => {
                 const Icon = r.icon
                 return (
                   <div
                     key={r.old}
-                    className="rounded-2xl border border-[#E5E7EB] bg-[#F5F6F8] p-8 hover:border-[#176FEB]/40"
+                    className="rounded-2xl border border-[#E5E7EB] bg-[#F5F6F8] p-6 md:p-8 hover:border-[#176FEB]/40"
                   >
                     <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#E8F2FE]">
                       <Icon className="h-6 w-6 text-[#176FEB]" />
@@ -300,20 +300,20 @@ export default function AccountingPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-3xl px-6 text-center">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center">
           <RevealOnScroll>
-            <h2 className="font-heading font-extrabold text-4xl tracking-tight text-[#0A1628] md:text-5xl">
+            <h2 className="font-heading font-extrabold text-3xl md:text-4xl lg:text-5xl tracking-tight text-[#0A1628]">
               See how Revun handles your{' '}
               <span className="text-[#176FEB]">finances</span>
             </h2>
-            <p className="mx-auto mt-5 max-w-lg text-lg text-[#555860]">
+            <p className="mx-auto mt-5 max-w-lg text-base md:text-lg text-[#555860]">
               From rent collection to owner disbursements, trust accounting to tax reporting — see the full financial operating layer in action.
             </p>
-            <div className="mt-10">
+            <div className="mt-8 md:mt-10">
               <Link
                 href="/demo/"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#176FEB] px-8 text-base font-semibold text-white transition-colors hover:bg-[#1461d0]"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#176FEB] px-6 md:px-8 text-sm md:text-base font-semibold text-white transition-colors hover:bg-[#1461d0]"
               >
                 Book a Demo
                 <ArrowRight className="h-4 w-4" />

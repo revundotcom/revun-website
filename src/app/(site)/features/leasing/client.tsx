@@ -37,22 +37,22 @@ function StepHandoff({ currentId }: { currentId: StepId }) {
   if (!next) return null
   return (
     <div className="bg-white">
-      <div className="mx-auto flex max-w-6xl items-center justify-center gap-4 px-6 py-8">
-        <span className="h-px flex-1 max-w-[120px] bg-[#E5E7EB]" />
+      <div className="mx-auto flex max-w-6xl items-center justify-center gap-3 md:gap-4 px-4 md:px-6 lg:px-8 py-6 md:py-8">
+        <span className="hidden sm:block h-px flex-1 max-w-[120px] bg-[#E5E7EB]" />
         <a
           href={`#${next.id}`}
-          className="group flex items-center gap-2.5 text-xs uppercase tracking-widest text-brand-graphite-mid transition-colors hover:text-brand-blue"
+          className="group flex flex-wrap items-center justify-center gap-x-2 gap-y-1 md:gap-2.5 text-[11px] md:text-xs uppercase tracking-widest text-brand-graphite-mid transition-colors hover:text-brand-blue"
         >
           <span>Up next</span>
           <span className="font-heading font-bold text-brand-blue">{next.num}</span>
           <span className="font-semibold text-brand-graphite">{next.label}</span>
-          <span className="text-brand-graphite-mid normal-case tracking-normal">· {next.handoff}</span>
+          <span className="hidden md:inline text-brand-graphite-mid normal-case tracking-normal">· {next.handoff}</span>
           <ArrowDown
             className="h-3.5 w-3.5 text-brand-blue transition-transform duration-200 group-hover:translate-y-0.5"
             strokeWidth={2}
           />
         </a>
-        <span className="h-px flex-1 max-w-[120px] bg-[#E5E7EB]" />
+        <span className="hidden sm:block h-px flex-1 max-w-[120px] bg-[#E5E7EB]" />
       </div>
     </div>
   )
@@ -60,8 +60,8 @@ function StepHandoff({ currentId }: { currentId: StepId }) {
 
 function SW({ children, id, dark }: { children: React.ReactNode; id: string; dark?: boolean }) {
   return (
-    <section id={id} className={`scroll-mt-32 py-16 md:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
-      <div className="mx-auto max-w-6xl px-6">{children}</div>
+    <section id={id} className={`scroll-mt-32 py-12 md:py-20 lg:py-24 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">{children}</div>
     </section>
   )
 }
@@ -99,7 +99,7 @@ function SH({
       </motion.div>
       <motion.h2
         variants={revealItem}
-        className="font-display text-4xl font-normal md:text-5xl text-brand-graphite"
+        className="font-display text-2xl sm:text-3xl font-normal md:text-4xl lg:text-5xl text-brand-graphite"
       >
         {title} <span className="text-keyword">{highlight}</span>
       </motion.h2>
@@ -138,7 +138,7 @@ function ReviewOffers() {
   return (
     <SW id="compare">
       <SH step="03" eyebrow="Compare" title="Rank and pick the" highlight="best offer" description="With verified tenants in hand, compare rent, lease term, and move-in dates side by side. Every offer carries tenant context so you decide with full information." />
-      <div ref={ref} className="mt-12 grid gap-8 lg:grid-cols-2">
+      <div ref={ref} className="mt-10 md:mt-12 grid gap-6 md:gap-8 lg:grid-cols-2">
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white overflow-hidden" {...fadeUp} animate={inView ? { opacity: 1, y: 0 } : {}}>
           <div className="border-b border-[#E5E7EB] px-6 py-4">
             <div className="flex items-center gap-2"><MapPin className="h-4 w-4 text-brand-blue" /><span className="font-heading text-base font-semibold text-brand-graphite">75 Portland St, Mississauga</span></div>
@@ -205,7 +205,7 @@ function TimeSensitiveOffers() {
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white" {...fadeUp} animate={inView ? { opacity: 1, y: 0 } : {}}>
           <div className="flex flex-col gap-4 border-b border-[#E5E7EB] px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
             <h3 className="font-heading text-lg font-semibold text-brand-graphite">Offers <span className="ml-1 text-brand-graphite-mid">7</span></h3>
-            <div className="flex gap-1.5">
+            <div className="flex flex-wrap gap-1.5">
               {['All', 'Pending', 'Approved', 'Declined'].map((t, i) => (
                 <span key={t} className={`rounded-full px-3.5 py-1.5 text-xs font-medium ${i === 0 ? 'bg-brand-blue text-white' : 'bg-brand-off-white text-brand-graphite-mid'}`}>{t}</span>
               ))}
@@ -218,8 +218,8 @@ function TimeSensitiveOffers() {
                   <span className="rounded-full bg-[#E8F2FE] px-3 py-1 text-xs font-medium text-brand-blue">Pending</span>
                   <span className="flex items-center gap-1 text-[11px] text-brand-graphite-mid"><Timer className="h-3 w-3" /> Expires in {o.expires}</span>
                 </div>
-                <p className="flex items-center gap-1.5 text-sm font-medium text-brand-graphite"><MapPin className="h-3.5 w-3.5 text-brand-blue" /> {o.property}</p>
-                <div className="mt-3 flex gap-8">
+                <p className="flex items-center gap-1.5 text-sm font-medium text-brand-graphite"><MapPin className="h-3.5 w-3.5 shrink-0 text-brand-blue" /> <span className="truncate">{o.property}</span></p>
+                <div className="mt-3 flex flex-wrap gap-6 sm:gap-8">
                   <div><p className="text-[10px] uppercase text-brand-graphite-mid">Offer amount</p><p className="font-heading text-lg font-bold text-brand-blue">{o.amount}</p></div>
                   <div><p className="text-[10px] uppercase text-brand-graphite-mid">Move-in date</p><p className="text-sm font-medium text-brand-graphite">{o.moveIn}</p></div>
                 </div>
@@ -240,7 +240,7 @@ function Negotiation() {
   return (
     <SW id="negotiate">
       <SH step="04" eyebrow="Negotiate" title="Decline or" highlight="counter" description="Reject offers or counter with updated rent, terms, or dates. Tenants see your response in seconds with a full audit trail of every revision." />
-      <div ref={ref} className="mt-12 grid gap-8 lg:grid-cols-2">
+      <div ref={ref} className="mt-10 md:mt-12 grid gap-6 md:gap-8 lg:grid-cols-2">
         {/* Left: decline/counter choice */}
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white p-6" {...fadeUp} animate={inView ? { opacity: 1, y: 0 } : {}}>
           <h3 className="mb-2 font-heading text-lg font-semibold text-brand-graphite">Respond to offer</h3>
@@ -293,7 +293,7 @@ function Signing() {
       <SH step="05" eyebrow="Sign" title="Close the" highlight="deal" description="Execute leases electronically with legally binding digital signatures. Every signer, every initial, and every revision is stamped with a tamper-proof audit trail." />
 
       {/* Editorial banner image */}
-      <div className="relative mx-auto mt-10 aspect-[21/7] max-w-5xl overflow-hidden rounded-2xl">
+      <div className="relative mx-auto mt-10 aspect-[16/9] md:aspect-[21/7] max-w-5xl overflow-hidden rounded-2xl">
         <Image
           src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=2000&q=80"
           alt="Landlord and tenant signing a lease agreement"
@@ -307,7 +307,7 @@ function Signing() {
         />
       </div>
 
-      <div ref={ref} className="mt-12 grid gap-8 lg:grid-cols-2">
+      <div ref={ref} className="mt-10 md:mt-12 grid gap-6 md:gap-8 lg:grid-cols-2">
         {/* Signature options */}
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white p-6" {...fadeUp} animate={inView ? { opacity: 1, y: 0 } : {}}>
           <h3 className="mb-4 font-heading text-base font-semibold text-brand-graphite">Choose how to <span className="text-brand-blue">sign</span></h3>
@@ -397,7 +397,7 @@ function IdentityCredit() {
   return (
     <SW id="screen" dark>
       <SH step="02" eyebrow="Screen" title="Verify identity and" highlight="credit, inline" description="Government ID verification through Persona and Equifax Canada credit reports pulled directly inside the leasing workflow. No side portals, no PDF email chains." />
-      <div ref={ref} className="mt-12 grid gap-8 lg:grid-cols-2">
+      <div ref={ref} className="mt-10 md:mt-12 grid gap-6 md:gap-8 lg:grid-cols-2">
         {/* ID Verification */}
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white overflow-hidden" {...fadeUp} animate={inView ? { opacity: 1, y: 0 } : {}}>
           <div className="flex items-center justify-between border-b border-[#E5E7EB] px-6 py-4">
@@ -526,23 +526,23 @@ function RentalProtection() {
 
 function LeasingHero() {
   return (
-    <section className="relative overflow-hidden bg-white pb-12 pt-28 md:pt-36">
+    <section className="relative overflow-hidden bg-white pb-12 pt-20 md:pt-28 lg:pt-36">
       <div className="absolute inset-0 bg-grid bg-grid-mask opacity-40" aria-hidden="true" />
       <div className="absolute top-0 right-[-200px] h-[500px] w-[500px] rounded-full bg-brand-blue/[0.04] blur-[120px]" aria-hidden="true" />
-      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
+      <div className="relative z-10 mx-auto max-w-4xl px-4 md:px-6 lg:px-8 text-center">
         <RevealOnScroll>
           <motion.div variants={revealItem} className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-4 py-1.5 shadow-sm">
             <FileText className="h-4 w-4 text-brand-blue" /><span className="text-sm font-medium text-brand-graphite-mid">Leasing</span>
           </motion.div>
-          <motion.h1 variants={revealItem} className="font-display text-5xl font-normal leading-[1.1] tracking-tight text-brand-graphite md:text-7xl">
+          <motion.h1 variants={revealItem} className="font-display text-3xl sm:text-4xl font-normal leading-[1.1] tracking-tight text-brand-graphite md:text-5xl lg:text-7xl">
             The complete{' '}<span className="text-brand-blue">leasing workflow</span>
           </motion.h1>
-          <motion.p variants={revealItem} className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-brand-graphite-mid md:text-xl">
+          <motion.p variants={revealItem} className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand-graphite-mid sm:text-lg md:text-xl">
             Intake offers, screen tenants with Persona and Equifax Canada, compare and negotiate, sign electronically, and activate rental protection. One leasing workflow, zero tab-switching.
           </motion.p>
           <motion.div variants={revealItem} className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/demo/" className="inline-flex h-14 items-center justify-center rounded-xl bg-brand-blue px-8 text-base font-semibold text-white hover:bg-brand-blue-dark">Book a Demo</Link>
-            <Link href="/pricing/" className="inline-flex h-14 items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-8 text-base font-semibold text-brand-graphite hover:border-brand-blue/30 hover:shadow-sm">See Pricing</Link>
+            <Link href="/demo/" className="inline-flex h-12 md:h-14 w-full sm:w-auto items-center justify-center rounded-xl bg-brand-blue px-8 text-base font-semibold text-white hover:bg-brand-blue-dark">Book a Demo</Link>
+            <Link href="/pricing/" className="inline-flex h-12 md:h-14 w-full sm:w-auto items-center justify-center rounded-xl border border-[#E5E7EB] bg-white px-8 text-base font-semibold text-brand-graphite hover:border-brand-blue/30 hover:shadow-sm">See Pricing</Link>
           </motion.div>
 
           {/* Scroll cue pointing at the sticky workflow nav below */}

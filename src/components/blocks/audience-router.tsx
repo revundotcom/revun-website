@@ -93,7 +93,7 @@ export function AudienceRouter() {
 
   return (
     <section className="bg-white py-12 md:py-16">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         {/* Header */}
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
@@ -104,13 +104,13 @@ export function AudienceRouter() {
           </motion.p>
           <motion.h2
             variants={revealItem}
-            className="mt-3 font-display text-4xl font-normal text-brand-graphite md:text-5xl"
+            className="mt-3 font-display text-3xl font-normal text-brand-graphite md:text-5xl"
           >
             Built for every role in <span className="text-keyword">property operations</span>
           </motion.h2>
           <motion.p
             variants={revealItem}
-            className="mx-auto mt-4 max-w-2xl text-lg text-brand-graphite/70"
+            className="mx-auto mt-4 max-w-2xl text-base md:text-lg text-brand-graphite/70"
           >
             Whether you manage one unit, one hundred units, or an entire national portfolio, Revun gives every role the exact workflows, controls, and visibility they need.
           </motion.p>
@@ -162,11 +162,11 @@ export function AudienceRouter() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="grid gap-12 lg:grid-cols-2 lg:items-stretch"
+              className="grid grid-cols-1 gap-6 md:gap-8 lg:gap-12 lg:grid-cols-2 lg:items-stretch"
             >
               {/* Left: text content */}
               <div className="flex flex-col">
-                <h3 className="font-display text-3xl font-normal text-brand-graphite md:text-4xl">
+                <h3 className="font-display text-2xl font-normal text-brand-graphite md:text-4xl">
                   {audience.headline}
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-brand-graphite-mid">

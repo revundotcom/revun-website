@@ -14,7 +14,7 @@ const trustStats = [
 export function ReviewBadges() {
   return (
     <section className="border-y border-[#E5E7EB] bg-[#F5F6F8] py-6 md:py-8">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         <RevealOnScroll>
           <motion.div
             variants={revealItem}

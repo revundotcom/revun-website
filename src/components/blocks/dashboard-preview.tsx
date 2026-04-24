@@ -116,9 +116,9 @@ const activityTiles = [
 
 function DashboardMockup() {
   return (
-    <div className="relative grid grid-cols-[220px_1fr] bg-white">
-      {/* ── Sidebar ───────────────────────────────────────────── */}
-      <aside className="flex min-h-[620px] flex-col border-r border-[#EEF0F3] bg-white px-3 py-4">
+    <div className="relative grid grid-cols-1 bg-white md:grid-cols-[220px_1fr]">
+      {/* ── Sidebar (hidden on mobile — not useful as a tiny sliver) ─────── */}
+      <aside className="hidden min-h-[620px] flex-col border-r border-[#EEF0F3] bg-white px-3 py-4 md:flex">
         {/* Logo row */}
         <div className="flex items-center justify-between px-2 pb-5">
           <div className="flex items-center gap-2">
@@ -204,24 +204,30 @@ function DashboardMockup() {
       </aside>
 
       {/* ── Main content ──────────────────────────────────────── */}
-      <main className="flex min-h-[620px] flex-col bg-[#FAFBFC]">
-        {/* Top bar */}
-        <div className="flex items-center justify-end gap-3 border-b border-[#EEF0F3] bg-white px-6 py-3">
-          <div className="relative">
-            <Bell className="h-4 w-4 text-[#555860]" />
-            <span className="absolute -right-1.5 -top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[#E7000B] text-[8px] font-bold text-white">
-              2
-            </span>
+      <main className="flex min-h-[560px] flex-col bg-[#FAFBFC] md:min-h-[620px]">
+        {/* Top bar — mobile gets a compact brand label since sidebar is hidden */}
+        <div className="flex items-center justify-between gap-3 border-b border-[#EEF0F3] bg-white px-4 py-3 md:justify-end md:px-6">
+          <div className="flex items-center gap-2 md:hidden">
+            <RevunLogo />
+            <span className="font-heading text-[13px] font-semibold text-[#0A1628]">Revun Pro</span>
           </div>
-          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0A1628] text-[10px] font-semibold text-white">
-            SA
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <Bell className="h-4 w-4 text-[#555860]" />
+              <span className="absolute -right-1.5 -top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[#E7000B] text-[8px] font-bold text-white">
+                2
+              </span>
+            </div>
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0A1628] text-[10px] font-semibold text-white">
+              SA
+            </div>
           </div>
         </div>
 
         {/* Page padding */}
-        <div className="flex flex-col gap-4 p-5">
+        <div className="flex flex-col gap-4 p-4 md:p-5">
           {/* Tabs */}
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <button className="rounded-md bg-[#0A1628] px-3 py-1.5 text-[11px] font-semibold text-white">
               Overview
             </button>
@@ -233,8 +239,8 @@ function DashboardMockup() {
             </button>
           </div>
 
-          {/* Stat cards */}
-          <div className="grid grid-cols-5 gap-2.5">
+          {/* Stat cards — 2-col mobile, 3 on small, 5 on desktop. Last card spans full width on mobile so 5th card doesn't orphan. */}
+          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
             {statCards.map((card, i) => (
               <motion.div
                 key={card.label}
@@ -242,7 +248,7 @@ function DashboardMockup() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.1 + i * 0.06 }}
-                className="relative overflow-hidden rounded-lg border border-[#EEF0F3] bg-white p-3"
+                className="relative overflow-hidden rounded-lg border border-[#EEF0F3] bg-white p-3 last:col-span-2 sm:last:col-span-1"
               >
                 <div className="flex items-start justify-between">
                   <div className="min-w-0">
@@ -277,47 +283,24 @@ function DashboardMockup() {
             ))}
           </div>
 
-          {/* Quick actions */}
-          <div className="flex flex-wrap gap-2">
+          {/* Quick actions — 2-col grid on mobile for tidy equal widths, inline flex on tablet+ */}
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
             {quickActions.map((a) => (
               <button
                 key={a.label}
-                className="flex items-center gap-2 rounded-lg border border-[#EEF0F3] bg-white px-3 py-2 text-[11px] font-medium text-[#0A1628] transition-colors hover:border-[#176FEB]/30 hover:bg-[#EEF4FE]/40"
+                className="flex items-center justify-center gap-2 rounded-lg border border-[#EEF0F3] bg-white px-2.5 py-2 text-[11px] font-medium text-[#0A1628] transition-colors hover:border-[#176FEB]/30 hover:bg-[#EEF4FE]/40 sm:justify-start sm:px-3"
               >
-                <a.icon className="h-3.5 w-3.5 text-[#176FEB]" />
-                {a.label}
+                <a.icon className="h-3.5 w-3.5 shrink-0 text-[#176FEB]" />
+                <span className="truncate">{a.label}</span>
               </button>
             ))}
           </div>
 
-          {/* User card */}
-          <div className="flex items-center justify-between rounded-xl border border-[#EEF0F3] bg-white px-4 py-3">
-            <div className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0A1628] text-[11px] font-semibold text-white">
-                SA
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <p className="text-[12px] font-semibold text-[#0A1628]">Super Admin</p>
-                  <span className="rounded-full bg-[#0A1628] px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wider text-white">
-                    Admin
-                  </span>
-                </div>
-                <p className="text-[10px] text-[#9097A3]">admin@rypm.com</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2 rounded-lg border border-[#EEF0F3] px-3 py-1.5">
-              <Users className="h-3.5 w-3.5 text-[#555860]" />
-              <span className="text-[11px] text-[#555860]">Super Admin</span>
-              <ChevronDown className="h-3 w-3 text-[#9097A3]" />
-            </div>
-          </div>
-
           {/* Activities */}
           <div className="rounded-xl border border-[#EEF0F3] bg-white p-4">
-            <div className="flex items-start justify-between">
+            <div className="flex flex-col items-start justify-between gap-3 sm:flex-row">
               <div className="flex items-start gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#EEF4FE]">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#EEF4FE]">
                   <CheckCircle2 className="h-4 w-4 text-[#176FEB]" />
                 </div>
                 <div>
@@ -327,14 +310,14 @@ function DashboardMockup() {
                   </p>
                 </div>
               </div>
-              <button className="flex items-center gap-1.5 rounded-lg bg-[#0A1628] px-2.5 py-1.5 text-[10px] font-semibold text-white">
+              <button className="flex shrink-0 items-center gap-1.5 rounded-lg bg-[#0A1628] px-2.5 py-1.5 text-[10px] font-semibold text-white">
                 <Table2 className="h-3 w-3" />
                 Add Task
               </button>
             </div>
 
-            {/* Activity tiles */}
-            <div className="mt-4 grid grid-cols-5 gap-2">
+            {/* Activity tiles — 2-col mobile, 3-col small, 5-col desktop. Last tile spans full width on mobile. */}
+            <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
               {activityTiles.map((t, i) => (
                 <motion.div
                   key={t.label}
@@ -342,7 +325,7 @@ function DashboardMockup() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.35, delay: 0.5 + i * 0.05 }}
-                  className={`relative flex items-start gap-2 rounded-lg p-3 transition-colors ${
+                  className={`relative flex items-start gap-2 rounded-lg p-3 transition-colors last:col-span-2 sm:last:col-span-1 ${
                     t.selected
                       ? 'bg-white ring-2 ring-[#176FEB]'
                       : 'bg-white ring-1 ring-[#EEF0F3]'
@@ -374,6 +357,29 @@ function DashboardMockup() {
               </div>
             </div>
           </div>
+
+          {/* User card — bottom footer, like the sidebar profile row in a real dashboard */}
+          <div className="mt-auto flex flex-col gap-3 rounded-xl border border-[#EEF0F3] bg-white px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0A1628] text-[11px] font-semibold text-white">
+                SA
+              </div>
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-2">
+                  <p className="text-[12px] font-semibold text-[#0A1628]">Super Admin</p>
+                  <span className="rounded-full bg-[#0A1628] px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wider text-white">
+                    Admin
+                  </span>
+                </div>
+                <p className="truncate text-[10px] text-[#9097A3]">admin@rypm.com</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 self-start rounded-lg border border-[#EEF0F3] px-3 py-1.5 sm:self-center">
+              <Users className="h-3.5 w-3.5 text-[#555860]" />
+              <span className="text-[11px] text-[#555860]">Super Admin</span>
+              <ChevronDown className="h-3 w-3 text-[#9097A3]" />
+            </div>
+          </div>
         </div>
 
         {/* Floating chat bubble */}
@@ -402,7 +408,9 @@ function BrowserFrame({ children }: { children: React.ReactNode }) {
           <span>app.revun.com/dashboard</span>
         </div>
       </div>
-      {children}
+      <div className="overflow-x-auto">
+        {children}
+      </div>
     </div>
   )
 }
@@ -411,7 +419,7 @@ function BrowserFrame({ children }: { children: React.ReactNode }) {
 
 export default function DashboardPreview() {
   return (
-    <section className="relative overflow-hidden bg-white py-20 md:py-28">
+    <section className="relative overflow-hidden bg-white py-12 md:py-20 lg:py-28">
       {/* Background decor */}
       <div
         className="absolute inset-0 bg-grid bg-grid-mask opacity-[0.035]"
@@ -422,7 +430,7 @@ export default function DashboardPreview() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         {/* Intro */}
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.div
@@ -434,14 +442,14 @@ export default function DashboardPreview() {
           </motion.div>
           <motion.h2
             variants={revealItem}
-            className="mt-4 font-display text-4xl font-normal leading-[1.1] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl"
+            className="mt-4 font-display text-3xl font-normal leading-[1.1] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl"
           >
             A command center that{' '}
             <span className="text-keyword">sees everything</span>
           </motion.h2>
           <motion.p
             variants={revealItem}
-            className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-brand-graphite-mid"
+            className="mx-auto mt-5 max-w-xl text-base md:text-lg leading-relaxed text-brand-graphite-mid"
           >
             Progress, calls, leads, events, work orders, and conversations: every
             signal from your property business in one live view, built for operators
@@ -450,7 +458,7 @@ export default function DashboardPreview() {
         </RevealOnScroll>
 
         {/* Browser-framed dashboard */}
-        <RevealOnScroll className="relative mt-16">
+        <RevealOnScroll className="relative mt-10 md:mt-16">
           <motion.div variants={revealItem} className="relative">
             {/* Floating feature callouts */}
             <motion.div

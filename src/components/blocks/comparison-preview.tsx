@@ -72,7 +72,7 @@ const rows = [
 export default function ComparisonPreview() {
   return (
     <section className="overflow-hidden bg-white py-12 md:py-16">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         {/* Section header */}
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
@@ -83,13 +83,13 @@ export default function ComparisonPreview() {
           </motion.p>
           <motion.h2
             variants={revealItem}
-            className="mt-3 font-display text-4xl font-normal text-[#0A1628] md:text-5xl"
+            className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-5xl"
           >
             Why operators are <span className="text-keyword">switching to Revun</span>
           </motion.h2>
           <motion.p
             variants={revealItem}
-            className="mx-auto mt-4 max-w-xl text-lg text-brand-graphite-mid"
+            className="mx-auto mt-4 max-w-xl text-base md:text-lg text-brand-graphite-mid"
           >
             Compare Revun against fragmented legacy software, US-first
             platforms, and point solutions.
@@ -104,13 +104,13 @@ export default function ComparisonPreview() {
           >
             {/* Header row */}
             <div className="grid grid-cols-3 border-b border-border bg-[#FAFBFC]">
-              <div className="px-6 py-4">
+              <div className="px-3 md:px-6 py-4">
                 <span className="text-sm font-semibold text-brand-graphite-mid">Feature</span>
               </div>
-              <div className="px-6 py-4 text-center">
+              <div className="px-3 md:px-6 py-4 text-center">
                 <span className="text-sm font-bold text-brand-blue">Revun</span>
               </div>
-              <div className="px-6 py-4 text-center">
+              <div className="px-3 md:px-6 py-4 text-center">
                 <span className="text-sm font-semibold text-brand-graphite-mid">Others</span>
               </div>
             </div>
@@ -124,12 +124,12 @@ export default function ComparisonPreview() {
                 }`}
                 variants={revealItem}
               >
-                <div className="px-6 py-4">
+                <div className="px-3 md:px-6 py-4">
                   <span className="text-sm font-medium text-brand-graphite">
                     {row.feature}
                   </span>
                 </div>
-                <div className="flex justify-center px-6 py-4">
+                <div className="flex justify-center px-3 md:px-6 py-4">
                   {row.revun ? (
                     <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#22C55E]/10">
                       <Check className="h-3.5 w-3.5 text-[#22C55E]" />
@@ -140,7 +140,7 @@ export default function ComparisonPreview() {
                     </span>
                   )}
                 </div>
-                <div className="flex justify-center px-6 py-4">
+                <div className="flex justify-center px-3 md:px-6 py-4">
                   <span className="rounded-full bg-brand-off-white px-3 py-1 text-xs font-medium text-brand-graphite-mid">
                     {row.others}
                   </span>

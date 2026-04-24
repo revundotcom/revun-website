@@ -376,14 +376,14 @@ export default function HowRevunWorksPage() {
         <div className="absolute left-[-160px] top-40 h-[400px] w-[400px] rounded-full bg-[#176FEB]/[0.05] blur-[120px]" aria-hidden />
         <div className="absolute right-[-180px] top-24 h-[380px] w-[380px] rounded-full bg-[#047857]/[0.04] blur-[120px]" aria-hidden />
 
-        <div className="relative mx-auto max-w-6xl px-6 pt-28 pb-20 md:pt-36">
-          <div className="grid items-center gap-14 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="relative mx-auto max-w-6xl px-4 md:px-6 lg:px-8 pt-20 pb-12 md:pt-28 md:pb-20 lg:pt-36">
+          <div className="grid items-center gap-10 md:gap-14 lg:grid-cols-[1.15fr_0.85fr]">
             <RevealOnScroll>
               <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[#176FEB]">
                 <Sparkles className="h-3.5 w-3.5" strokeWidth={2} />
                 How Revun works
               </p>
-              <h1 className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-[#0A1628] sm:text-5xl lg:text-[3.75rem]">
+              <h1 className="font-display text-3xl font-extrabold leading-[1.05] tracking-tight text-[#0A1628] md:text-5xl lg:text-[3.75rem]">
                 How Revun turns{' '}
                 <span className="text-[#176FEB]">property chaos</span>{' '}
                 into one clean ledger.
@@ -446,13 +446,13 @@ export default function HowRevunWorksPage() {
 
           {/* KPI strip */}
           <RevealOnScroll>
-            <div className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[#E5E7EB] bg-[#E5E7EB] md:grid-cols-4">
+            <div className="mt-12 md:mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[#E5E7EB] bg-[#E5E7EB] md:grid-cols-4">
               {kpis.map((k) => (
                 <div
                   key={k.label}
-                  className="flex flex-col items-start bg-white px-6 py-5"
+                  className="flex flex-col items-start bg-white px-4 py-4 sm:px-6 sm:py-5"
                 >
-                  <div className="font-display text-2xl font-extrabold tracking-tight text-[#0A1628] md:text-3xl">
+                  <div className="font-display text-xl font-extrabold tracking-tight text-[#0A1628] sm:text-2xl md:text-3xl">
                     {'raw' in k && k.raw ? (
                       <span>
                         {k.prefix}
@@ -472,13 +472,13 @@ export default function HowRevunWorksPage() {
       </section>
 
       {/* ── The Revun Model ── */}
-      <section className="bg-white py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <RevealOnScroll className="mx-auto mb-14 max-w-2xl text-center">
+      <section className="bg-white py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+          <RevealOnScroll className="mx-auto mb-10 md:mb-14 max-w-2xl text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               The Revun model
             </p>
-            <h2 className="font-display text-3xl font-extrabold tracking-tight text-[#0A1628] md:text-[2.5rem]">
+            <h2 className="font-display text-2xl font-extrabold tracking-tight text-[#0A1628] sm:text-3xl md:text-[2.5rem]">
               Three ideas define how Revun is built.
             </h2>
             <p className="mt-5 text-[#475569]">
@@ -487,13 +487,13 @@ export default function HowRevunWorksPage() {
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.1}>
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
               {pillars.map((p) => {
                 const Icon = p.icon
                 return (
                   <div
                     key={p.title}
-                    className="group relative flex flex-col rounded-2xl border border-[#E5E7EB] bg-[#F5F6F8] p-8 transition-all hover:-translate-y-0.5 hover:border-[#176FEB]/40 hover:bg-white hover:shadow-[0_16px_40px_-20px_rgba(10,22,40,0.25)]"
+                    className="group relative flex flex-col rounded-2xl border border-[#E5E7EB] bg-[#F5F6F8] p-6 sm:p-8 transition-all hover:-translate-y-0.5 hover:border-[#176FEB]/40 hover:bg-white hover:shadow-[0_16px_40px_-20px_rgba(10,22,40,0.25)]"
                   >
                     <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[#176FEB]/10 text-[#176FEB]">
                       <Icon className="h-6 w-6" strokeWidth={1.8} />
@@ -513,17 +513,17 @@ export default function HowRevunWorksPage() {
       </section>
 
       {/* ── Operator Day-in-the-Life ── */}
-      <section className="relative bg-[#0A1628] py-24 text-white">
+      <section className="relative bg-[#0A1628] py-12 md:py-20 lg:py-24 text-white">
         <div
           className="absolute inset-x-0 top-0 h-40 bg-[radial-gradient(ellipse_at_top,_rgba(23,111,235,0.25),_transparent_70%)]"
           aria-hidden
         />
-        <div className="relative mx-auto max-w-6xl px-6">
-          <RevealOnScroll className="mx-auto mb-14 max-w-2xl text-center">
+        <div className="relative mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+          <RevealOnScroll className="mx-auto mb-10 md:mb-14 max-w-2xl text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#67A0FF]">
               A day in the life
             </p>
-            <h2 className="font-display text-3xl font-extrabold tracking-tight md:text-[2.5rem]">
+            <h2 className="font-display text-2xl font-extrabold tracking-tight sm:text-3xl md:text-[2.5rem]">
               What Tuesday looks like inside Revun.
             </h2>
             <p className="mt-5 text-[#CBD5E1]">
@@ -534,17 +534,17 @@ export default function HowRevunWorksPage() {
           <RevealOnScroll stagger={0.08}>
             <ol className="relative mx-auto max-w-3xl">
               <span
-                className="absolute left-[27px] top-2 bottom-2 w-px bg-gradient-to-b from-[#176FEB]/60 via-[#176FEB]/25 to-transparent"
+                className="absolute left-[23px] sm:left-[27px] top-2 bottom-2 w-px bg-gradient-to-b from-[#176FEB]/60 via-[#176FEB]/25 to-transparent"
                 aria-hidden
               />
               {timeline.map((t) => {
                 const Icon = t.icon
                 return (
-                  <li key={t.time} className="relative mb-6 flex gap-5 pl-0 last:mb-0">
-                    <div className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-[#0F1F38] shadow-[0_0_0_6px_rgba(10,22,40,1)]">
-                      <Icon className="h-6 w-6 text-[#67A0FF]" strokeWidth={1.8} />
+                  <li key={t.time} className="relative mb-6 flex gap-4 sm:gap-5 pl-0 last:mb-0">
+                    <div className="relative z-10 flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-[#0F1F38] shadow-[0_0_0_6px_rgba(10,22,40,1)]">
+                      <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-[#67A0FF]" strokeWidth={1.8} />
                     </div>
-                    <div className="flex-1 rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-[#176FEB]/50 hover:bg-white/[0.05]">
+                    <div className="flex-1 min-w-0 rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-5 transition-colors hover:border-[#176FEB]/50 hover:bg-white/[0.05]">
                       <div className="mb-2 flex flex-wrap items-center gap-3">
                         <span className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-[#67A0FF]">
                           <Clock className="h-3.5 w-3.5" />
@@ -568,13 +568,13 @@ export default function HowRevunWorksPage() {
       </section>
 
       {/* ── End-to-End Flow ── */}
-      <section className="bg-white py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <RevealOnScroll className="mx-auto mb-14 max-w-2xl text-center">
+      <section className="bg-white py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+          <RevealOnScroll className="mx-auto mb-10 md:mb-14 max-w-2xl text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               End-to-end flow
             </p>
-            <h2 className="font-display text-3xl font-extrabold tracking-tight text-[#0A1628] md:text-[2.5rem]">
+            <h2 className="font-display text-2xl font-extrabold tracking-tight text-[#0A1628] sm:text-3xl md:text-[2.5rem]">
               From tenant tap to owner payout.
             </h2>
             <p className="mt-5 text-[#475569]">
@@ -588,7 +588,7 @@ export default function HowRevunWorksPage() {
                 className="absolute left-0 right-0 top-[38px] hidden h-px bg-[linear-gradient(90deg,transparent,rgba(23,111,235,0.4),transparent)] lg:block"
                 aria-hidden
               />
-              <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-6">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-6">
                 {flow.map((f) => {
                   const Icon = f.icon
                   return (
@@ -618,7 +618,7 @@ export default function HowRevunWorksPage() {
           </RevealOnScroll>
 
           <RevealOnScroll>
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-3 rounded-2xl border border-[#E5E7EB] bg-[#F5F6F8] px-6 py-5 text-sm text-[#475569]">
+            <div className="mt-10 md:mt-12 flex flex-wrap items-center justify-center gap-3 rounded-2xl border border-[#E5E7EB] bg-[#F5F6F8] px-4 py-4 sm:px-6 sm:py-5 text-sm text-[#475569]">
               <Layers className="h-4 w-4 text-[#176FEB]" />
               <span>
                 The same pipeline runs for security deposits, late fees, utility recoveries, and vendor payables — with role-aware views for every stakeholder.
@@ -629,13 +629,13 @@ export default function HowRevunWorksPage() {
       </section>
 
       {/* ── Who Does What ── */}
-      <section className="bg-[#F5F6F8] py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <RevealOnScroll className="mx-auto mb-14 max-w-2xl text-center">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+          <RevealOnScroll className="mx-auto mb-10 md:mb-14 max-w-2xl text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Who does what
             </p>
-            <h2 className="font-display text-3xl font-extrabold tracking-tight text-[#0A1628] md:text-[2.5rem]">
+            <h2 className="font-display text-2xl font-extrabold tracking-tight text-[#0A1628] sm:text-3xl md:text-[2.5rem]">
               One platform, four experiences.
             </h2>
             <p className="mt-5 text-[#475569]">
@@ -644,13 +644,13 @@ export default function HowRevunWorksPage() {
           </RevealOnScroll>
 
           <RevealOnScroll stagger={0.08}>
-            <div className="grid gap-5 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
               {roles.map((r) => {
                 const Icon = r.icon
                 return (
                   <div
                     key={r.label}
-                    className="group flex flex-col rounded-2xl border border-[#E5E7EB] bg-white p-7 transition-all hover:-translate-y-0.5 hover:border-[#176FEB]/40 hover:shadow-[0_16px_40px_-20px_rgba(10,22,40,0.2)]"
+                    className="group flex flex-col rounded-2xl border border-[#E5E7EB] bg-white p-6 sm:p-7 transition-all hover:-translate-y-0.5 hover:border-[#176FEB]/40 hover:shadow-[0_16px_40px_-20px_rgba(10,22,40,0.2)]"
                   >
                     <div className="mb-5 flex items-center gap-4">
                       <div
@@ -708,14 +708,14 @@ export default function HowRevunWorksPage() {
       </section>
 
       {/* ── Compliance & Trust ── */}
-      <section className="bg-white py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
+      <section className="bg-white py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+          <div className="grid items-center gap-8 md:gap-12 lg:grid-cols-[1fr_1.1fr]">
             <RevealOnScroll>
               <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
                 Compliance &amp; trust
               </p>
-              <h2 className="font-display text-3xl font-extrabold tracking-tight text-[#0A1628] md:text-[2.5rem]">
+              <h2 className="font-display text-2xl font-extrabold tracking-tight text-[#0A1628] sm:text-3xl md:text-[2.5rem]">
                 Built to the standard your auditor asks for.
               </h2>
               <p className="mt-5 text-[#475569]">
@@ -761,13 +761,13 @@ export default function HowRevunWorksPage() {
       </section>
 
       {/* ── Integrations preview ── */}
-      <section className="bg-[#F5F6F8] py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <RevealOnScroll className="mx-auto mb-12 max-w-2xl text-center">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+          <RevealOnScroll className="mx-auto mb-10 md:mb-12 max-w-2xl text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Integrations
             </p>
-            <h2 className="font-display text-3xl font-extrabold tracking-tight text-[#0A1628] md:text-[2.5rem]">
+            <h2 className="font-display text-2xl font-extrabold tracking-tight text-[#0A1628] sm:text-3xl md:text-[2.5rem]">
               Plugs into every system you already run.
             </h2>
             <p className="mt-5 text-[#475569]">
@@ -806,13 +806,13 @@ export default function HowRevunWorksPage() {
       </section>
 
       {/* ── FAQ ── */}
-      <section className="bg-white py-24">
-        <div className="mx-auto max-w-3xl px-6">
+      <section className="bg-white py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Frequently asked
             </p>
-            <h2 className="font-display text-3xl font-extrabold tracking-tight text-[#0A1628] md:text-[2.5rem]">
+            <h2 className="font-display text-2xl font-extrabold tracking-tight text-[#0A1628] sm:text-3xl md:text-[2.5rem]">
               Questions about how Revun works.
             </h2>
           </RevealOnScroll>
@@ -821,15 +821,15 @@ export default function HowRevunWorksPage() {
             <div className="divide-y divide-[#E5E7EB] overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white">
               {faqs.map((item) => (
                 <details key={item.q} className="group">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 px-6 py-5 transition-colors hover:bg-[#F5F6F8]">
-                    <h3 className="font-heading text-base font-semibold text-[#0A1628] md:text-lg">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 sm:gap-6 px-4 py-4 sm:px-6 sm:py-5 transition-colors hover:bg-[#F5F6F8]">
+                    <h3 className="font-heading text-sm font-semibold text-[#0A1628] sm:text-base md:text-lg">
                       {item.q}
                     </h3>
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#E5E7EB] bg-white text-[#176FEB] transition-transform duration-200 group-open:rotate-45">
                       <Plus className="h-4 w-4" strokeWidth={2.2} />
                     </span>
                   </summary>
-                  <div className="px-6 pb-6 pr-16 text-sm leading-relaxed text-[#475569]">
+                  <div className="px-4 pb-5 pr-6 sm:px-6 sm:pb-6 sm:pr-16 text-sm leading-relaxed text-[#475569]">
                     {item.a}
                   </div>
                 </details>
@@ -853,7 +853,7 @@ export default function HowRevunWorksPage() {
       </section>
 
       {/* ── Final CTA ── */}
-      <section className="relative overflow-hidden bg-[#0A1628] py-24 text-white">
+      <section className="relative overflow-hidden bg-[#0A1628] py-12 md:py-20 lg:py-24 text-white">
         <div
           className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(23,111,235,0.25),_transparent_60%)]"
           aria-hidden
@@ -861,9 +861,9 @@ export default function HowRevunWorksPage() {
         <div className="absolute left-[-120px] top-10 h-[300px] w-[300px] rounded-full bg-[#176FEB]/20 blur-[100px]" aria-hidden />
         <div className="absolute right-[-120px] bottom-0 h-[280px] w-[280px] rounded-full bg-[#047857]/15 blur-[100px]" aria-hidden />
 
-        <div className="relative mx-auto max-w-4xl px-6 text-center">
+        <div className="relative mx-auto max-w-4xl px-4 md:px-6 lg:px-8 text-center">
           <RevealOnScroll>
-            <h2 className="font-display text-3xl font-extrabold tracking-tight md:text-[2.75rem]">
+            <h2 className="font-display text-2xl font-extrabold tracking-tight sm:text-3xl md:text-[2.75rem]">
               Ready to run your portfolio on{' '}
               <span className="text-[#67A0FF]">one system?</span>
             </h2>

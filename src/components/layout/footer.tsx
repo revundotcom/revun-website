@@ -109,9 +109,9 @@ export function Footer() {
   return (
     <footer className="bg-brand-off-white border-t border-border">
       {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-12 md:py-16">
         {/* Top: brand + newsletter */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pb-12 border-b border-border">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 pb-10 md:pb-12 border-b border-border">
           <div className="max-w-md">
             <RevunLogo size="h-8" />
             <p className="mt-4 text-sm leading-relaxed text-[#64748B]">
@@ -143,7 +143,7 @@ export function Footer() {
         </div>
 
         {/* Link columns */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 pt-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 pt-10 md:pt-12">
           {Object.values(navigation).map((column) => (
             <FooterColumn key={column.title} title={column.title} links={column.links} />
           ))}
@@ -152,7 +152,7 @@ export function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-border">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-brand-graphite-mid">
             &copy; 2026 Revun. All rights reserved.
           </p>
@@ -191,7 +191,7 @@ export function Footer() {
 
       {/* Disclaimer */}
       <div className="border-t border-border">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-4">
           <p className="text-xs text-[#94A3B8] leading-relaxed text-center">
             Revun is a software and infrastructure platform used by property operators. The operating company remains responsible for the services it provides.
           </p>

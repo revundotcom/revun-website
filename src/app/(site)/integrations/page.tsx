@@ -104,13 +104,13 @@ export default function IntegrationsPage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-[#F5F6F8]">
-        <div className="relative mx-auto max-w-6xl px-6 py-16 text-center sm:py-16 lg:px-8">
+        <div className="relative mx-auto max-w-6xl px-4 md:px-6 py-12 text-center md:py-16 lg:px-8">
           <RevealOnScroll>
             <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-4 py-1.5 text-sm text-[#555860]">
               <Plug className="size-4" />
               Integrations
             </div>
-            <h1 className="font-display text-4xl font-normal text-[#0A1628] sm:text-5xl lg:text-6xl">
+            <h1 className="font-display text-3xl font-normal text-[#0A1628] md:text-5xl lg:text-6xl">
               Connect Revun to the systems your{' '}
               <span className="text-[#176FEB]">business already relies on</span>
             </h1>
@@ -126,13 +126,13 @@ export default function IntegrationsPage() {
         const items = integrations.filter((i) => i.category === category)
         if (items.length === 0) return null
         return (
-          <section key={category} className="bg-[#F5F6F8] py-12">
-            <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <section key={category} className="bg-[#F5F6F8] py-10 md:py-12">
+            <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
               <h2 className="font-heading text-2xl font-bold text-[#2C2E33] sm:text-3xl">
                 {category}
               </h2>
               <RevealOnScroll stagger={0.05}>
-                <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="mt-6 md:mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
                   {items.map((integration) => (
                     <motion.div key={integration.slug} variants={revealItem}>
                       <IntegrationCard integration={integration} />
@@ -146,8 +146,8 @@ export default function IntegrationsPage() {
       })}
 
       {/* Bottom CTA */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-3xl border-t border-[#D3D5DB] px-6 pt-20 text-center lg:px-8">
+      <section className="bg-white py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-3xl border-t border-[#D3D5DB] px-4 md:px-6 pt-12 md:pt-20 text-center lg:px-8">
           <h2 className="font-heading text-2xl font-bold text-[#2C2E33] sm:text-3xl">
             Need a Custom <span className="text-[#176FEB]">Integration</span>?
           </h2>

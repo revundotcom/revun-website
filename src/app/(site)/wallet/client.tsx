@@ -58,8 +58,8 @@ function SectionWrapper({
   dark?: boolean
 }) {
   return (
-    <section id={id} className={`py-16 md:py-20 lg:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
-      <div className="mx-auto max-w-6xl px-6">{children}</div>
+    <section id={id} className={`py-12 md:py-20 lg:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">{children}</div>
     </section>
   )
 }
@@ -413,7 +413,7 @@ function HeroSection() {
         aria-hidden="true"
       />
 
-      <RevealOnScroll className="relative z-10 mx-auto max-w-4xl px-4 text-center">
+      <RevealOnScroll className="relative z-10 mx-auto max-w-4xl px-4 md:px-6 lg:px-8 text-center">
         <motion.p
           variants={revealItem}
           className="font-heading text-xs font-semibold uppercase tracking-widest text-[#176FEB]"
@@ -435,7 +435,7 @@ function HeroSection() {
         </motion.p>
 
         {/* Quick action buttons */}
-        <motion.div variants={revealItem} className="mt-10 flex items-center justify-center gap-8">
+        <motion.div variants={revealItem} className="mt-10 flex flex-wrap items-center justify-center gap-6 md:gap-8">
           {ACTION_BUTTONS.map((action) => (
             <button key={action.label} className="group flex flex-col items-center gap-2.5">
               <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#E8F2FE] text-[#176FEB] shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:bg-[#176FEB] group-hover:text-white group-hover:shadow-lg">
@@ -924,8 +924,8 @@ function ReceiptPreviewSection() {
 
 function CTASection() {
   return (
-    <section className="bg-[#F5F6F8] py-16 lg:py-20">
-      <RevealOnScroll className="mx-auto max-w-3xl px-6 text-center">
+    <section className="bg-[#F5F6F8] py-12 md:py-16 lg:py-20">
+      <RevealOnScroll className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center">
         <motion.h2
           variants={revealItem}
           className="font-display text-3xl font-normal text-[#0A1628] md:text-4xl lg:text-5xl"
@@ -985,7 +985,7 @@ function SectionNav() {
   ]
   return (
     <nav aria-label="Wallet sections" className="sticky top-0 z-40 hidden border-b border-[#E5E7EB] bg-white/80 backdrop-blur md:block">
-      <div className="mx-auto max-w-6xl overflow-x-auto px-6">
+      <div className="mx-auto max-w-6xl overflow-x-auto px-4 md:px-6 lg:px-8">
         <ul className="flex items-center gap-2 py-3">
           {links.map((l) => (
             <li key={l.href}>
@@ -1023,18 +1023,18 @@ function WalletHero() {
     { value: '100%', label: 'PIPEDA compliant' },
   ]
   return (
-    <section id="hero" ref={ref} className="relative overflow-hidden bg-white py-20 md:py-28">
+    <section id="hero" ref={ref} className="relative overflow-hidden bg-white py-12 md:py-20 lg:py-28">
       <motion.div aria-hidden style={{ y: gridY }} className="pointer-events-none absolute inset-0 opacity-[0.35]">
         <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(#E5E7EB 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
       </motion.div>
-      <div className="relative mx-auto max-w-6xl px-6">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+      <div className="relative mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+        <div className="grid gap-8 md:gap-12 lg:grid-cols-2 lg:items-center">
           <div>
             <motion.div initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.05 }} className="inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-[#E8F2FE] px-3 py-1">
               <Wallet className="h-3.5 w-3.5 text-[#176FEB]" />
               <span className="text-xs font-heading font-semibold uppercase tracking-wider text-[#176FEB]">Wallet</span>
             </motion.div>
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.15 }} className="mt-4 font-display text-5xl font-normal leading-tight md:text-6xl text-[#0A1628]">
+            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.15 }} className="mt-4 font-display text-3xl font-normal leading-tight md:text-5xl lg:text-6xl text-[#0A1628]">
               Your Property Financials, <span className="text-[#176FEB]">unified.</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.25 }} className="mt-5 max-w-xl text-lg text-[#555860]">
@@ -1069,8 +1069,8 @@ function WalletHero() {
               <div className="flex items-center gap-2 text-[11px] uppercase tracking-wider text-white/60">
                 <Wallet className="h-3.5 w-3.5" /> Available Balance
               </div>
-              <div className="mt-2 font-display text-5xl leading-none">
-                $8,420<span className="text-3xl text-white/70">.55</span>
+              <div className="mt-2 font-display text-4xl sm:text-5xl leading-none">
+                $8,420<span className="text-2xl sm:text-3xl text-white/70">.55</span>
               </div>
               <div aria-hidden className="my-5 h-px w-full border-t border-dashed border-white/15" />
               <div className="flex items-center justify-between text-xs">
@@ -1151,7 +1151,7 @@ function WalletProblemSection() {
           <span className="h-1.5 w-1.5 rounded-full bg-[#E7000B]" />
           <span className="text-xs font-heading font-semibold uppercase tracking-wider text-[#555860]">Why wallets break</span>
         </div>
-        <h2 className="font-display text-4xl font-normal md:text-5xl text-[#0A1628]">
+        <h2 className="font-display text-3xl font-normal md:text-4xl lg:text-5xl text-[#0A1628]">
           Most rental money moves on <span className="text-[#176FEB]">scattered rails.</span>
         </h2>
         <p className="mt-4 max-w-2xl text-lg text-[#555860]">
@@ -1455,7 +1455,7 @@ function WalletFAQ() {
 
 function WalletCTASection() {
   return (
-    <section id="cta" className="relative overflow-hidden bg-[#0A1628] px-6 py-24 md:py-32">
+    <section id="cta" className="relative overflow-hidden bg-[#0A1628] px-4 md:px-6 lg:px-8 py-16 md:py-24 lg:py-32">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 60% 55% at 50% 40%, rgba(23,111,235,0.28), rgba(23,111,235,0.08), transparent 75%)' }} />
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#176FEB]/40 to-transparent" />
       <RevealOnScroll className="relative mx-auto max-w-3xl text-center">
@@ -1465,7 +1465,7 @@ function WalletCTASection() {
             Move money smarter
           </span>
         </motion.div>
-        <motion.h2 variants={revealItem} className="mt-6 font-display text-4xl font-normal tracking-tight text-white sm:text-5xl lg:text-6xl">
+        <motion.h2 variants={revealItem} className="mt-6 font-display text-3xl font-normal tracking-tight text-white md:text-5xl lg:text-6xl">
           Stop wrangling bank statements. <span className="text-[#176FEB]">Start closing the books.</span>
         </motion.h2>
         <motion.p variants={revealItem} className="mx-auto mt-6 max-w-xl text-base text-white/70 sm:text-lg">

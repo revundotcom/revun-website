@@ -452,7 +452,7 @@ export default function ComparePage() {
           />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-6">
+        <div className="relative mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <motion.div variants={fadeUp} className="flex justify-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-[#F5F6F8] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#176FEB]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#176FEB]" />
@@ -462,7 +462,7 @@ export default function ComparePage() {
 
           <motion.h1
             variants={fadeUp}
-            className="font-display mt-6 text-center text-4xl font-semibold leading-[1.05] tracking-tight text-[#0A1628] sm:text-5xl md:text-6xl lg:text-7xl"
+            className="font-display mt-6 text-center text-3xl font-semibold leading-[1.05] tracking-tight text-[#0A1628] sm:text-4xl md:text-5xl lg:text-6xl"
           >
             The last property software
             <br className="hidden sm:block" />{' '}
@@ -555,8 +555,8 @@ export default function ComparePage() {
       </motion.section>
 
       {/* ============ WHY OPERATORS SWITCH ============ */}
-      <section className="relative bg-[#F5F6F8] py-20 md:py-28">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="relative bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mx-auto max-w-3xl text-center">
             <motion.span
               variants={revealItem}
@@ -617,8 +617,8 @@ export default function ComparePage() {
       </section>
 
       {/* ============ COMPETITOR PROFILES — deep research, grouped by category ============ */}
-      <section className="bg-white py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="mx-auto max-w-3xl text-center">
               <span className="inline-block rounded-full border border-[#176FEB]/20 bg-[#E8F2FE] px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#176FEB]">
@@ -763,8 +763,8 @@ export default function ComparePage() {
       </section>
 
       {/* ============ PRICING SHOWDOWN ============ */}
-      <section className="bg-white py-20 md:py-28">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="mx-auto max-w-3xl text-center">
               <span className="inline-block rounded-full border border-[#176FEB]/20 bg-[#E8F2FE] px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#176FEB]">
@@ -865,8 +865,8 @@ export default function ComparePage() {
       </section>
 
       {/* ============ FEATURE SHOWDOWN MATRIX ============ */}
-      <section className="relative overflow-hidden bg-[#F5F6F8] py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="mx-auto max-w-3xl text-center">
               <span className="inline-block rounded-full border border-[#176FEB]/20 bg-[#E8F2FE] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#176FEB]">
@@ -968,8 +968,8 @@ export default function ComparePage() {
       </section>
 
       {/* ============ MIGRATION TIMELINE ============ */}
-      <section className="bg-white py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1fr] lg:gap-16">
             <RevealOnScroll>
               <div className="relative">
@@ -1031,7 +1031,7 @@ export default function ComparePage() {
                     <motion.div
                       key={m.phase}
                       variants={revealItem}
-                      className="group grid grid-cols-[auto_1fr_auto] items-start gap-4 py-6 md:gap-6"
+                      className="group grid grid-cols-1 items-start gap-4 py-6 sm:grid-cols-[auto_1fr_auto] md:gap-6"
                     >
                       <div className="flex flex-col">
                         <span className="font-heading text-[10px] font-semibold uppercase tracking-[0.16em] text-[#176FEB]">
@@ -1049,7 +1049,7 @@ export default function ComparePage() {
                           {m.body}
                         </p>
                       </div>
-                      <div className="text-right">
+                      <div className="text-left sm:text-right">
                         <p className="font-display text-xl font-normal leading-none tabular-nums text-[#176FEB]">
                           {m.stat}
                         </p>
@@ -1067,8 +1067,8 @@ export default function ComparePage() {
       </section>
 
       {/* ============ OPERATOR STORIES ============ */}
-      <section className="bg-[#F5F6F8] py-20 md:py-28">
-        <div className="mx-auto max-w-5xl px-6">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <div className="mx-auto max-w-3xl text-center">
               <span className="inline-block rounded-full border border-[#176FEB]/20 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#176FEB]">
@@ -1142,8 +1142,8 @@ export default function ComparePage() {
       </section>
 
       {/* ============ FAQ ============ */}
-      <section className="relative bg-white py-24 md:py-32">
-        <div className="mx-auto max-w-3xl px-6">
+      <section className="relative bg-white py-12 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll>
             <motion.div variants={revealItem} className="mb-14 text-center">
               <span className="inline-block rounded-full border border-[#E8F2FE] bg-[#E8F2FE] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#176FEB]">
@@ -1214,7 +1214,7 @@ export default function ComparePage() {
       </section>
 
       {/* ============ FINAL CTA ============ */}
-      <section className="relative overflow-hidden bg-[#0A1628] py-24 md:py-32">
+      <section className="relative overflow-hidden bg-[#0A1628] py-12 md:py-24 lg:py-32">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
@@ -1228,7 +1228,7 @@ export default function ComparePage() {
           className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#176FEB]/40 to-transparent"
         />
 
-        <div className="relative mx-auto max-w-3xl px-6 text-center">
+        <div className="relative mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center">
           <RevealOnScroll>
             <motion.div variants={revealItem}>
               <span className="inline-block rounded-full border border-[#176FEB]/30 bg-[#176FEB]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#7FB2FF]">

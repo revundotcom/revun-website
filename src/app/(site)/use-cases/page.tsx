@@ -127,7 +127,7 @@ export default function UseCasesPage() {
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-[#F5F6F8]">
         <motion.div
-          className="relative z-10 mx-auto max-w-3xl px-6 py-16 text-center"
+          className="relative z-10 mx-auto max-w-3xl px-4 py-12 text-center md:px-6 md:py-16 lg:px-8 lg:py-20"
           variants={heroStagger}
           initial="hidden"
           animate="visible"
@@ -140,7 +140,7 @@ export default function UseCasesPage() {
           </motion.p>
           <motion.h1
             variants={fadeUp}
-            className="font-display text-4xl font-normal leading-[1.1] tracking-tight text-[#0A1628] sm:text-5xl md:text-6xl"
+            className="font-display text-3xl font-normal leading-[1.1] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl"
           >
             One Platform, Every{' '}
             <span className="text-[#176FEB]">Workflow</span>
@@ -156,10 +156,10 @@ export default function UseCasesPage() {
       </section>
 
       {/* ── Filter + Grid ─────────────────────────────────────────────── */}
-      <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           {/* Category filter */}
-          <div className="mb-12 flex flex-wrap justify-center gap-3">
+          <div className="mb-8 flex flex-wrap justify-center gap-2 md:mb-12 md:gap-3">
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -178,7 +178,7 @@ export default function UseCasesPage() {
           {/* Use case cards */}
           <RevealOnScroll
             stagger={0.08}
-            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8"
           >
             {filtered.map((u) => {
               const Icon = u.icon
@@ -211,8 +211,8 @@ export default function UseCasesPage() {
       </section>
 
       {/* ── Bottom CTA ────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-[#F5F6F8] py-12">
-        <RevealOnScroll className="relative z-10 mx-auto max-w-2xl px-6 text-center">
+      <section className="relative overflow-hidden bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <RevealOnScroll className="relative z-10 mx-auto max-w-2xl px-4 md:px-6 lg:px-8 text-center">
           <motion.p
             variants={revealItem}
             className="mb-3 text-sm font-medium uppercase tracking-widest text-[#176FEB]"

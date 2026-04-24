@@ -1,5 +1,6 @@
 'use client'
 
+import { Fragment } from 'react'
 import { motion } from 'framer-motion'
 import { Check, Minus } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -167,9 +168,9 @@ export function PricingComparison() {
             </thead>
             <tbody>
               {COMPARISON.map((group) => (
-                <>
+                <Fragment key={group.category}>
                   {/* Category header */}
-                  <tr key={group.category}>
+                  <tr>
                     <td
                       colSpan={5}
                       className="pt-8 pb-3 text-xs font-heading font-bold uppercase tracking-wider text-[#176FEB]"
@@ -199,7 +200,7 @@ export function PricingComparison() {
                       ))}
                     </tr>
                   ))}
-                </>
+                </Fragment>
               ))}
             </tbody>
           </table>

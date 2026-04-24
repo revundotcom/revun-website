@@ -45,14 +45,14 @@ export default function DemoPage() {
       {/* Top accent bar */}
       <div className="h-1 w-full bg-[#176FEB]" aria-hidden />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 pb-24 pt-32 md:pt-40">
-        <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6 lg:px-8 pb-16 md:pb-24 pt-20 md:pt-32 lg:pt-40">
+        <div className="grid gap-12 md:gap-16 lg:grid-cols-2 lg:gap-20">
           {/* ── Left Column: Info ── */}
           <div className="flex flex-col justify-center">
             <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Book a Demo
             </p>
-            <h1 className="font-display text-4xl font-extrabold tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl">
+            <h1 className="font-display text-3xl font-extrabold tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl">
               See how Revun runs an{' '}
               <span className="text-[#176FEB]">entire property business</span>
             </h1>
@@ -85,7 +85,7 @@ export default function DemoPage() {
 
           {/* ── Right Column: Form ── */}
           <div className="flex flex-col justify-center">
-            <div className="rounded-2xl border border-[#E5E7EB] bg-[#F5F6F8] p-8 md:p-10">
+            <div className="rounded-2xl border border-[#E5E7EB] bg-[#F5F6F8] p-6 md:p-10">
               <h2 className="mb-1 font-heading text-xl font-bold text-[#0A1628]">
                 Book your demo
               </h2>

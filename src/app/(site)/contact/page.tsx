@@ -58,15 +58,15 @@ export default function ContactPage() {
       {/* Top accent bar */}
       <div className="h-1 w-full bg-[#176FEB]" aria-hidden />
 
-      <div className="mx-auto max-w-6xl px-6 pb-24 pt-32 md:pt-40">
-        <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8 pb-16 md:pb-24 pt-20 md:pt-32 lg:pt-40">
+        <div className="grid gap-12 md:gap-16 lg:grid-cols-2 lg:gap-20">
           {/* ── Left Column ── */}
           <div className="flex flex-col justify-center">
             <RevealOnScroll stagger={0.12}>
               <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
                 Contact
               </p>
-              <h1 className="font-display font-extrabold text-4xl tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl">
+              <h1 className="font-display font-extrabold text-3xl tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl">
                 Talk to the{' '}
                 <span className="text-[#176FEB]">Revun team</span>
               </h1>
@@ -130,7 +130,7 @@ export default function ContactPage() {
 
           {/* ── Right Column: Form ── */}
           <RevealOnScroll className="flex flex-col justify-center">
-            <div className="rounded-2xl border border-[#E5E7EB] bg-[#F5F6F8] p-8 md:p-10">
+            <div className="rounded-2xl border border-[#E5E7EB] bg-[#F5F6F8] p-6 md:p-10">
               <h2 className="mb-1 font-heading text-xl font-bold text-[#0A1628]">
                 Send us a message
               </h2>

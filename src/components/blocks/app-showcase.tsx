@@ -273,10 +273,18 @@ function ImageMosaic({
   const active = images[safeIdx]
 
   return (
-    <div className="relative mx-auto w-full max-w-[380px]">
-      {/* Clean white showcase card — same size for every feature. No phone
-          shape, no colored gradient, no device chrome. Just a rounded white
-          panel hosting whatever UI the feature needs to show. */}
+    <div className="relative mx-auto w-full max-w-[400px]">
+      {/* One consistent stage for every feature:
+          - Fixed 4:5 card gives every slide identical outer dimensions
+          - Image uses `fill` + `object-contain` so it always fits within the
+            same bounding box (no more "short/tall" variance between widget
+            exports and full-phone exports)
+          - Uniform inner padding creates the same whitespace ratio whatever
+            the source aspect ratio
+          - Drop-shadow gives a single floating-UI feel across all slides
+          No CSS mask is applied — it was haloing widget exports whose content
+          reached the fade edge. Cleanest presentation regardless of whether
+          an export has baked device chrome or not. */}
       <div
         className="relative overflow-hidden rounded-[28px] bg-white"
         style={{
@@ -288,34 +296,26 @@ function ImageMosaic({
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={active.src}
-            initial={{ opacity: 0, scale: 0.97, y: 6 }}
+            initial={{ opacity: 0, scale: 0.98, y: 4 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 1.03, y: -6 }}
-            transition={{ duration: 0.5, ease }}
-            className="absolute inset-0 flex items-center justify-center p-6 md:p-7"
+            exit={{ opacity: 0, scale: 1.02, y: -4 }}
+            transition={{ duration: 0.45, ease }}
+            className="absolute inset-0"
           >
-            <Image
-              src={active.src}
-              alt={active.alt}
-              width={800}
-              height={1200}
-              sizes="(max-width: 768px) 340px, 380px"
-              className="max-h-full max-w-full h-auto w-auto"
-              style={{
-                // Vertical mask fades the top and bottom edges of the image
-                // into the card's white background. For screenshots that have
-                // phone-bezel chrome baked into the top/bottom (status bar,
-                // rounded device corners), those artifacts dissolve into the
-                // card. For pure widget exports, the fade is barely noticeable.
-                maskImage:
-                  'linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%)',
-                WebkitMaskImage:
-                  'linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%)',
-                filter:
-                  'drop-shadow(0 12px 24px rgba(10, 22, 40, 0.10))',
-              }}
-              priority
-            />
+            <div className="relative h-full w-full p-6 md:p-7">
+              <Image
+                src={active.src}
+                alt={active.alt}
+                fill
+                sizes="(max-width: 768px) 320px, 400px"
+                className="object-contain"
+                style={{
+                  filter:
+                    'drop-shadow(0 14px 28px rgba(10, 22, 40, 0.10))',
+                }}
+                priority
+              />
+            </div>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -594,8 +594,8 @@ export default function AppShowcase() {
   const featureDurationMs = Math.max(imageCount, 1) * IMAGE_DWELL_MS
 
   return (
-    <section className="bg-[#F5F6F8] py-14 md:py-20">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="bg-[#F5F6F8] py-12 md:py-20">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         {/* Header */}
         <RevealOnScroll className="mx-auto max-w-3xl text-center">
           <motion.p
@@ -606,14 +606,14 @@ export default function AppShowcase() {
           </motion.p>
           <motion.h2
             variants={revealItem}
-            className="mt-3 font-display text-4xl font-normal leading-[1.1] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl"
+            className="mt-3 font-display text-3xl font-normal leading-[1.1] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl"
           >
             Everything residents and owners need,{' '}
             <span className="text-keyword">in one app</span>
           </motion.h2>
           <motion.p
             variants={revealItem}
-            className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-brand-graphite-mid"
+            className="mx-auto mt-5 max-w-2xl text-base md:text-lg leading-relaxed text-brand-graphite-mid"
           >
             Every feature for tenants, owners, and property teams — in one place. Watch it cycle,
             or jump to any feature.

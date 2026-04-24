@@ -31,8 +31,8 @@ function Anim({ children, className, delay = 0.1, x, y = 12 }: { children: React
 
 function SW({ children, id, dark }: { children: React.ReactNode; id: string; dark?: boolean }) {
   return (
-    <section id={id} className={`py-16 md:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
-      <div className="mx-auto max-w-6xl px-6">{children}</div>
+    <section id={id} className={`py-12 md:py-20 lg:py-24 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">{children}</div>
     </section>
   )
 }
@@ -41,10 +41,10 @@ function SH({ eyebrow, title, highlight, description }: { eyebrow: string; title
   return (
     <RevealOnScroll className="mx-auto max-w-2xl text-center">
       <motion.p variants={revealItem} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">{eyebrow}</motion.p>
-      <motion.h2 variants={revealItem} className="mt-3 font-display text-4xl font-normal md:text-5xl text-brand-graphite">
+      <motion.h2 variants={revealItem} className="mt-3 font-display text-2xl sm:text-3xl font-normal md:text-4xl lg:text-5xl text-brand-graphite">
         {title} <span className="text-keyword">{highlight}</span>
       </motion.h2>
-      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-lg text-brand-graphite/70">{description}</motion.p>
+      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-base sm:text-lg text-brand-graphite/70">{description}</motion.p>
     </RevealOnScroll>
   )
 }
@@ -77,7 +77,7 @@ function ScopeOfWork() {
   return (
     <SW id="scope">
       <SH eyebrow="Work Orders" title="Scope" highlight="of Work" description="View the proposed scope, estimated time, and cost before any action is taken." />
-      <div ref={ref} className="mt-12 grid gap-6 lg:grid-cols-12 lg:items-start">
+      <div ref={ref} className="mt-10 md:mt-12 grid gap-6 lg:grid-cols-12 lg:items-start">
         {/* Main work order card */}
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white overflow-hidden lg:col-span-7" initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.1 }}>
           <div className="border-b border-[#E5E7EB] px-6 py-4">
@@ -182,7 +182,7 @@ function EasyRequest() {
   return (
     <SW id="request" dark>
       <SH eyebrow="Submit" title="Easy Request" highlight="Repair" description="A request is submitted by you or the tenant, including details, photos, or video." />
-      <div ref={ref} className="mt-12 grid gap-6 lg:grid-cols-12 lg:items-start">
+      <div ref={ref} className="mt-10 md:mt-12 grid gap-6 lg:grid-cols-12 lg:items-start">
         {/* Main form card */}
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 lg:col-span-7" initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.1 }}>
           <div className="border-b border-[#E5E7EB] pb-4 mb-5">
@@ -290,7 +290,7 @@ function AIAnalysis() {
   return (
     <SW id="ai-analysis">
       <SH eyebrow="AI Triage" title="AI Analyzes" highlight="All Requests" description="The request is automatically reviewed to understand the issue, urgency, and category." />
-      <div ref={ref} className="mt-12 grid gap-6 lg:grid-cols-12 lg:items-start">
+      <div ref={ref} className="mt-10 md:mt-12 grid gap-6 lg:grid-cols-12 lg:items-start">
         {/* Main request card */}
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white overflow-hidden lg:col-span-7" initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.1 }}>
           <div className="border-b border-[#E5E7EB] px-6 py-4">
@@ -411,7 +411,7 @@ function MaintenanceOverview() {
   return (
     <SW id="overview" dark>
       <SH eyebrow="Dashboard" title="Maintenance" highlight="Overview" description="See all maintenance requests across your property and track their status in real time." />
-      <div ref={ref} className="mt-12 grid gap-6 lg:grid-cols-12">
+      <div ref={ref} className="mt-10 md:mt-12 grid gap-6 lg:grid-cols-12">
         {/* Left: Donut + stats */}
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 lg:col-span-5" initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.1 }}>
           <h3 className="mb-6 font-heading text-lg font-semibold text-brand-graphite">Request Summary</h3>
@@ -484,7 +484,7 @@ function ApproveDecline() {
   return (
     <SW id="approve">
       <SH eyebrow="Owner Control" title="Approve Or Decline" highlight="Request" description="You choose to approve, decline, or request changes. No work starts without your approval." />
-      <div ref={ref} className="mt-12 grid gap-6 lg:grid-cols-12 lg:items-start">
+      <div ref={ref} className="mt-10 md:mt-12 grid gap-6 lg:grid-cols-12 lg:items-start">
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white overflow-hidden lg:col-span-7" initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.1 }}>
           <div className="border-b border-[#E5E7EB] px-6 py-4"><h3 className="font-heading text-base font-semibold text-brand-graphite">Maintenance Request</h3></div>
           <div className="px-6 py-4"><Pipeline active={0} /></div>
@@ -598,7 +598,7 @@ function CompleteSatisfaction() {
   return (
     <SW id="complete" dark>
       <SH eyebrow="Proof of Work" title="Complete" highlight="with Satisfaction" description="Review before-and-after photos and technician notes once the job is finished." />
-      <div ref={ref} className="mt-12 grid gap-6 lg:grid-cols-12 lg:items-start">
+      <div ref={ref} className="mt-10 md:mt-12 grid gap-6 lg:grid-cols-12 lg:items-start">
         {/* Main card */}
         <motion.div className="rounded-2xl border border-[#E5E7EB] bg-white overflow-hidden lg:col-span-7" initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.1 }}>
           <div className="border-b border-[#E5E7EB] px-6 py-4"><h3 className="font-heading text-base font-semibold text-brand-graphite">Maintenance Request</h3></div>
@@ -719,7 +719,7 @@ function JobInProgress() {
   return (
     <SW id="tracking">
       <SH eyebrow="Live Tracking" title="Job in" highlight="Progress" description="Track the technician's route, timing, and job status as the work is completed." />
-      <div ref={ref} className="mt-12 grid gap-6 lg:grid-cols-12 lg:items-start">
+      <div ref={ref} className="mt-10 md:mt-12 grid gap-6 lg:grid-cols-12 lg:items-start">
         {/* Live tracking card with richer "map" visual */}
         <motion.div className="overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white lg:col-span-7" initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.1 }}>
           {/* Fake map */}
@@ -894,7 +894,7 @@ function RateService() {
   return (
     <SW id="rate" dark>
       <SH eyebrow="Feedback" title="Rate" highlight="the Service" description="Leave feedback on the technician to maintain quality and accountability." />
-      <div ref={ref} className="mt-12 grid gap-6 lg:grid-cols-12 lg:items-start">
+      <div ref={ref} className="mt-10 md:mt-12 grid gap-6 lg:grid-cols-12 lg:items-start">
         {/* Rating card */}
         <motion.div
           className="rounded-2xl border border-[#E5E7EB] bg-white p-6 text-center lg:col-span-5"
@@ -1046,27 +1046,27 @@ function MaintenanceHero() {
   ]
   const pipelineStages = ['Accepted', 'En route', 'On site', 'Complete']
   return (
-    <section id="hero" className="relative overflow-hidden bg-white pb-12 pt-20 md:pb-16 md:pt-24">
+    <section id="hero" className="relative overflow-hidden bg-white pb-10 pt-16 md:pb-16 md:pt-20 lg:pt-24">
       <motion.div aria-hidden style={{ y: gridY }} className="pointer-events-none absolute inset-0 opacity-[0.35]">
         <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(#E5E7EB 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
       </motion.div>
-      <div className="relative mx-auto max-w-6xl px-6">
-        <div ref={ref} className="grid gap-12 lg:grid-cols-2 lg:items-center">
+      <div className="relative mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+        <div ref={ref} className="grid gap-8 md:gap-12 lg:grid-cols-2 lg:items-center">
           <div>
             <motion.div {...fadeUp} animate={inView ? { opacity: 1, y: 0 } : {}} className="inline-flex items-center gap-2 text-sm font-heading font-semibold uppercase tracking-wider text-[#176FEB]">
               <Wrench className="h-4 w-4" /><span>Maintenance</span>
             </motion.div>
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.15 }} className="mt-4 font-display text-5xl font-normal leading-tight text-[#0A1628] md:text-6xl">
+            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.15 }} className="mt-4 font-display text-3xl font-normal leading-tight text-[#0A1628] sm:text-4xl md:text-5xl lg:text-6xl">
               Maintenance that <span className="text-[#176FEB]">runs itself.</span>
             </motion.h1>
-            <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.25 }} className="mt-5 max-w-xl text-lg text-[#555860]">
+            <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.25 }} className="mt-5 max-w-xl text-base sm:text-lg text-[#555860]">
               AI triage categorizes every request, dispatch finds the closest available tech, and photo-verified proof archives automatically. One property-linked workflow, from request to resolution.
             </motion.p>
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.35 }} className="mt-8 flex flex-wrap gap-3">
-              <Link href="/signup/" className="inline-flex items-center gap-2 rounded-xl bg-[#176FEB] px-6 py-3 text-sm font-heading font-semibold text-white transition hover:brightness-110">
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease, delay: 0.35 }} className="mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
+              <Link href="/signup/" className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-[#176FEB] px-6 py-3 text-sm font-heading font-semibold text-white transition hover:brightness-110">
                 Get Started Free <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/demo/" className="inline-flex items-center gap-2 rounded-xl border border-[#E5E7EB] bg-white px-6 py-3 text-sm font-heading font-semibold text-[#0A1628] transition hover:border-[#176FEB] hover:text-[#176FEB]">
+              <Link href="/demo/" className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white px-6 py-3 text-sm font-heading font-semibold text-[#0A1628] transition hover:border-[#176FEB] hover:text-[#176FEB]">
                 Book a Demo
               </Link>
             </motion.div>
@@ -1566,7 +1566,7 @@ function FAQ() {
 
 function CTASection() {
   return (
-    <section id="cta" className="relative overflow-hidden bg-[#0A1628] px-6 py-24 md:py-32">
+    <section id="cta" className="relative overflow-hidden bg-[#0A1628] px-4 md:px-6 lg:px-8 py-16 md:py-24 lg:py-32">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 60% 55% at 50% 40%, rgba(23,111,235,0.28), rgba(23,111,235,0.08), transparent 75%)' }} />
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#176FEB]/40 to-transparent" />
       <RevealOnScroll className="relative mx-auto max-w-3xl text-center">
@@ -1575,18 +1575,18 @@ function CTASection() {
             Deploy in 14 days
           </span>
         </motion.div>
-        <motion.h2 variants={revealItem} className="mt-6 font-display text-4xl font-normal tracking-tight text-white sm:text-5xl lg:text-6xl">
+        <motion.h2 variants={revealItem} className="mt-6 font-display text-3xl font-normal tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
           Stop fighting with phone calls. <span className="text-[#176FEB]">Start dispatching with clarity.</span>
         </motion.h2>
         <motion.p variants={revealItem} className="mx-auto mt-6 max-w-xl text-base text-white/70 sm:text-lg">
           Try Revun Maintenance free for 14 days. No credit card, no sales gate.
         </motion.p>
         <motion.div variants={revealItem} className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link href="/signup/" className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#176FEB] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_0_40px_-8px_rgba(23,111,235,0.8)] transition-all hover:brightness-110 hover:shadow-[0_0_50px_-4px_rgba(23,111,235,0.9)]">
+          <Link href="/signup/" className="group inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#176FEB] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_0_40px_-8px_rgba(23,111,235,0.8)] transition-all hover:brightness-110 hover:shadow-[0_0_50px_-4px_rgba(23,111,235,0.9)]">
             Get Started Free
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
           </Link>
-          <Link href="/demo/" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all hover:border-white/40 hover:bg-white/15">
+          <Link href="/demo/" className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all hover:border-white/40 hover:bg-white/15">
             Book a Demo
           </Link>
         </motion.div>

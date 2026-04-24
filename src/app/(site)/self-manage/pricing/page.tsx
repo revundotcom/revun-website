@@ -213,7 +213,7 @@ export default function SelfManagePricingPage() {
       {/* ── Hero ──────────────────────────────────────────────────── */}
       <section className="bg-white">
         <motion.div
-          className="mx-auto max-w-3xl px-6 pt-28 pb-16 text-center"
+          className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 pt-28 pb-16 text-center"
           variants={heroStagger}
           initial="hidden"
           animate="visible"
@@ -226,7 +226,7 @@ export default function SelfManagePricingPage() {
           </motion.p>
           <motion.h1
             variants={fadeUp}
-            className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-foreground md:text-5xl"
+            className="font-display font-extrabold text-3xl leading-[1.1] tracking-tight text-foreground md:text-5xl lg:text-6xl"
           >
             From <span className="text-brand-blue">$1/day</span> per unit
           </motion.h1>
@@ -241,7 +241,7 @@ export default function SelfManagePricingPage() {
 
       {/* ── Pricing Tiers ─────────────────────────────────────────── */}
       <section className="bg-brand-off-white py-12">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll
             stagger={0.08}
             className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
@@ -296,7 +296,7 @@ export default function SelfManagePricingPage() {
 
       {/* ── Add-Ons ───────────────────────────────────────────────── */}
       <section className="bg-white py-12">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="text-center">
             <motion.p
               variants={revealItem}
@@ -361,7 +361,7 @@ export default function SelfManagePricingPage() {
 
       {/* ── Comparison: Revun vs PM ───────────────────────────────── */}
       <section className="bg-brand-off-white py-12">
-        <div className="mx-auto max-w-5xl px-6">
+        <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="text-center">
             <motion.p
               variants={revealItem}
@@ -387,8 +387,9 @@ export default function SelfManagePricingPage() {
           <RevealOnScroll className="mt-12">
             <motion.div
               variants={revealItem}
-              className="overflow-hidden rounded-2xl border border-border"
+              className="overflow-x-auto overflow-hidden rounded-2xl border border-border"
             >
+              <div className="min-w-[640px]">
               <div className="grid grid-cols-3 border-b border-border bg-brand-off-white">
                 <div className="px-6 py-4 text-sm font-semibold text-muted-foreground" />
                 <div className="border-l border-border px-6 py-4 text-center">
@@ -433,6 +434,7 @@ export default function SelfManagePricingPage() {
                   </div>
                 )
               )}
+              </div>
             </motion.div>
           </RevealOnScroll>
         </div>
@@ -440,7 +442,7 @@ export default function SelfManagePricingPage() {
 
       {/* ── FAQ ────────────────────────────────────────────────────── */}
       <section className="bg-white py-12">
-        <div className="mx-auto max-w-3xl px-6">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="text-center">
             <motion.p
               variants={revealItem}
@@ -493,7 +495,7 @@ export default function SelfManagePricingPage() {
 
       {/* ── Bottom CTA ────────────────────────────────────────────── */}
       <section className="bg-brand-off-white py-12">
-        <RevealOnScroll className="mx-auto max-w-2xl px-6 text-center">
+        <RevealOnScroll className="mx-auto max-w-2xl px-4 md:px-6 lg:px-8 text-center">
           <motion.h2
             variants={revealItem}
             className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl"

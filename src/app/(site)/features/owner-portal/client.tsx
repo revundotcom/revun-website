@@ -21,8 +21,8 @@ const ease = [0.22, 1, 0.36, 1] as const
 
 function SW({ children, id, dark }: { children: React.ReactNode; id: string; dark?: boolean }) {
   return (
-    <section id={id} className={`py-16 md:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
-      <div className="mx-auto max-w-6xl px-6">{children}</div>
+    <section id={id} className={`py-12 md:py-20 lg:py-28 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">{children}</div>
     </section>
   )
 }
@@ -35,10 +35,10 @@ function SH({ eyebrow, title, highlight, description }: {
       <motion.p variants={revealItem} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">
         {eyebrow}
       </motion.p>
-      <motion.h2 variants={revealItem} className="mt-3 font-display text-4xl font-normal md:text-5xl text-brand-graphite">
+      <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal md:text-4xl lg:text-5xl text-brand-graphite">
         {title} <span className="text-keyword">{highlight}</span>
       </motion.h2>
-      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-lg text-brand-graphite/70">
+      <motion.p variants={revealItem} className="mx-auto mt-4 max-w-xl text-base md:text-lg text-brand-graphite/70">
         {description}
       </motion.p>
     </RevealOnScroll>
@@ -85,10 +85,10 @@ function BrowserChrome({ url, children, className = '' }: {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-white pt-32 pb-16 md:pt-40 md:pb-20">
+    <section className="relative overflow-hidden bg-white pt-24 pb-12 md:pt-32 md:pb-16 lg:pt-40 lg:pb-20">
       <div className="absolute inset-0 bg-[linear-gradient(rgba(23,111,235,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(23,111,235,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" aria-hidden="true" />
       <div className="absolute top-24 left-1/2 -translate-x-1/2 h-[400px] w-[720px] rounded-full bg-[#176FEB]/[0.06] blur-3xl" aria-hidden="true" />
-      <div className="relative mx-auto max-w-4xl px-6 text-center">
+      <div className="relative mx-auto max-w-4xl px-4 md:px-6 lg:px-8 text-center">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease }}
           className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#E8F2FE]">
           <Landmark className="h-8 w-8 text-[#176FEB]" />
@@ -98,16 +98,16 @@ function Hero() {
           Owner Portal
         </motion.p>
         <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease, delay: 0.1 }}
-          className="mt-3 font-display text-4xl font-normal text-[#0A1628] md:text-6xl">
+          className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-5xl lg:text-6xl">
           Real-time visibility for<br />
           <span className="text-keyword">property owners</span>
         </motion.h1>
         <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease, delay: 0.2 }}
-          className="mx-auto mt-5 max-w-2xl text-lg text-[#555860]">
+          className="mx-auto mt-5 max-w-2xl text-base text-[#555860] md:text-lg">
           Replace monthly PDF statements with an always-on portal. Owners see live financials, disbursements, documents, and communications — white-label ready for your brand.
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease, delay: 0.3 }}
-          className="mt-8 flex items-center justify-center gap-4">
+          className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
           <Link href="/pricing/" className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#0B5AD4]">
             Start Free Trial
           </Link>
@@ -972,19 +972,19 @@ function BuiltIntoOS() {
 
 function CTASection() {
   return (
-    <section id="cta" className="bg-white py-16 md:py-20">
-      <div className="mx-auto max-w-3xl px-6 text-center">
+    <section id="cta" className="bg-white py-12 md:py-20 lg:py-28">
+      <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center">
         <RevealOnScroll stagger={0.12}>
           <motion.p variants={revealItem} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">
             Get Started
           </motion.p>
-          <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal md:text-4xl text-brand-graphite">
+          <motion.h2 variants={revealItem} className="mt-3 font-display text-2xl font-normal md:text-3xl lg:text-4xl text-brand-graphite">
             Give owners the transparency<br /><span className="text-keyword">they deserve</span>
           </motion.h2>
           <motion.p variants={revealItem} className="mx-auto mt-4 max-w-lg text-base text-[#555860]">
             Start your free trial today. No credit card required. Invite your first owner in under 5 minutes.
           </motion.p>
-          <motion.div variants={revealItem} className="mt-8 flex items-center justify-center gap-4">
+          <motion.div variants={revealItem} className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
             <Link href="/pricing/" className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#1260D6]">
               Start Free Trial
             </Link>

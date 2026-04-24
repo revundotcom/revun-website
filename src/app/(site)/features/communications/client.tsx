@@ -46,8 +46,8 @@ function SectionWrapper({
   dark?: boolean
 }) {
   return (
-    <section id={id} className={`py-16 md:py-20 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
-      <div className="mx-auto max-w-6xl px-6">{children}</div>
+    <section id={id} className={`py-12 md:py-20 lg:py-24 ${dark ? 'bg-[#F5F6F8]' : 'bg-white'}`}>
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">{children}</div>
     </section>
   )
 }
@@ -90,12 +90,12 @@ function UIShell({ children, className = '' }: { children: React.ReactNode; clas
 
 function HeroSection() {
   return (
-    <section className="relative border-b border-[#E5E7EB] bg-white pb-16 pt-12 lg:pb-20 lg:pt-16">
-      <RevealOnScroll className="relative z-10 mx-auto max-w-4xl px-4 text-center">
+    <section className="relative border-b border-[#E5E7EB] bg-white pb-12 pt-10 md:pb-16 md:pt-12 lg:pb-20 lg:pt-16">
+      <RevealOnScroll className="relative z-10 mx-auto max-w-4xl px-4 md:px-6 lg:px-8 text-center">
         <Eyebrow>Communications</Eyebrow>
         <motion.h1
           variants={revealItem}
-          className="mt-3 font-display text-4xl font-bold text-[#0A1628] sm:text-5xl lg:text-6xl"
+          className="mt-3 font-display text-3xl font-bold text-[#0A1628] sm:text-4xl md:text-5xl lg:text-6xl"
         >
           Every conversation, call, and meeting,{' '}
           <span className="text-[#176FEB]">in one place</span>
@@ -109,17 +109,17 @@ function HeroSection() {
         </motion.p>
         <motion.div
           variants={revealItem}
-          className="mt-8 flex flex-wrap items-center justify-center gap-4"
+          className="mt-8 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4"
         >
           <Link
             href="/features/"
-            className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-8 font-heading text-sm font-semibold text-white transition-colors hover:bg-[#1260d1]"
+            className="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-xl bg-[#176FEB] px-8 font-heading text-sm font-semibold text-white transition-colors hover:bg-[#1260d1]"
           >
             See the Platform <ArrowRight className="ml-2 size-4" />
           </Link>
           <Link
             href="/demo/"
-            className="inline-flex h-12 items-center justify-center rounded-xl border border-[#E5E7EB] px-8 font-heading text-sm font-semibold text-[#0A1628] transition-colors hover:border-[#176FEB] hover:text-[#176FEB]"
+            className="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-xl border border-[#E5E7EB] px-8 font-heading text-sm font-semibold text-[#0A1628] transition-colors hover:border-[#176FEB] hover:text-[#176FEB]"
           >
             Book a Live Demo
           </Link>
@@ -212,7 +212,7 @@ function InboxCard() {
 function ChatsInboxSection() {
   return (
     <SectionWrapper id="chats-inbox" dark>
-      <div className="grid items-center gap-12 lg:grid-cols-2">
+      <div className="grid items-center gap-8 md:gap-10 lg:gap-12 lg:grid-cols-2">
         <RevealOnScroll>
           <Eyebrow>Unified Inbox</Eyebrow>
           <motion.h2
@@ -491,7 +491,7 @@ function ConnectCard() {
 function ConnectTalkSection() {
   return (
     <SectionWrapper id="connect-talk" dark>
-      <div className="grid items-center gap-12 lg:grid-cols-[1fr_1fr]">
+      <div className="grid items-center gap-8 md:gap-10 lg:gap-12 lg:grid-cols-[1fr_1fr]">
         <RevealOnScroll>
           <Eyebrow>Contacts</Eyebrow>
           <motion.h2
@@ -830,7 +830,7 @@ function GroupVideoSection() {
         </motion.h2>
       </RevealOnScroll>
 
-      <div className="mt-12 grid items-center gap-10 lg:grid-cols-[1fr_1.2fr]">
+      <div className="mt-10 md:mt-12 grid items-center gap-8 md:gap-10 lg:grid-cols-[1fr_1.2fr]">
         <RevealOnScroll className="space-y-4" stagger={0.1}>
           {tiles.map((t) => (
             <motion.div
@@ -1075,11 +1075,11 @@ function FeaturesGridSection() {
 
 function CTASection() {
   return (
-    <section className="bg-white py-16 lg:py-20">
-      <RevealOnScroll className="mx-auto max-w-3xl px-6 text-center">
+    <section className="bg-white py-12 md:py-16 lg:py-20">
+      <RevealOnScroll className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center">
         <motion.h2
           variants={revealItem}
-          className="font-display text-3xl font-normal text-[#0A1628] md:text-4xl lg:text-5xl"
+          className="font-display text-2xl font-normal text-[#0A1628] md:text-4xl lg:text-5xl"
         >
           Deploy secure communications across your operation
         </motion.h2>
@@ -1087,16 +1087,16 @@ function CTASection() {
           Messaging, calls, video, transcripts, and recordings, all in one platform.
           No more juggling Zoom, Teams, WhatsApp, and email.
         </motion.p>
-        <motion.div variants={revealItem} className="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <motion.div variants={revealItem} className="mt-8 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4">
           <Link
             href="/features/"
-            className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-8 font-heading text-sm font-semibold text-white transition-colors hover:bg-[#1260d1]"
+            className="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-xl bg-[#176FEB] px-8 font-heading text-sm font-semibold text-white transition-colors hover:bg-[#1260d1]"
           >
             See the Platform <ArrowRight className="ml-2 size-4" />
           </Link>
           <Link
             href="/demo/"
-            className="inline-flex h-12 items-center justify-center rounded-xl border border-[#E5E7EB] px-8 font-heading text-sm font-semibold text-[#0A1628] transition-colors hover:border-[#D1D5DB] hover:bg-[#EAECF0]"
+            className="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-xl border border-[#E5E7EB] px-8 font-heading text-sm font-semibold text-[#0A1628] transition-colors hover:border-[#D1D5DB] hover:bg-[#EAECF0]"
           >
             Book a Live Demo
           </Link>

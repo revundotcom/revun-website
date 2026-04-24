@@ -63,14 +63,14 @@ export default function TravelingTenantsPage() {
         <div className="absolute inset-0" aria-hidden="true">
           <div className="absolute -left-[10%] top-[20%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(23,111,235,0.08)_0%,transparent_70%)] blur-3xl" />
         </div>
-        <div className="relative z-10 mx-auto max-w-4xl px-6 pt-24 pb-16 text-center lg:pt-32 lg:pb-24">
+        <div className="relative z-10 mx-auto max-w-4xl px-4 pt-20 pb-12 text-center md:px-6 md:pt-24 md:pb-16 lg:px-8 lg:pt-32 lg:pb-24">
           <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#176FEB]/20 text-[#176FEB]">
             <Plane className="h-7 w-7" strokeWidth={1.8} />
           </div>
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-4 py-1.5 text-sm font-medium text-[#555860]">
             For Traveling & Relocating Tenants
           </p>
-          <h1 className="font-display font-extrabold text-4xl leading-[1.1] tracking-tight text-[#0A1628] sm:text-5xl md:text-6xl">
+          <h1 className="font-display font-extrabold text-3xl leading-[1.1] tracking-tight text-[#0A1628] md:text-5xl lg:text-6xl">
             Moving to a New City? We Have Got You Covered.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#555860]">
@@ -88,19 +88,19 @@ export default function TravelingTenantsPage() {
       </section>
 
       {/* Features */}
-      <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="mb-10 text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">How it works</p>
-            <h2 className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] sm:text-4xl">
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-[#2C2E33] md:text-3xl lg:text-4xl">
               Rent from <span className="text-[#176FEB]">anywhere</span>
             </h2>
           </RevealOnScroll>
-          <RevealOnScroll stagger={0.08} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealOnScroll stagger={0.08} className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8">
             {features.map((f) => {
               const Icon = f.icon
               return (
-                <div key={f.title} className="rounded-2xl border border-[#D3D5DB] bg-white p-7 transition-colors duration-150 hover:border-[#176FEB]/40">
+                <div key={f.title} className="rounded-2xl border border-[#D3D5DB] bg-white p-5 transition-colors duration-150 hover:border-[#176FEB]/40 md:p-7">
                   <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-[#E8F2FE] text-[#176FEB]">
                     <Icon className="h-5 w-5" strokeWidth={1.8} />
                   </div>
@@ -114,10 +114,10 @@ export default function TravelingTenantsPage() {
       </section>
 
       {/* Important notice */}
-      <section className="bg-white py-12">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <RevealOnScroll className="rounded-2xl border border-[#176FEB]/20 bg-[#E8F2FE] p-8">
-            <h2 className="font-heading text-2xl font-bold text-[#2C2E33]">Important: Your Operator is Your Point of Contact</h2>
+      <section className="bg-white py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-3xl px-4 text-center md:px-6 lg:px-8">
+          <RevealOnScroll className="rounded-2xl border border-[#176FEB]/20 bg-[#E8F2FE] p-5 md:p-8">
+            <h2 className="font-heading text-xl font-bold text-[#2C2E33] md:text-2xl">Important: Your Operator is Your Point of Contact</h2>
             <p className="mt-4 text-[0.938rem] leading-relaxed text-[#555860]">
               When you rent through a Revun-powered property manager, your service relationship is with that operator. For property issues, maintenance requests, lease questions, or service concerns, contact your assigned property manager directly. Revun powers the software experience - your operator provides the service.
             </p>
@@ -129,9 +129,9 @@ export default function TravelingTenantsPage() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-[#F5F6F8] py-12">
-        <div className="mx-auto max-w-3xl px-6">
-          <h2 className="mb-8 text-center font-heading text-3xl font-bold tracking-tight text-[#2C2E33] sm:text-4xl">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8">
+          <h2 className="mb-8 text-center font-heading text-2xl font-bold tracking-tight text-[#2C2E33] md:text-3xl lg:text-4xl">
             Frequently Asked <span className="text-[#176FEB]">Questions</span>
           </h2>
           <div className="space-y-4">
@@ -149,9 +149,9 @@ export default function TravelingTenantsPage() {
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-[#F5F6F8] py-12">
-        <div className="relative z-10 mx-auto max-w-2xl px-6 text-center">
-          <h2 className="font-heading font-extrabold text-3xl leading-tight tracking-tight text-[#0A1628] sm:text-4xl">
+      <section className="relative overflow-hidden bg-[#F5F6F8] py-12 md:py-20 lg:py-28">
+        <div className="relative z-10 mx-auto max-w-2xl px-4 text-center md:px-6 lg:px-8">
+          <h2 className="font-heading font-extrabold text-2xl leading-tight tracking-tight text-[#0A1628] md:text-3xl lg:text-4xl">
             Find your next home
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-[#555860]">

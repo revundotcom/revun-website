@@ -204,18 +204,18 @@ export default async function IntegrationDetailPage({
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-[#F5F6F8]">
-        <div className="relative mx-auto max-w-5xl px-6 py-16 sm:py-16 lg:px-8">
+        <div className="relative mx-auto max-w-5xl px-4 md:px-6 py-12 md:py-16 lg:px-8">
           <RevealOnScroll className="flex flex-col items-center text-center">
             {/* Connection visual */}
-            <div className="flex items-center gap-4">
-              <div className="flex size-16 items-center justify-center rounded-2xl border border-[#E5E7EB] bg-white">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="flex size-14 sm:size-16 items-center justify-center rounded-2xl border border-[#E5E7EB] bg-white">
                 <span className="font-heading text-2xl font-bold text-[#0A1628]">R</span>
               </div>
               <div className="flex flex-col items-center gap-1">
                 <Zap className="size-5 text-[#176FEB]" />
                 <div className="h-px w-8 bg-[#176FEB]" />
               </div>
-              <div className="flex size-16 items-center justify-center rounded-2xl bg-white border border-[#E5E7EB]">
+              <div className="flex size-14 sm:size-16 items-center justify-center rounded-2xl bg-white border border-[#E5E7EB]">
                 <span className="font-heading text-2xl font-bold text-[#0A1628]">
                   {data.name.charAt(0)}
                 </span>
@@ -225,7 +225,7 @@ export default async function IntegrationDetailPage({
             <p className="mt-8 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
               Integration
             </p>
-            <h1 className="mt-3 font-display text-4xl font-normal text-[#0A1628] sm:text-5xl">
+            <h1 className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-5xl">
               Revun + {data.name}
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-lg text-[#555860]">
@@ -249,11 +249,11 @@ export default async function IntegrationDetailPage({
       </section>
 
       {/* What This Integration Does */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <RevealOnScroll className="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
+      <section className="bg-white py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
+          <RevealOnScroll className="grid gap-8 md:gap-12 lg:grid-cols-[1fr_1.2fr]">
             <div>
-              <h2 className="font-heading text-2xl font-bold text-[#2C2E33]">
+              <h2 className="font-heading text-xl font-bold text-[#2C2E33] sm:text-2xl">
                 What this integration does
               </h2>
               <p className="mt-4 leading-relaxed text-[#555860]">
@@ -262,7 +262,7 @@ export default async function IntegrationDetailPage({
             </div>
 
             {/* Key Features */}
-            <div className="rounded-2xl border border-[#D3D5DB] bg-[#F5F6F8] p-8">
+            <div className="rounded-2xl border border-[#D3D5DB] bg-[#F5F6F8] p-6 sm:p-8">
               <h3 className="font-heading text-lg font-bold text-[#2C2E33]">
                 Key features
               </h3>
@@ -282,9 +282,9 @@ export default async function IntegrationDetailPage({
       </section>
 
       {/* Setup Info */}
-      <section className="bg-[#F5F6F8] py-16 md:py-20">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <div className="rounded-2xl border border-[#D3D5DB] bg-white p-8 md:p-12">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
+          <div className="rounded-2xl border border-[#D3D5DB] bg-white p-6 sm:p-8 md:p-12">
             <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
               <div>
                 <h2 className="font-heading text-xl font-bold text-[#2C2E33]">
@@ -302,7 +302,7 @@ export default async function IntegrationDetailPage({
               </span>
             </div>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
               {[
                 {
                   step: '1',
@@ -336,21 +336,21 @@ export default async function IntegrationDetailPage({
       </section>
 
       {/* CTA */}
-      <section className="bg-[#F5F6F8] py-16 md:py-20">
-        <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 text-center lg:px-8">
           <div className="mx-auto flex w-fit items-center gap-3 rounded-full bg-white border border-[#E5E7EB] px-5 py-2">
             <Plug className="size-4 text-[#176FEB]" />
             <span className="text-sm font-medium text-[#0A1628]">
               Ready to connect
             </span>
           </div>
-          <h2 className="mt-6 font-heading text-2xl font-bold text-[#0A1628] sm:text-3xl">
+          <h2 className="mt-6 font-heading text-xl font-bold text-[#0A1628] sm:text-2xl md:text-3xl">
             Get started with Revun + {data.name}
           </h2>
           <p className="mt-4 text-[#555860]">
             Start your free trial and connect {data.name} in minutes.
           </p>
-          <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
             <Link
               href="/contact/"
               className="inline-flex h-12 items-center gap-2 rounded-lg bg-[#176FEB] px-8 text-sm font-semibold text-white hover:bg-[#005CE8]"

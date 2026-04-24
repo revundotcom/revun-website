@@ -174,21 +174,21 @@ export default async function FeatureDetailPage({
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[#F5F6F8] pt-32 pb-16 md:pt-40 md:pb-20">
+      <section className="relative overflow-hidden bg-[#F5F6F8] pt-24 pb-12 md:pt-32 md:pb-16 lg:pt-40 lg:pb-20">
         {/* Decorative dot grid */}
         <div className="absolute inset-0 bg-dot-grid opacity-40" aria-hidden="true" />
 
-        <div className="relative mx-auto max-w-4xl px-6 text-center">
-          <div className="animate-fade-up mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#E8F2FE]">
-            <Icon className="h-8 w-8 text-[#176FEB]" />
+        <div className="relative mx-auto max-w-4xl px-4 md:px-6 lg:px-8 text-center">
+          <div className="animate-fade-up mx-auto mb-6 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-[#E8F2FE]">
+            <Icon className="h-7 w-7 sm:h-8 sm:w-8 text-[#176FEB]" />
           </div>
-          <h1 className="animate-fade-up font-display text-4xl font-normal text-[#0A1628] md:text-5xl">
+          <h1 className="animate-fade-up font-display text-3xl font-normal text-[#0A1628] md:text-5xl lg:text-6xl">
             {data.title}
           </h1>
-          <p className="animate-fade-up delay-150 mx-auto mt-4 max-w-2xl text-lg text-[#555860]">
+          <p className="animate-fade-up delay-150 mx-auto mt-4 max-w-2xl text-base sm:text-lg text-[#555860]">
             {data.heroDescription}
           </p>
-          <div className="animate-fade-up delay-300 mt-8 flex items-center justify-center gap-4">
+          <div className="animate-fade-up delay-300 mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <Link
               href="/pricing/"
               className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#0B5AD4]"
@@ -206,18 +206,18 @@ export default async function FeatureDetailPage({
       </section>
 
       {/* Capabilities */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="bg-white py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll stagger={0.12}>
             <p className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
               Capabilities
             </p>
-            <h2 className="mt-3 font-heading text-2xl font-bold text-[#0A1628] md:text-3xl">
+            <h2 className="mt-3 font-heading text-xl font-bold text-[#0A1628] sm:text-2xl md:text-3xl">
               What you get with {data.title}
             </h2>
           </RevealOnScroll>
           <RevealOnScroll stagger={0.08}>
-            <div className="mt-10 grid gap-6 md:grid-cols-2">
+            <div className="mt-8 md:mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
               {data.capabilities.map((cap, i) => (
                 <div
                   key={cap.title}
@@ -267,22 +267,22 @@ export default async function FeatureDetailPage({
       </section>
 
       {/* How it works */}
-      <section className="bg-[#F5F6F8] py-16 md:py-20">
-        <div className="mx-auto max-w-4xl px-6">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <RevealOnScroll className="text-center" stagger={0.12}>
             <p className="font-heading text-sm font-semibold uppercase tracking-wider text-[#176FEB]">
               How it works
             </p>
-            <h2 className="mt-3 font-heading text-2xl font-bold text-[#0A1628] md:text-3xl">
+            <h2 className="mt-3 font-heading text-xl font-bold text-[#0A1628] sm:text-2xl md:text-3xl">
               Three steps to get started
             </h2>
           </RevealOnScroll>
           <RevealOnScroll stagger={0.1}>
-            <div className="mt-10 space-y-6">
+            <div className="mt-8 md:mt-10 space-y-4 md:space-y-6">
               {data.steps.map((step) => (
                 <div
                   key={step.number}
-                  className="flex gap-5 rounded-xl border border-[#E5E7EB] bg-white p-6 transition-all duration-200 hover:border-[#176FEB]/30 hover:shadow-sm"
+                  className="flex gap-4 sm:gap-5 rounded-xl border border-[#E5E7EB] bg-white p-5 sm:p-6 transition-all duration-200 hover:border-[#176FEB]/30 hover:shadow-sm"
                 >
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#E8F2FE] font-heading text-sm font-bold text-[#176FEB]">
                     {step.number}
@@ -303,16 +303,16 @@ export default async function FeatureDetailPage({
       </section>
 
       {/* CTA */}
-      <section className="bg-[#F5F6F8] py-16 md:py-20">
-        <div className="mx-auto max-w-3xl px-6 text-center">
+      <section className="bg-[#F5F6F8] py-12 md:py-20 lg:py-24">
+        <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center">
           <RevealOnScroll stagger={0.12}>
-            <h2 className="font-heading text-2xl font-bold text-[#0A1628] md:text-3xl">
+            <h2 className="font-heading text-xl font-bold text-[#0A1628] sm:text-2xl md:text-3xl">
               Ready to try {data.title}?
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-base text-[#555860]">
               Start your free trial today. No credit card required.
             </p>
-            <div className="mt-8 flex items-center justify-center gap-4">
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
               <Link
                 href="/pricing/"
                 className="inline-flex h-12 items-center justify-center rounded-xl bg-[#176FEB] px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#1260D6]"
