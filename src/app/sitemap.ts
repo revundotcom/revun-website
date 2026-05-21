@@ -1,5 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/metadata';
+import { caCities } from '@/data/ca-cities';
+import { usCities } from '@/data/us-cities';
 
 const url = (path: string) => `${SITE_URL}${path}`;
 const d = new Date('2026-05-21');
@@ -19,6 +21,22 @@ function pages(
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  /* Canadian city URLs ────────────────────────────────────────────────── */
+  const caCityEntries: MetadataRoute.Sitemap = caCities.map((c) => ({
+    url: url(`/ca/${c.provinceSlug}/${c.slug}/`),
+    lastModified: d,
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }));
+
+  /* US city URLs ──────────────────────────────────────────────────────── */
+  const usCityEntries: MetadataRoute.Sitemap = usCities.map((c) => ({
+    url: url(`/us/${c.stateSlug}/${c.slug}/`),
+    lastModified: d,
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }));
+
   return [
     // ─── Core ───────────────────────────────────────────────────────
     { url: url('/'), lastModified: d, changeFrequency: 'weekly', priority: 1.0 },
@@ -42,17 +60,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       'leasing-companies', 'maintenance-companies', 'reits', 'tenants', 'internal-ops-teams',
     ], { changeFrequency: 'monthly', priority: 0.8 }),
 
-    // ─── Industries hub (sub-pages render as in-page sections) ──────
+    // ─── Industries hub + sub-pages ─────────────────────────────────
     { url: url('/industries/'), lastModified: d, changeFrequency: 'weekly', priority: 0.8 },
+    ...pages('/industries/', [
+      'reits-and-asset-managers', 'single-family-operators', 'multifamily-operators',
+      'student-housing', 'senior-living', 'vacation-rentals', 'commercial-property',
+      'affordable-housing', 'military-housing', 'mixed-use',
+    ], { changeFrequency: 'monthly', priority: 0.7 }),
 
-    // ─── Self-Manage ────────────────────────────────────────────────
+    // ─── Self-Manage hub + personas ─────────────────────────────────
     { url: url('/self-manage/'), lastModified: d, changeFrequency: 'weekly', priority: 0.9 },
     ...pages('/self-manage/', [
       'pricing', 'how-it-works', 'add-ons', 'get-started', 'faq',
     ], { changeFrequency: 'monthly', priority: 0.7 }),
+    ...pages('/self-manage/', [
+      'first-time-landlord', 'condo-landlord', 'house-landlord',
+      'furnished-rental', 'relocation-landlord', 'small-portfolio', 'investor-owner',
+    ], { changeFrequency: 'monthly', priority: 0.7 }),
 
-    // ─── Use Cases hub (sub-pages render as in-page sections) ───────
+    // ─── Use Cases hub + sub-pages ──────────────────────────────────
     { url: url('/use-cases/'), lastModified: d, changeFrequency: 'weekly', priority: 0.8 },
+    ...pages('/use-cases/', [
+      'tenant-screening', 'rent-collection', 'lease-management', 'maintenance-management',
+      'property-listing', 'showing-scheduling', 'owner-reporting', 'vendor-management',
+      'document-automation', 'communication-hub', 'accounting-integration', 'compliance-tracking',
+    ], { changeFrequency: 'monthly', priority: 0.7 }),
 
     // ─── Features ───────────────────────────────────────────────────
     { url: url('/features/'), lastModified: d, changeFrequency: 'weekly', priority: 0.8 },
@@ -118,20 +150,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url('/support/powered-by-revun/'), lastModified: d, changeFrequency: 'monthly', priority: 0.6 },
     { url: url('/support/self-manage/'), lastModified: d, changeFrequency: 'monthly', priority: 0.6 },
 
-    // ─── Canada (province hubs only; city sub-routes not yet built) ──
+    // ─── Canada (province hubs + city pages) ────────────────────────
     { url: url('/ca/'), lastModified: d, changeFrequency: 'weekly', priority: 0.8 },
     ...pages('/ca/', [
       'ontario', 'british-columbia', 'quebec', 'alberta', 'nova-scotia', 'manitoba',
       'saskatchewan', 'new-brunswick', 'prince-edward-island', 'newfoundland-and-labrador',
     ], { changeFrequency: 'monthly', priority: 0.7 }),
+    ...caCityEntries,
 
-    // ─── United States (state hubs only; city sub-routes not yet built) ──
+    // ─── United States (state hubs + city pages) ────────────────────
     { url: url('/us/'), lastModified: d, changeFrequency: 'weekly', priority: 0.8 },
     ...pages('/us/', [
       'florida', 'texas', 'california', 'new-york', 'illinois', 'georgia',
       'north-carolina', 'arizona', 'colorado', 'new-jersey', 'virginia',
       'washington', 'nevada', 'pennsylvania', 'ohio', 'michigan', 'massachusetts', 'tennessee',
     ], { changeFrequency: 'monthly', priority: 0.7 }),
+    ...usCityEntries,
 
     // ─── Legal ──────────────────────────────────────────────────────
     { url: url('/privacy/'), lastModified: d, changeFrequency: 'yearly', priority: 0.3 },
