@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://revun.com'),
   title: {
     default: 'Revun | The Operating System for Modern Property Operations',
-    template: '%s | Revun',
+    template: '%s',
   },
   description:
     'One platform for property management, leasing, maintenance, brokerage, and self-managing owners. Replace fragmented tools with Revun.',

@@ -802,15 +802,15 @@ export default function IndustriesPage() {
         <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-widest text-[#0A1628]">
-              Canadian coverage
+              North American coverage
             </p>
             <h2 className="mt-3 font-display text-4xl leading-[1.05] tracking-tight text-[#0A1628] md:text-5xl">
-              Every province.{' '}
-              <em className="font-normal text-[#0A1628]">Every territory.</em>
+              Across the United States{' '}
+              <em className="font-normal text-[#0A1628]">and Canada.</em>
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-[#555860]">
-              Revun ships tribunal-ready documents, bilingual leases, and
-              province-specific compliance from day one.
+              Revun ships jurisdiction ready documents, bilingual leases, and
+              state and province specific compliance from day one.
             </p>
           </div>
 
