@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Instrument_Sans, Instrument_Serif, Geist_Mono } from 'next/font/google'
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
 import { buildOrganizationSchema, buildWebSiteSchema, buildSoftwareApplicationSchema } from '@/lib/schema-builders'
 import { sanitizeJsonLd } from '@/lib/utils'
 import './globals.css'
@@ -129,6 +129,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         {process.env.NEXT_PUBLIC_GTM_ID && (
           <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
+        )}
+        {process.env.NEXT_PUBLIC_GA4_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA4_ID} />
         )}
         {children}
       </body>
