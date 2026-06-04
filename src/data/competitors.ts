@@ -62,7 +62,7 @@ export const DIMENSIONS: { key: string; label: string; revun: Verdict; revunNote
 
 const m = (key: string, competitor: Verdict, note: string): DimensionVerdict => ({ key, competitor, note })
 
-export const competitors: Record<string, Competitor> = {
+export const baseCompetitors: Record<string, Competitor> = {
   appfolio: {
     slug: 'appfolio',
     name: 'AppFolio',
@@ -545,4 +545,7 @@ export const competitors: Record<string, Competitor> = {
   },
 }
 
+import { generatedCompetitors } from './competitors-generated'
+
+export const competitors: Record<string, Competitor> = { ...baseCompetitors, ...generatedCompetitors }
 export const competitorSlugs = Object.keys(competitors)
