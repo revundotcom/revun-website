@@ -22,6 +22,7 @@ export const metadata: Metadata = {
 /* ── Page Data ───────────────────────────────────────────────────────────── */
 
 const pageData: CategoryPageData = {
+  slug: 'brokerage-software',
   eyebrow: 'Brokerage Software',
   h1: (
     <>

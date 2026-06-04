@@ -26,6 +26,17 @@ import {
   MaintenanceCompanyIcon,
 } from '@/lib/feature-icons'
 import { CTASection } from '@/components/blocks/cta-section'
+import { categoryFaqs } from '@/data/category-faqs-generated'
+import { buildFAQPageSchema } from '@/lib/schema-builders'
+import { sanitizeJsonLd } from '@/lib/utils'
+
+const RESOURCE_LINKS = [
+  { label: 'Landlord-tenant law by state', href: '/laws/' },
+  { label: 'State lease agreement requirements', href: '/forms/' },
+  { label: 'Free landlord calculators', href: '/tools/' },
+  { label: 'Property management glossary', href: '/glossary/' },
+  { label: 'Compare Revun to alternatives', href: '/compare/' },
+]
 
 /* ── Icon lookup ────────────────────────────────────────────────────────── */
 
@@ -67,6 +78,7 @@ export interface Differentiator {
 }
 
 export interface CategoryPageData {
+  slug?: string
   eyebrow: string
   h1: React.ReactNode
   subtitle: string
@@ -83,8 +95,17 @@ export interface CategoryPageData {
 /* ── Component ─────────────────────────────────────────────────────────── */
 
 export function CategorySEOPage({ data }: { data: CategoryPageData }) {
+  const faqs = data.slug ? categoryFaqs[data.slug] : undefined
   return (
     <>
+      {faqs && faqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: sanitizeJsonLd(buildFAQPageSchema(faqs.map((f) => ({ question: f.q, answer: f.a })))),
+          }}
+        />
+      )}
       {/* ─── Hero ─── */}
       <section className="relative overflow-hidden bg-[#F5F6F8]">
         <motion.div
@@ -293,6 +314,50 @@ export function CategorySEOPage({ data }: { data: CategoryPageData }) {
             </Link>
           </motion.div>
         </RevealOnScroll>
+      </section>
+
+      {/* ─── FAQ ─── */}
+      {faqs && faqs.length > 0 && (
+        <section className="bg-white py-12">
+          <div className="mx-auto max-w-3xl px-6">
+            <RevealOnScroll className="mb-8 text-center">
+              <motion.p variants={revealItem} className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">
+                FAQ
+              </motion.p>
+              <motion.h2 variants={revealItem} className="font-heading text-3xl font-bold tracking-tight text-[#2C2E33] sm:text-4xl">
+                Common questions
+              </motion.h2>
+            </RevealOnScroll>
+            <RevealOnScroll stagger={0.06} className="space-y-4">
+              {faqs.map((f) => (
+                <motion.div key={f.q} variants={revealItem} className="rounded-2xl border border-[#D3D5DB] bg-[#F5F6F8] p-6">
+                  <h3 className="font-heading text-base font-bold text-[#2C2E33]">{f.q}</h3>
+                  <p className="mt-2 text-[0.938rem] leading-relaxed text-[#555860]">{f.a}</p>
+                </motion.div>
+              ))}
+            </RevealOnScroll>
+          </div>
+        </section>
+      )}
+
+      {/* ─── Explore more resources (internal links) ─── */}
+      <section className="bg-white pb-12">
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="rounded-2xl border border-[#D3D5DB] bg-[#F5F6F8] p-6 md:p-8">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">Explore more</p>
+            <div className="flex flex-wrap gap-3">
+              {RESOURCE_LINKS.map((r) => (
+                <Link
+                  key={r.href}
+                  href={r.href}
+                  className="inline-flex items-center rounded-xl border border-[#D3D5DB] bg-white px-4 py-2.5 text-sm font-semibold text-[#2C2E33] transition-colors duration-150 hover:border-[#176FEB]/40"
+                >
+                  {r.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* ─── CTA ─── */}

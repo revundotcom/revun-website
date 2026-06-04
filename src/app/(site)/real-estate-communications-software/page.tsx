@@ -22,6 +22,7 @@ export const metadata: Metadata = {
 /* ── Page Data ───────────────────────────────────────────────────────────── */
 
 const pageData: CategoryPageData = {
+  slug: 'real-estate-communications-software',
   eyebrow: 'Real Estate Communications Software',
   h1: (
     <>

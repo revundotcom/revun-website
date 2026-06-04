@@ -22,6 +22,7 @@ export const metadata: Metadata = {
 /* ── Page Data ───────────────────────────────────────────────────────────── */
 
 const pageData: CategoryPageData = {
+  slug: 'ai-property-management-software',
   eyebrow: 'AI Property Management Software',
   h1: (
     <>

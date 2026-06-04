@@ -22,6 +22,7 @@ export const metadata: Metadata = {
 /* ── Page Data ───────────────────────────────────────────────────────────── */
 
 const pageData: CategoryPageData = {
+  slug: 'owner-portal',
   eyebrow: 'Owner Portal Software',
   h1: (
     <>
