@@ -29,7 +29,7 @@ export interface BlogPost {
   related: { label: string; href: string }[]
 }
 
-export const blogPosts: Record<string, BlogPost> = {
+export const baseBlogPosts: Record<string, BlogPost> = {
   'best-property-management-software-for-small-landlords': {
     slug: 'best-property-management-software-for-small-landlords',
     title: 'Best Property Management Software for Small Landlords',
@@ -340,4 +340,7 @@ export const blogPosts: Record<string, BlogPost> = {
   },
 }
 
+import { generatedBlogPosts } from './blog-posts-generated'
+
+export const blogPosts: Record<string, BlogPost> = { ...baseBlogPosts, ...generatedBlogPosts }
 export const blogSlugs = Object.keys(blogPosts)
