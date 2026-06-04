@@ -7,6 +7,7 @@ import { blogSlugs } from '@/data/blog-posts';
 import { stateLawSlugs } from '@/data/state-laws';
 import { toolSlugs } from '@/data/tools';
 import { glossarySlugs } from '@/data/glossary';
+import { formSlugs } from '@/data/forms';
 
 const url = (path: string) => `${SITE_URL}${path}`;
 const d = new Date('2026-05-21');
@@ -134,6 +135,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ─── Tools / calculators (hub + tools) ──────────────────────────
     { url: url('/tools/'), lastModified: d, changeFrequency: 'monthly', priority: 0.7 },
     ...pages('/tools/', toolSlugs, { changeFrequency: 'monthly', priority: 0.6 }),
+
+    // ─── Lease Forms (hub + state guides) ───────────────────────────
+    { url: url('/forms/'), lastModified: d, changeFrequency: 'weekly', priority: 0.7 },
+    ...pages('/forms/', formSlugs, { changeFrequency: 'monthly', priority: 0.6 }),
 
     // ─── Glossary (hub + terms) ─────────────────────────────────────
     { url: url('/glossary/'), lastModified: d, changeFrequency: 'monthly', priority: 0.7 },
