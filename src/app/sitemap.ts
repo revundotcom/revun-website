@@ -5,6 +5,8 @@ import { usCities } from '@/data/us-cities';
 import { competitorSlugs } from '@/data/competitors';
 import { blogSlugs } from '@/data/blog-posts';
 import { stateLawSlugs } from '@/data/state-laws';
+import { toolSlugs } from '@/data/tools';
+import { glossarySlugs } from '@/data/glossary';
 
 const url = (path: string) => `${SITE_URL}${path}`;
 const d = new Date('2026-05-21');
@@ -128,6 +130,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url('/wallet/'), lastModified: d, changeFrequency: 'monthly', priority: 0.7 },
     { url: url('/wallet/pay/'), lastModified: d, changeFrequency: 'monthly', priority: 0.6 },
     { url: url('/wallet/receipt/'), lastModified: d, changeFrequency: 'monthly', priority: 0.6 },
+
+    // ─── Tools / calculators (hub + tools) ──────────────────────────
+    { url: url('/tools/'), lastModified: d, changeFrequency: 'monthly', priority: 0.7 },
+    ...pages('/tools/', toolSlugs, { changeFrequency: 'monthly', priority: 0.6 }),
+
+    // ─── Glossary (hub + terms) ─────────────────────────────────────
+    { url: url('/glossary/'), lastModified: d, changeFrequency: 'monthly', priority: 0.7 },
+    ...pages('/glossary/', glossarySlugs, { changeFrequency: 'monthly', priority: 0.5 }),
 
     // ─── Landlord-Tenant Law (hub + state guides) ───────────────────
     { url: url('/laws/'), lastModified: d, changeFrequency: 'weekly', priority: 0.8 },
