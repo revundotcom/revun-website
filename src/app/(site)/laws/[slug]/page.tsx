@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { ArrowRight, ShieldCheck, Scale, FileText, AlertCircle, HelpCircle } from 'lucide-react'
+import { ArrowRight, ShieldCheck, Scale, FileText, AlertCircle, HelpCircle, Building2, Users, DollarSign, MapPin } from 'lucide-react'
 import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
 import { buildBreadcrumbSchema, buildFAQPageSchema, buildArticleSchema } from '@/lib/schema-builders'
 import { RevealOnScroll } from '@/components/ui/reveal-on-scroll'
@@ -10,6 +10,24 @@ import { stateLaws, stateLawSlugs } from '@/data/state-laws'
 
 export function generateStaticParams() {
   return stateLawSlugs.map((slug) => ({ slug }))
+}
+
+/* Render **bolded** key phrases inside body copy as <strong>. */
+function RichText({ text }: { text: string }) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g)
+  return (
+    <>
+      {parts.map((p, i) =>
+        p.startsWith('**') && p.endsWith('**') ? (
+          <strong key={i} className="font-semibold text-brand-graphite">
+            {p.slice(2, -2)}
+          </strong>
+        ) : (
+          <span key={i}>{p}</span>
+        )
+      )}
+    </>
+  )
 }
 
 type Props = { params: Promise<{ slug: string }> }
@@ -114,6 +132,55 @@ export default async function StateLawPage({ params }: Props) {
         </div>
       </section>
 
+      {/* ── Local market snapshot (uniqueness: real per-state data) ──────── */}
+      {law.localData && (
+        <section className="bg-white pt-10 md:pt-14">
+          <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+            <div className="rounded-2xl border border-border bg-brand-off-white p-6 md:p-8">
+              <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-brand-blue">
+                {law.state} rental market snapshot
+              </p>
+              <h2 className="font-heading text-xl font-bold text-brand-graphite">
+                The numbers behind {law.state} rentals
+              </h2>
+              <div className="mt-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
+                <div className="flex items-start gap-3">
+                  <Building2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-blue" />
+                  <div>
+                    <p className="text-xs text-[#94A3B8]">Population</p>
+                    <p className="text-sm font-bold text-brand-graphite">{law.localData.population}</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Users className="mt-0.5 h-5 w-5 shrink-0 text-brand-blue" />
+                  <div>
+                    <p className="text-xs text-[#94A3B8]">Renter households</p>
+                    <p className="text-sm font-bold text-brand-graphite">{law.localData.renterShare}</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <DollarSign className="mt-0.5 h-5 w-5 shrink-0 text-brand-blue" />
+                  <div>
+                    <p className="text-xs text-[#94A3B8]">Median rent</p>
+                    <p className="text-sm font-bold text-brand-graphite">{law.localData.medianRent}</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-brand-blue" />
+                  <div>
+                    <p className="text-xs text-[#94A3B8]">Largest rental markets</p>
+                    <p className="text-sm font-bold text-brand-graphite">{law.localData.metros.join(', ')}</p>
+                  </div>
+                </div>
+              </div>
+              <p className="mt-5 text-sm leading-relaxed text-[#475569]">
+                <RichText text={law.localData.marketNote} />
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── Body: TOC + topics ───────────────────────────────────────────── */}
       <section className="bg-white py-12 md:py-16">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 md:px-6 lg:grid-cols-[220px_1fr] lg:px-8">
@@ -142,7 +209,7 @@ export default async function StateLawPage({ params }: Props) {
                   </h2>
                   {t.paragraphs.map((p, i) => (
                     <p key={i} className="mt-5 text-base leading-relaxed text-[#475569]">
-                      {p}
+                      <RichText text={p} />
                     </p>
                   ))}
                   {t.bullets && (
