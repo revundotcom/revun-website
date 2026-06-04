@@ -279,6 +279,9 @@ export default async function StateLawPage({ params }: Props) {
             <Link href="/use-cases/lease-management/" className="inline-flex items-center gap-2 rounded-xl border border-border bg-brand-off-white px-5 py-3 text-sm font-semibold text-brand-graphite transition-colors hover:border-brand-blue/40">
               Lease management <ArrowRight className="h-4 w-4 text-brand-blue" />
             </Link>
+            <Link href={`/forms/${law.slug.replace('-landlord-tenant-law', '-residential-lease-agreement')}/`} className="inline-flex items-center gap-2 rounded-xl border border-border bg-brand-off-white px-5 py-3 text-sm font-semibold text-brand-graphite transition-colors hover:border-brand-blue/40">
+              {law.state} lease agreement requirements <ArrowRight className="h-4 w-4 text-brand-blue" />
+            </Link>
             <Link href="/laws/" className="inline-flex items-center gap-2 rounded-xl border border-border bg-brand-off-white px-5 py-3 text-sm font-semibold text-brand-graphite transition-colors hover:border-brand-blue/40">
               All state guides <ArrowRight className="h-4 w-4 text-brand-blue" />
             </Link>
