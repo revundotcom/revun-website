@@ -17,7 +17,16 @@ import {
 } from 'lucide-react'
 import { RevealOnScroll } from '@/components/ui/reveal-on-scroll'
 import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
-import { buildBreadcrumbSchema, buildWebPageSchema } from '@/lib/schema-builders'
+import { buildBreadcrumbSchema, buildWebPageSchema, buildFAQPageSchema } from '@/lib/schema-builders'
+import { categoryFaqs } from '@/data/category-faqs-generated'
+
+const RESOURCE_LINKS = [
+  { label: 'Landlord-tenant law by state', href: '/laws/' },
+  { label: 'State lease agreement requirements', href: '/forms/' },
+  { label: 'Free landlord calculators', href: '/tools/' },
+  { label: 'Property management glossary', href: '/glossary/' },
+  { label: 'Compare Revun to alternatives', href: '/compare/' },
+]
 
 export const metadata: Metadata = {
   title: 'Accounting & Financial Operations | Revun',
@@ -127,8 +136,17 @@ const replacements = [
 /* ── Page ──────────────────────────────────────────────────────────────── */
 
 export default function AccountingPage() {
+  const faqs = categoryFaqs['accounting'] ?? []
   return (
     <>
+      {faqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: sanitizeJsonLd(buildFAQPageSchema(faqs.map((f) => ({ question: f.q, answer: f.a })))),
+          }}
+        />
+      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -296,6 +314,42 @@ export default function AccountingPage() {
               })}
             </div>
           </RevealOnScroll>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      {faqs.length > 0 && (
+        <section className="bg-white py-12 md:py-20">
+          <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8">
+            <RevealOnScroll className="mb-8 text-center">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">FAQ</p>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold tracking-tight text-[#2C2E33]">Common questions</h2>
+            </RevealOnScroll>
+            <RevealOnScroll stagger={0.06} className="space-y-4">
+              {faqs.map((f) => (
+                <div key={f.q} className="rounded-2xl border border-[#D3D5DB] bg-[#F5F6F8] p-6">
+                  <h3 className="font-heading text-base font-bold text-[#2C2E33]">{f.q}</h3>
+                  <p className="mt-2 text-[0.938rem] leading-relaxed text-[#555860]">{f.a}</p>
+                </div>
+              ))}
+            </RevealOnScroll>
+          </div>
+        </section>
+      )}
+
+      {/* ── Explore more ── */}
+      <section className="bg-white pb-12">
+        <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
+          <div className="rounded-2xl border border-[#D3D5DB] bg-[#F5F6F8] p-6 md:p-8">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-[#176FEB]">Explore more</p>
+            <div className="flex flex-wrap gap-3">
+              {RESOURCE_LINKS.map((r) => (
+                <Link key={r.href} href={r.href} className="inline-flex items-center rounded-xl border border-[#D3D5DB] bg-white px-4 py-2.5 text-sm font-semibold text-[#2C2E33] transition-colors hover:border-[#176FEB]/40">
+                  {r.label}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
