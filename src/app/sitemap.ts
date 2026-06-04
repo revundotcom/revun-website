@@ -3,6 +3,7 @@ import { SITE_URL } from '@/lib/metadata';
 import { caCities } from '@/data/ca-cities';
 import { usCities } from '@/data/us-cities';
 import { competitorSlugs } from '@/data/competitors';
+import { blogSlugs } from '@/data/blog-posts';
 
 const url = (path: string) => `${SITE_URL}${path}`;
 const d = new Date('2026-05-21');
@@ -42,11 +43,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ─── Core ───────────────────────────────────────────────────────
     { url: url('/'), lastModified: d, changeFrequency: 'weekly', priority: 1.0 },
     { url: url('/pricing/'), lastModified: d, changeFrequency: 'weekly', priority: 0.9 },
+    { url: url('/reviews/'), lastModified: d, changeFrequency: 'weekly', priority: 0.8 },
     { url: url('/about/'), lastModified: d, changeFrequency: 'monthly', priority: 0.7 },
     { url: url('/contact/'), lastModified: d, changeFrequency: 'monthly', priority: 0.7 },
     { url: url('/resources/'), lastModified: d, changeFrequency: 'weekly', priority: 0.7 },
     { url: url('/demo/'), lastModified: d, changeFrequency: 'monthly', priority: 0.8 },
     { url: url('/events/'), lastModified: d, changeFrequency: 'monthly', priority: 0.6 },
+    ...pages('/resources/', blogSlugs, { changeFrequency: 'monthly', priority: 0.6 }),
 
     // ─── Entity / Branded ───────────────────────────────────────────
     { url: url('/what-is-revun/'), lastModified: d, changeFrequency: 'monthly', priority: 0.8 },
