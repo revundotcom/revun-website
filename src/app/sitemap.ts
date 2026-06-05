@@ -8,6 +8,7 @@ import { stateLawSlugs } from '@/data/state-laws';
 import { toolSlugs } from '@/data/tools';
 import { glossarySlugs } from '@/data/glossary';
 import { formSlugs } from '@/data/forms';
+import { evictionSlugs } from '@/data/evictions';
 
 const url = (path: string) => `${SITE_URL}${path}`;
 const d = new Date('2026-05-21');
@@ -135,6 +136,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ─── Tools / calculators (hub + tools) ──────────────────────────
     { url: url('/tools/'), lastModified: d, changeFrequency: 'monthly', priority: 0.7 },
     ...pages('/tools/', toolSlugs, { changeFrequency: 'monthly', priority: 0.6 }),
+
+    // ─── Evictions (hub + state guides) ─────────────────────────────
+    { url: url('/evictions/'), lastModified: d, changeFrequency: 'weekly', priority: 0.8 },
+    ...pages('/evictions/', evictionSlugs, { changeFrequency: 'monthly', priority: 0.7 }),
 
     // ─── Lease Forms (hub + state guides) ───────────────────────────
     { url: url('/forms/'), lastModified: d, changeFrequency: 'weekly', priority: 0.7 },
