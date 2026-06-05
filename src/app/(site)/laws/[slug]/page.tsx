@@ -109,7 +109,14 @@ export default async function StateLawPage({ params }: Props) {
             <h1 className="font-display text-3xl font-extrabold text-white md:text-5xl lg:text-6xl">
               {law.state} Landlord-Tenant Law
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-white/80">{law.intro}</p>
+            {law.quickAnswer ? (
+              <div className="mt-6 rounded-2xl border border-white/15 bg-white/5 p-5 md:p-6">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-white/70">Quick answer</p>
+                <p className="text-base leading-relaxed text-white/90"><RichText text={law.quickAnswer} /></p>
+              </div>
+            ) : (
+              <p className="mt-6 text-lg leading-relaxed text-white/80">{law.intro}</p>
+            )}
             <div className="mt-6 inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white/90">
               <ShieldCheck className="h-4 w-4" />
               {law.landlordFriendliness}

@@ -43,7 +43,8 @@ export interface StateLaw {
   landlordFriendliness: string
   statute: string
   statuteUrl: string
-  intro: string
+  intro?: string
+  quickAnswer?: string
   quickFacts: LawQuickFact[]
   topics: LawTopic[]
   faqs: { q: string; a: string }[]

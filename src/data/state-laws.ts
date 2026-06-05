@@ -18,8 +18,8 @@ import { baseStateLaws, type StateLaw } from './state-laws-base'
 import { generatedStateLaws } from './state-laws-generated'
 
 export const stateLaws: Record<string, StateLaw> = {
-  ...generatedStateLaws,
-  ...baseStateLaws, // hand-verified flagship states win on any slug collision
+  ...baseStateLaws,
+  ...generatedStateLaws, // retrofit (SERP-spec, all 51) wins on any slug collision
 }
 
 /* Sorted alphabetically by state name for stable hub + sitemap ordering. */
