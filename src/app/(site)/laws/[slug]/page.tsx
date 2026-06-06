@@ -6,6 +6,7 @@ import { ArrowRight, ShieldCheck, Scale, FileText, AlertCircle, HelpCircle, Buil
 import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
 import { buildBreadcrumbSchema, buildFAQPageSchema, buildArticleSchema } from '@/lib/schema-builders'
 import { RevealOnScroll } from '@/components/ui/reveal-on-scroll'
+import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { stateLaws, stateLawSlugs } from '@/data/state-laws'
 
 export function generateStaticParams() {
@@ -89,6 +90,8 @@ export default async function StateLawPage({ params }: Props) {
           ),
         }}
       />
+
+      <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Landlord-Tenant Law', href: '/laws/' }, { name: law.state }]} />
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-[#0A1628]">

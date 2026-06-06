@@ -5,6 +5,7 @@ import { ArrowRight, Zap, Scale, Ban, Clock, DollarSign, ShieldAlert, HelpCircle
 import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
 import { buildBreadcrumbSchema, buildFAQPageSchema, buildArticleSchema } from '@/lib/schema-builders'
 import { RevealOnScroll } from '@/components/ui/reveal-on-scroll'
+import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { evictions, evictionSlugs } from '@/data/evictions'
 
 export function generateStaticParams() {
@@ -60,6 +61,8 @@ export default async function EvictionGuidePage({ params }: Props) {
         datePublished: '2026-06-04', dateModified: '2026-06-04', url: pageUrl, category: 'Eviction',
       })) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: sanitizeJsonLd(buildFAQPageSchema(e.faqs.map((f) => ({ question: f.q, answer: f.a })))) }} />
+
+      <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Evictions', href: '/evictions/' }, { name: e.state }]} />
 
       {/* Hero + quick answer (the box top rankers lack) */}
       <section className="bg-[#0A1628]">

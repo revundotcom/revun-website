@@ -55,6 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url('/demo/'), lastModified: d, changeFrequency: 'monthly', priority: 0.8 },
     { url: url('/events/'), lastModified: d, changeFrequency: 'monthly', priority: 0.6 },
     ...pages('/resources/', blogSlugs, { changeFrequency: 'monthly', priority: 0.6 }),
+    { url: url('/reports/2026-rental-market-report/'), lastModified: d, changeFrequency: 'monthly', priority: 0.7 },
 
     // ─── Entity / Branded ───────────────────────────────────────────
     { url: url('/what-is-revun/'), lastModified: d, changeFrequency: 'monthly', priority: 0.8 },

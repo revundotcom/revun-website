@@ -5,6 +5,7 @@ import { ArrowRight, FileText, Check, Ban, Lightbulb, HelpCircle, AlertCircle } 
 import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
 import { buildBreadcrumbSchema, buildFAQPageSchema, buildArticleSchema } from '@/lib/schema-builders'
 import { RevealOnScroll } from '@/components/ui/reveal-on-scroll'
+import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { forms, formSlugs } from '@/data/forms'
 
 export function generateStaticParams() {
@@ -59,6 +60,8 @@ export default async function FormPageView({ params }: Props) {
         url: pageUrl, category: 'Lease Forms',
       })) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: sanitizeJsonLd(buildFAQPageSchema(f.faqs.map((q) => ({ question: q.q, answer: q.a })))) }} />
+
+      <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Lease Forms', href: '/forms/' }, { name: f.state }]} />
 
       {/* Hero */}
       <section className="bg-[#F5F6F8]">
