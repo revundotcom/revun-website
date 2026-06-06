@@ -17,6 +17,7 @@ export interface FormPage {
 }
 
 import { generatedForms } from './forms-generated'
+import { caForms } from './forms-ca-generated'
 
-export const forms: Record<string, FormPage> = generatedForms
+export const forms: Record<string, FormPage> = { ...generatedForms, ...caForms }
 export const formSlugs = Object.keys(forms).sort((a, b) => forms[a].state.localeCompare(forms[b].state))

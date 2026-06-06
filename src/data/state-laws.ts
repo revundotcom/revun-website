@@ -16,10 +16,12 @@ export type {
 
 import { baseStateLaws, type StateLaw } from './state-laws-base'
 import { generatedStateLaws } from './state-laws-generated'
+import { caStateLaws } from './state-laws-ca-generated'
 
 export const stateLaws: Record<string, StateLaw> = {
   ...baseStateLaws,
-  ...generatedStateLaws, // retrofit (SERP-spec, all 51) wins on any slug collision
+  ...generatedStateLaws, // US retrofit (SERP-spec, all 51) wins on any slug collision
+  ...caStateLaws, // Canadian provinces + territories (13)
 }
 
 /* Sorted alphabetically by state name for stable hub + sitemap ordering. */

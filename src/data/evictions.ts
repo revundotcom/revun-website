@@ -24,8 +24,9 @@ export interface EvictionGuide {
 }
 
 import { generatedEvictions } from './evictions-generated'
+import { caEvictions } from './evictions-ca-generated'
 
-export const evictions: Record<string, EvictionGuide> = generatedEvictions
+export const evictions: Record<string, EvictionGuide> = { ...generatedEvictions, ...caEvictions }
 export const evictionSlugs = Object.keys(evictions).sort((a, b) =>
   evictions[a].state.localeCompare(evictions[b].state)
 )
