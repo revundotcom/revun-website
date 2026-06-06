@@ -69,7 +69,14 @@ export default async function FormPageView({ params }: Props) {
           <h1 className="font-display text-3xl font-extrabold text-[#0A1628] md:text-5xl">
             {f.state} Residential Lease Agreement
           </h1>
-          <p className="mt-6 text-lg leading-relaxed text-[#475569]"><Rich text={f.intro} /></p>
+          {f.quickAnswer ? (
+            <div className="mt-6 rounded-2xl border border-brand-blue/30 bg-brand-blue/5 p-5 md:p-6">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-brand-blue">Quick answer</p>
+              <p className="text-base leading-relaxed text-[#334155]"><Rich text={f.quickAnswer} /></p>
+            </div>
+          ) : (
+            <p className="mt-6 text-lg leading-relaxed text-[#475569]"><Rich text={f.intro} /></p>
+          )}
         </div>
       </section>
 

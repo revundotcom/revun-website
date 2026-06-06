@@ -6,6 +6,7 @@ export interface FormPage {
   metaTitle: string
   description: string
   intro: string
+  quickAnswer?: string
   requiredDisclosures: { name: string; detail: string }[]
   mandatoryClauses: string[]
   prohibitedTerms: string[]
