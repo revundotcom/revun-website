@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: law.metaTitle,
     description: law.description,
     alternates: { canonical: url },
-    openGraph: { title: law.metaTitle, description: law.description, url, type: 'article' },
+    openGraph: { title: law.metaTitle, description: law.description, url, type: 'article', images: ['/og-default.png'] },
   }
 }
 

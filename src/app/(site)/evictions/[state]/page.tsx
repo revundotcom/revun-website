@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: e.metaTitle,
     description: e.description,
     alternates: { canonical: url },
-    openGraph: { title: e.metaTitle, description: e.description, url, type: 'article' },
+    openGraph: { title: e.metaTitle, description: e.description, url, type: 'article', images: ['/og-default.png'] },
   }
 }
 
