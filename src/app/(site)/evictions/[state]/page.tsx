@@ -28,12 +28,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 /* Bold **key** phrases; keep copy answer-first and scannable. */
-function Rich({ text }: { text: string }) {
+function Rich({ text, dark }: { text: string; dark?: boolean }) {
   return (
     <>
       {text.split(/(\*\*[^*]+\*\*)/g).map((p, i) =>
         p.startsWith('**') && p.endsWith('**') ? (
-          <strong key={i} className="font-semibold text-brand-graphite">{p.slice(2, -2)}</strong>
+          <strong key={i} className={dark ? 'font-semibold text-white' : 'font-semibold text-brand-graphite'}>{p.slice(2, -2)}</strong>
         ) : (
           <span key={i}>{p}</span>
         )
@@ -77,7 +77,7 @@ export default async function EvictionGuidePage({ params }: Props) {
             <p className="mb-2 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/70">
               <Zap className="h-4 w-4 text-white" /> Quick answer
             </p>
-            <p className="text-base leading-relaxed text-white/90"><Rich text={e.quickAnswer} /></p>
+            <p className="text-base leading-relaxed text-white/90"><Rich text={e.quickAnswer} dark /></p>
           </div>
         </div>
       </section>

@@ -14,13 +14,13 @@ export function generateStaticParams() {
 }
 
 /* Render **bolded** key phrases inside body copy as <strong>. */
-function RichText({ text }: { text: string }) {
+function RichText({ text, dark }: { text: string; dark?: boolean }) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g)
   return (
     <>
       {parts.map((p, i) =>
         p.startsWith('**') && p.endsWith('**') ? (
-          <strong key={i} className="font-semibold text-brand-graphite">
+          <strong key={i} className={dark ? 'font-semibold text-white' : 'font-semibold text-brand-graphite'}>
             {p.slice(2, -2)}
           </strong>
         ) : (
@@ -115,7 +115,7 @@ export default async function StateLawPage({ params }: Props) {
             {law.quickAnswer ? (
               <div className="mt-6 rounded-2xl border border-white/15 bg-white/5 p-5 md:p-6">
                 <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-white/70">Quick answer</p>
-                <p className="text-base leading-relaxed text-white/90"><RichText text={law.quickAnswer} /></p>
+                <p className="text-base leading-relaxed text-white/90"><RichText text={law.quickAnswer} dark /></p>
               </div>
             ) : (
               <p className="mt-6 text-lg leading-relaxed text-white/80">{law.intro}</p>
