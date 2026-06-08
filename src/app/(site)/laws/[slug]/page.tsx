@@ -8,6 +8,8 @@ import { buildBreadcrumbSchema, buildFAQPageSchema, buildArticleSchema } from '@
 import { RevealOnScroll } from '@/components/ui/reveal-on-scroll'
 import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { stateLaws, stateLawSlugs } from '@/data/state-laws'
+import { usCities } from '@/data/us-cities'
+import { caCities } from '@/data/ca-cities'
 
 export function generateStaticParams() {
   return stateLawSlugs.map((slug) => ({ slug }))
@@ -52,6 +54,12 @@ export default async function StateLawPage({ params }: Props) {
   if (!law) notFound()
 
   const pageUrl = `https://revun.com/laws/${law.slug}/`
+  const geoSlug = law.slug.replace('-landlord-tenant-law', '')
+  const usCity = usCities.filter((c) => c.stateSlug === geoSlug)
+  const caCity = caCities.filter((c) => c.provinceSlug === geoSlug)
+  const cityLinks = usCity.length
+    ? usCity.map((c) => ({ name: c.name, href: `/us/${c.stateSlug}/${c.slug}/` }))
+    : caCity.map((c) => ({ name: c.name, href: `/ca/${c.provinceSlug}/${c.slug}/` }))
 
   return (
     <>
@@ -275,6 +283,22 @@ export default async function StateLawPage({ params }: Props) {
       </section>
 
       {/* ── Product tie-in ───────────────────────────────────────────────── */}
+      {cityLinks.length > 0 && (
+        <section className="bg-white py-12 md:py-16">
+          <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
+            <h2 className="font-heading text-xl font-bold text-brand-graphite">Property management in {law.state} cities</h2>
+            <p className="mt-3 text-sm leading-relaxed text-[#475569]">Revun serves landlords and property managers across {law.state}.</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {cityLinks.map((c) => (
+                <Link key={c.href} href={c.href} className="rounded-lg border border-border bg-brand-off-white px-3 py-1.5 text-sm text-brand-blue transition-colors hover:border-brand-blue/40">
+                  {c.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="bg-white py-12 md:py-16">
         <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <h2 className="font-heading text-xl font-bold text-brand-graphite">Stay compliant automatically</h2>

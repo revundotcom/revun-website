@@ -6,6 +6,7 @@ import { z } from 'zod/v4'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Loader2, CheckCircle2, AlertCircle } from 'lucide-react'
+import { trackDemoRequest } from '@/lib/analytics'
 
 /* ── Schema ── */
 
@@ -67,6 +68,7 @@ export function DemoForm() {
     await new Promise((resolve) => setTimeout(resolve, 1200))
 
     setStatus('success')
+    trackDemoRequest()
     reset()
   }
 

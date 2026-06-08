@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Loader2, CheckCircle2, AlertCircle } from 'lucide-react'
+import { trackContactFormSubmit } from '@/lib/analytics'
 
 /* ── Schema ── */
 
@@ -80,6 +81,7 @@ export function ContactForm() {
 
       setStatus('success')
       setServerMessage(json.message || 'Message sent successfully.')
+      trackContactFormSubmit(data.role)
       reset()
     } catch {
       setStatus('error')
