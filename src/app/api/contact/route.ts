@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod/v4'
 import { getClientIp, isRateLimited } from '@/lib/rate-limit'
+import { sendLead } from '@/lib/email'
 
 const NO_STORE = { 'cache-control': 'no-store' } as const
 
@@ -51,17 +52,7 @@ export async function POST(request: Request) {
 
     const { name, email, company, portfolio_size, role, message } = parsed.data
 
-    // TODO: Replace with email service (Resend, SendGrid, etc.)
-    // eslint-disable-next-line no-console
-    console.info('[Contact Form Submission]', {
-      name,
-      email,
-      company: company || '(none)',
-      portfolio_size,
-      role,
-      message,
-      timestamp: new Date().toISOString(),
-    })
+    await sendLead('contact', { name, email, company, portfolio_size, role, message })
 
     return NextResponse.json(
       { message: 'Thank you. We will be in touch within one business day.' },

@@ -61,15 +61,24 @@ export function DemoForm() {
     },
   })
 
-  async function onSubmit(_data: DemoFormData) {
+  async function onSubmit(data: DemoFormData) {
     setStatus('loading')
-
-    // Simulate submission delay
-    await new Promise((resolve) => setTimeout(resolve, 1200))
-
-    setStatus('success')
-    trackDemoRequest()
-    reset()
+    try {
+      const res = await fetch('/api/demo/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) {
+        setStatus('error')
+        return
+      }
+      setStatus('success')
+      trackDemoRequest(data.role)
+      reset()
+    } catch {
+      setStatus('error')
+    }
   }
 
   if (status === 'success') {
