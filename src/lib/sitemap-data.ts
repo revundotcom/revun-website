@@ -67,7 +67,7 @@ export const sitemapGroups: Record<string, () => MetadataRoute.Sitemap> = {
   ],
   integrations: () => [
     e('/integrations/', 0.8, 'weekly'),
-    ...pages('/integrations/', ['quickbooks','xero','sage-intacct','netsuite','zoho-books','zoho-crm','zoho-desk','salesforce','hubspot','pipedrive','twilio','ringcentral','openphone','dialpad','aircall','zoom-phone','intercom','zendesk','freshdesk','stripe','plaid','interac','klarna','affirm','paybright','persona','trustii','flinks','singlekey-integration','equifax','transunion','checkr','docusign','dropbox-sign','adobe-sign','slack','zapier','make','microsoft-365','google-workspace','calendly','google-calendar','google-maps','mapbox','brokerbay','mls-idx'], { changeFrequency: 'monthly', priority: 0.6 }),
+    ...pages('/integrations/', ['quickbooks','salesforce','twilio','docusign','stripe','zapier'], { changeFrequency: 'monthly', priority: 0.6 }),
   ],
   'locations-us': () => [
     e('/us/', 0.8, 'weekly'),
