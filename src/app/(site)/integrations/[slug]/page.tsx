@@ -5,9 +5,114 @@ import { ArrowRight, Check, Plug, Zap } from 'lucide-react'
 import { buildCanonicalUrl, sanitizeJsonLd } from '@/lib/utils'
 import { RevealOnScroll } from '@/components/ui/reveal-on-scroll'
 
+/* ------------------------------------------------------------------ */
+/*                             Data                                    */
+/* ------------------------------------------------------------------ */
 
-import { integrationData, type SetupDifficulty } from '@/data/integrations'
+type SetupDifficulty = 'Easy' | 'Medium' | 'Advanced'
 
+interface IntegrationDetail {
+  name: string
+  slug: string
+  category: string
+  description: string
+  features: string[]
+  setup: SetupDifficulty
+  status: 'Available' | 'Coming Soon' | 'Beta'
+}
+
+const integrationData: Record<string, IntegrationDetail> = {
+  quickbooks: {
+    name: 'QuickBooks',
+    slug: 'quickbooks',
+    category: 'Accounting',
+    description:
+      'Automatically sync rent payments, invoices, expenses, and vendor bills between Revun and QuickBooks Online. Eliminate double-entry and keep your books current in real time.',
+    features: [
+      'Automatic two-way sync of invoices and payments',
+      'Map Revun properties to QuickBooks classes and locations',
+      'Real-time expense categorization and GL mapping',
+      'Owner statement data pushed directly to QuickBooks',
+    ],
+    setup: 'Easy',
+    status: 'Available',
+  },
+  salesforce: {
+    name: 'Salesforce',
+    slug: 'salesforce',
+    category: 'CRM',
+    description:
+      'Push lead data, deal pipeline updates, and owner communications from Revun into Salesforce. Keep your sales and property management teams on the same page.',
+    features: [
+      'Automatic lead creation from Revun inquiries',
+      'Custom field mapping for property and unit data',
+      'Bi-directional contact and deal sync',
+      'Activity timeline sync for full audit trail',
+    ],
+    setup: 'Medium',
+    status: 'Available',
+  },
+  twilio: {
+    name: 'Twilio',
+    slug: 'twilio',
+    category: 'Communications',
+    description:
+      'Power tenant and owner communications with Twilio. Send automated SMS reminders, voice calls for maintenance updates, and WhatsApp messages, all from within Revun.',
+    features: [
+      'Automated SMS rent reminders and lease notifications',
+      'Programmable voice for maintenance callback routing',
+      'WhatsApp Business messaging for tenant comms',
+      'Delivery tracking and message analytics',
+    ],
+    setup: 'Medium',
+    status: 'Available',
+  },
+  docusign: {
+    name: 'DocuSign',
+    slug: 'docusign',
+    category: 'Documents',
+    description:
+      'Electronic lease signing and document management with DocuSign. Send, sign, and store leases, amendments, and compliance documents directly within Revun.',
+    features: [
+      'E-signature for leases and amendments',
+      'Template library with auto-populated fields',
+      'Audit trail and completion tracking',
+      'Mobile signing for tenants and owners',
+    ],
+    setup: 'Easy',
+    status: 'Available',
+  },
+  stripe: {
+    name: 'Stripe',
+    slug: 'stripe',
+    category: 'Payments',
+    description:
+      'Accept rent payments via credit card, debit card, ACH bank transfer, and more. Stripe powers Revun payment processing with automatic reconciliation and payout management.',
+    features: [
+      'Accept cards, ACH, and bank debits for rent',
+      'Automatic payment reconciliation in Revun ledger',
+      'Configurable payout schedules per property owner',
+      'PCI-compliant payment infrastructure',
+    ],
+    setup: 'Easy',
+    status: 'Available',
+  },
+  zapier: {
+    name: 'Zapier',
+    slug: 'zapier',
+    category: 'Productivity',
+    description:
+      'Connect Revun to 5,000+ apps with Zapier. Build custom automations triggered by lease events, maintenance requests, payment receipts, and more without writing code.',
+    features: [
+      'Triggers for lease events, payments, and maintenance',
+      'Actions to create records in any connected app',
+      'Multi-step workflows with conditional logic',
+      'Pre-built templates for common property management automations',
+    ],
+    setup: 'Easy',
+    status: 'Available',
+  },
+}
 
 const setupColors: Record<SetupDifficulty, string> = {
   Easy: 'bg-[#E8F2FE] text-[#176FEB]',
