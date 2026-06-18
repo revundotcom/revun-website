@@ -1,248 +1,284 @@
-'use client'
-
-import { useState } from 'react'
+import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, MapPin, Briefcase, CheckCircle2, Code2, Layers, Users, Cpu } from 'lucide-react'
+import {
+  ArrowRight,
+  Banknote,
+  Briefcase,
+  Globe2,
+  GraduationCap,
+  Handshake,
+  HeartHandshake,
+  Laptop2,
+  Lightbulb,
+  LineChart,
+  MapPin,
+  Star,
+  Users,
+} from 'lucide-react'
 
-interface ModalProps {
-  role: string
-  onClose: () => void
-}
+import { getRolesByRegion, ROLES } from '@/data/careers'
+import { buildCanonicalUrl } from '@/lib/utils'
 
-function ApplyModal({ role, onClose }: ModalProps) {
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [errorMsg, setErrorMsg] = useState('')
+const UNSPLASH = (id: string, w = 1600) =>
+  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setStatus('loading')
-    const fd = new FormData(e.currentTarget)
-    const payload = {
-      role,
-      firstName: fd.get('firstName'),
-      lastName: fd.get('lastName'),
-      email: fd.get('email'),
-      phone: fd.get('phone'),
-      linkedin: fd.get('linkedin'),
-      resumeUrl: fd.get('resumeUrl'),
-      whyYou: fd.get('whyYou'),
-      referral: fd.get('referral'),
-    }
-    try {
-      const res = await fetch('/api/careers-apply', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      })
-      if (res.ok) {
-        setStatus('success')
-      } else {
-        const data = await res.json()
-        setErrorMsg(data.error || 'Something went wrong.')
-        setStatus('error')
-      }
-    } catch {
-      setErrorMsg('Network error. Please try again.')
-      setStatus('error')
-    }
-  }
+const IMG = {
+  heroSkyline: { src: UNSPLASH('1517935706615-2717063c2225', 2400), alt: 'Toronto skyline at golden hour' },
+  cultureTeam: { src: UNSPLASH('1521737711867-e3b97375f902', 1400), alt: 'Team collaborating on laptops' },
+  benefitsLearning: { src: UNSPLASH('1517048676732-d65bc937f952', 1400), alt: 'Colleagues taking notes' },
+  hybridOffice: { src: UNSPLASH('1531973576160-7125cd663d86', 1600), alt: 'Modern open-concept office' },
+  teamsBoardroom: { src: UNSPLASH('1542744173-8e7e53415bb0', 1600), alt: 'Boardroom team review' },
+  communityOffice: { src: UNSPLASH('1556761175-b413da4baf72', 1600), alt: 'Open-plan workspace' },
+} as const
 
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A1628]/70 backdrop-blur-sm"
-      onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
-    >
-      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl ring-1 ring-[#E5E7EB]">
-        <div className="sticky top-0 flex items-center justify-between px-6 py-4 border-b border-[#E5E7EB] bg-white rounded-t-2xl z-10">
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#176FEB]">Apply Now</p>
-            <h2 className="mt-0.5 text-[18px] font-semibold text-[#0A1628]">{role}</h2>
-          </div>
-          <button onClick={onClose} className="text-[#555860] hover:text-[#0A1628] p-1 transition-colors" aria-label="Close">
-            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-          </button>
-        </div>
-        {status === 'success' ? (
-          <div className="flex flex-col items-center justify-center gap-4 p-10 text-center">
-            <CheckCircle2 className="h-12 w-12 text-[#176FEB]" />
-            <h3 className="text-xl font-semibold text-[#0A1628]">Application received</h3>
-            <p className="text-[#555860] text-sm max-w-sm">Thank you for applying to the {role} position at Revun. Our team will review your application within 5 business days.</p>
-            <button onClick={onClose} className="mt-2 px-6 py-3 bg-[#176FEB] text-white rounded-lg text-sm font-semibold hover:bg-[#0B5AD4] transition-colors">Close</button>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="p-6 space-y-5">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div><label className="block text-xs font-semibold text-[#555860] mb-1.5">First Name <span className="text-red-500">*</span></label><input name="firstName" required className="w-full border border-[#E5E7EB] rounded-lg bg-[#F5F6F8] px-3 py-2.5 text-sm text-[#2C2E33] focus:outline-none focus:ring-2 focus:ring-[#176FEB]" placeholder="Jane" /></div>
-              <div><label className="block text-xs font-semibold text-[#555860] mb-1.5">Last Name <span className="text-red-500">*</span></label><input name="lastName" required className="w-full border border-[#E5E7EB] rounded-lg bg-[#F5F6F8] px-3 py-2.5 text-sm text-[#2C2E33] focus:outline-none focus:ring-2 focus:ring-[#176FEB]" placeholder="Smith" /></div>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div><label className="block text-xs font-semibold text-[#555860] mb-1.5">Email <span className="text-red-500">*</span></label><input name="email" type="email" required className="w-full border border-[#E5E7EB] rounded-lg bg-[#F5F6F8] px-3 py-2.5 text-sm text-[#2C2E33] focus:outline-none focus:ring-2 focus:ring-[#176FEB]" placeholder="you@email.com" /></div>
-              <div><label className="block text-xs font-semibold text-[#555860] mb-1.5">Phone</label><input name="phone" type="tel" className="w-full border border-[#E5E7EB] rounded-lg bg-[#F5F6F8] px-3 py-2.5 text-sm text-[#2C2E33] focus:outline-none focus:ring-2 focus:ring-[#176FEB]" placeholder="+1 416 555 0100" /></div>
-            </div>
-            <div><label className="block text-xs font-semibold text-[#555860] mb-1.5">LinkedIn Profile URL</label><input name="linkedin" type="url" className="w-full border border-[#E5E7EB] rounded-lg bg-[#F5F6F8] px-3 py-2.5 text-sm text-[#2C2E33] focus:outline-none focus:ring-2 focus:ring-[#176FEB]" placeholder="https://linkedin.com/in/yourprofile" /></div>
-            <div><label className="block text-xs font-semibold text-[#555860] mb-1.5">Resume / Portfolio URL</label><input name="resumeUrl" type="url" className="w-full border border-[#E5E7EB] rounded-lg bg-[#F5F6F8] px-3 py-2.5 text-sm text-[#2C2E33] focus:outline-none focus:ring-2 focus:ring-[#176FEB]" placeholder="https://github.com/ or drive.google.com/..." /></div>
-            <div><label className="block text-xs font-semibold text-[#555860] mb-1.5">Why do you want this role? <span className="text-[#555860]/50 font-normal">(optional)</span></label><textarea name="whyYou" rows={3} className="w-full border border-[#E5E7EB] rounded-lg bg-[#F5F6F8] px-3 py-2.5 text-sm text-[#2C2E33] focus:outline-none focus:ring-2 focus:ring-[#176FEB] resize-none" placeholder="What draws you to this position..." /></div>
-            <div><label className="block text-xs font-semibold text-[#555860] mb-1.5">How did you hear about us?</label><select name="referral" className="w-full border border-[#E5E7EB] rounded-lg bg-[#F5F6F8] px-3 py-2.5 text-sm text-[#2C2E33] focus:outline-none focus:ring-2 focus:ring-[#176FEB]"><option value="">Select one</option><option>Google Search</option><option>LinkedIn</option><option>Hacker News</option><option>GitHub</option><option>Referral</option><option>Other</option></select></div>
-            {status === 'error' && <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">{errorMsg}</p>}
-            <button type="submit" disabled={status === 'loading'} className="w-full py-3 bg-[#176FEB] text-white rounded-lg text-sm font-semibold hover:bg-[#0B5AD4] transition-colors disabled:opacity-60">
-              {status === 'loading' ? 'Submitting...' : 'Submit Application'}
-            </button>
-          </form>
-        )}
-      </div>
-    </div>
-  )
+export const metadata: Metadata = {
+  title: 'Careers | Revun',
+  description: 'Open roles across Canada and the United States. Leasing, operations, marketing, and trade roles.',
+  alternates: { canonical: buildCanonicalUrl('/careers') },
 }
 
 const WHY_JOIN = [
-  { Icon: Code2, title: 'Remote-first engineering', body: 'Our engineering team is distributed across North America. We ship fast, review code thoroughly, and trust people to do great work without micromanagement.' },
-  { Icon: Layers, title: 'Modern stack, real scale', body: 'Next.js, TypeScript, Postgres, Redis. Infrastructure that handles real property management volumes across thousands of units.' },
-  { Icon: Users, title: 'Small team, high impact', body: 'Every engineer, designer, and PM owns a meaningful piece of the product. You are not a ticket-triager; you are a builder.' },
-  { Icon: Cpu, title: 'AI-native product development', body: 'We are building AI features into the core of property management. If you want to work on applied AI in a production product, this is the team.' },
+  { Icon: LineChart, title: 'Scale your career', body: 'We are expanding. The team you join today will be many times the size in three years.' },
+  { Icon: Globe2, title: 'North American markets', body: 'Work across Canada and the US.' },
+  { Icon: Users, title: 'Owner-first culture', body: 'We take the work seriously.' },
+  { Icon: Star, title: 'Performance-backed comp', body: 'Strong base salaries with real upside.' },
 ]
-
-const JOBS = [
-  {
-    title: 'Senior Software Engineer',
-    location: 'Remote, North America',
-    type: 'Full-time',
-    summary: 'You will build and own features across the Revun platform, from property listing infrastructure to tenant payment flows and owner reporting dashboards. You work closely with product and design, contribute to architectural decisions, and help establish engineering standards for the team.',
-    requirements: ['5 or more years of full-stack engineering experience', 'Proficient in TypeScript, React, and Node.js or equivalent modern stack', 'Experience building and scaling production systems, not just prototypes', 'Strong communication: you write clear technical docs and code reviews'],
-    compensation: '$140,000 to $180,000 USD base',
-  },
-  {
-    title: 'Product Designer',
-    location: 'Remote, North America',
-    type: 'Full-time',
-    summary: 'You will own design across the Revun product: landlord dashboards, tenant portals, leasing flows, and mobile experiences. You think in systems, build in Figma, and work closely with engineering to ship high-quality UI. Your standard is Stripe meets real estate software.',
-    requirements: ['4 or more years of product design experience, SaaS preferred', 'Strong portfolio showing end-to-end design work, not just visual comps', 'Proficient in Figma, with experience building and maintaining design systems', 'Comfortable doing user research and translating insights into product decisions'],
-    compensation: '$110,000 to $145,000 USD base',
-  },
-  {
-    title: 'Customer Success Manager',
-    location: 'Toronto, ON or Remote',
-    type: 'Full-time',
-    summary: 'You will manage a book of Revun accounts: onboarding new property management companies, driving feature adoption, resolving issues, and ensuring customers achieve their desired outcomes. You are the primary relationship owner and an internal advocate for product improvements the customer base needs.',
-    requirements: ['3 or more years of customer success or account management experience, SaaS preferred', 'Strong communicator who can translate technical concepts for non-technical customers', 'Experience with property management or real estate software is a real advantage', 'Data-driven: you track and report on your accounts with discipline'],
-    compensation: '$75,000 to $100,000 USD base plus variable',
-  },
-  {
-    title: 'Solutions Architect',
-    location: 'Remote, North America',
-    type: 'Full-time',
-    summary: 'You will lead complex technical integrations and enterprise implementations for Revun. That means scoping integration work, designing data migration approaches, building custom API workflows for large customers, and working closely with engineering and sales to close and onboard enterprise accounts.',
-    requirements: ['5 or more years of solutions architecture, technical consulting, or integration engineering experience', 'Proficient with REST APIs, webhooks, and integration patterns', 'Experience with property management software or real estate tech is a strong advantage', 'Ability to communicate technical architecture to both engineering teams and non-technical executives'],
-    compensation: '$130,000 to $170,000 USD base',
-  },
-  {
-    title: 'Sales Engineer',
-    location: 'Toronto, ON or New York, NY',
-    type: 'Full-time',
-    summary: 'You will work with the sales team on technical evaluations, demos, and POCs for enterprise and mid-market prospects. You own the technical side of the sales process: answering integration questions, running product demonstrations, scoping implementation requirements, and building confidence in Revun before close.',
-    requirements: ['3 or more years of sales engineering, pre-sales, or technical account management', 'Ability to demonstrate complex software products to a technical and non-technical audience', 'Comfortable with APIs, data models, and integration discussions at a detailed level', 'Property management software or proptech experience is a meaningful plus'],
-    compensation: '$100,000 to $135,000 USD base plus commission',
-  },
+const BENEFITS = [
+  { Icon: Banknote, title: 'Competitive comp', body: 'Competitive base salaries and performance incentives.' },
+  { Icon: HeartHandshake, title: 'Health & wellness', body: 'Health, dental, mental-wellness support, and annual wellness allowance.' },
+  { Icon: GraduationCap, title: 'Learning', body: 'Educational reimbursement and professional designation fees covered.' },
+]
+const HYBRID = [
+  { Icon: Handshake, title: 'In-person connection', body: 'When we are together, we build real relationships and move faster.' },
+  { Icon: Lightbulb, title: 'Challenge the status quo', body: 'Being together turns good ideas into real products.' },
+  { Icon: Laptop2, title: 'Right tech', body: 'Modern collaboration tools across every workstation.' },
+]
+const COMMUNITY = [
+  'Paid community-care days for every employee.',
+  'Local housing and shelter partnerships in our markets.',
+  'Volunteer time-matching for the causes you care about.',
+  'Pro-bono guidance for first-time landlords in the communities we serve.',
+]
+const TEAMS = [
+  { title: 'Business & Support', body: 'Marketing, ops, finance, people, legal, and risk.' },
+  { title: 'Client Service & Sales', body: 'The voice of the brand on every interaction.' },
+  { title: 'Leasing & Real Estate', body: 'Licensed agents on the ground in our markets.' },
+  { title: 'Engineering & Technology', body: 'Software, data, AI, and platform reliability.' },
+  { title: 'Trades & Field Services', body: 'Technicians who keep the portfolio in showing-ready condition.' },
+  { title: 'Students & Interns', body: 'Internships across ops, marketing, tech, and trades.' },
 ]
 
 export default function CareersPage() {
-  const [activeRole, setActiveRole] = useState<string | null>(null)
+  const jobsByRegion = getRolesByRegion()
+  const totalRoles = ROLES.length
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-[#0A1628] text-white py-20 md:py-28">
-        <div className="max-w-5xl mx-auto px-6">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#176FEB] mb-4">Careers</p>
-          <h1 className="text-4xl md:text-5xl font-semibold text-white text-balance leading-tight">
-            Build the infrastructure layer for property management.
+      {/* ── HERO ─────────────────────────────────────────────────── */}
+      <section className="relative isolate overflow-hidden bg-[#0A1628] py-24 text-white md:py-32">
+        <Image src={IMG.heroSkyline.src} alt={IMG.heroSkyline.alt} fill priority sizes="100vw" className="absolute inset-0 -z-20 object-cover object-center" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-[#0A1628] via-[#0A1628]/85 to-[#0A1628]/55" />
+        <div className="relative mx-auto max-w-5xl px-6">
+          <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--brand-blue)]">Careers</p>
+          <h1 className="text-balance text-4xl font-bold leading-tight text-white md:text-5xl">
+            Join the team building a better rental market across North America.
           </h1>
-          <p className="mt-6 text-lg text-white/75 max-w-2xl">
-            Revun is a property management platform for landlords, property managers, and tenants across North America. We are building a team of engineers, designers, and operators who care about craft and want to ship software that actually works.
+          <p className="mt-6 max-w-2xl text-lg text-white/85">
+            We connect landlords and tenants across Canada and the United States.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="#positions" className="inline-flex items-center gap-2 bg-[#176FEB] text-white px-6 py-3 rounded-lg font-semibold text-sm hover:bg-[#0B5AD4] transition-colors">
-              See open roles <ArrowRight className="h-4 w-4" />
-            </a>
-            <a href="mailto:careers@revun.com" className="inline-flex items-center gap-2 border border-white/20 text-white px-6 py-3 rounded-lg font-semibold text-sm hover:border-white/40 transition-colors">
-              General application
-            </a>
+            <a href="#positions" className="inline-flex items-center gap-2 rounded-full bg-[var(--brand-blue)] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--brand-blue-dark)]">See open positions <ArrowRight className="h-4 w-4" /></a>
+            <a href="mailto:careers@revun.com" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:border-white/70 hover:bg-white/10">General application</a>
           </div>
         </div>
       </section>
 
-      {/* Why join */}
-      <section className="py-16 bg-[#F5F6F8]">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="mb-10">
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#176FEB] mb-2">Why Revun</p>
-            <h2 className="text-3xl font-semibold text-[#0A1628]">A product-focused team shipping real software.</h2>
+      {/* ── CULTURE ─────────────────────────────────────────────── */}
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+            <div>
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--brand-blue)]">Our culture</p>
+              <h2 className="text-3xl font-bold text-[#0A1628] md:text-4xl">People are the key to our success.</h2>
+              <p className="mt-6 text-base leading-relaxed text-[#555860]">
+                We are highly collaborative. You will conquer challenges, push boundaries, and discover what you are truly capable of.
+              </p>
+            </div>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg ring-1 ring-[#E5E7EB]">
+              <Image src={IMG.cultureTeam.src} alt={IMG.cultureTeam.alt} fill sizes="(max-width: 1024px) 100vw, 480px" className="object-cover" />
+            </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {WHY_JOIN.map(({ Icon, title, body }) => (
-              <div key={title} className="bg-white rounded-xl border border-[#E5E7EB] p-6 shadow-sm">
-                <Icon className="h-5 w-5 text-[#176FEB] mb-4" strokeWidth={1.5} />
-                <h3 className="text-base font-semibold text-[#2C2E33] mb-1.5">{title}</h3>
-                <p className="text-sm text-[#555860] leading-relaxed">{body}</p>
+              <div key={title} className="rounded-2xl border border-[#E5E7EB] bg-white p-5 shadow-sm">
+                <Icon className="mb-3 h-5 w-5 text-[var(--brand-blue)]" strokeWidth={1.5} />
+                <h3 className="text-sm font-bold text-[#0A1628]">{title}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-[#555860]">{body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Job listings */}
-      <section id="positions" className="py-16 md:py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="mb-10">
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#176FEB] mb-2">Open positions</p>
-            <h2 className="text-3xl font-semibold text-[#0A1628]">Five roles open right now.</h2>
-          </div>
-          <div className="space-y-4">
-            {JOBS.map((job) => (
-              <div key={job.title} className="rounded-xl border border-[#E5E7EB] bg-white p-6 md:p-8 shadow-sm hover:border-[#176FEB]/30 transition-colors">
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-[#0A1628]">{job.title}</h3>
-                    <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-[#555860] uppercase tracking-wide">
-                      <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5" />{job.location}</span>
-                      <span className="flex items-center gap-1"><Briefcase className="h-3.5 w-3.5" />{job.type}</span>
-                      <span className="text-[#176FEB] font-bold">{job.compensation}</span>
+      {/* ── BENEFITS ────────────────────────────────────────────── */}
+      <section className="bg-[#F5F6F8] py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            {/* Image */}
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg ring-1 ring-[#E5E7EB]">
+              <Image src={IMG.benefitsLearning.src} alt={IMG.benefitsLearning.alt} fill sizes="(max-width: 1024px) 100vw, 480px" className="object-cover" />
+            </div>
+            {/* Heading + benefit rows */}
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0B5AD4]">Benefits</p>
+              <h2 className="mt-3 text-3xl font-bold text-[#0A1628] md:text-4xl">Why people love working here.</h2>
+              <p className="mt-4 text-base leading-relaxed text-[#555860]">
+                We invest in the people who do the work — your pay, your health, and your growth, backed by real budget.
+              </p>
+              <div className="mt-8 space-y-6">
+                {BENEFITS.map(({ Icon, title, body }) => (
+                  <div key={title} className="flex gap-4">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#176FEB]/10 ring-1 ring-[#176FEB]/15">
+                      <Icon className="h-5 w-5 text-[#176FEB]" strokeWidth={1.7} aria-hidden="true" />
+                    </span>
+                    <div>
+                      <h3 className="text-base font-bold text-[#0A1628]">{title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-[#555860]">{body}</p>
                     </div>
-                    <p className="mt-4 text-sm text-[#555860] leading-relaxed max-w-2xl">{job.summary}</p>
-                    <ul className="mt-4 space-y-1.5">
-                      {job.requirements.map((req) => (
-                        <li key={req} className="flex items-start gap-2 text-xs text-[#555860]">
-                          <span className="mt-0.5 h-1.5 w-1.5 rounded-full bg-[#176FEB] flex-none" />
-                          {req}
-                        </li>
-                      ))}
-                    </ul>
                   </div>
-                  <div className="sm:ml-6 flex-none">
-                    <button onClick={() => setActiveRole(job.title)} className="inline-flex items-center gap-2 bg-[#176FEB] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#0B5AD4] transition-colors whitespace-nowrap">
-                      Apply <ArrowRight className="h-4 w-4" />
-                    </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── HYBRID ──────────────────────────────────────────────── */}
+      <section className="bg-white py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            {/* Heading + rows */}
+            <div className="lg:order-1">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--brand-blue)]">How we work</p>
+              <h2 className="mt-3 text-3xl font-bold text-[#0A1628] md:text-4xl">Hybrid work is the future.</h2>
+              <p className="mt-4 text-base leading-relaxed text-[#555860]">
+                We come together on purpose, then give you the tools to do your best work wherever you are.
+              </p>
+              <div className="mt-8 space-y-6">
+                {HYBRID.map(({ Icon, title, body }) => (
+                  <div key={title} className="flex gap-4">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#176FEB]/10 ring-1 ring-[#176FEB]/15">
+                      <Icon className="h-5 w-5 text-[#176FEB]" strokeWidth={1.7} aria-hidden="true" />
+                    </span>
+                    <div>
+                      <h3 className="text-base font-bold text-[#0A1628]">{title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-[#555860]">{body}</p>
+                    </div>
                   </div>
+                ))}
+              </div>
+            </div>
+            {/* Image */}
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg ring-1 ring-[#E5E7EB] lg:order-2">
+              <Image src={IMG.hybridOffice.src} alt={IMG.hybridOffice.alt} fill sizes="(max-width: 1024px) 100vw, 480px" className="object-cover" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TEAMS ───────────────────────────────────────────────── */}
+      <section className="bg-[#F5F6F8] py-16 md:py-20">
+        <div className="mx-auto max-w-5xl px-6">
+          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--brand-blue)]">Teams</p>
+          <h2 className="text-3xl font-bold text-[#0A1628] md:text-4xl">Choose your path with us.</h2>
+          <div className="relative mt-10 aspect-[21/9] overflow-hidden rounded-2xl shadow-lg ring-1 ring-[#E5E7EB]">
+            <Image src={IMG.teamsBoardroom.src} alt={IMG.teamsBoardroom.alt} fill sizes="(max-width: 1024px) 100vw, 960px" className="object-cover" />
+          </div>
+          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2">
+            {TEAMS.map((t) => (
+              <div key={t.title} className="rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-sm">
+                <h3 className="text-lg font-bold text-[#0A1628]">{t.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#555860]">{t.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── COMMUNITY ───────────────────────────────────────────── */}
+      <section className="bg-white py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            {/* Image */}
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg ring-1 ring-[#E5E7EB]">
+              <Image src={IMG.communityOffice.src} alt={IMG.communityOffice.alt} fill sizes="(max-width: 1024px) 100vw, 480px" className="object-cover" />
+            </div>
+            {/* Heading + commitments */}
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--brand-blue)]">Community</p>
+              <h2 className="mt-3 text-3xl font-bold text-[#0A1628] md:text-4xl">We care.</h2>
+              <p className="mt-4 text-base leading-relaxed text-[#555860]">
+                Our community approach is to engage and support the cities we operate in — backed with real time and budget, not just words.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {COMMUNITY.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-[15px] leading-relaxed text-[#2C2E33]">
+                    <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-[#176FEB]" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── OPEN POSITIONS ──────────────────────────────────────── */}
+      <section id="positions" className="bg-[#F5F6F8] py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-6">
+          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--brand-blue)]">Open positions</p>
+          <h2 className="text-3xl font-bold text-[#0A1628] md:text-4xl">{totalRoles} {totalRoles === 1 ? 'role' : 'roles'} open right now.</h2>
+
+          <div className="mt-10 space-y-10">
+            {jobsByRegion.map((region) => (
+              <div key={`${region.country}-${region.region}`} className="rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-sm md:p-8">
+                <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-[#E5E7EB] pb-4">
+                  <h3 className="flex items-center gap-2 text-xl font-bold text-[#0A1628]">
+                    <MapPin className="h-4 w-4 text-[var(--brand-blue)]" aria-hidden="true" />
+                    {region.region}
+                  </h3>
+                  <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#555860]">{region.country}</span>
+                </div>
+                <div className="mt-6 space-y-7">
+                  {region.cities.map((city) => (
+                    <div key={city.city}>
+                      <h4 className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#0A1628]/65">{city.city}</h4>
+                      <ul className="mt-3 space-y-3">
+                        {city.roles.map((role) => (
+                          <li key={role.slug}>
+                            <Link href={`/careers/${role.slug}/`} className="group flex flex-col gap-2 rounded-xl border border-[#E5E7EB] bg-[#F5F6F8]/60 p-4 transition-all hover:-translate-y-0.5 hover:border-[var(--brand-blue)]/40 hover:bg-white hover:shadow-md md:flex-row md:items-center md:justify-between md:gap-6 md:p-5">
+                              <div className="min-w-0 flex-1">
+                                <h5 className="text-base font-bold text-[#0A1628] transition-colors group-hover:text-[var(--brand-blue)]">{role.title}</h5>
+                                <div className="mt-2 flex flex-wrap items-center gap-3 text-xs uppercase tracking-wide text-[#555860]">
+                                  <span className="inline-flex items-center gap-1"><Briefcase className="h-3.5 w-3.5" />{role.type}</span>
+                                  <span className="inline-flex items-center gap-1"><MapPin className="h-3.5 w-3.5" />{role.locationDisplay}</span>
+                                  <span className="font-bold text-[var(--brand-blue)]">{role.compensation}</span>
+                                </div>
+                              </div>
+                              <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-bold text-[#0A1628] transition-colors group-hover:text-[var(--brand-blue)]">View role <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* CTA */}
-      <section className="py-16 bg-[#0A1628] text-white">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-semibold text-white mb-4">No role that fits?</h2>
-          <p className="text-white/75 text-base mb-8">We keep a file of strong candidates. Email us at{' '}
-            <a href="mailto:careers@revun.com" className="text-[#176FEB] underline">careers@revun.com</a>
-          </p>
-          <Link href="/contact" className="inline-flex items-center gap-2 bg-[#176FEB] text-white px-6 py-3 rounded-lg font-semibold text-sm hover:bg-[#0B5AD4] transition-colors">
-            Get in touch <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </section>
-
-      {activeRole && <ApplyModal role={activeRole} onClose={() => setActiveRole(null)} />}
     </>
   )
 }

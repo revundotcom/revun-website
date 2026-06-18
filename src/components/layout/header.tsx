@@ -136,6 +136,13 @@ const RESOURCES_ITEMS: NavChild[] = [
   { label: 'Why Revun', description: 'What makes Revun different', href: '/why-revun/' },
 ]
 
+const ABOUT_ITEMS: NavChild[] = [
+  { label: 'About Us', description: 'Who we are and why we exist', href: '/about/' },
+  { label: 'Meet the Team', description: 'The people behind Revun', href: '/meet-the-team/' },
+  { label: 'Careers', description: 'Join the team', href: '/careers/' },
+  { label: 'Reviews', description: 'What customers say', href: '/reviews/' },
+]
+
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Features', sections: FEATURES_SECTIONS },
   { label: 'Tenants', href: '/tenants/' },
@@ -143,6 +150,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Pricing', href: '/pricing/' },
   { label: 'Compare', href: '/compare/' },
   { label: 'Resources', children: RESOURCES_ITEMS },
+  { label: 'About', children: ABOUT_ITEMS },
 ]
 
 // ─── Reusable simple dropdown item (no icon) ────────────────────────────────
@@ -242,7 +250,7 @@ function FeaturesMegaMenu({ onClose }: { onClose: () => void }) {
 
 // ─── Dropdown: Resources ─────────────────────────────────────────────────────
 
-function ResourcesDropdown({ onClose }: { onClose: () => void }) {
+function SimpleDropdown({ items, onClose }: { items: NavChild[]; onClose: () => void }) {
   return (
     <motion.div
       variants={dropdownVariants}
@@ -253,7 +261,7 @@ function ResourcesDropdown({ onClose }: { onClose: () => void }) {
       role="menu"
       onKeyDown={(e) => e.key === 'Escape' && onClose()}
     >
-      {RESOURCES_ITEMS.map((item) => (
+      {items.map((item) => (
         <SimpleDropdownItem key={item.href} item={item} onClose={onClose} />
       ))}
     </motion.div>
@@ -338,7 +346,7 @@ function DesktopNavItem({
             item.label === 'Features' ? (
               <FeaturesMegaMenu onClose={() => setOpenDropdown(null)} />
             ) : (
-              <ResourcesDropdown onClose={() => setOpenDropdown(null)} />
+              <SimpleDropdown items={dropdownChildren} onClose={() => setOpenDropdown(null)} />
             )
           )}
         </AnimatePresence>
