@@ -17,7 +17,7 @@ import {
   Users,
 } from 'lucide-react'
 
-import { getRolesByRegion, ROLES } from '@/data/careers'
+import { getRolesByRegion, fetchRolesFromApi } from '@/data/careers'
 import { buildCanonicalUrl } from '@/lib/utils'
 
 const UNSPLASH = (id: string, w = 1600) =>
@@ -69,9 +69,10 @@ const TEAMS = [
   { title: 'Students & Interns', body: 'Internships across ops, marketing, tech, and trades.' },
 ]
 
-export default function CareersPage() {
-  const jobsByRegion = getRolesByRegion()
-  const totalRoles = ROLES.length
+export default async function CareersPage() {
+  const jobsByRegion = await getRolesByRegion()
+  const allRoles = await fetchRolesFromApi()
+  const totalRoles = allRoles.length
 
   return (
     <>
