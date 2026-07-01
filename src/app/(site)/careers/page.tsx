@@ -1,16 +1,24 @@
 import Link from 'next/link'
 import { ArrowRight, MapPin, Briefcase } from 'lucide-react'
-import { JOBS, WHY_JOIN } from './jobs'
+import { WHY_JOIN } from './jobs'
+import { fetchRolesFromApi } from '@/data/careers'
+import JobFilterList from './job-filter-list'
+import JobFilterControls from './job-filter-controls'
+import { CareersFilterProvider } from './careers-filter-context'
 
+export const dynamic = "force-dynamic"
 export const metadata = {
   title: 'Careers at Revun',
   description: 'Join Revun. We are hiring engineers, designers, and operators to build the infrastructure layer for property management across North America.',
   alternates: { canonical: '/careers' },
 }
 
-export default function CareersPage() {
+export default async function CareersPage() {
+  const allRoles = await fetchRolesFromApi()
+  const totalRoles = allRoles.length
+
   return (
-    <>
+    <CareersFilterProvider allRoles={allRoles}>
       {/* Hero */}
       <section className="bg-[#0A1628] text-white py-20 md:py-28">
         <div className="max-w-5xl mx-auto px-6">
@@ -29,6 +37,13 @@ export default function CareersPage() {
               General application
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* Top Filter Bar */}
+      <section className="bg-slate-50 border-b border-slate-200 py-6">
+        <div className="mx-auto max-w-5xl px-6">
+          <JobFilterControls scrollToId="positions" />
         </div>
       </section>
 
@@ -56,31 +71,13 @@ export default function CareersPage() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="mb-10">
             <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#176FEB] mb-2">Open positions</p>
-            <h2 className="text-3xl font-semibold text-[#0A1628]">{JOBS.length} roles open right now.</h2>
+            <h2 className="text-3xl font-semibold text-[#0A1628]">{totalRoles} roles open right now.</h2>
             <p className="mt-3 text-base text-[#555860] max-w-xl">Click a role to see the full details and apply.</p>
           </div>
-          <div className="space-y-4">
-            {JOBS.map((job) => (
-              <Link key={job.slug} href={`/careers/${job.slug}`} className="group block rounded-xl border border-[#E5E7EB] bg-white p-6 md:p-8 shadow-sm hover:border-[#176FEB]/30 transition-colors">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-[#0A1628] group-hover:text-[#176FEB] transition-colors">{job.title}</h3>
-                    <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-[#555860] uppercase tracking-wide">
-                      <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5" />{job.location}</span>
-                      <span className="flex items-center gap-1"><Briefcase className="h-3.5 w-3.5" />{job.type}</span>
-                      <span className="text-[#176FEB] font-bold">{job.compensation}</span>
-                    </div>
-                    <p className="mt-4 text-sm text-[#555860] leading-relaxed max-w-2xl">{job.summary}</p>
-                  </div>
-                  <div className="sm:ml-6 flex-none">
-                    <span className="inline-flex items-center gap-2 bg-[#176FEB] text-white px-5 py-2.5 rounded-lg text-sm font-semibold group-hover:bg-[#0B5AD4] transition-colors whitespace-nowrap">
-                      View role <ArrowRight className="h-4 w-4" />
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
+          <div className="mb-8 block">
+            <JobFilterControls scrollToId="positions" />
           </div>
+          <JobFilterList />
         </div>
       </section>
 
@@ -96,6 +93,6 @@ export default function CareersPage() {
           </Link>
         </div>
       </section>
-    </>
+    </CareersFilterProvider>
   )
 }
