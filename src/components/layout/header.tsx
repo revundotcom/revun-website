@@ -133,14 +133,28 @@ const RESOURCES_ITEMS: NavChild[] = [
   { label: 'Help Center', description: 'Guides and documentation', href: '/help/' },
   { label: 'Resources', description: 'Articles, guides, and insights', href: '/resources/' },
   { label: 'How It Works', description: 'See the platform in action', href: '/how-revun-works/' },
+  { label: 'What Is Revun', description: 'The property operations platform explained', href: '/what-is-revun/' },
   { label: 'Why Revun', description: 'What makes Revun different', href: '/why-revun/' },
+  { label: 'Use Cases', description: 'How teams put Revun to work', href: '/use-cases/' },
+  { label: 'Glossary', description: 'Property management terms defined', href: '/glossary/' },
+  { label: 'Landlord-Tenant Laws', description: 'State and provincial rules', href: '/laws/' },
+  { label: 'Evictions', description: 'Process, timelines, and compliance', href: '/evictions/' },
+  { label: 'Reviews', description: 'What operators say about Revun', href: '/reviews/' },
+  { label: 'Self-Manage', description: 'Run your own portfolio with Revun', href: '/self-manage/' },
+  { label: 'Powered by Revun', description: 'Build on the Revun platform', href: '/powered-by-revun/' },
+  { label: 'Careers', description: 'Join the team building Revun', href: '/careers/' },
 ]
 
-const ABOUT_ITEMS: NavChild[] = [
-  { label: 'About Us', description: 'Who we are and why we exist', href: '/about/' },
-  { label: 'Meet the Team', description: 'The people behind Revun', href: '/meet-the-team/' },
-  { label: 'Careers', description: 'Join the team', href: '/careers/' },
-  { label: 'Reviews', description: 'What customers say', href: '/reviews/' },
+const SOFTWARE_ITEMS: NavChild[] = [
+  { label: 'Property Management Software', description: 'The full operations platform', href: '/property-management-software/' },
+  { label: 'Property Operations Software', description: 'Run day-to-day operations', href: '/property-operations-software/' },
+  { label: 'PM Operating System', description: 'One system of record', href: '/property-management-operating-system/' },
+  { label: 'AI Property Management', description: 'AI-native workflows', href: '/ai-property-management-software/' },
+  { label: 'Leasing Software', description: 'Applications to renewals', href: '/leasing-software/' },
+  { label: 'Maintenance Software', description: 'Requests, dispatch, proof-of-work', href: '/maintenance-management-software/' },
+  { label: 'Tenant Portal Software', description: 'Self-service for renters', href: '/tenant-portal-software/' },
+  { label: 'Brokerage Software', description: 'Tools for brokerages and agents', href: '/brokerage-software/' },
+  { label: 'Communications Software', description: 'Unified owner and tenant inbox', href: '/real-estate-communications-software/' },
 ]
 
 export const NAV_ITEMS: NavItem[] = [
@@ -150,7 +164,6 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Pricing', href: '/pricing/' },
   { label: 'Compare', href: '/compare/' },
   { label: 'Resources', children: RESOURCES_ITEMS },
-  { label: 'About', children: ABOUT_ITEMS },
 ]
 
 // ─── Reusable simple dropdown item (no icon) ────────────────────────────────
@@ -244,13 +257,27 @@ function FeaturesMegaMenu({ onClose }: { onClose: () => void }) {
           ))}
         </div>
       </div>
+
+      {/* By Software - SEO software landing pages integrated into features menu */}
+      <div className="mt-5 border-t border-border/60 pt-5">
+        <div className="mb-3 px-2">
+          <p className="text-[11px] font-heading font-semibold uppercase tracking-wider text-brand-graphite">
+            By Software
+          </p>
+        </div>
+        <div className="grid grid-cols-3 gap-x-4">
+          {SOFTWARE_ITEMS.map((item) => (
+            <CompactDropdownItem key={item.href} item={item} onClose={onClose} />
+          ))}
+        </div>
+      </div>
     </motion.div>
   )
 }
 
 // ─── Dropdown: Resources ─────────────────────────────────────────────────────
 
-function SimpleDropdown({ items, onClose }: { items: NavChild[]; onClose: () => void }) {
+function ResourcesDropdown({ onClose }: { onClose: () => void }) {
   return (
     <motion.div
       variants={dropdownVariants}
@@ -261,7 +288,7 @@ function SimpleDropdown({ items, onClose }: { items: NavChild[]; onClose: () => 
       role="menu"
       onKeyDown={(e) => e.key === 'Escape' && onClose()}
     >
-      {items.map((item) => (
+      {RESOURCES_ITEMS.map((item) => (
         <SimpleDropdownItem key={item.href} item={item} onClose={onClose} />
       ))}
     </motion.div>
@@ -346,7 +373,7 @@ function DesktopNavItem({
             item.label === 'Features' ? (
               <FeaturesMegaMenu onClose={() => setOpenDropdown(null)} />
             ) : (
-              <SimpleDropdown items={dropdownChildren} onClose={() => setOpenDropdown(null)} />
+              <ResourcesDropdown onClose={() => setOpenDropdown(null)} />
             )
           )}
         </AnimatePresence>

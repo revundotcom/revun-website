@@ -12,7 +12,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   const key = id.replace(/\.xml$/, '');
   const group = sitemapGroups[key];
   if (!group) return new Response('Not found', { status: 404 });
-  return new Response(urlsetXml(await group()), {
+  return new Response(urlsetXml(group()), {
     headers: { 'Content-Type': 'application/xml', 'Cache-Control': 'public, max-age=3600, s-maxage=3600' },
   });
 }
