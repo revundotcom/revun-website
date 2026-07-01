@@ -10,18 +10,51 @@ const navigation = {
       { label: 'Integrations', href: '/integrations/' },
       { label: 'Compare', href: '/compare/' },
       { label: 'Industries', href: '/industries/' },
+      { label: 'Accounting', href: '/accounting/' },
+      { label: 'Owner Portal', href: '/owner-portal/' },
+      { label: 'Reports', href: '/reports/' },
+      { label: 'Forms', href: '/forms/' },
+      { label: 'Wallet', href: '/wallet/' },
+      { label: 'Tools', href: '/tools/' },
+      { label: 'Coverage', href: '/coverage/' },
+    ],
+  },
+  software: {
+    title: 'Software',
+    links: [
+      { label: 'Property Management Software', href: '/property-management-software/' },
+      { label: 'Property Operations Software', href: '/property-operations-software/' },
+      { label: 'PM Operating System', href: '/property-management-operating-system/' },
+      { label: 'AI Property Management', href: '/ai-property-management-software/' },
+      { label: 'Leasing Software', href: '/leasing-software/' },
+      { label: 'Maintenance Software', href: '/maintenance-management-software/' },
+      { label: 'Tenant Portal Software', href: '/tenant-portal-software/' },
+      { label: 'Brokerage Software', href: '/brokerage-software/' },
+      { label: 'Communications Software', href: '/real-estate-communications-software/' },
     ],
   },
   solutions: {
     title: 'Solutions',
     links: [
+      { label: 'All Solutions', href: '/solutions/' },
       { label: 'Self-Managing Owners', href: '/solutions/self-managing-owners/' },
       { label: 'PMCs', href: '/solutions/property-management-companies/' },
       { label: 'Brokerages', href: '/solutions/brokerages/' },
       { label: 'Leasing', href: '/solutions/leasing-companies/' },
       { label: 'Maintenance', href: '/solutions/maintenance-companies/' },
       { label: 'REITs', href: '/solutions/reits/' },
+      { label: 'Operators', href: '/operators/' },
+      { label: 'Self-Manage', href: '/self-manage/' },
       { label: 'Tenants', href: '/tenants/' },
+    ],
+  },
+  rentals: {
+    title: 'Rentals',
+    links: [
+      { label: 'Corporate Housing', href: '/corporate-housing/' },
+      { label: 'Furnished Rentals', href: '/furnished-rentals/' },
+      { label: 'Relocation Rentals', href: '/relocation-rentals/' },
+      { label: 'Traveling Tenants', href: '/traveling-tenants/' },
     ],
   },
   resources: {
@@ -30,7 +63,14 @@ const navigation = {
       { label: 'Help Center', href: '/help/' },
       { label: 'Resources', href: '/resources/' },
       { label: 'How It Works', href: '/how-revun-works/' },
+      { label: 'What Is Revun', href: '/what-is-revun/' },
       { label: 'Why Revun', href: '/why-revun/' },
+      { label: 'Powered by Revun', href: '/powered-by-revun/' },
+      { label: 'Use Cases', href: '/use-cases/' },
+      { label: 'Glossary', href: '/glossary/' },
+      { label: 'Landlord-Tenant Laws', href: '/laws/' },
+      { label: 'Evictions', href: '/evictions/' },
+      { label: 'Reviews', href: '/reviews/' },
       { label: 'Events', href: '/events/' },
     ],
   },
@@ -38,10 +78,13 @@ const navigation = {
     title: 'Company',
     links: [
       { label: 'About', href: '/about/' },
+      { label: 'Careers', href: '/careers/' },
       { label: 'Contact', href: '/contact/' },
       { label: 'Investment', href: '/investment/' },
       { label: 'Book Demo', href: '/demo/' },
       { label: 'Support', href: '/support/' },
+      { label: 'Canada', href: '/ca/' },
+      { label: 'United States', href: '/us/' },
     ],
   },
   legal: {
@@ -143,7 +186,7 @@ export function Footer() {
         </div>
 
         {/* Link columns */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 pt-10 md:pt-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 md:gap-8 pt-10 md:pt-12">
           {Object.values(navigation).map((column) => (
             <FooterColumn key={column.title} title={column.title} links={column.links} />
           ))}
