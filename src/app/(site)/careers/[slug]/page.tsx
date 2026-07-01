@@ -198,7 +198,7 @@ export default async function CareerRolePage({ params }: RouteParams) {
               <h2 className="font-display text-2xl font-bold text-[#0A1628] sm:text-3xl tracking-wider">
                 Job
                 <br />
-                Descriptions
+                Description
               </h2>
 
               {/* Compact meta box for quick scan on long pages */}
