@@ -160,7 +160,7 @@ export async function fetchRolesFromApi(): Promise<Role[]> {
         compensation = `${compensation}`
       }
 
-      const isRemote = job.Work_Type == null || String(job.Work_Type).toLowerCase() === 'remote'
+      const isRemote = job.Work_Type == null || String(job.Work_Type).toLowerCase() === 'remote/hybrid'
       const workTypeSuffix = isRemote ? 'Remote' : 'Hybrid'
 
       const locParts = []
