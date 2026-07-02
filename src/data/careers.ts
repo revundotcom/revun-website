@@ -150,14 +150,14 @@ export async function fetchRolesFromApi(): Promise<Role[]> {
         job.Salary === 'Do not disclose pay'
       let compensation = hidePay ? '' : job.Salary || ''
       if (compensation && /\d/.test(compensation)) {
-        compensation = compensation.replace(/\$/g, '').trim()
+        //compensation = compensation.replace(/\$/g, '').trim()
 
         // Add commas to numbers 1000 and above
         compensation = compensation.replace(/\d{4,}/g, (match) => {
           return Number(match).toLocaleString('en-US')
         })
 
-        compensation = `$ ${compensation}`
+        compensation = `${compensation}`
       }
 
       const isRemote = job.Work_Type == null || String(job.Work_Type).toLowerCase() === 'remote'
@@ -246,7 +246,7 @@ export function groupRolesByCountry(roles: Role[]): CountryGroup[] {
       })
     }
     const country = countryMap.get(countryKey)!
-    
+
     const regionKey = role.province || 'Other'
     if (!country.regionMap.has(regionKey)) {
       country.regionOrder.push(regionKey)
@@ -256,7 +256,7 @@ export function groupRolesByCountry(roles: Role[]): CountryGroup[] {
       })
     }
     const region = country.regionMap.get(regionKey)!
-    
+
     const cityKey = role.city || 'Remote'
     if (!region.cityMap.has(cityKey)) {
       region.cityOrder.push(cityKey)
