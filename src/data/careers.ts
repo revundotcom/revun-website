@@ -52,6 +52,8 @@ export interface Role {
   locationDisplay: string
   /** Job opening ID. */
   jobId: string
+  /** Location ID from Zoho. */
+  locId?: string
   /** ISO date — YYYY-MM-DD. Shown in the hero. */
   postingStartDate: string
   /** Display string — e.g. "$55,000 to $75,000 base". */
@@ -76,6 +78,34 @@ export interface Role {
   workType: 'remote' | 'hybrid'
   /** Job Category for filtering. */
   category: string
+  /** Parsed array of categories. */
+  categories: string[]
+}
+
+export function parseCategories(raw: any): string[] {
+  if (!raw) return ['Other']
+  if (Array.isArray(raw)) {
+    const cleaned = raw.map((s) => String(s).trim()).filter(Boolean)
+    return cleaned.length > 0 ? cleaned : ['Other']
+  }
+  if (typeof raw === 'string') {
+    let str = raw.trim()
+    if (!str) return ['Other']
+    if (str.startsWith('[') && str.endsWith(']')) {
+      try {
+        const parsed = JSON.parse(str)
+        if (Array.isArray(parsed)) {
+          const cleaned = parsed.map((s) => String(s).trim()).filter(Boolean)
+          if (cleaned.length > 0) return cleaned
+        }
+      } catch {
+        // Fallthrough if invalid JSON
+      }
+    }
+    const split = str.split(',').map((s) => s.trim()).filter(Boolean)
+    if (split.length > 0) return split
+  }
+  return ['Other']
 }
 
 interface ApiJob {
@@ -91,12 +121,13 @@ interface ApiJob {
   Industry?: string
   Job_Type?: string
   zoho_id?: string
+  location_id?: string
   Date_Opened?: string
   Role_Category?: string
 }
 
 export async function fetchRolesFromApi(): Promise<Role[]> {
-  const baseUrl = process.env.NEXT_PUBLIC_PORTAL_BASE_URL || 'https://portal.revun.com'
+  const baseUrl = process.env.NEXT_PUBLIC_PORTAL_BASE_URL || 'https://phpstack-1217932-6516253.cloudwaysapps.com'
   const url = `${baseUrl}/api/v1/job-postings?client_name=Revun`
   try {
     const res = await fetch(url, { cache: 'no-store' })
@@ -160,7 +191,7 @@ export async function fetchRolesFromApi(): Promise<Role[]> {
         compensation = `${compensation}`
       }
 
-      const isRemote = job.Work_Type == null || String(job.Work_Type).toLowerCase() === 'remote/hybrid'
+      const isRemote = job.Job_Type == null || String(job.Job_Type).toLowerCase() === 'hybrid' || String(job.Job_Type).toLowerCase() === 'remote'
       const workTypeSuffix = isRemote ? 'Remote' : 'Hybrid'
 
       const locParts = []
@@ -172,6 +203,8 @@ export async function fetchRolesFromApi(): Promise<Role[]> {
         ? `${locParts.join(', ')} · ${workTypeSuffix}`
         : workTypeSuffix
 
+      const parsedCats = parseCategories(job.Role_Category)
+
       return {
         slug: job.slug,
         title: job.Posting_Title || 'Untitled Role',
@@ -182,6 +215,7 @@ export async function fetchRolesFromApi(): Promise<Role[]> {
         country: job.Country || '',
         locationDisplay,
         jobId: job.zoho_id || '',
+        locId: job.location_id || '',
         postingStartDate: job.Date_Opened ? job.Date_Opened.split('T')[0] : '',
         compensation,
         summary: '',
@@ -193,7 +227,8 @@ export async function fetchRolesFromApi(): Promise<Role[]> {
         relocationAssistance: false,
         htmlDescription: rawHtml,
         workType: isRemote ? 'remote' : 'hybrid',
-        category: job.Role_Category || 'Other',
+        categories: parsedCats,
+        category: parsedCats.join(', '),
       }
     })
   } catch (error) {

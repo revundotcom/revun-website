@@ -99,6 +99,20 @@ export default async function CareerRolePage({ params }: RouteParams) {
     { name: role.title, url: shareUrl },
   ])
 
+  const formattedCategories =
+    role.categories && role.categories.length > 0
+      ? role.categories
+          .map((c) =>
+            c
+              .trim()
+              .toLowerCase()
+              .replace(/\b\w/g, (char) => char.toUpperCase())
+          )
+          .join(', ')
+      : (role.category || role.department || '')
+          .toLowerCase()
+          .replace(/\b\w/g, (char) => char.toUpperCase())
+
   // Format the posting date in a friendlier form for the hero meta line.
   // const postingDateDisplay = formatDate(role.postingStartDate)
 
@@ -129,9 +143,11 @@ export default async function CareerRolePage({ params }: RouteParams) {
                 {role.title}
               </h1>
 
-              <p className="mt-5 text-sm font-bold uppercase tracking-[0.16em] text-white/85">
-                {role.department}
-              </p>
+              {formattedCategories && (
+                <p className="mt-3 text-xs sm:text-sm font-medium tracking-wide text-white/80">
+                  {formattedCategories}
+                </p>
+              )}
 
               <dl className="mt-8 space-y-2 text-sm sm:text-base">
                 <MetaRow label="Type">{role.type}</MetaRow>
@@ -181,7 +197,7 @@ export default async function CareerRolePage({ params }: RouteParams) {
 
                 {/* Apply CTA */}
                 <div className="flex flex-wrap gap-3 lg:pb-1">
-                  <ApplyButton role={role.title} jobId={role.jobId} workType={role.workType} />
+                  <ApplyButton role={role.title} jobId={role.jobId} locId={role.locId || ''} workType={role.workType} />
                 </div>
               </div>
             </div>
@@ -360,7 +376,7 @@ export default async function CareerRolePage({ params }: RouteParams) {
               )}
 
               <div className="mt-12 flex flex-wrap gap-3 border-t border-slate-100 pt-10">
-                <ApplyButton role={role.title} jobId={role.jobId} workType={role.workType} />
+                <ApplyButton role={role.title} jobId={role.jobId} locId={role.locId || ''} workType={role.workType} />
                 <Link
                   href="/careers/#positions"
                   className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-[#0A1628]/20 bg-white px-6 py-3 text-sm font-bold text-[#0A1628] transition-colors hover:border-[#0A1628]/40 hover:bg-slate-50"
@@ -375,7 +391,7 @@ export default async function CareerRolePage({ params }: RouteParams) {
       </section>
 
       {/* Mobile Sticky Apply Button */}
-      <StickyApplyButton role={role.title} jobId={role.jobId} workType={role.workType} />
+      <StickyApplyButton role={role.title} jobId={role.jobId} locId={role.locId || ''} workType={role.workType} />
     </main>
   )
 }
