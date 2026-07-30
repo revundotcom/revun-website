@@ -191,7 +191,8 @@ export async function fetchRolesFromApi(): Promise<Role[]> {
         compensation = `${compensation}`
       }
 
-      const isRemote = job.Job_Type == null || String(job.Job_Type).toLowerCase() === 'hybrid' || String(job.Job_Type).toLowerCase() === 'remote'
+      const workTypeVal = job.Work_Type ? String(job.Work_Type).toLowerCase() : (job.Job_Type ? String(job.Job_Type).toLowerCase() : '')
+      const isRemote = !workTypeVal || workTypeVal === 'hybrid' || workTypeVal === 'remote' || workTypeVal === 'remote/hybrid'
       const workTypeSuffix = isRemote ? 'Remote' : 'Hybrid'
 
       const locParts = []
@@ -203,13 +204,13 @@ export async function fetchRolesFromApi(): Promise<Role[]> {
         ? `${locParts.join(', ')} · ${workTypeSuffix}`
         : workTypeSuffix
 
-      const parsedCats = parseCategories(job.Role_Category)
+      const parsedCats = parseCategories(job.Role_Category || job.Industry)
 
       return {
         slug: job.slug,
         title: job.Posting_Title || 'Untitled Role',
         department: job.Industry || 'Careers',
-        type: job.Job_Type || 'Full time',
+        type: job.Work_Type || job.Job_Type || 'Full time',
         city: job.City || '',
         province: job.State || '',
         country: job.Country || '',
