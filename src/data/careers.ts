@@ -164,17 +164,18 @@ export async function fetchRolesFromApi(): Promise<Role[]> {
       rawHtml = rawHtml.replace(/&nbsp;/gi, ' ')
       rawHtml = rawHtml.replace(/<br\s*\/?>\s*(?=<\/div>|<\/p>)/gi, '')
 
-      // 1. Convert standalone bold text to <h3> (handles <div><b>Text</b></div> or <br><b>Text</b><br>)
-      rawHtml = rawHtml.replace(/<(div|p)[^>]*>\s*(?:<b>|<strong>)(.*?)(?:<\/b>|<\/strong>)\s*<\/\1>/gi, '\n<h3>$2</h3>\n')
-      rawHtml = rawHtml.replace(/(?:<br\s*\/?>|\n|^)\s*(?:<b>|<strong>)(.*?)(?:<\/b>|<\/strong>)\s*(?=<br\s*\/?>|\n|$)/gi, '\n<h3>$1</h3>\n')
+      // 1. Convert ONLY standalone bold section titles (like <br><b>Required Qualifications</b><br>) to <h3>
+      rawHtml = rawHtml.replace(/(?:<br\s*\/?>|\n|^)\s*(?:<b>|<strong>)\s*([^<]+?)\s*(?:<\/b>|<\/strong>)\s*(?=<br\s*\/?>|\n|$)/gi, '\n<h3>$1</h3>\n')
 
-      // 2. Convert plain text ending in colon (like "Requirements:") to <h3>
-      rawHtml = rawHtml.replace(/<(div|p)[^>]*>\s*([A-Za-z0-9 &\/,-]+):\s*<\/\1>/gi, '\n<h3>$2</h3>\n')
-      rawHtml = rawHtml.replace(/(?:<br\s*\/?>|\n|^)\s*([A-Za-z0-9 &\/,-]+):\s*(?=<br\s*\/?>|\n|$)/gi, '\n<h3>$1</h3>\n')
+      // 2. Convert standalone titles ending with colon to <h3>
+      rawHtml = rawHtml.replace(/<(div|p)[^>]*>\s*([A-Za-z0-9 &\/,-]{3,50}):\s*<\/\1>/gi, '\n<h3>$2</h3>\n')
+      rawHtml = rawHtml.replace(/(?:<br\s*\/?>|\n|^)\s*([A-Za-z0-9 &\/,-]{3,50}):\s*(?=<br\s*\/?>|\n|$)/gi, '\n<h3>$1</h3>\n')
 
-      // 3. Format plain text lists (- item or • item) into HTML <ul><li>
-      rawHtml = rawHtml.replace(/(?:<div[^>]*>|<p[^>]*>|<br\s*\/?>|\n|^)\s*[-•]\s+(.*?)\s*(?:<\/div>|<\/p>|<br\s*\/?>|\n|$)/gi, '\n<li>$1</li>\n')
-      rawHtml = rawHtml.replace(/(?:\n*<li>.*?<\/li>\n*)+/g, (match) => `\n<ul>${match}</ul>\n`)
+      // 3. Format plain text lists (- item or • item) into HTML <ul><li> ONLY if non-HTML list
+      if (!rawHtml.includes('<li')) {
+        rawHtml = rawHtml.replace(/(?:<div[^>]*>|<p[^>]*>|<br\s*\/?>|\n|^)\s*[-•]\s*(.*?)\s*(?:<\/div>|<\/p>|<br\s*\/?>|\n|$)/gi, '\n<li>$1</li>\n')
+        rawHtml = rawHtml.replace(/(?:\n*<li>.*?<\/li>\n*)+/g, (match) => `\n<ul>${match}</ul>\n`)
+      }
 
       const hidePay =
         job.Pay_Disclosure === 'Do not disclose pay' ||

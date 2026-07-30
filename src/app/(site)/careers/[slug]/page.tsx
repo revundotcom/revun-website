@@ -268,13 +268,11 @@ export default async function CareerRolePage({ params }: RouteParams) {
                 <>
                   <style dangerouslySetInnerHTML={{
                     __html: `
-                    .job-desc p > strong:only-child,
-                    .job-desc p > b:only-child,
-                    .job-desc div > strong:only-child,
-                    .job-desc div > b:only-child,
-                    .job-desc p > span > strong:only-child,
-                    .job-desc p > span > b:only-child,
-                    .job-desc h3 {
+                    .job-desc h3,
+                    .job-desc > p > strong:only-child,
+                    .job-desc > p > b:only-child,
+                    .job-desc > div > strong:only-child,
+                    .job-desc > div > b:only-child {
                       display: block;
                       font-size: 1.125rem;
                       font-weight: 800;
