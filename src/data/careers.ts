@@ -157,23 +157,53 @@ export async function fetchRolesFromApi(): Promise<Role[]> {
 
       rawHtml = cleanStyles(rawHtml)
 
-      // Strip <font> tags but keep the content inside them
-      rawHtml = rawHtml.replace(/<\/?font[^>]*>/gi, '')
+      // Strip <font> and <span> tags but keep the content inside them
+      rawHtml = rawHtml.replace(/<\/?(font|span)[^>]*>/gi, '')
 
       // Clean up messy Zoho HTML artifacts (non-breaking spaces, empty trailing br tags)
       rawHtml = rawHtml.replace(/&nbsp;/gi, ' ')
       rawHtml = rawHtml.replace(/<br\s*\/?>\s*(?=<\/div>|<\/p>)/gi, '')
 
-      // 1. Convert ONLY standalone bold section titles (like <br><b>Required Qualifications</b><br>) to <h3>
-      rawHtml = rawHtml.replace(/(?:<br\s*\/?>|\n|^)\s*(?:<b>|<strong>)\s*([^<]+?)\s*(?:<\/b>|<\/strong>)\s*(?=<br\s*\/?>|\n|$)/gi, '\n<h3>$1</h3>\n')
+      // Convert double breaks into clean paragraph splits
+      rawHtml = rawHtml.replace(/(?:<br\s*\/?>\s*){2,}/gi, '</p><p>')
 
-      // 2. Convert standalone titles ending with colon to <h3>
-      rawHtml = rawHtml.replace(/<(div|p)[^>]*>\s*([A-Za-z0-9 &\/,-]{3,50}):\s*<\/\1>/gi, '\n<h3>$2</h3>\n')
-      rawHtml = rawHtml.replace(/(?:<br\s*\/?>|\n|^)\s*([A-Za-z0-9 &\/,-]{3,50}):\s*(?=<br\s*\/?>|\n|$)/gi, '\n<h3>$1</h3>\n')
+      // Strip any paragraph or div whose text content is empty / whitespace
+      rawHtml = rawHtml.replace(/<(p|div)[^>]*>(.*?)(?:<\/p>|<\/div>)/gi, (fullMatch, tag, inner) => {
+        const text = inner.replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').trim()
+        if (text.length === 0) {
+          return ''
+        }
+        return fullMatch
+      })
+
+      const isHeadingText = (text: string) => {
+        let trimmed = text.replace(/&nbsp;/g, ' ').trim()
+        if (trimmed.endsWith(':')) {
+          trimmed = trimmed.slice(0, -1).trim()
+        }
+        if (trimmed.length < 2 || trimmed.length > 85) return false
+        if (trimmed.endsWith('.')) return false
+        if (/^[-•*\d]/i.test(trimmed)) return false
+        if (/\d+\s*(gb|mbps|ram|years)/i.test(trimmed)) return false
+        if (/^(est|hours|pay|location|salary|base salary|performance bonus|total compensation|job type|work type|note|ref|id)\b/i.test(trimmed)) return false
+        return true
+      }
+
+      // 1. Convert standalone bold section titles to <h3>
+      rawHtml = rawHtml.replace(/(?:<(div|p)[^>]*>)?\s*(?:<b>|<strong>)\s*([^<]{2,85}?)\s*(?:<\/b>|<\/strong>)\s*(?:<\/(?:div|p)>)?/gi, (match, tag, headingText) => {
+        const cleanHeading = headingText.replace(/&nbsp;/g, ' ').trim()
+        if (isHeadingText(cleanHeading)) {
+          return `\n<h3>${cleanHeading.replace(/:$/, '')}</h3>\n`
+        }
+        return match
+      })
+
+      // 2. Strip empty paragraphs, divs, and breaks directly following <h3> or </h2>
+      rawHtml = rawHtml.replace(/(<\/h[1-6]>\s*)(?:<(p|div)[^>]*>\s*(?:&nbsp;|\s)*<\/\2>|<br\s*\/?>|\s)+/gi, '$1')
 
       // 3. Format plain text lists (- item or • item) into HTML <ul><li> ONLY if non-HTML list
       if (!rawHtml.includes('<li')) {
-        rawHtml = rawHtml.replace(/(?:<div[^>]*>|<p[^>]*>|<br\s*\/?>|\n|^)\s*[-•]\s*(.*?)\s*(?:<\/div>|<\/p>|<br\s*\/?>|\n|$)/gi, '\n<li>$1</li>\n')
+        rawHtml = rawHtml.replace(/(?:<div[^>]*>|<p[^>]*>|<br\s*\/?>|\n|^)\s*[-•*]\s*(.*?)\s*(?:<\/div>|<\/p>|<br\s*\/?>|\n|$)/gi, '\n<li>$1</li>\n')
         rawHtml = rawHtml.replace(/(?:\n*<li>.*?<\/li>\n*)+/g, (match) => `\n<ul>${match}</ul>\n`)
       }
 
