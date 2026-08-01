@@ -164,8 +164,8 @@ export async function fetchRolesFromApi(): Promise<Role[]> {
       rawHtml = rawHtml.replace(/&nbsp;/gi, ' ')
       rawHtml = rawHtml.replace(/<br\s*\/?>\s*(?=<\/div>|<\/p>)/gi, '')
 
-      // Convert double breaks into clean paragraph splits
-      rawHtml = rawHtml.replace(/(?:<br\s*\/?>\s*){2,}/gi, '</p><p>')
+      // Convert single or multiple break tags into clean paragraph splits
+      rawHtml = rawHtml.replace(/(?:<br\s*\/?>\s*)+/gi, '</p><p>')
 
       // Strip any paragraph or div whose text content is empty / whitespace
       rawHtml = rawHtml.replace(/<(p|div)[^>]*>(.*?)(?:<\/p>|<\/div>)/gi, (fullMatch, tag, inner) => {
@@ -185,12 +185,24 @@ export async function fetchRolesFromApi(): Promise<Role[]> {
         if (trimmed.endsWith('.')) return false
         if (/^[-•*\d]/i.test(trimmed)) return false
         if (/\d+\s*(gb|mbps|ram|years)/i.test(trimmed)) return false
+        // Exclude currencies, amounts, and figures (e.g. C$160,000, $60,000)
+        if (/[\$\€\£]|c\$|\b\d{2,}\b/i.test(trimmed)) return false
+        // Exclude meta key labels like EST HOURS REQUIRED, LOCATION, PAY, SALARY, etc.
         if (/^(est|hours|pay|location|salary|base salary|performance bonus|total compensation|job type|work type|note|ref|id)\b/i.test(trimmed)) return false
         return true
       }
 
-      // 1. Convert standalone bold section titles to <h3>
-      rawHtml = rawHtml.replace(/(?:<(div|p)[^>]*>)?\s*(?:<b>|<strong>)\s*([^<]{2,85}?)\s*(?:<\/b>|<\/strong>)\s*(?:<\/(?:div|p)>)?/gi, (match, tag, headingText) => {
+      // 1. Convert ONLY standalone bold section titles wrapped in <p> or <div> (where <b>Title</b> is the ONLY content) to <h3>
+      rawHtml = rawHtml.replace(/<(div|p)[^>]*>\s*(?:<b>|<strong>)\s*([^<]{2,85}?)\s*(?:<\/b>|<\/strong>)\s*<\/\1>/gi, (match, tag, headingText) => {
+        const cleanHeading = headingText.replace(/&nbsp;/g, ' ').trim()
+        if (isHeadingText(cleanHeading)) {
+          return `\n<h3>${cleanHeading.replace(/:$/, '')}</h3>\n`
+        }
+        return match
+      })
+
+      // Convert standalone bold headings surrounded by <br> breaks
+      rawHtml = rawHtml.replace(/(?:<br\s*\/?>|\n|^)\s*(?:<b>|<strong>)\s*([^<]{2,85}?)\s*(?:<\/b>|<\/strong>)\s*(?=<br\s*\/?>|\n|$)/gi, (match, headingText) => {
         const cleanHeading = headingText.replace(/&nbsp;/g, ' ').trim()
         if (isHeadingText(cleanHeading)) {
           return `\n<h3>${cleanHeading.replace(/:$/, '')}</h3>\n`
