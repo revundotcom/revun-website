@@ -235,16 +235,17 @@ export async function fetchRolesFromApi(): Promise<Role[]> {
       }
 
       const isRemote = job.Job_Type == null || String(job.Job_Type).toLowerCase() === 'hybrid' || String(job.Job_Type).toLowerCase() === 'remote'
-      const workTypeSuffix = isRemote ? 'Remote' : 'Hybrid'
 
       const locParts = []
       if (job.City) locParts.push(job.City)
       if (job.State) locParts.push(job.State)
       if (job.Country) locParts.push(job.Country)
 
+      const jobTypeDisplay = job.Job_Type ? String(job.Job_Type).trim() : ''
+
       const locationDisplay = locParts.length > 0
-        ? `${locParts.join(', ')} · ${workTypeSuffix}`
-        : workTypeSuffix
+        ? (jobTypeDisplay ? `${locParts.join(', ')} · ${jobTypeDisplay}` : locParts.join(', '))
+        : (jobTypeDisplay || 'Remote')
 
       const parsedCats = parseCategories(job.Role_Category || job.Industry)
 
