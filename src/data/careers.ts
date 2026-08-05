@@ -137,6 +137,7 @@ export async function fetchRolesFromApi(): Promise<Role[]> {
     }
     const json = await res.json()
     const apiJobs = json.data || []
+
     return apiJobs.map((job: ApiJob) => {
       let rawHtml = job.Job_Description || ''
 
