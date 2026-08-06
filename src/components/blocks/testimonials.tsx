@@ -38,10 +38,10 @@ function StarRating() {
 
 export function Testimonials() {
   return (
-    <section className="bg-white py-12 md:py-16">
+    <section className="bg-white py-10 md:py-12">
       <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
-        <RevealOnScroll className="text-center mb-12 md:mb-16">
-          <motion.p variants={revealItemBlur} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">
+        <RevealOnScroll className="text-center mb-8 md:mb-10">
+          <motion.p variants={revealItemBlur} className="text-base font-heading font-semibold uppercase tracking-wider text-brand-blue">
             Testimonials
           </motion.p>
           <motion.h2 variants={revealItemBlur} className="mt-3 font-heading text-2xl md:text-4xl font-bold text-brand-graphite">
@@ -58,16 +58,16 @@ export function Testimonials() {
             >
               <div className="absolute inset-x-0 top-0 h-[2px] bg-[#176FEB] opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-t-xl" aria-hidden="true" />
               <StarRating />
-              <p className="text-brand-graphite text-sm leading-relaxed mb-8 italic">
+              <p className="text-brand-graphite text-base leading-relaxed mb-8 italic">
                 &ldquo;{t.quote}&rdquo;
               </p>
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue text-sm font-bold">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue text-base font-bold">
                   {t.initials}
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-brand-graphite">{t.name}</p>
-                  <p className="text-xs text-[#555860]">{t.role}</p>
+                  <p className="text-base font-semibold text-brand-graphite">{t.name}</p>
+                  <p className="text-sm text-[#555860]">{t.role}</p>
                 </div>
               </div>
             </motion.div>

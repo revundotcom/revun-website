@@ -594,13 +594,13 @@ export default function AppShowcase() {
   const featureDurationMs = Math.max(imageCount, 1) * IMAGE_DWELL_MS
 
   return (
-    <section className="bg-[#F5F6F8] py-12 md:py-20">
+    <section className="bg-[#F5F6F8] py-10 md:py-14">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         {/* Header */}
         <RevealOnScroll className="mx-auto max-w-3xl text-center">
           <motion.p
             variants={revealItem}
-            className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue"
+            className="text-base font-heading font-semibold uppercase tracking-wider text-brand-blue"
           >
             The Mobile App
           </motion.p>

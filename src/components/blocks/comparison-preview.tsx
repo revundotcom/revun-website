@@ -71,13 +71,13 @@ const rows = [
 /* ═══════════════════════════════════════════ */
 export default function ComparisonPreview() {
   return (
-    <section className="overflow-hidden bg-white py-12 md:py-16">
+    <section className="overflow-hidden bg-white py-10 md:py-12">
       <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         {/* Section header */}
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
             variants={revealItem}
-            className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue"
+            className="text-base font-heading font-semibold uppercase tracking-wider text-brand-blue"
           >
             Why Revun
           </motion.p>
@@ -105,13 +105,13 @@ export default function ComparisonPreview() {
             {/* Header row */}
             <div className="grid grid-cols-3 border-b border-border bg-[#FAFBFC]">
               <div className="px-3 md:px-6 py-4">
-                <span className="text-sm font-semibold text-brand-graphite-mid">Feature</span>
+                <span className="text-base font-semibold text-brand-graphite-mid">Feature</span>
               </div>
               <div className="px-3 md:px-6 py-4 text-center">
-                <span className="text-sm font-bold text-brand-blue">Revun</span>
+                <span className="text-base font-bold text-brand-blue">Revun</span>
               </div>
               <div className="px-3 md:px-6 py-4 text-center">
-                <span className="text-sm font-semibold text-brand-graphite-mid">Others</span>
+                <span className="text-base font-semibold text-brand-graphite-mid">Others</span>
               </div>
             </div>
 
@@ -125,7 +125,7 @@ export default function ComparisonPreview() {
                 variants={revealItem}
               >
                 <div className="px-3 md:px-6 py-4">
-                  <span className="text-sm font-medium text-brand-graphite">
+                  <span className="text-base font-medium text-brand-graphite">
                     {row.feature}
                   </span>
                 </div>
@@ -141,7 +141,7 @@ export default function ComparisonPreview() {
                   )}
                 </div>
                 <div className="flex justify-center px-3 md:px-6 py-4">
-                  <span className="rounded-full bg-brand-off-white px-3 py-1 text-xs font-medium text-brand-graphite-mid">
+                  <span className="rounded-full bg-brand-off-white px-3 py-1 text-sm font-medium text-brand-graphite-mid">
                     {row.others}
                   </span>
                 </div>
@@ -155,7 +155,7 @@ export default function ComparisonPreview() {
           <motion.div variants={revealItem}>
             <Link
               href="/compare/"
-              className="inline-flex items-center gap-2 rounded-xl border border-border bg-white px-6 py-3 text-sm font-semibold text-brand-graphite transition-all duration-200 hover:border-brand-blue/30 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
+              className="inline-flex items-center gap-2 rounded-xl border border-border bg-white px-6 py-3 text-base font-semibold text-brand-graphite transition-all duration-200 hover:border-brand-blue/30 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
             >
               See Full Comparisons
               <ArrowRight className="h-4 w-4 text-brand-blue" />

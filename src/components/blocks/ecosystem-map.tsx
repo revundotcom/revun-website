@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import {
@@ -39,7 +40,7 @@ function WorkflowMap() {
   const inView = useInView(ref, { once: true, margin: '-80px 0px' })
 
   return (
-    <div ref={ref} className="relative mx-auto hidden w-full max-w-[700px] lg:block">
+    <div ref={ref} className="relative mx-auto hidden w-full max-w-[560px] lg:block">
       <svg viewBox={`0 0 ${SIZE} ${SIZE}`} className="w-full h-auto" aria-label="Revun ecosystem workflow map">
         <defs>
           <linearGradient id="orbit-grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -78,8 +79,14 @@ function WorkflowMap() {
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-[#176FEB] to-[#0B5AD4] shadow-[0_0_40px_rgba(23,111,235,0.35)]"
         initial={{ scale: 0 }} animate={inView ? { scale: 1 } : {}} transition={{ delay: 0.1, ...spring }}
       >
-        <div className="flex h-[84px] w-[84px] items-center justify-center rounded-full border border-white/20 bg-gradient-to-br from-[#176FEB] to-[#0B5AD4]">
-          <span className="font-heading text-base font-bold text-white tracking-wide">Revun</span>
+        <div className="flex h-[84px] w-[84px] items-center justify-center overflow-hidden rounded-full border border-white/20">
+          <Image
+            src="/revun-mark.png"
+            alt="Revun"
+            width={512}
+            height={512}
+            className="h-full w-full object-cover"
+          />
         </div>
       </motion.div>
 
@@ -98,7 +105,7 @@ function WorkflowMap() {
               <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: `${n.color}15` }}>
                 <Icon className="h-3.5 w-3.5" style={{ color: n.color }} />
               </span>
-              <span className="text-[11px] font-semibold text-[#0A1628] group-hover:text-[#176FEB] md:text-xs whitespace-nowrap">
+              <span className="text-[11px] font-semibold text-[#0A1628] group-hover:text-[#176FEB] md:text-sm whitespace-nowrap">
                 {n.label}
               </span>
             </Link>
@@ -111,12 +118,12 @@ function WorkflowMap() {
 
 export default function EcosystemMap() {
   return (
-    <section id="ecosystem" className="relative overflow-hidden bg-white py-12 md:py-16 scroll-mt-24">
+    <section id="ecosystem" className="relative overflow-hidden bg-white py-10 md:py-12 scroll-mt-14">
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[700px] w-[700px] rounded-full bg-[#176FEB]/[0.03] blur-[120px]" aria-hidden />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
-          <motion.p variants={revealItem} className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">
+          <motion.p variants={revealItem} className="text-base font-heading font-semibold uppercase tracking-wider text-brand-blue">
             Ecosystem
           </motion.p>
           <motion.h2 variants={revealItem} className="mt-3 font-display text-3xl font-normal text-[#0A1628] md:text-5xl">
@@ -127,7 +134,7 @@ export default function EcosystemMap() {
           </motion.p>
         </RevealOnScroll>
 
-        <div className="mt-10 md:mt-16">
+        <div className="mt-6 md:mt-8">
           <WorkflowMap />
 
           {/* Mobile + tablet fallback: clean grid with same 9 modules around a Revun hub */}
@@ -135,8 +142,14 @@ export default function EcosystemMap() {
             <div className="relative mb-8 flex items-center justify-center">
               <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-[#E5E7EB] to-transparent" aria-hidden="true" />
               <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#176FEB] to-[#0B5AD4] shadow-[0_0_30px_rgba(23,111,235,0.3)]">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-gradient-to-br from-[#176FEB] to-[#0B5AD4]">
-                  <span className="font-heading text-sm font-bold tracking-wide text-white">Revun</span>
+                <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-white/20">
+                  <Image
+                    src="/revun-mark.png"
+                    alt="Revun"
+                    width={512}
+                    height={512}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
               </div>
             </div>

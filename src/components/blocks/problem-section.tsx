@@ -246,11 +246,11 @@ function ChaosSlideshow() {
                 >
                   {sc.stat.value}
                 </span>
-                <span className="text-xs uppercase tracking-wider text-white/50">
+                <span className="text-sm uppercase tracking-wider text-white/50">
                   Hidden cost
                 </span>
               </div>
-              <p className="text-sm leading-snug text-white/70">{sc.stat.label}</p>
+              <p className="text-base leading-snug text-white/70">{sc.stat.label}</p>
               <span
                 className="absolute bottom-0 left-0 h-[2px] bg-[#4A91F0] transition-all duration-300"
                 style={{ width: i === idx ? '100%' : '0%' }}
@@ -261,7 +261,7 @@ function ChaosSlideshow() {
         </div>
         <a
           href="#ecosystem"
-          className="group flex items-center justify-between gap-4 border-t border-white/10 bg-[#0A1628] px-6 py-5 text-sm font-semibold text-white/90 transition-colors hover:bg-white/[0.04] md:min-w-[280px] md:border-l md:border-t-0 md:px-7"
+          className="group flex items-center justify-between gap-4 border-t border-white/10 bg-[#0A1628] px-6 py-5 text-base font-semibold text-white/90 transition-colors hover:bg-white/[0.04] md:min-w-[280px] md:border-l md:border-t-0 md:px-7"
         >
           <span>See how Revun replaces the mess</span>
           <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-brand-blue transition-transform duration-300 group-hover:translate-x-1">
@@ -531,7 +531,7 @@ function PainChapters() {
   const chapter = painPoints[active]
 
   return (
-    <div className="mt-20">
+    <div className="mt-12">
       {/* tab bar */}
       <div className="border-b border-border">
         <div className="flex flex-wrap gap-x-6 gap-y-2 md:gap-x-10">
@@ -552,7 +552,7 @@ function PainChapters() {
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <span
-                  className={`text-xs font-heading font-semibold uppercase tracking-[0.18em] transition-colors ${
+                  className={`text-sm font-heading font-semibold uppercase tracking-[0.18em] transition-colors ${
                     isActive ? 'text-[#0A1628]' : 'text-[#555860] group-hover:text-[#0A1628]'
                   }`}
                 >
@@ -584,7 +584,7 @@ function PainChapters() {
           >
             {/* left */}
             <div>
-              <p className="text-xs font-heading font-semibold uppercase tracking-[0.2em] text-brand-blue">
+              <p className="text-sm font-heading font-semibold uppercase tracking-[0.2em] text-brand-blue">
                 Chapter {String(active + 1).padStart(2, '0')} of 04, {chapter.tag}
               </p>
               <h4
@@ -601,7 +601,7 @@ function PainChapters() {
                 <span className="font-display text-4xl font-normal leading-none text-brand-blue md:text-6xl">
                   {chapter.stat}
                 </span>
-                <span className="pb-1 text-xs font-heading font-semibold uppercase tracking-[0.18em] text-brand-graphite-mid">
+                <span className="pb-1 text-sm font-heading font-semibold uppercase tracking-[0.18em] text-brand-graphite-mid">
                   {chapter.statLabel}
                 </span>
               </div>
@@ -647,7 +647,7 @@ function PainChapters() {
             )
           })}
         </div>
-        <span className="font-display text-sm text-[#0A1628]">
+        <span className="font-display text-base text-[#0A1628]">
           {String(active + 1).padStart(2, '0')} / 04
         </span>
       </div>
@@ -661,7 +661,7 @@ function PainChapters() {
 
 export default function ProblemSection() {
   return (
-    <section className="relative overflow-hidden bg-brand-off-white py-12 md:py-16">
+    <section className="relative overflow-hidden bg-brand-off-white py-10 md:py-12">
       <div className="absolute inset-0 bg-grid bg-grid-mask opacity-[0.03]" aria-hidden="true" />
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[800px] rounded-full bg-[#176FEB]/[0.04] blur-[140px]"
@@ -672,7 +672,7 @@ export default function ProblemSection() {
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
             variants={revealItem}
-            className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue"
+            className="text-base font-heading font-semibold uppercase tracking-wider text-brand-blue"
           >
             The Problem
           </motion.p>

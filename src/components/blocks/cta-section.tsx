@@ -8,7 +8,7 @@ import { RevealOnScroll, revealItem } from '@/components/ui/reveal-on-scroll'
 
 export function CTASection() {
   return (
-    <section className="bg-[#F5F6F8] py-12 md:py-16">
+    <section className="bg-[#F5F6F8] py-10 md:py-12">
       <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8 text-center">
         <RevealOnScroll>
           <motion.h2
@@ -46,7 +46,7 @@ export function CTASection() {
 
           <motion.p
             variants={revealItem}
-            className="mt-6 text-sm text-[#555860]"
+            className="mt-6 text-base text-[#555860]"
           >
             From $1/day per unit. No long-term contracts.
           </motion.p>

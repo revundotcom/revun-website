@@ -26,7 +26,7 @@ export function ReviewBadges() {
                   <Icon className="h-4 w-4 text-brand-blue" />
                 </span>
                 <div>
-                  <p className="text-sm font-semibold leading-tight text-[#0A1628]">{value}</p>
+                  <p className="text-base font-semibold leading-tight text-[#0A1628]">{value}</p>
                   <p className="text-[11px] leading-tight text-[#555860]">{label}</p>
                 </div>
               </div>

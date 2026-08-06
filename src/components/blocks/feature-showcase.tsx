@@ -160,7 +160,7 @@ function FeatureRow({ feature, index }: { feature: Feature; index: number }) {
         </p>
         <Link
           href={feature.href}
-          className="mt-4 inline-flex items-center gap-1.5 font-heading text-sm font-semibold text-brand-blue transition-colors hover:text-brand-blue-dark"
+          className="mt-4 inline-flex items-center gap-1.5 font-heading text-base font-semibold text-brand-blue transition-colors hover:text-brand-blue-dark"
         >
           Explore {feature.title.toLowerCase()}
           <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -186,7 +186,7 @@ function FeatureRow({ feature, index }: { feature: Feature; index: number }) {
 
 export function FeatureShowcase() {
   return (
-    <section className="relative overflow-hidden bg-brand-off-white py-12 md:py-20 lg:py-28">
+    <section className="relative overflow-hidden bg-brand-off-white py-10 md:py-14 lg:py-16">
       <div
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[800px] rounded-full bg-[#176FEB]/[0.02] blur-[120px]"
         aria-hidden="true"
@@ -197,7 +197,7 @@ export function FeatureShowcase() {
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
             variants={revealItem}
-            className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue"
+            className="text-base font-heading font-semibold uppercase tracking-wider text-brand-blue"
           >
             The Operating System
           </motion.p>

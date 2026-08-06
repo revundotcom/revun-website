@@ -33,10 +33,10 @@ const faqs = [
 
 export function HomepageFaq() {
   return (
-    <section className="bg-brand-off-white py-12 md:py-16">
+    <section className="bg-brand-off-white py-10 md:py-12">
       <div className="mx-auto max-w-3xl px-4 md:px-6 lg:px-8">
-        <div className="text-center mb-10 md:mb-12">
-          <p className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue">
+        <div className="text-center mb-10 md:mb-8">
+          <p className="text-base font-heading font-semibold uppercase tracking-wider text-brand-blue">
             FAQ
           </p>
           <h2 className="mt-3 font-heading text-2xl md:text-4xl font-bold text-brand-graphite">
@@ -67,7 +67,7 @@ export function HomepageFaq() {
                 </svg>
               </summary>
               <div className="px-4 md:px-6 pb-5 -mt-1">
-                <p className="text-[#555860] text-sm leading-relaxed">
+                <p className="text-[#555860] text-base leading-relaxed">
                   {faq.answer}
                 </p>
               </div>

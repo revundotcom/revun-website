@@ -92,13 +92,13 @@ export function AudienceRouter() {
   const audience = audiences[active]
 
   return (
-    <section className="bg-white py-12 md:py-16">
+    <section className="bg-white py-10 md:py-12">
       <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         {/* Header */}
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
             variants={revealItem}
-            className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue"
+            className="text-base font-heading font-semibold uppercase tracking-wider text-brand-blue"
           >
             Solutions
           </motion.p>
@@ -130,7 +130,7 @@ export function AudienceRouter() {
                   key={a.id}
                   type="button"
                   onClick={() => setActive(i)}
-                  className={`relative flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-200 ${
+                  className={`relative flex items-center gap-2 rounded-full px-5 py-2.5 text-base font-medium transition-colors duration-200 ${
                     isActive
                       ? 'text-white'
                       : 'text-brand-graphite-mid hover:text-brand-graphite'
@@ -183,14 +183,14 @@ export function AudienceRouter() {
                       >
                         <Check className="h-3 w-3" style={{ color: audience.color }} />
                       </span>
-                      <span className="text-sm text-brand-graphite-mid">{bullet}</span>
+                      <span className="text-base text-brand-graphite-mid">{bullet}</span>
                     </li>
                   ))}
                 </ul>
 
                 <Link
                   href={audience.href}
-                  className="group mt-auto inline-flex items-center gap-2 pt-8 text-sm font-semibold text-brand-blue transition-colors hover:text-brand-blue-dark"
+                  className="group mt-auto inline-flex items-center gap-2 pt-8 text-base font-semibold text-brand-blue transition-colors hover:text-brand-blue-dark"
                 >
                   Explore {audience.tab.toLowerCase()} solutions
                   <ArrowRight className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-1" />
@@ -248,7 +248,7 @@ export function AudienceRouter() {
 
                   <Link
                     href={audience.href}
-                    className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-brand-blue px-6 text-sm font-semibold text-white transition-colors duration-150 hover:bg-brand-blue-dark"
+                    className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-brand-blue px-6 text-base font-semibold text-white transition-colors duration-150 hover:bg-brand-blue-dark"
                   >
                     Get started as {audience.tab.toLowerCase().replace('property ', '')}
                   </Link>

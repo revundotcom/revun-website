@@ -461,7 +461,7 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <RevunLogo size="h-8" variant={scrolled ? 'light' : 'dark'} />
+        <RevunLogo size="h-8" variant={scrolled ? 'light' : 'dark'} compact />
 
         <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Main navigation">
           {NAV_ITEMS.map((item) => (

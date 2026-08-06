@@ -174,7 +174,7 @@ function EndNode({
         <p className="text-[10px] font-heading font-semibold uppercase tracking-wider text-brand-graphite-mid">
           {variant === 'inbound' ? 'Inbound' : 'Outbound'}
         </p>
-        <p className="mt-0.5 font-heading text-sm font-semibold text-[#0A1628]">{label}</p>
+        <p className="mt-0.5 font-heading text-base font-semibold text-[#0A1628]">{label}</p>
       </div>
       <div className="border-t border-border pt-2.5 w-full">
         <p className="font-display text-xl font-normal text-brand-blue">{count}</p>
@@ -457,7 +457,7 @@ function FlowsConsole() {
 
 export function PaymentsFintech() {
   return (
-    <section className="relative overflow-hidden bg-brand-off-white py-12 md:py-20 lg:py-28">
+    <section className="relative overflow-hidden bg-brand-off-white py-10 md:py-14 lg:py-16">
       {/* Background effects */}
       <div className="absolute inset-0 bg-grid bg-grid-mask opacity-[0.03]" aria-hidden="true" />
       <div
@@ -470,7 +470,7 @@ export function PaymentsFintech() {
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
           <motion.p
             variants={revealItem}
-            className="text-sm font-heading font-semibold uppercase tracking-wider text-brand-blue"
+            className="text-base font-heading font-semibold uppercase tracking-wider text-brand-blue"
           >
             Financial Operating Layer
           </motion.p>
@@ -492,7 +492,7 @@ export function PaymentsFintech() {
         </RevealOnScroll>
 
         {/* ══ Money flow diagram ══ */}
-        <RevealOnScroll className="mt-16" stagger={0.1}>
+        <RevealOnScroll className="mt-10" stagger={0.1}>
           <div className="flex flex-col items-stretch gap-2 lg:flex-row lg:items-center">
             {/* Inbound zone */}
             <div className="flex justify-center lg:w-[180px]">
@@ -537,7 +537,7 @@ export function PaymentsFintech() {
         </RevealOnScroll>
 
         {/* ══ Operations Console — tabbed, each tab renders a live mini-UI ══ */}
-        <RevealOnScroll className="relative mt-24" stagger={0.08}>
+        <RevealOnScroll className="relative mt-14" stagger={0.08}>
           <motion.div variants={revealItem} className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.18em] text-brand-graphite-mid">

@@ -419,7 +419,7 @@ function BrowserFrame({ children }: { children: React.ReactNode }) {
 
 export default function DashboardPreview() {
   return (
-    <section className="relative overflow-hidden bg-white py-12 md:py-20 lg:py-28">
+    <section className="relative overflow-hidden bg-white py-10 md:py-14 lg:py-16">
       {/* Background decor */}
       <div
         className="absolute inset-0 bg-grid bg-grid-mask opacity-[0.035]"
@@ -458,7 +458,7 @@ export default function DashboardPreview() {
         </RevealOnScroll>
 
         {/* Browser-framed dashboard */}
-        <RevealOnScroll className="relative mt-10 md:mt-16">
+        <RevealOnScroll className="relative mt-10 md:mt-10">
           <motion.div variants={revealItem} className="relative">
             {/* Floating feature callouts */}
             <motion.div
@@ -543,7 +543,7 @@ export default function DashboardPreview() {
               <h3 className="font-heading text-base font-semibold text-[#0A1628]">
                 {f.title}
               </h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-brand-graphite-mid">
+              <p className="mt-1.5 text-base leading-relaxed text-brand-graphite-mid">
                 {f.desc}
               </p>
             </motion.div>

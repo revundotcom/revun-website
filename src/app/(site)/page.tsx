@@ -12,7 +12,7 @@ import { OperatorPlatformBlock } from '@/components/blocks/operator-platform-blo
 import { ReviewBadges } from '@/components/blocks/review-badges'
 import ProblemSection from '@/components/blocks/problem-section'
 import EcosystemMap from '@/components/blocks/ecosystem-map'
-import AppShowcase from '@/components/blocks/app-showcase'
+import AiFeatureBento from '@/components/blocks/ai-feature-bento'
 import ComparisonPreview from '@/components/blocks/comparison-preview'
 import DashboardPreview from '@/components/blocks/dashboard-preview'
 
@@ -57,7 +57,7 @@ export default function HomePage() {
       <ProblemSection />
       <EcosystemMap />
       <AudienceRouter />
-      <AppShowcase />
+      <AiFeatureBento />
       <PaymentsFintech />
       <FeatureShowcase />
       <ComparisonPreview />
