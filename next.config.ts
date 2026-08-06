@@ -51,7 +51,7 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' https: data:",
               "font-src 'self' https://fonts.gstatic.com",
-              "connect-src 'self' https://*.sanity.io https://www.google-analytics.com https://www.googletagmanager.com",
+              "connect-src 'self' https://*.sanity.io https://www.google-analytics.com https://www.googletagmanager.com https://portal.revun.com https://phpstack-1217932-6516253.cloudwaysapps.com",
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",

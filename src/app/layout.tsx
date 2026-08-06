@@ -98,6 +98,7 @@ export const metadata: Metadata = {
     google: process.env.NEXT_PUBLIC_GSC_VERIFICATION || '',
     other: {
       'msvalidate.01': process.env.NEXT_PUBLIC_BING_VERIFICATION || '',
+      'p:domain_verify': '3dfac3cee000564942a780951907feeb',
     },
   },
 }

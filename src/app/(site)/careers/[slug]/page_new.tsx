@@ -6,10 +6,10 @@ import { ArrowLeft, Briefcase, Mail, MapPin } from 'lucide-react'
 import { JsonLd } from '@/components/json-ld'
 import { buildBreadcrumbSchema } from '@/lib/schema-builders'
 import { getAllRoleSlugs, getRoleBySlug, type Role } from '@/data/careers'
-import { ApplyButton, StickyApplyButton } from './apply-button'
+import { ApplyButton } from './apply-button'
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://revun.com'
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://Revunrentals.com'
 
 interface RouteParams {
   params: Promise<{ slug: string }>
@@ -99,20 +99,6 @@ export default async function CareerRolePage({ params }: RouteParams) {
     { name: role.title, url: shareUrl },
   ])
 
-  const formattedCategories =
-    role.categories && role.categories.length > 0
-      ? role.categories
-          .map((c) =>
-            c
-              .trim()
-              .toLowerCase()
-              .replace(/\b\w/g, (char) => char.toUpperCase())
-          )
-          .join(', ')
-      : (role.category || role.department || '')
-          .toLowerCase()
-          .replace(/\b\w/g, (char) => char.toUpperCase())
-
   // Format the posting date in a friendlier form for the hero meta line.
   // const postingDateDisplay = formatDate(role.postingStartDate)
 
@@ -125,7 +111,7 @@ export default async function CareerRolePage({ params }: RouteParams) {
           Mirrors the GE Vernova reference: huge title, structured
           meta rows (Type / Location / Posting Date / Job ID), share
           row, and a primary Apply button anchored top-right. */}
-      <section className="bg-[#0A1628] text-white">
+      <section className="bg-[var(--brand-navy)] text-white">
         <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 sm:py-14 lg:px-10 lg:py-16">
           {/* Back link */}
           <Link
@@ -139,15 +125,13 @@ export default async function CareerRolePage({ params }: RouteParams) {
           <div className="mt-8 grid grid-cols-1 gap-10 lg:gap-12">
             {/* LEFT: title + meta + share */}
             <div className="min-w-0">
-              <h1 className="font-display text-4xl font-bold uppercase leading-[1.05] tracking-wide text-white sm:text-5xl md:text-6xl lg:text-[4.25rem]">
+              <h1 className="font-display text-4xl font-bold uppercase leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.25rem]">
                 {role.title}
               </h1>
 
-              {formattedCategories && (
-                <p className="mt-3 text-xs sm:text-sm font-medium tracking-wide text-white/80">
-                  {formattedCategories}
-                </p>
-              )}
+              <p className="mt-5 text-sm font-bold uppercase tracking-[0.16em] text-white/85">
+                {role.department}
+              </p>
 
               <dl className="mt-8 space-y-2 text-sm sm:text-base">
                 <MetaRow label="Type">{role.type}</MetaRow>
@@ -157,7 +141,7 @@ export default async function CareerRolePage({ params }: RouteParams) {
                 </MetaRow> */}
                 {/* <MetaRow label="Job ID">{role.jobId}</MetaRow> */}
                 {role.compensation && (
-                  <MetaRow label="Compensation">{role.compensation} Annually</MetaRow>
+                  <MetaRow label="Compensation">{role.compensation}</MetaRow>
                 )}
               </dl>
 
@@ -197,7 +181,7 @@ export default async function CareerRolePage({ params }: RouteParams) {
 
                 {/* Apply CTA */}
                 <div className="flex flex-wrap gap-3 lg:pb-1">
-                  <ApplyButton role={role.title} jobId={role.jobId} locId={role.locId || ''} workType={role.workType} />
+                  <ApplyButton role={role.title} jobId={role.jobId} workType={role.workType} />
                 </div>
               </div>
             </div>
@@ -206,12 +190,12 @@ export default async function CareerRolePage({ params }: RouteParams) {
       </section>
 
       {/* ── WHITE BODY ────────────────────────────────────────────── */}
-      <section className="bg-white pt-14 pb-32 sm:py-20">
+      <section className="bg-white py-14 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[14rem_1fr] lg:gap-16">
             {/* Sidebar label */}
             <aside className="lg:pt-2 lg:sticky lg:top-24 lg:self-start">
-              <h2 className="font-display text-2xl font-bold text-[#0A1628] sm:text-3xl tracking-wider">
+              <h2 className="font-display text-2xl font-bold text-[var(--brand-navy)] sm:text-3xl">
                 Job
                 <br />
                 Description
@@ -221,28 +205,28 @@ export default async function CareerRolePage({ params }: RouteParams) {
               <ul className="mt-8 hidden space-y-3 text-xs text-slate-600 lg:block">
                 <li className="flex items-start gap-2">
                   <Briefcase
-                    className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#176FEB]"
+                    className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--brand-emerald)]"
                     aria-hidden="true"
                   />
                   <span>{role.type}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <MapPin
-                    className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#176FEB]"
+                    className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--brand-emerald)]"
                     aria-hidden="true"
                   />
                   <span>{role.locationDisplay}</span>
                 </li>
                 {/* <li className="flex items-start gap-2">
                   <Calendar
-                    className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#176FEB]"
+                    className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--brand-emerald)]"
                     aria-hidden="true"
                   />
                   <span>{postingDateDisplay}</span>
                 </li> */}
                 {/* <li className="flex items-start gap-2">
                   <Hash
-                    className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#176FEB]"
+                    className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--brand-emerald)]"
                     aria-hidden="true"
                   />
                   <span>{role.jobId}</span>
@@ -250,7 +234,7 @@ export default async function CareerRolePage({ params }: RouteParams) {
               </ul>
 
               <div className="mt-8 hidden lg:block rounded-xl bg-slate-50 p-4 border border-slate-100">
-                <h3 className="text-lg font-bold text-[#0A1628] mb-2 tracking-wider">Important Location Requirement:</h3>
+                <h3 className="text-lg font-bold text-[var(--brand-navy)] mb-2 tracking-wider">Important Location Requirement:</h3>
                 <div className="text-sm text-slate-900 space-y-3 tracking-wider">
                   <p>
                     This is a remote position; however, candidates must be located in the same country, city, or region where the job is posted. The successful candidate must be available to attend a local office, meeting, training session, or company event if requested.
@@ -268,49 +252,35 @@ export default async function CareerRolePage({ params }: RouteParams) {
                 <>
                   <style dangerouslySetInnerHTML={{
                     __html: `
+                    .job-desc p > strong:only-child,
+                    .job-desc p > b:only-child,
+                    .job-desc div > strong:only-child,
+                    .job-desc div > b:only-child,
+                    .job-desc p > span > strong:only-child,
+                    .job-desc p > span > b:only-child,
                     .job-desc h3 {
                       display: block;
                       font-size: 1.125rem;
                       font-weight: 800;
-                      color: #0A1628;
-                      margin-top: 2rem;
-                      margin-bottom: 0.35rem;
+                      color: var(--brand-navy);
+                      margin-top: 2.5rem;
+                      margin-bottom: 0.75rem;
                       text-transform: uppercase;
                       letter-spacing: 0.05em;
-                      border-bottom: 2px solid #176FEB;
+                      border-bottom: 2px solid var(--brand-emerald);
                       padding-bottom: 0.25rem;
                       width: fit-content;
                     }
-                    .job-desc p {
-                      margin-top: 0.85rem !important;
-                      margin-bottom: 0.85rem !important;
-                      line-height: 1.75 !important;
-                      color: #0A1628;
-                    }
-                    .job-desc b,
-                    .job-desc strong {
-                      display: inline !important;
-                      font-weight: 700 !important;
-                      border-bottom: none !important;
-                      text-transform: none !important;
-                      padding: 0 !important;
-                      margin: 0 !important;
-                    }
-                    .job-desc h3 + ul,
-                    .job-desc h3 + p,
-                    .job-desc h3 + div {
-                      margin-top: 0.35rem !important;
-                    }
                     .job-desc h1, .job-desc h2, .job-desc h4 {
-                      color: #0A1628;
+                      color: var(--brand-navy);
                       font-weight: 800;
-                      margin-top: 2rem;
-                      margin-bottom: 0.35rem;
+                      margin-top: 2.5rem;
+                      margin-bottom: 0.75rem;
                     }
                     .job-desc ul {
                       list-style-type: none !important;
                       padding-left: 0 !important;
-                      margin-top: 0.5rem;
+                      margin-top: 0.75rem;
                       margin-bottom: 1.5rem;
                     }
                     .job-desc ul > li {
@@ -327,7 +297,7 @@ export default async function CareerRolePage({ params }: RouteParams) {
                       width: 0.375rem;
                       height: 0.375rem;
                       border-radius: 9999px;
-                      background-color: #176FEB;
+                      background-color: #10b981;
                     }
                     .job-desc > *:first-child {
                       margin-top: 0 !important;
@@ -349,7 +319,7 @@ export default async function CareerRolePage({ params }: RouteParams) {
 
                   {/* Responsibilities */}
                   <Block title="Job Description">
-                    <h4 className="text-[12px] font-bold uppercase tracking-[0.18em] text-[#0A1628]">
+                    <h4 className="text-[12px] font-bold uppercase tracking-[0.18em] text-[var(--brand-navy)]">
                       Key Responsibilities
                     </h4>
                     <BulletList items={role.responsibilities} />
@@ -380,7 +350,7 @@ export default async function CareerRolePage({ params }: RouteParams) {
                       </p>
                     )}
                     <p className="mt-3 text-[15px] leading-[1.8] text-slate-700">
-                      <span className="font-bold text-[#0A1628]">
+                      <span className="font-bold text-[var(--brand-navy)]">
                         Relocation Assistance Provided:
                       </span>{' '}
                       {role.relocationAssistance ? 'Yes' : 'No'}
@@ -390,10 +360,10 @@ export default async function CareerRolePage({ params }: RouteParams) {
               )}
 
               <div className="mt-12 flex flex-wrap gap-3 border-t border-slate-100 pt-10">
-                <ApplyButton role={role.title} jobId={role.jobId} locId={role.locId || ''} workType={role.workType} />
+                <ApplyButton role={role.title} jobId={role.jobId} workType={role.workType} />
                 <Link
                   href="/careers/#positions"
-                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-[#0A1628]/20 bg-white px-6 py-3 text-sm font-bold text-[#0A1628] transition-colors hover:border-[#0A1628]/40 hover:bg-slate-50"
+                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-brand-navy/20 bg-white px-6 py-3 text-sm font-bold text-[var(--brand-navy)] transition-colors hover:border-brand-navy/40 hover:bg-slate-50"
                 >
                   <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                   See all open roles
@@ -403,9 +373,6 @@ export default async function CareerRolePage({ params }: RouteParams) {
           </div>
         </div>
       </section>
-
-      {/* Mobile Sticky Apply Button */}
-      <StickyApplyButton role={role.title} jobId={role.jobId} locId={role.locId || ''} workType={role.workType} />
     </main>
   )
 }
@@ -465,7 +432,7 @@ function Block({
 }) {
   return (
     <section className="mt-8 first:mt-0">
-      <h3 className="font-bold text-[#0A1628]">{title}</h3>
+      <h3 className="font-bold text-[var(--brand-navy)]">{title}</h3>
       <div className="mt-3">{children}</div>
     </section>
   )
@@ -481,7 +448,7 @@ function BulletList({ items }: { items: string[] }) {
         >
           <span
             aria-hidden="true"
-            className="mt-2 inline-block size-1.5 shrink-0 rounded-full bg-[#176FEB]"
+            className="mt-2 inline-block size-1.5 shrink-0 rounded-full bg-[var(--brand-emerald)]"
           />
           <span>{item}</span>
         </li>

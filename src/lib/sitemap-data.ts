@@ -9,8 +9,6 @@ import { toolSlugs } from '@/data/tools';
 import { glossarySlugs } from '@/data/glossary';
 import { formSlugs } from '@/data/forms';
 import { evictionSlugs } from '@/data/evictions';
-import { getAllRoleSlugs } from '@/data/careers';
-import { getAllTeamSlugs } from '@/data/team';
 
 export type Entry = MetadataRoute.Sitemap[number];
 type Freq = Entry['changeFrequency'];
@@ -28,10 +26,7 @@ const e = (path: string, priority: number, changeFrequency: Freq = 'monthly'): E
 export const sitemapGroups: Record<string, () => MetadataRoute.Sitemap> = {
   core: () => [
     e('/', 1.0, 'weekly'), e('/pricing/', 0.9, 'weekly'), e('/reviews/', 0.8, 'weekly'),
-    e('/about/', 0.7), e('/meet-the-team/', 0.55), e('/careers/', 0.6),
-    ...pages('/meet-the-team/', getAllTeamSlugs(), { changeFrequency: 'monthly', priority: 0.5 }),
-    ...pages('/careers/', getAllRoleSlugs(), { changeFrequency: 'monthly', priority: 0.55 }),
-    e('/contact/', 0.7), e('/demo/', 0.8), e('/events/', 0.6),
+    e('/about/', 0.7), e('/contact/', 0.7), e('/demo/', 0.8), e('/events/', 0.6),
     e('/what-is-revun/', 0.8), e('/powered-by-revun/', 0.8), e('/how-revun-works/', 0.8), e('/why-revun/', 0.8),
     e('/operators/', 0.7), e('/tenants/', 0.7), e('/investment/', 0.7), e('/coverage/', 0.7),
     e('/traveling-tenants/', 0.7), e('/relocation-rentals/', 0.7), e('/furnished-rentals/', 0.7), e('/corporate-housing/', 0.7),
