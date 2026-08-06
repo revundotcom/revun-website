@@ -133,16 +133,14 @@ const RESOURCES_ITEMS: NavChild[] = [
   { label: 'Help Center', description: 'Guides and documentation', href: '/help/' },
   { label: 'Resources', description: 'Articles, guides, and insights', href: '/resources/' },
   { label: 'How It Works', description: 'See the platform in action', href: '/how-revun-works/' },
-  { label: 'What Is Revun', description: 'The property operations platform explained', href: '/what-is-revun/' },
   { label: 'Why Revun', description: 'What makes Revun different', href: '/why-revun/' },
-  { label: 'Use Cases', description: 'How teams put Revun to work', href: '/use-cases/' },
-  { label: 'Glossary', description: 'Property management terms defined', href: '/glossary/' },
-  { label: 'Landlord-Tenant Laws', description: 'State and provincial rules', href: '/laws/' },
-  { label: 'Evictions', description: 'Process, timelines, and compliance', href: '/evictions/' },
-  { label: 'Reviews', description: 'What operators say about Revun', href: '/reviews/' },
-  { label: 'Self-Manage', description: 'Run your own portfolio with Revun', href: '/self-manage/' },
-  { label: 'Powered by Revun', description: 'Build on the Revun platform', href: '/powered-by-revun/' },
-  { label: 'Careers', description: 'Join the team building Revun', href: '/careers/' },
+]
+
+const ABOUT_ITEMS: NavChild[] = [
+  { label: 'About Us', description: 'Who we are and why we exist', href: '/about/' },
+  { label: 'Meet the Team', description: 'The people behind Revun', href: '/meet-the-team/' },
+  { label: 'Careers', description: 'Join the team', href: '/careers/' },
+  { label: 'Reviews', description: 'What customers say', href: '/reviews/' },
 ]
 
 export const NAV_ITEMS: NavItem[] = [
@@ -152,6 +150,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Pricing', href: '/pricing/' },
   { label: 'Compare', href: '/compare/' },
   { label: 'Resources', children: RESOURCES_ITEMS },
+  { label: 'About', children: ABOUT_ITEMS },
 ]
 
 // ─── Reusable simple dropdown item (no icon) ────────────────────────────────
