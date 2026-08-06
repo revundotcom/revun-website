@@ -6,7 +6,7 @@ import { CommunicationsClient } from './client'
 export const metadata: Metadata = {
   title: 'Communications — Messaging, Calls, Video & Transcripts | Revun',
   description:
-    'Message tenants, owners, vendors, and teams. Voice and video calls built in. Every message recorded, every transcript searchable, every file saved.',
+    'Every tenant, owner, and vendor conversation stays attached to the unit — calls, video, and searchable transcripts on the record. No personal numbers exposed, no context lost between staff.',
   alternates: { canonical: buildCanonicalUrl('/features/communications') },
   openGraph: {
     title: 'Communications | Revun',

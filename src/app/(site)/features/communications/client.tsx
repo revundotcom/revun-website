@@ -1025,12 +1025,12 @@ function SavedSection() {
    ═════════════════════════════════════════════════════════════════════════ */
 
 const COMMS_FEATURES = [
-  { icon: MessageSquare, title: 'Unified Messaging', description: 'All conversations in one place. Property-linked threads keep context attached to every unit.' },
-  { icon: Phone, title: 'Built-in Voice Calls', description: 'Call contacts directly from the app with caller ID, property context, and one-tap dialling.' },
-  { icon: Video, title: 'Video Conferencing', description: 'Group video calls with screen sharing, recording, and automatic transcription.' },
-  { icon: FileText, title: 'Auto-Transcription', description: 'Every call and voice note transcribed automatically. Search by keyword anytime.' },
-  { icon: Shield, title: 'Secure and Compliant', description: 'End-to-end encrypted messages and calls. Data stored on Canadian and US servers, by jurisdiction.' },
-  { icon: Bookmark, title: 'Saved Recordings', description: 'Recordings, summaries, and transcripts saved permanently for audit and review.' },
+  { icon: MessageSquare, title: 'Every thread stays with the unit', description: 'All conversations in one place. Property-linked threads keep context attached to every unit.' },
+  { icon: Phone, title: 'Call without exposing personal numbers', description: 'Call contacts directly from the app with caller ID, property context, and one-tap dialling.' },
+  { icon: Video, title: 'Meet face to face, on the record', description: 'Group video calls with screen sharing, recording, and automatic transcription.' },
+  { icon: FileText, title: 'Never lose what was said on a call', description: 'Every call and voice note transcribed automatically. Search by keyword anytime.' },
+  { icon: Shield, title: 'Data stays in the country it belongs to', description: 'End-to-end encrypted messages and calls. Data stored on Canadian and US servers, by jurisdiction.' },
+  { icon: Bookmark, title: 'Proof of every conversation, kept', description: 'Recordings, summaries, and transcripts saved permanently for audit and review.' },
 ]
 
 function FeaturesGridSection() {
