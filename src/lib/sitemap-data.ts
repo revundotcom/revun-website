@@ -33,10 +33,7 @@ export const sitemapGroups: Record<string, () => MetadataRoute.Sitemap> = {
     e('/wallet/', 0.7), e('/wallet/pay/', 0.6), e('/wallet/receipt/', 0.6),
     e('/help/', 0.6), e('/support/', 0.6), e('/support/powered-by-revun/', 0.6), e('/support/self-manage/', 0.6),
     e('/privacy/', 0.3, 'yearly'), e('/terms/', 0.3, 'yearly'),
-    e('/owner-portal/', 0.8), e('/property-operations-software/', 0.8), e('/real-estate-communications-software/', 0.8),
-    e('/ai-property-management-software/', 0.8), e('/property-management-operating-system/', 0.8), e('/property-management-software/', 0.8),
-    e('/leasing-software/', 0.8), e('/brokerage-software/', 0.8), e('/maintenance-management-software/', 0.8),
-    e('/tenant-portal-software/', 0.8), e('/accounting/', 0.7),
+    e('/owner-portal/', 0.8), e('/accounting/', 0.7),
   ],
   product: () => [
     e('/features/', 0.8, 'weekly'),

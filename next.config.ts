@@ -68,6 +68,20 @@ const nextConfig: NextConfig = {
         destination: '/why-revun/',
         permanent: true,
       },
+      // The nine /*-software/ landing pages were retired from the nav, footer
+      // and sitemap. They sat at sitemap priority 0.8 and target the highest
+      // commercial-intent terms in this category, so they are 301'd to the
+      // closest surviving page rather than left to 404 — that keeps any ranking
+      // and inbound links pointing somewhere real.
+      { source: '/property-management-software', destination: '/features/', permanent: true },
+      { source: '/property-operations-software', destination: '/features/', permanent: true },
+      { source: '/property-management-operating-system', destination: '/features/', permanent: true },
+      { source: '/ai-property-management-software', destination: '/features/ai-automation/', permanent: true },
+      { source: '/leasing-software', destination: '/features/leasing/', permanent: true },
+      { source: '/maintenance-management-software', destination: '/features/maintenance/', permanent: true },
+      { source: '/tenant-portal-software', destination: '/features/tenant-portal/', permanent: true },
+      { source: '/brokerage-software', destination: '/solutions/brokerages/', permanent: true },
+      { source: '/real-estate-communications-software', destination: '/features/communications/', permanent: true },
     ]
   },
   images: {

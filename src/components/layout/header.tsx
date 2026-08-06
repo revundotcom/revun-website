@@ -145,18 +145,6 @@ const RESOURCES_ITEMS: NavChild[] = [
   { label: 'Careers', description: 'Join the team building Revun', href: '/careers/' },
 ]
 
-const SOFTWARE_ITEMS: NavChild[] = [
-  { label: 'Property Management Software', description: 'The full operations platform', href: '/property-management-software/' },
-  { label: 'Property Operations Software', description: 'Run day-to-day operations', href: '/property-operations-software/' },
-  { label: 'PM Operating System', description: 'One system of record', href: '/property-management-operating-system/' },
-  { label: 'AI Property Management', description: 'AI-native workflows', href: '/ai-property-management-software/' },
-  { label: 'Leasing Software', description: 'Applications to renewals', href: '/leasing-software/' },
-  { label: 'Maintenance Software', description: 'Requests, dispatch, proof-of-work', href: '/maintenance-management-software/' },
-  { label: 'Tenant Portal Software', description: 'Self-service for renters', href: '/tenant-portal-software/' },
-  { label: 'Brokerage Software', description: 'Tools for brokerages and agents', href: '/brokerage-software/' },
-  { label: 'Communications Software', description: 'Unified owner and tenant inbox', href: '/real-estate-communications-software/' },
-]
-
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Features', sections: FEATURES_SECTIONS },
   { label: 'Tenants', href: '/tenants/' },
@@ -258,19 +246,6 @@ function FeaturesMegaMenu({ onClose }: { onClose: () => void }) {
         </div>
       </div>
 
-      {/* By Software - SEO software landing pages integrated into features menu */}
-      <div className="mt-5 border-t border-border/60 pt-5">
-        <div className="mb-3 px-2">
-          <p className="text-[11px] font-heading font-semibold uppercase tracking-wider text-brand-graphite">
-            By Software
-          </p>
-        </div>
-        <div className="grid grid-cols-3 gap-x-4">
-          {SOFTWARE_ITEMS.map((item) => (
-            <CompactDropdownItem key={item.href} item={item} onClose={onClose} />
-          ))}
-        </div>
-      </div>
     </motion.div>
   )
 }
