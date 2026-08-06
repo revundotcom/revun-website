@@ -251,7 +251,12 @@ function FeaturesMegaMenu({ onClose }: { onClose: () => void }) {
 
 // ─── Dropdown: Resources ─────────────────────────────────────────────────────
 
-function ResourcesDropdown({ onClose }: { onClose: () => void }) {
+/**
+ * Renders whichever nav item opened it. This used to map over RESOURCES_ITEMS
+ * directly, so every non-Features dropdown showed the Resources list — a latent
+ * bug that only surfaced once a second link dropdown (About) existed.
+ */
+function LinkDropdown({ items, onClose }: { items: NavChild[]; onClose: () => void }) {
   return (
     <motion.div
       variants={dropdownVariants}
@@ -262,7 +267,7 @@ function ResourcesDropdown({ onClose }: { onClose: () => void }) {
       role="menu"
       onKeyDown={(e) => e.key === 'Escape' && onClose()}
     >
-      {RESOURCES_ITEMS.map((item) => (
+      {items.map((item) => (
         <SimpleDropdownItem key={item.href} item={item} onClose={onClose} />
       ))}
     </motion.div>
@@ -344,10 +349,13 @@ function DesktopNavItem({
         </button>
         <AnimatePresence>
           {isOpen && (
-            item.label === 'Features' ? (
+            item.sections ? (
               <FeaturesMegaMenu onClose={() => setOpenDropdown(null)} />
             ) : (
-              <ResourcesDropdown onClose={() => setOpenDropdown(null)} />
+              <LinkDropdown
+                items={item.children ?? []}
+                onClose={() => setOpenDropdown(null)}
+              />
             )
           )}
         </AnimatePresence>
