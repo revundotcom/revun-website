@@ -236,25 +236,35 @@ export async function fetchRolesFromApi(): Promise<Role[]> {
       }
 
       const isRemote = job.Job_Type == null || String(job.Job_Type).toLowerCase() === 'hybrid' || String(job.Job_Type).toLowerCase() === 'remote'
+      const workTypeRaw = job.Work_Type ? String(job.Work_Type).trim() : ''
+      const jobTypeRaw = job.Job_Type ? String(job.Job_Type).trim() : ''
 
       const locParts = []
-      if (job.City) locParts.push(job.City)
-      if (job.State) locParts.push(job.State)
-      if (job.Country) locParts.push(job.Country)
-
-      const jobTypeDisplay = job.Job_Type ? String(job.Job_Type).trim() : ''
+      if (job.City && String(job.City).trim()) locParts.push(String(job.City).trim())
+      if (job.State && String(job.State).trim()) locParts.push(String(job.State).trim())
+      if (job.Country && String(job.Country).trim()) locParts.push(String(job.Country).trim())
 
       const locationDisplay = locParts.length > 0
-        ? (jobTypeDisplay ? `${locParts.join(', ')} · ${jobTypeDisplay}` : locParts.join(', '))
-        : (jobTypeDisplay || 'Remote')
+        ? locParts.join(', ')
+        : (jobTypeRaw || workTypeRaw || 'Remote')
+
+      const typeParts: string[] = []
+      if (workTypeRaw) typeParts.push(workTypeRaw)
+      if (jobTypeRaw && !typeParts.some((p) => p.toLowerCase() === jobTypeRaw.toLowerCase())) {
+        typeParts.push(jobTypeRaw)
+      }
+      const combinedTypeDisplay = typeParts.length > 0 ? typeParts.join(' · ') : 'Full time'
+
+      const industryVal = job.Industry || 'Careers'
+      const departmentDisplay = Array.isArray(industryVal) ? industryVal.join(', ') : industryVal
 
       const parsedCats = parseCategories(job.Role_Category || job.Industry)
 
       return {
         slug: job.slug,
         title: job.Posting_Title || 'Untitled Role',
-        department: job.Industry || 'Careers',
-        type: job.Work_Type || job.Job_Type || 'Full time',
+        department: departmentDisplay,
+        type: combinedTypeDisplay,
         city: job.City || '',
         province: job.State || '',
         country: job.Country || '',
