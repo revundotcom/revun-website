@@ -479,6 +479,15 @@ function ApplyModal({
                             })
                           }
                         }}
+                        onClearError={() => {
+                          if (fieldErrors.residential_location) {
+                            setFieldErrors((prev) => {
+                              const next = { ...prev }
+                              delete next.residential_location
+                              return next
+                            })
+                          }
+                        }}
                         error={fieldErrors.residential_location}
                       />
 
