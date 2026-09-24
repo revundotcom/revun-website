@@ -6,13 +6,15 @@ export const runtime = "nodejs";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { firstName, lastName, email, phone, linkedin, resumeUrl, whyYou, referral, role } = body;
+    const { firstName, lastName, email, phone, linkedin, resumeUrl, whyYou, referral, role, residential_location, city, state, country } = body;
 
     if (!firstName || !lastName || !email || !role) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
     const resend = new Resend(process.env.RESEND_API_KEY);
+
+    const locationText = residential_location || [city, state, country].filter(Boolean).join(', ') || 'Not provided';
 
     const { error } = await resend.emails.send({
       from: "Careers Portal <onboarding@resend.dev>",
@@ -26,6 +28,7 @@ export async function POST(req: NextRequest) {
           <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Name</td><td style="padding:8px;border-bottom:1px solid #eee">${firstName} ${lastName}</td></tr>
           <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Email</td><td style="padding:8px;border-bottom:1px solid #eee"><a href="mailto:${email}">${email}</a></td></tr>
           <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Phone</td><td style="padding:8px;border-bottom:1px solid #eee">${phone || "Not provided"}</td></tr>
+          <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Location</td><td style="padding:8px;border-bottom:1px solid #eee">${locationText}</td></tr>
           <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">LinkedIn</td><td style="padding:8px;border-bottom:1px solid #eee">${linkedin ? `<a href="${linkedin}">${linkedin}</a>` : "Not provided"}</td></tr>
           <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Resume</td><td style="padding:8px;border-bottom:1px solid #eee">${resumeUrl ? `<a href="${resumeUrl}">${resumeUrl}</a>` : "Not provided"}</td></tr>
           <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee">Why this role</td><td style="padding:8px;border-bottom:1px solid #eee">${whyYou || "Not provided"}</td></tr>
